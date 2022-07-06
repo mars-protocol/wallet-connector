@@ -1,0 +1,51 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "project": "tsconfig.json"
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "globals": {
+    "JSX": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended" // configures both eslint-plugin-prettier and eslint-config-prettier
+  ],
+  "plugins": ["simple-import-sort", "unused-imports", "react-hooks"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "prettier/prettier": "error",
+    "react/no-children-prop": "off",
+    "@typescript-eslint/no-unused-vars": ["off"],
+    "no-unused-vars": ["off"],
+    "react/jsx-sort-props": ["warn", { "reservedFirst": ["key"] }],
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["./src/tests/**/*"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}
