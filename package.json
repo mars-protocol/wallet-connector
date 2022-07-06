@@ -1,16 +1,16 @@
 {
   "name": "@marsprotocol/wallet-connector",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marsprotocol/wallet-connector.git"
+    "url": "git+https://github.com/mars-protocol/wallet-connector.git"
   },
   "author": "Mars Protcol",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/marsprotocol/wallet-connector/issues"
+    "url": "https://github.com/mars-protocol/wallet-connector/issues"
   },
-  "homepage": "https://github.com/marsprotocol/wallet-connector#readme",
+  "homepage": "https://github.com/mars-protocol/wallet-connector#readme",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "unpkg": "dist/index.js",
