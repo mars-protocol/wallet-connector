@@ -1,4 +1,3 @@
-import { IEnableMeta } from "@walletconnect/types"
 import React, {
   FunctionComponent,
   ReactElement,
@@ -6,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react"
+import { IEnableMeta } from "src/types"
 
 import { BaseModal, BaseModalProps } from "./BaseModal"
 

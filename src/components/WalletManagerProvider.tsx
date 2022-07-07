@@ -1,7 +1,7 @@
 import { SigningCosmWasmClientOptions } from "@cosmjs/cosmwasm-stargate"
 import { SigningStargateClientOptions } from "@cosmjs/stargate"
 import WalletConnect from "@walletconnect/client"
-import { IClientMeta, IEnableMeta } from "@walletconnect/types"
+import { IClientMeta } from "@walletconnect/types"
 import React, {
   FunctionComponent,
   PropsWithChildren,
@@ -18,6 +18,7 @@ import { KeplrWalletConnectV1 } from "../connectors"
 import {
   ChainInfoOverrides,
   ConnectedWallet,
+  IEnableMeta,
   ModalClassNames,
   SigningClientGetter,
   Wallet,

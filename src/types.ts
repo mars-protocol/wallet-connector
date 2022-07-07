@@ -9,6 +9,7 @@ import {
 } from "@cosmjs/stargate"
 import { ChainInfo, Keplr } from "@keplr-wallet/types"
 import WalletConnect from "@walletconnect/client"
+import { ReactNode } from "react"
 
 export interface IKeplrWalletConnectV1 extends Keplr {
   dontOpenAppOnEnable: boolean
@@ -60,6 +61,14 @@ export interface ConnectedWallet {
   signingCosmWasmClient: SigningCosmWasmClient
   // Signing client for interacting with Stargate chain APIs.
   signingStargateClient: SigningStargateClient
+}
+
+export interface IEnableMeta {
+  text: string | ReactNode
+  textClassName: string
+  buttonText: string | ReactNode
+  buttonClassName: string
+  contentClassName: string
 }
 
 export type SigningClientGetter<T> = (
