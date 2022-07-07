@@ -40,12 +40,6 @@ export const EnablingWalletModal: FunctionComponent<
     return () => clearTimeout(timeout)
   }, [isOpen, setShowHelp])
 
-  const ButtonRow = styled.div`
-    display: flex;
-    flex: 0 0 100%;
-    flex-wrap: nowrap;
-  `
-
   return (
     <BaseModal
       classNames={classNames}
@@ -56,15 +50,16 @@ export const EnablingWalletModal: FunctionComponent<
       }
       {...props}
     >
+      {renderLoader && <div className="mt-4">{renderLoader()}</div>}
       {showHelp && (
         <>
           {enablingMeta ? (
-            <ButtonRow>
+            <div className={enablingMeta.contentClassName}>
               <p className={enablingMeta.textClassName}>{enablingMeta.text}</p>
               <button className={enablingMeta.buttonClassName} onClick={reset}>
                 {enablingMeta.buttonText}
               </button>
-            </ButtonRow>
+            </div>
           ) : (
             <p className={classNames?.textContent}>
               If nothing shows up in your wallet,{" "}
@@ -74,8 +69,6 @@ export const EnablingWalletModal: FunctionComponent<
           )}
         </>
       )}
-
-      {renderLoader && <div className="mt-4">{renderLoader()}</div>}
     </BaseModal>
   )
 }
