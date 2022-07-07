@@ -19,6 +19,7 @@ import {
   ChainInfoOverrides,
   ConnectedWallet,
   IEnableMeta,
+  IWalletMetaOverride,
   ModalClassNames,
   SigningClientGetter,
   Wallet,
@@ -61,6 +62,8 @@ export type WalletManagerProviderProps = PropsWithChildren<{
   // Descriptive info about the webapp which gets displayed when enabling a
   // WalletConnect wallet (e.g. name, image, etc.).
   walletConnectClientMeta?: IClientMeta
+  // Overwirte wallet MetaData for any supported wallet
+  walletMetaOverride?: IWalletMetaOverride
   // A custom loader to display in the modals, such as enabling the wallet.
   renderLoader?: () => ReactNode
   // When set to a valid wallet type, the connect function will skip the
@@ -90,6 +93,7 @@ export const WalletManagerProvider: FunctionComponent<
   enablingMeta,
   renderLoader,
   walletConnectClientMeta,
+  walletMetaOverride,
   preselectedWalletType,
   localStorageKey,
   onKeplrKeystoreChangeEvent,
@@ -102,6 +106,18 @@ export const WalletManagerProvider: FunctionComponent<
     () => Wallets.filter(({ type }) => enabledWalletTypes.includes(type)),
     [enabledWalletTypes]
   )
+
+  if (walletMetaOverride) {
+    Object.entries(walletMetaOverride).forEach(([type, override]) => {
+      Object.entries(override).forEach(([key, value]) => {
+        enabledWallets.forEach((wallet, index) => {
+          if (wallet.type === type) {
+            enabledWallets[index][key] = value
+          }
+        })
+      })
+    })
+  }
 
   const [isEmbeddedKeplrMobileWeb, setIsEmbeddedKeplrMobileWeb] =
     useState(false)

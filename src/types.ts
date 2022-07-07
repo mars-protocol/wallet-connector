@@ -71,6 +71,16 @@ export interface IEnableMeta {
   contentClassName: string
 }
 
+export type IWalletMetaOverride = {
+  [key in WalletType]: IWalletMeta
+}
+
+export interface IWalletMeta {
+  description?: string
+  imageUrl?: string
+  name?: string
+}
+
 export type SigningClientGetter<T> = (
   chainInfo: ChainInfo
 ) => T | Promise<T | undefined> | undefined
