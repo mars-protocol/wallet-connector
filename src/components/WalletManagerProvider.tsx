@@ -1,7 +1,7 @@
 import { SigningCosmWasmClientOptions } from "@cosmjs/cosmwasm-stargate"
 import { SigningStargateClientOptions } from "@cosmjs/stargate"
 import WalletConnect from "@walletconnect/client"
-import { IClientMeta } from "@walletconnect/types"
+import { IClientMeta, IEnableMeta } from "@walletconnect/types"
 import React, {
   FunctionComponent,
   PropsWithChildren,
@@ -55,6 +55,8 @@ export type WalletManagerProviderProps = PropsWithChildren<{
   closeIcon?: ReactNode
   // Custom connection string.
   enablingStringOverride?: string | ReactElement
+  // Custom enable Modal content.
+  enablingMeta?: IEnableMeta
   // Descriptive info about the webapp which gets displayed when enabling a
   // WalletConnect wallet (e.g. name, image, etc.).
   walletConnectClientMeta?: IClientMeta
@@ -84,6 +86,7 @@ export const WalletManagerProvider: FunctionComponent<
   classNames,
   closeIcon,
   enablingStringOverride,
+  enablingMeta,
   renderLoader,
   walletConnectClientMeta,
   preselectedWalletType,
@@ -525,6 +528,7 @@ export const WalletManagerProvider: FunctionComponent<
         <EnablingWalletModal
           classNames={classNames}
           closeIcon={closeIcon}
+          enablingMeta={enablingMeta}
           enablingStringOverride={enablingStringOverride}
           isOpen
           onClose={() => setWalletEnableModalOpen(false)}

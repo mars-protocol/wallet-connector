@@ -1,3 +1,4 @@
+import { IEnableMeta } from "@walletconnect/types"
 import React, {
   FunctionComponent,
   ReactElement,
@@ -5,11 +6,13 @@ import React, {
   useEffect,
   useState,
 } from "react"
+import styled from "styled-components"
 
 import { BaseModal, BaseModalProps } from "./BaseModal"
 
 export interface EnablingWalletModalProps extends BaseModalProps {
   enablingStringOverride?: string | ReactElement
+  enablingMeta?: IEnableMeta
   renderLoader?: () => ReactNode
   reset: () => void
 }
@@ -21,6 +24,7 @@ export const EnablingWalletModal: FunctionComponent<
   classNames,
   renderLoader,
   enablingStringOverride,
+  enablingMeta,
   reset,
   ...props
 }) => {
@@ -36,6 +40,12 @@ export const EnablingWalletModal: FunctionComponent<
     return () => clearTimeout(timeout)
   }, [isOpen, setShowHelp])
 
+  const ButtonRow = styled.div`
+    display: flex;
+    flex: 0 0 100%;
+    flex-wrap: nowrap;
+  `
+
   return (
     <BaseModal
       classNames={classNames}
@@ -47,11 +57,22 @@ export const EnablingWalletModal: FunctionComponent<
       {...props}
     >
       {showHelp && (
-        <p className={classNames?.textContent}>
-          If nothing shows up in your wallet,{" "}
-          <button onClick={reset}>click here to reset</button> and try
-          connecting again. Refresh the page if the problem persists.
-        </p>
+        <>
+          {enablingMeta ? (
+            <ButtonRow>
+              <p className={enablingMeta.textClassName}>{enablingMeta.text}</p>
+              <button className={enablingMeta.buttonClassName} onClick={reset}>
+                {enablingMeta.buttonText}
+              </button>
+            </ButtonRow>
+          ) : (
+            <p className={classNames?.textContent}>
+              If nothing shows up in your wallet,{" "}
+              <button onClick={reset}>click here to reset</button> and try
+              connecting again. Refresh the page if the problem persists.
+            </p>
+          )}
+        </>
       )}
 
       {renderLoader && <div className="mt-4">{renderLoader()}</div>}
