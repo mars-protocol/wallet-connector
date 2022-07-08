@@ -44,6 +44,8 @@ export interface Wallet {
   ) => (chainId: string) => OfflineSigner | Promise<OfflineSigner>
 }
 
+export type WalletChainInfo = ChainInfo
+
 export interface ConnectedWallet {
   // Wallet.
   wallet: Wallet
