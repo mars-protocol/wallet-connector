@@ -1,6 +1,6 @@
 {
   "name": "@marsprotocol/wallet-connector",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mars-protocol/wallet-connector.git"
@@ -39,6 +39,7 @@
     "@keplr-wallet/stores": "^0.10.11",
     "@walletconnect/client": "^1.7.8",
     "@walletconnect/utils": "^1.7.8",
+    "axios": "^0.27.2",
     "core-js": "3",
     "qrcode.react": "^3.0.2",
     "react-modal": "^3.15.1",
