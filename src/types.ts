@@ -26,9 +26,9 @@ export interface Wallet {
   // A unique identifier among all wallets.
   type: WalletType
   // The name of the wallet.
-  name: string
+  name: string | ReactNode
   // A description of the wallet.
-  description: string
+  description: string | ReactNode
   // The URL of the wallet logo.
   imageUrl: string
   // A function that returns an instantiated wallet client, with
@@ -76,9 +76,9 @@ export type IWalletMetaOverride = {
 }
 
 export interface IWalletMeta {
-  description?: string
+  description?: string | ReactNode
   imageUrl?: string
-  name?: string
+  name?: string | ReactNode
 }
 
 export type SigningClientGetter<T> = (
