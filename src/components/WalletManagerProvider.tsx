@@ -323,13 +323,6 @@ export const WalletManagerProvider: FunctionComponent<
   // Begin connection process, either auto-selecting a wallet or opening
   // the selection modal.
   const beginConnection = useCallback(() => {
-    // We need to check if we are in the embedded Keplr Mobile web before
-    // connecting, since we will force the embedded Keplr wallet if
-    // possible. This will only happen if `connect` is called very quickly
-    // without waiting for `state` to reach at least
-    // `State.AttemptingAutoConnection`, though ideally `connect` is only
-    // called once `state` reaches `State.ReadyForConnection`.
-    // TODO: Add some docs about this.
     if (status === WalletConnectionStatus.Initializing) {
       throw new Error("Cannot connect while initializing.")
     }
@@ -410,7 +403,13 @@ export const WalletManagerProvider: FunctionComponent<
             setIsEmbeddedKeplrMobileWeb(true)
         }
       })
-      .finally(() => setStatus(WalletConnectionStatus.AttemptingAutoConnection))
+      .finally(() =>
+        setStatus(
+          !isKeplrExtentionNotInstalled
+            ? WalletConnectionStatus.AttemptingAutoConnection
+            : WalletConnectionStatus.Errored
+        )
+      )
   }, [status])
 
   // Auto connect on mount handler, after the above mobile web check.
