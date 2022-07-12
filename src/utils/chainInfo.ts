@@ -98,6 +98,40 @@ const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     },
     features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
   },
+  [ChainInfoID.OsmosisTestnet]: {
+    rpc: "http://rpc-test.osmosis.zone/",
+    rest: "http://lcd-test.osmosis.zone/",
+    chainId: ChainInfoID.OsmosisTestnet,
+    chainName: "Osmosis",
+    bip44: {
+      coinType: 118,
+    },
+    bech32Config: Bech32Address.defaultBech32Config("osmo"),
+    currencies: [
+      {
+        coinDenom: "OSMO",
+        coinMinimalDenom: "uosmo",
+        coinDecimals: 6,
+        coinGeckoId: "osmosis",
+        coinImageUrl: "/tokens/osmo.svg",
+        isStakeCurrency: true,
+        isFeeCurrency: true,
+      },
+      {
+        coinDenom: "ION",
+        coinMinimalDenom: "uion",
+        coinDecimals: 6,
+        coinGeckoId: "ion",
+        coinImageUrl: "/tokens/ion.png",
+      },
+    ],
+    gasPriceStep: {
+      low: 0,
+      average: 0,
+      high: 0.025,
+    },
+    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+  },
   [ChainInfoID.Cosmoshub4]: {
     rpc: "https://rpc-cosmoshub.keplr.app",
     rest: "https://lcd-cosmoshub.keplr.app",
