@@ -63,11 +63,11 @@ export function createKeplrChainInfo(
   }
 }
 
-const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
+export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Osmosis1]: {
-    rpc: "https://rpc-osmosis.blockapsis.com/", // test: "http://rpc-test.osmosis.zone/"
-    rest: "https://lcd-osmosis.blockapsis.com/", // test: "http://lcd-test.osmosis.zone/"
-    chainId: ChainInfoID.Osmosis1, // test: "osmo-test-4"
+    rpc: "https://rpc-osmosis.blockapsis.com/",
+    rest: "https://lcd-osmosis.blockapsis.com/",
+    chainId: ChainInfoID.Osmosis1,
     chainName: "Osmosis",
     bip44: {
       coinType: 118,
@@ -82,13 +82,6 @@ const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         coinImageUrl: "/tokens/osmo.svg",
         isStakeCurrency: true,
         isFeeCurrency: true,
-      },
-      {
-        coinDenom: "ION",
-        coinMinimalDenom: "uion",
-        coinDecimals: 6,
-        coinGeckoId: "ion",
-        coinImageUrl: "/tokens/ion.png",
       },
     ],
     gasPriceStep: {
@@ -116,13 +109,6 @@ const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         coinImageUrl: "/tokens/osmo.svg",
         isStakeCurrency: true,
         isFeeCurrency: true,
-      },
-      {
-        coinDenom: "ION",
-        coinMinimalDenom: "uion",
-        coinDecimals: 6,
-        coinGeckoId: "ion",
-        coinImageUrl: "/tokens/ion.png",
       },
     ],
     gasPriceStep: {
