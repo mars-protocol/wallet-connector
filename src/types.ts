@@ -160,7 +160,7 @@ export type UseWalletResponse = Partial<ConnectedWallet> &
 
 export enum ChainInfoID {
   Osmosis1 = "osmosis-1",
-  OsmosisTestnet = "test-osmo-4",
+  OsmosisTestnet = "osmo-test-4",
   Cosmoshub4 = "cosmoshub-4",
   Columbus5 = "columbus-5",
   Secret4 = "secret-4",
