@@ -1,45 +1,80 @@
 import React, { FunctionComponent } from "react"
 import styled from "styled-components"
 
-import { Wallet } from "../../types"
+import { Wallet, WalletType } from "../../types"
 import { BaseModal, BaseModalProps } from "./BaseModal"
 
 export interface SelectWalletModalProps extends BaseModalProps {
   wallets: Wallet[]
   selectWallet: (wallet: Wallet) => void
+  closeModal: () => void
+  isKeplrExtentionNotInstalled: boolean
 }
 
 export const SelectWalletModal: FunctionComponent<SelectWalletModalProps> = ({
   wallets,
   selectWallet,
+  closeModal,
   classNames,
+  isKeplrExtentionNotInstalled,
   ...props
 }) => (
   <BaseModal classNames={classNames} title="Select a wallet" {...props}>
     <WalletList className={classNames?.walletList}>
       {wallets.map((wallet) => (
-        <WalletRow
-          key={wallet.type}
-          className={classNames?.wallet}
-          onClick={(e) => {
-            e.preventDefault()
-            selectWallet(wallet)
-          }}
-        >
-          <WalletIconImg
-            alt="keplr logo"
-            className={classNames?.walletImage}
-            src={wallet.imageUrl}
-          />
-          <WalletInfo className={classNames?.walletInfo}>
-            <WalletName className={classNames?.walletName}>
-              {wallet.name}
-            </WalletName>
-            <WalletDescription className={classNames?.walletDescription}>
-              {wallet.description}
-            </WalletDescription>
-          </WalletInfo>
-        </WalletRow>
+        <>
+          {wallet.type === WalletType.Keplr &&
+          isKeplrExtentionNotInstalled &&
+          wallet.install &&
+          wallet.installURL ? (
+            <WalletRow
+              key={wallet.type}
+              className={classNames?.wallet}
+              onClick={(e) => {
+                e.preventDefault()
+                window.open(wallet.installURL, "_blank")
+                closeModal()
+              }}
+            >
+              <WalletIconImg
+                alt={`${wallet.name} logo`}
+                className={classNames?.walletImage}
+                src={wallet.imageUrl}
+              />
+              <WalletInfo className={classNames?.walletInfo}>
+                <WalletName className={classNames?.walletName}>
+                  {wallet.install}
+                </WalletName>
+                <WalletDescription className={classNames?.walletDescription}>
+                  {wallet.installURL}
+                </WalletDescription>
+              </WalletInfo>
+            </WalletRow>
+          ) : (
+            <WalletRow
+              key={wallet.type}
+              className={classNames?.wallet}
+              onClick={(e) => {
+                e.preventDefault()
+                selectWallet(wallet)
+              }}
+            >
+              <WalletIconImg
+                alt={`${wallet.name} logo`}
+                className={classNames?.walletImage}
+                src={wallet.imageUrl}
+              />
+              <WalletInfo className={classNames?.walletInfo}>
+                <WalletName className={classNames?.walletName}>
+                  {wallet.name}
+                </WalletName>
+                <WalletDescription className={classNames?.walletDescription}>
+                  {wallet.description}
+                </WalletDescription>
+              </WalletInfo>
+            </WalletRow>
+          )}
+        </>
       ))}
     </WalletList>
   </BaseModal>

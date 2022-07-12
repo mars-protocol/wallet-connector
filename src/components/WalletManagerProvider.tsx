@@ -122,6 +122,9 @@ export const WalletManagerProvider: FunctionComponent<
   const [isEmbeddedKeplrMobileWeb, setIsEmbeddedKeplrMobileWeb] =
     useState(false)
 
+  const [isKeplrExtentionNotInstalled, setIsKeplrExtensionNotInstalled] =
+    useState(false)
+
   // Modal State
   const [pickerModalOpen, setPickerModalOpen] = useState(false)
   const [walletEnableModalOpen, setWalletEnableModalOpen] = useState(false)
@@ -190,6 +193,10 @@ export const WalletManagerProvider: FunctionComponent<
     },
     [localStorageKey, walletConnect]
   )
+
+  const _closePickerModal = () => {
+    setPickerModalOpen(false)
+  }
 
   // Obtain WalletConnect if necessary, and connect to the wallet.
   const _connectToWallet = useCallback(
@@ -394,12 +401,15 @@ export const WalletManagerProvider: FunctionComponent<
 
     import("@keplr-wallet/stores")
       .then(({ getKeplrFromWindow }) => getKeplrFromWindow())
-      .then(
-        (keplr) =>
+      .then((keplr) => {
+        if (!keplr) {
+          setIsKeplrExtensionNotInstalled(true)
+        } else {
           keplr &&
-          keplr.mode === "mobile-web" &&
-          setIsEmbeddedKeplrMobileWeb(true)
-      )
+            keplr.mode === "mobile-web" &&
+            setIsEmbeddedKeplrMobileWeb(true)
+        }
+      })
       .finally(() => setStatus(WalletConnectionStatus.AttemptingAutoConnection))
   }, [status])
 
@@ -525,6 +535,8 @@ export const WalletManagerProvider: FunctionComponent<
         <SelectWalletModal
           classNames={classNames}
           closeIcon={closeIcon}
+          closeModal={_closePickerModal}
+          isKeplrExtentionNotInstalled={isKeplrExtentionNotInstalled}
           isOpen
           onClose={() => setPickerModalOpen(false)}
           selectWallet={_connectToWallet}

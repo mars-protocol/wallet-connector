@@ -27,6 +27,10 @@ export interface Wallet {
   type: WalletType
   // The name of the wallet.
   name: string | ReactNode
+  // The install string
+  install?: string | ReactNode
+  // The install url
+  installURL?: string
   // A description of the wallet.
   description: string | ReactNode
   // The URL of the wallet logo.
@@ -81,6 +85,8 @@ export interface IWalletMeta {
   description?: string | ReactNode
   imageUrl?: string
   name?: string | ReactNode
+  install?: string | ReactNode
+  installURL?: string
 }
 
 export type SigningClientGetter<T> = (

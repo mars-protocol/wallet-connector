@@ -5,6 +5,8 @@ import { Wallet, WalletType } from "../types"
 export const KeplrWallet: Wallet = {
   type: WalletType.Keplr,
   name: "Keplr Wallet",
+  install: "Install Keplr Wallet",
+  installURL: "https://keplr.app",
   description: "Keplr Chrome Extension",
   imageUrl: "/keplr-wallet-extension.png",
   getClient: async () =>
