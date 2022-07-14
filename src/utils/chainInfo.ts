@@ -92,8 +92,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
   },
   [ChainInfoID.OsmosisTestnet]: {
-    rpc: "http://rpc-test.osmosis.zone/",
-    rest: "http://lcd-test.osmosis.zone/",
+    rpc: "https://rpc-test.osmosis.zone/",
+    rest: "https://lcd-test.osmosis.zone/",
     chainId: ChainInfoID.OsmosisTestnet,
     chainName: "Osmosis",
     bip44: {
