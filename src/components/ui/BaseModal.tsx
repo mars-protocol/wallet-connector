@@ -38,6 +38,7 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
 
   return (
     <ReactModal
+      ariaHideApp={false}
       className={classNames?.modalContent ?? "_"}
       contentElement={(props, children) => (
         <ModalContent maxWidth={maxWidth} {...props}>
