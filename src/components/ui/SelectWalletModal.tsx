@@ -21,8 +21,8 @@ export const SelectWalletModal: FunctionComponent<SelectWalletModalProps> = ({
 }) => (
   <BaseModal classNames={classNames} title="Select a wallet" {...props}>
     <WalletList className={classNames?.walletList}>
-      {wallets.map((wallet) => (
-        <>
+      {wallets.map((wallet, index) => (
+        <div key={index}>
           {wallet.type === WalletType.Keplr &&
           isKeplrExtentionNotInstalled &&
           wallet.install &&
@@ -74,7 +74,7 @@ export const SelectWalletModal: FunctionComponent<SelectWalletModalProps> = ({
               </WalletInfo>
             </WalletRow>
           )}
-        </>
+        </div>
       ))}
     </WalletList>
   </BaseModal>
