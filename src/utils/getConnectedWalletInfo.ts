@@ -14,7 +14,29 @@ export const getConnectedWalletInfo = async (
   // Only Keplr browser extension supports suggesting chain.
   // Not WalletConnect nor embedded Keplr Mobile web.
   if (wallet.type === WalletType.Keplr && client.mode !== "mobile-web") {
-    await client.experimentalSuggestChain(chainInfo)
+    const info = {
+      ...chainInfo,
+      stakeCurrency: {
+        ...chainInfo.stakeCurrency,
+        coinImageUrl: chainInfo.stakeCurrency.coinImageUrl
+          ? window.origin + chainInfo.stakeCurrency.coinImageUrl
+          : undefined,
+      },
+      currencies: chainInfo.currencies.map((currency) => ({
+        ...currency,
+        coinImageUrl: currency.coinImageUrl
+          ? window.origin + currency.coinImageUrl
+          : undefined,
+      })),
+      feeCurrencies: chainInfo.feeCurrencies.map((currency) => ({
+        ...currency,
+        coinImageUrl: currency.coinImageUrl
+          ? window.origin + currency.coinImageUrl
+          : undefined,
+      })),
+    }
+
+    await client.experimentalSuggestChain(info)
   }
 
   await client.enable(chainInfo.chainId)

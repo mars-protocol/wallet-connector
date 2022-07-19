@@ -89,7 +89,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0,
       high: 0.025,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.OsmosisTestnet]: {
     rpc: "https://rpc-test.osmosis.zone/",
@@ -116,7 +116,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0,
       high: 0.025,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Cosmoshub4]: {
     rpc: "https://rpc-cosmoshub.keplr.app",
@@ -138,7 +138,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Columbus5]: {
     rpc: "https://rpc-columbus.keplr.app",
@@ -182,7 +182,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 5.665,
       high: 10,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Secret4]: {
     rpc: "https://rpc-secret.keplr.app",
@@ -204,7 +204,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Akashnet2]: {
     rpc: "https://rpc-akash.keplr.app",
@@ -226,7 +226,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "ibc-go", "no-legacy-stdTx"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Regen1]: {
     rpc: "https://rpc-regen.keplr.app",
@@ -246,7 +246,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Sentinelhub2]: {
     rpc: "https://rpc-sentinel.keplr.app",
@@ -266,7 +266,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Core1]: {
     rpc: "https://rpc-persistence.keplr.app",
@@ -296,7 +296,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         coinImageUrl: "/tokens/pstake.png",
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Irishub1]: {
     rpc: "https://rpc-iris.keplr.app",
@@ -318,7 +318,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.CryptoOrgChainMainnet1]: {
     rpc: "https://rpc-crypto-org.keplr.app/",
@@ -340,7 +340,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.IovMainnetIbc]: {
     rpc: "https://rpc-iov.keplr.app",
@@ -362,7 +362,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Emoney3]: {
     rpc: "https://rpc-emoney.keplr.app",
@@ -396,7 +396,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 1,
       high: 1,
     },
-    features: ["stargate", "ibc-transfer"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Juno1]: {
     rpc: "https://rpc-juno.itastakers.com",
@@ -423,14 +423,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0.04,
       high: 0.05,
     },
-    features: [
-      "stargate",
-      "ibc-transfer",
-      "ibc-go",
-      "no-legacy-stdTx",
-      "wasmd_0.24+",
-      "cosmwasm",
-    ],
+    features: ["ibc-transfer", "ibc-go", "wasmd_0.24+", "cosmwasm"],
   },
   [ChainInfoID.Uni3]: {
     rpc: "https://rpc.uni.juno.deuslabs.fi",
@@ -483,7 +476,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0,
       high: 0.025,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Microtick1]: {
     rpc: "https://rpc-microtick.keplr.app",
@@ -505,7 +498,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.LikecoinMainnet2]: {
     rpc: "https://mainnet-node.like.co/rpc",
@@ -527,7 +520,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Impacthub3]: {
     rpc: "https://rpc-impacthub.keplr.app",
@@ -549,7 +542,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Bitcanna1]: {
     rpc: "https://rpc.bitcanna.io",
@@ -571,7 +564,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Bitsong2b]: {
     rpc: "https://rpc.explorebitsong.com",
@@ -593,7 +586,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Kichain2]: {
     rpc: "https://rpc-mainnet.blockchain.ki",
@@ -615,7 +608,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Panacea3]: {
     rpc: "https://rpc.gopanacea.org",
@@ -642,7 +635,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 7,
       high: 9,
     },
-    features: ["stargate", "ibc-transfer"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Bostrom]: {
     rpc: "https://rpc.bostrom.cybernode.ai",
@@ -664,7 +657,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Comdex1]: {
     rpc: "https://rpc.comdex.one",
@@ -686,7 +679,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.CheqdMainnet1]: {
     rpc: "https://rpc.cheqd.net",
@@ -713,7 +706,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 50,
       high: 100,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Stargaze1]: {
     rpc: "https://rpc.stargaze-apis.com",
@@ -735,7 +728,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Chihuahua1]: {
     rpc: "https://rpc.chihuahua.wtf",
@@ -762,7 +755,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0.03,
       high: 0.035,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.LumNetwork1]: {
     rpc: "https://node0.mainnet.lum.network/rpc",
@@ -784,7 +777,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Vidulum1]: {
     rpc: "https://mainnet-rpc.vidulum.app",
@@ -806,7 +799,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.DesmosMainnet]: {
     rpc: "https://rpc.mainnet.desmos.network",
@@ -828,7 +821,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Dig1]: {
     rpc: "https://rpc-1-dig.notional.ventures",
@@ -855,7 +848,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0.03,
       high: 0.035,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Sommelier3]: {
     rpc: "https://rpc-sommelier.keplr.app",
@@ -877,7 +870,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Sifchain1]: {
     rpc: "https://rpc.sifchain.finance",
@@ -899,7 +892,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.LaoziMainnet]: {
     rpc: "https://rpc.laozi3.bandchain.org",
@@ -921,7 +914,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Darchub]: {
     rpc: "https://node1.konstellation.tech:26657",
@@ -943,7 +936,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Umee1]: {
     rpc: "https://rpc.aphrodite.main.network.umee.cc",
@@ -965,7 +958,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.GravityBridge3]: {
     rpc: "https://gravitychain.io:26657",
@@ -1037,7 +1030,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0,
       high: 0.035,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Mainnet3]: {
     rpc: "https://poseidon.mainnet.decentr.xyz",
@@ -1059,7 +1052,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Shentu22]: {
     rpc: "https://shenturpc.certikpowered.info",
@@ -1081,7 +1074,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Carbon1]: {
     rpc: "https://tm-api.carbon.network",
@@ -1108,7 +1101,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 769.23077,
       high: 769.23077,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Injective1]: {
     rpc: "https://public.api.injective.network",
@@ -1135,7 +1128,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0.0007,
       high: 0.0009,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.CerberusChain1]: {
     rpc: "https://rpc.cerberus.zone:26657",
@@ -1157,7 +1150,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Fetchhub4]: {
     rpc: "https://rpc-fetchhub.fetch.ai:443",
@@ -1184,7 +1177,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0.025,
       high: 0.035,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Mantle1]: {
     rpc: "https://rpc.assetmantle.one/",
@@ -1206,7 +1199,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.PioMainnet1]: {
     rpc: "https://rpc.provenance.io/",
@@ -1233,7 +1226,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 2100,
       high: 2500,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Galaxy1]: {
     rpc: "https://rpc.galaxychain.zone",
@@ -1260,7 +1253,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0.025,
       high: 0.035,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Meme1]: {
     rpc: "https://rpc-meme-1.meme.sx:443",
@@ -1287,7 +1280,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0.025,
       high: 0.035,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Evmos_9001_2]: {
     rpc: "https://rpc-evmos.keplr.app/",
@@ -1314,7 +1307,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 25000000000,
       high: 40000000000,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Phoenix1]: {
     rpc: "https://rpc.terrav2.ccvalidators.com/",
@@ -1341,7 +1334,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0.2,
       high: 0.25,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx"],
+    features: ["ibc-transfer"],
   },
   [ChainInfoID.Titan1]: {
     rpc: "https://rpcapi.rizon.world/",
@@ -1368,7 +1361,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 0.025,
       high: 0.035,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Kava_2222_10]: {
     rpc: "https://rpc-kava.keplr.app",
@@ -1404,7 +1397,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         coinImageUrl: "/tokens/swp.svg",
       },
     ],
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Genesis_29_2]: {
     rpc: "https://26657.genesisl1.org",
@@ -1431,7 +1424,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       average: 1000000000,
       high: 1000000001,
     },
-    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+    features: ["ibc-transfer", "ibc-go"],
   },
 }
 export const ChainInfoMap = Object.entries(SimpleChainInfoList).reduce(

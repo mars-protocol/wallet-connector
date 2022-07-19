@@ -215,8 +215,8 @@ export const WalletManagerProvider: FunctionComponent<
         setWalletEnableModalOpen(true)
 
         const chainInfo = await _getDefaultChainInfo()
-
         walletClient = await wallet.getClient(chainInfo, _walletConnect)
+
         if (!walletClient) {
           throw new Error("Failed to retrieve wallet client.")
         }
