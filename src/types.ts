@@ -174,6 +174,7 @@ export enum ChainInfoID {
   Emoney3 = "emoney-3",
   Juno1 = "juno-1",
   Uni3 = "uni-3",
+  Mars1 = "mars-1",
   Microtick1 = "microtick-1",
   LikecoinMainnet2 = "likecoin-mainnet-2",
   Impacthub3 = "impacthub-3",

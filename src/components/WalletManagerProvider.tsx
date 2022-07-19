@@ -530,50 +530,46 @@ export const WalletManagerProvider: FunctionComponent<
     <WalletManagerContext.Provider value={value}>
       {children}
 
-      {status !== WalletConnectionStatus.Resetting && pickerModalOpen && (
-        <SelectWalletModal
-          classNames={classNames}
-          closeIcon={closeIcon}
-          closeModal={_closePickerModal}
-          isKeplrExtentionNotInstalled={isKeplrExtentionNotInstalled}
-          isOpen
-          onClose={() => setPickerModalOpen(false)}
-          selectWallet={_connectToWallet}
-          wallets={enabledWallets}
-        />
-      )}
-      {status !== WalletConnectionStatus.Resetting && !!walletConnectUri && (
-        <WalletConnectModal
-          classNames={classNames}
-          closeIcon={closeIcon}
-          isOpen
-          onClose={() => disconnect().finally(_cleanupAfterConnection)}
-          reset={_reset}
-          uri={walletConnectUri}
-        />
-      )}
-      {status !== WalletConnectionStatus.Resetting && walletEnableModalOpen && (
-        <EnablingWalletModal
-          classNames={classNames}
-          closeIcon={closeIcon}
-          enablingMeta={enablingMeta}
-          enablingStringOverride={enablingStringOverride}
-          isOpen
-          onClose={() => setWalletEnableModalOpen(false)}
-          renderLoader={renderLoader}
-          reset={_reset}
-        />
-      )}
-      {status === WalletConnectionStatus.Resetting && (
-        <BaseModal
-          classNames={classNames}
-          isOpen
-          maxWidth="24rem"
-          title="Resetting..."
-        >
-          {renderLoader?.()}
-        </BaseModal>
-      )}
+      <SelectWalletModal
+        classNames={classNames}
+        closeIcon={closeIcon}
+        closeModal={_closePickerModal}
+        isKeplrExtentionNotInstalled={isKeplrExtentionNotInstalled}
+        isOpen={status !== WalletConnectionStatus.Resetting && pickerModalOpen}
+        onClose={() => setPickerModalOpen(false)}
+        selectWallet={_connectToWallet}
+        wallets={enabledWallets}
+      />
+      <WalletConnectModal
+        classNames={classNames}
+        closeIcon={closeIcon}
+        isOpen={
+          status !== WalletConnectionStatus.Resetting && !!walletConnectUri
+        }
+        onClose={() => disconnect().finally(_cleanupAfterConnection)}
+        reset={_reset}
+        uri={walletConnectUri}
+      />
+      <EnablingWalletModal
+        classNames={classNames}
+        closeIcon={closeIcon}
+        enablingMeta={enablingMeta}
+        enablingStringOverride={enablingStringOverride}
+        isOpen={
+          status !== WalletConnectionStatus.Resetting && walletEnableModalOpen
+        }
+        onClose={() => setWalletEnableModalOpen(false)}
+        renderLoader={renderLoader}
+        reset={_reset}
+      />
+      <BaseModal
+        classNames={classNames}
+        isOpen={status === WalletConnectionStatus.Resetting}
+        maxWidth="24rem"
+        title="Resetting..."
+      >
+        {renderLoader?.()}
+      </BaseModal>
     </WalletManagerContext.Provider>
   )
 }

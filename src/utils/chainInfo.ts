@@ -458,6 +458,33 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     },
     features: ["ibc-transfer", "ibc-go"],
   },
+  [ChainInfoID.Mars1]: {
+    rpc: "https://rpc.larry.engineer/",
+    rest: "https://lcd.larry.engineer/",
+    chainId: ChainInfoID.Mars1,
+    chainName: "Mars Hub",
+    bip44: {
+      coinType: 118,
+    },
+    bech32Config: Bech32Address.defaultBech32Config("mars"),
+    currencies: [
+      {
+        coinDenom: "MARS",
+        coinMinimalDenom: "umars",
+        coinDecimals: 6,
+        coinGeckoId: "mars",
+        coinImageUrl: "/tokens/mars.svg",
+        isStakeCurrency: true,
+        isFeeCurrency: true,
+      },
+    ],
+    gasPriceStep: {
+      low: 0,
+      average: 0,
+      high: 0.025,
+    },
+    features: ["stargate", "ibc-transfer", "no-legacy-stdTx", "ibc-go"],
+  },
   [ChainInfoID.Microtick1]: {
     rpc: "https://rpc-microtick.keplr.app",
     rest: "https://lcd-microtick.keplr.app",
