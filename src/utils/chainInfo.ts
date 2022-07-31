@@ -95,7 +95,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://rpc-test.osmosis.zone/",
     rest: "https://lcd-test.osmosis.zone/",
     chainId: ChainInfoID.OsmosisTestnet,
-    chainName: "Osmosis",
+    chainName: "Osmosis Testnet",
     bip44: {
       coinType: 118,
     },
@@ -452,10 +452,37 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Mars1]: {
-    rpc: "https://rpc.larry.engineer/",
-    rest: "https://lcd.larry.engineer/",
+    rpc: "https://rpc.marsprotocol.io/",
+    rest: "https://rest.marsprotocol.io/",
     chainId: ChainInfoID.Mars1,
     chainName: "Mars Hub",
+    bip44: {
+      coinType: 118,
+    },
+    bech32Config: Bech32Address.defaultBech32Config("mars"),
+    currencies: [
+      {
+        coinDenom: "MARS",
+        coinMinimalDenom: "umars",
+        coinDecimals: 6,
+        coinGeckoId: "mars",
+        coinImageUrl: "/tokens/mars.svg",
+        isStakeCurrency: true,
+        isFeeCurrency: true,
+      },
+    ],
+    gasPriceStep: {
+      low: 0,
+      average: 0,
+      high: 0.025,
+    },
+    features: ["ibc-transfer", "ibc-go"],
+  },
+  [ChainInfoID.MarsAres1]: {
+    rpc: "https://testnet-rpc.marsprotocol.io/",
+    rest: "https://testnet-rest.marsprotocol.io/",
+    chainId: ChainInfoID.MarsAres1,
+    chainName: "Mars Hub Testnet",
     bip44: {
       coinType: 118,
     },
@@ -1439,25 +1466,20 @@ export const getChainInfo = async (
   chainId: ChainInfo["chainId"],
   chainInfoOverrides?: ChainInfoOverrides
 ) => {
-  const overrides =
-    typeof chainInfoOverrides === "function"
-      ? await chainInfoOverrides()
-      : chainInfoOverrides
+  const chainInfo: ChainInfo | undefined = ChainInfoMap[chainId]
 
-  const chainInfo: ChainInfo | undefined =
-    // Check overrides for chain info.
-    overrides?.find((info) => info.chainId === chainId) ||
-    // Use embedded map as fallback.
-    ChainInfoMap[chainId]
+  if (
+    typeof chainInfoOverrides !== "undefined" &&
+    chainInfoOverrides[chainId] &&
+    chainInfo
+  ) {
+    Object.keys(chainInfoOverrides[chainId]).map(function (key) {
+      chainInfo[key] = chainInfoOverrides[chainId][key]
+    })
+  }
 
   if (!chainInfo) {
-    const availableChainIds = [
-      ...(overrides?.map((info) => info.chainId) ?? []),
-      ...Object.keys(ChainInfoMap).filter(
-        // Don't list ID in overrides to prevent duplicates.
-        (key) => !overrides?.some((info) => info.chainId === key)
-      ),
-    ]
+    const availableChainIds = [...Object.keys(ChainInfoMap)]
     throw new Error(
       `Chain ID "${chainId}" does not exist among provided ChainInfo objects. Available Chain IDs: ${availableChainIds.join(
         ","

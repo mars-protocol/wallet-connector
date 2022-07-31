@@ -7,8 +7,16 @@ import {
   SigningStargateClient,
   SigningStargateClientOptions,
 } from "@cosmjs/stargate"
-import { ChainInfo, Keplr } from "@keplr-wallet/types"
+import {
+  AppCurrency,
+  Bech32Config,
+  BIP44,
+  ChainInfo,
+  Currency,
+  Keplr,
+} from "@keplr-wallet/types"
 import WalletConnect from "@walletconnect/client"
+import { AxiosRequestConfig } from "axios"
 import { ReactNode } from "react"
 
 export interface IKeplrWalletConnectV1 extends Keplr {
@@ -77,8 +85,37 @@ export interface IEnableMeta {
   contentClassName: string
 }
 
+export interface ChainInfoOptions {
+  rpc: string
+  rpcConfig?: AxiosRequestConfig
+  rest: string
+  restConfig?: AxiosRequestConfig
+  chainId?: string
+  chainName?: string
+  stakeCurrency?: Currency
+  walletUrl?: string
+  walletUrlForStaking?: string
+  bip44?: BIP44
+  alternativeBIP44s?: BIP44[]
+  bech32Config?: Bech32Config
+  currencies?: AppCurrency[]
+  feeCurrencies?: Currency[]
+  coinType?: number
+  gasPriceStep?: {
+    low: number
+    average: number
+    high: number
+  }
+  features?: string[]
+  beta?: boolean
+}
+
 export type IWalletMetaOverride = {
-  [key in WalletType]: IWalletMeta
+  [key in WalletType]?: IWalletMeta
+}
+
+export type ChainInfoOverrides = {
+  [key in ChainInfoID]?: ChainInfoOptions
 }
 
 export interface IWalletMeta {
@@ -92,10 +129,6 @@ export interface IWalletMeta {
 export type SigningClientGetter<T> = (
   chainInfo: ChainInfo
 ) => T | Promise<T | undefined> | undefined
-
-export type ChainInfoOverrides =
-  | ChainInfo[]
-  | (() => undefined | ChainInfo[] | Promise<undefined | ChainInfo[]>)
 
 export interface IWalletManagerContext {
   // Function to begin the connection process. This will either display
@@ -175,6 +208,7 @@ export enum ChainInfoID {
   Juno1 = "juno-1",
   Uni3 = "uni-3",
   Mars1 = "mars-1",
+  MarsAres1 = "ares-1",
   Microtick1 = "microtick-1",
   LikecoinMainnet2 = "likecoin-mainnet-2",
   Impacthub3 = "impacthub-3",
