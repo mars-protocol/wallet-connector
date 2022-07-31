@@ -58,6 +58,10 @@ export interface Wallet {
 
 export type WalletChainInfo = ChainInfo
 
+export type WalletSigningCosmWasmClient = SigningCosmWasmClient
+
+export type WalletSigningStargateClient = SigningStargateClient
+
 export interface ConnectedWallet {
   // Wallet.
   wallet: Wallet
@@ -72,9 +76,9 @@ export interface ConnectedWallet {
   // Wallet address.
   address: string
   // Signing client for interacting with CosmWasm chain APIs.
-  signingCosmWasmClient: SigningCosmWasmClient
+  signingCosmWasmClient: WalletSigningCosmWasmClient
   // Signing client for interacting with Stargate chain APIs.
-  signingStargateClient: SigningStargateClient
+  signingStargateClient: WalletSigningStargateClient
 }
 
 export interface IEnableMeta {
