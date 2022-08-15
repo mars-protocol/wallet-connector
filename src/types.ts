@@ -75,10 +75,27 @@ export interface ConnectedWallet {
   name: string
   // Wallet address.
   address: string
+  // userBalances json
+  walletBalances: BalancesResponse | undefined
   // Signing client for interacting with CosmWasm chain APIs.
   signingCosmWasmClient: WalletSigningCosmWasmClient
   // Signing client for interacting with Stargate chain APIs.
   signingStargateClient: WalletSigningStargateClient
+}
+
+interface AssetResponse {
+  denom: string
+  amount: string
+}
+
+interface Pagination {
+  next_key: null | number
+  total: string
+}
+
+export interface BalancesResponse {
+  balances?: AssetResponse[]
+  pagination: Pagination
 }
 
 export interface IEnableMeta {
