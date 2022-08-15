@@ -7,7 +7,7 @@ export const getWalletBalances = async (
   address?: string,
   chainId?: string
 ): Promise<BalancesResponse | undefined> => {
-  if (!address || !chainId) return
+  if (!address || !chainId) return undefined
 
   const URL = `${SimpleChainInfoList[chainId].rest}cosmos/bank/v1beta1/balances/${address}`
 

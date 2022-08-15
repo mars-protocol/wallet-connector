@@ -54,26 +54,26 @@ export const getConnectedWalletInfo = async (
     throw new Error("Failed to retrieve wallet address.")
   }
 
-  const [signingCosmWasmClient, signingStargateClient, walletBalances] =
-    await Promise.all([
-      // Get CosmWasm client.
-      await (
-        await import("@cosmjs/cosmwasm-stargate")
-      ).SigningCosmWasmClient.connectWithSigner(
-        chainInfo.rpc,
-        offlineSigner,
-        signingCosmWasmClientOptions
-      ),
-      // Get Stargate client.
-      await (
-        await import("@cosmjs/stargate")
-      ).SigningStargateClient.connectWithSigner(
-        chainInfo.rpc,
-        offlineSigner,
-        signingStargateClientOptions
-      ),
-      await getWalletBalances(address, chainInfo.chainId),
-    ])
+  const [signingCosmWasmClient, signingStargateClient] = await Promise.all([
+    // Get CosmWasm client.
+    await (
+      await import("@cosmjs/cosmwasm-stargate")
+    ).SigningCosmWasmClient.connectWithSigner(
+      chainInfo.rpc,
+      offlineSigner,
+      signingCosmWasmClientOptions
+    ),
+    // Get Stargate client.
+    await (
+      await import("@cosmjs/stargate")
+    ).SigningStargateClient.connectWithSigner(
+      chainInfo.rpc,
+      offlineSigner,
+      signingStargateClientOptions
+    ),
+  ])
+
+  const walletBalances = await getWalletBalances(address, chainInfo.chainId)
 
   return {
     wallet,
