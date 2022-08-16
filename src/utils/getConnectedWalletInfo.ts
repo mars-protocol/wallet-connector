@@ -12,37 +12,46 @@ export const getConnectedWalletInfo = async (
   signingCosmWasmClientOptions?: SigningCosmWasmClientOptions,
   signingStargateClientOptions?: SigningStargateClientOptions
 ): Promise<ConnectedWallet> => {
-  await client.enable(chainInfo.chainId)
-
-  // Only Keplr browser extension supports suggesting chain.
-  // Not WalletConnect nor embedded Keplr Mobile web.
-  if (wallet.type === WalletType.Keplr && client.mode !== "mobile-web") {
-    const info = {
-      ...chainInfo,
-      stakeCurrency: {
-        ...chainInfo.stakeCurrency,
-        coinImageUrl: chainInfo.stakeCurrency.coinImageUrl
-          ? window.origin + chainInfo.stakeCurrency.coinImageUrl
-          : undefined,
-      },
-      currencies: chainInfo.currencies.map((currency) => ({
-        ...currency,
-        coinImageUrl: currency.coinImageUrl
-          ? window.origin + currency.coinImageUrl
-          : undefined,
-      })),
-      feeCurrencies: chainInfo.feeCurrencies.map((currency) => ({
-        ...currency,
-        coinImageUrl: currency.coinImageUrl
-          ? window.origin + currency.coinImageUrl
-          : undefined,
-      })),
-    }
-
-    await client.experimentalSuggestChain(info)
-
-    // Chain is now added, retry to enable it
+  try {
     await client.enable(chainInfo.chainId)
+  } catch (e) {
+    // Don't handle the missing chain as an error, but a warning
+    console.warn(e)
+
+    // Only Keplr browser extension supports suggesting chain.
+    // Not WalletConnect nor embedded Keplr Mobile web.
+    if (wallet.type === WalletType.Keplr && client.mode !== "mobile-web") {
+      const info = {
+        ...chainInfo,
+        stakeCurrency: {
+          ...chainInfo.stakeCurrency,
+          coinImageUrl: chainInfo.stakeCurrency.coinImageUrl
+            ? window.origin + chainInfo.stakeCurrency.coinImageUrl
+            : undefined,
+        },
+        currencies: chainInfo.currencies.map((currency) => ({
+          ...currency,
+          coinImageUrl: currency.coinImageUrl
+            ? window.origin + currency.coinImageUrl
+            : undefined,
+        })),
+        feeCurrencies: chainInfo.feeCurrencies.map((currency) => ({
+          ...currency,
+          coinImageUrl: currency.coinImageUrl
+            ? window.origin + currency.coinImageUrl
+            : undefined,
+        })),
+      }
+
+      await client.experimentalSuggestChain(info)
+
+      try {
+        // Chain is now added, retry to enable it
+        await client.enable(chainInfo.chainId)
+      } catch (e) {
+        console.warn(e)
+      }
+    }
   }
 
   // Parallelize for efficiency.
