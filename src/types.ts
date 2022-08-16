@@ -83,12 +83,12 @@ export interface ConnectedWallet {
   signingStargateClient: WalletSigningStargateClient
 }
 
-interface AssetResponse {
+export interface AssetResponse {
   denom: string
   amount: string
 }
 
-interface Pagination {
+export interface Pagination {
   next_key: null | number
   total: string
 }

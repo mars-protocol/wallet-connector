@@ -2,12 +2,17 @@ import { ChainInfo } from "@keplr-wallet/types"
 import { createContext, useContext, useEffect, useState } from "react"
 
 import {
+  BalancesResponse,
   ConnectedWallet,
   IWalletManagerContext,
   UseWalletResponse,
   WalletConnectionStatus,
 } from "../types"
-import { getChainInfo, getConnectedWalletInfo } from "../utils"
+import {
+  getChainInfo,
+  getConnectedWalletInfo,
+  getWalletBalances,
+} from "../utils"
 
 export const WalletManagerContext = createContext<IWalletManagerContext | null>(
   null
@@ -20,6 +25,13 @@ export const useWalletManager = () => {
   }
 
   return context
+}
+
+export const fetchBalances = async (
+  address: string,
+  chainId?: string
+): Promise<BalancesResponse | undefined> => {
+  return await getWalletBalances(address, chainId)
 }
 
 export const useWallet = (
