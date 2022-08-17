@@ -14,6 +14,7 @@ import {
 } from "@keplr-wallet/provider"
 import {
   ChainInfo,
+  EthSignType,
   KeplrIntereactionOptions,
   KeplrMode,
   KeplrSignOptions,
@@ -306,6 +307,15 @@ export class KeplrWalletConnectV1 implements IKeplrWalletConnectV1 {
   }
 
   getEnigmaPubKey(_chainId: string): Promise<Uint8Array> {
+    throw new Error("Not yet implemented")
+  }
+
+  signEthereum(
+    _chainId: string,
+    _signer: string,
+    _data: string | Uint8Array,
+    _type: EthSignType
+  ): Promise<Uint8Array> {
     throw new Error("Not yet implemented")
   }
 
