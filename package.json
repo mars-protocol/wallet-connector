@@ -1,6 +1,6 @@
 {
   "name": "@marsprotocol/wallet-connector",
-  "version": "0.6.6",
+  "version": "0.7.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mars-protocol/wallet-connector.git"
@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "clean": "rm -rf node_modules dist",
-    "build": "tsc --build --force",
+    "build": "tsc && tsc -m ES6",
     "build:webpack": "webpack",
     "build:webpack:stats": "webpack --json > webpack_stats.json",
     "build:webpack:analyze": "webpack-bundle-analyzer webpack_stats.json dist",
