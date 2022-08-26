@@ -1,21 +1,24 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import React from "react";
-import { act } from "react-dom/test-utils";
-import { useWallet, useWalletManager, WalletManagerProvider, } from "../components";
-import { ChainInfoID, WalletConnectionStatus, WalletType } from "../types";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+const react_1 = require("@testing-library/react");
+const react_2 = tslib_1.__importDefault(require("react"));
+const test_utils_1 = require("react-dom/test-utils");
+const components_1 = require("../components");
+const types_1 = require("../types");
 const DisplayStatus = () => {
-    const { status } = useWalletManager();
-    useWallet();
-    return React.createElement("p", null, status);
+    const { status } = (0, components_1.useWalletManager)();
+    (0, components_1.useWallet)();
+    return react_2.default.createElement("p", null, status);
 };
 describe("display status", () => {
-    beforeAll(() => act(() => {
-        render(React.createElement(WalletManagerProvider, { defaultChainId: ChainInfoID.Juno1, enabledWalletTypes: [WalletType.Keplr, WalletType.WalletConnectKeplr] },
-            React.createElement(DisplayStatus, null)));
+    beforeAll(() => (0, test_utils_1.act)(() => {
+        (0, react_1.render)(react_2.default.createElement(components_1.WalletManagerProvider, { defaultChainId: types_1.ChainInfoID.Juno1, enabledWalletTypes: [types_1.WalletType.Keplr, types_1.WalletType.WalletConnectKeplr] },
+            react_2.default.createElement(DisplayStatus, null)));
     }));
     it("should display the status in the DOM", () => {
-        expect(screen.getByText(WalletConnectionStatus.ReadyForConnection)).toBeInTheDocument();
+        expect(react_1.screen.getByText(types_1.WalletConnectionStatus.ReadyForConnection)).toBeInTheDocument();
     });
-    afterAll(cleanup);
+    afterAll(react_1.cleanup);
 });
 //# sourceMappingURL=display_status.test.js.map

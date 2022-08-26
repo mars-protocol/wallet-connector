@@ -1,4 +1,7 @@
-export const baseModalStyles = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.selectWalletStyles = exports.baseModalStyles = void 0;
+exports.baseModalStyles = {
     modalOverlay: {
         position: "fixed",
         top: 0,
@@ -34,7 +37,7 @@ export const baseModalStyles = {
         cursor: "pointer",
     },
 };
-export const selectWalletStyles = {
+exports.selectWalletStyles = {
     walletList: {
         display: "flex",
         flexDirection: "column",

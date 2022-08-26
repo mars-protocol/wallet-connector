@@ -1,9 +1,12 @@
-export var WalletType;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ChainInfoID = exports.WalletConnectionStatus = exports.WalletType = void 0;
+var WalletType;
 (function (WalletType) {
     WalletType["Keplr"] = "keplr";
     WalletType["WalletConnectKeplr"] = "walletconnect_keplr";
-})(WalletType || (WalletType = {}));
-export var WalletConnectionStatus;
+})(WalletType = exports.WalletType || (exports.WalletType = {}));
+var WalletConnectionStatus;
 (function (WalletConnectionStatus) {
     WalletConnectionStatus[WalletConnectionStatus["Initializing"] = 0] = "Initializing";
     WalletConnectionStatus[WalletConnectionStatus["AttemptingAutoConnection"] = 1] = "AttemptingAutoConnection";
@@ -13,8 +16,8 @@ export var WalletConnectionStatus;
     WalletConnectionStatus[WalletConnectionStatus["Connected"] = 4] = "Connected";
     WalletConnectionStatus[WalletConnectionStatus["Resetting"] = 5] = "Resetting";
     WalletConnectionStatus[WalletConnectionStatus["Errored"] = 6] = "Errored";
-})(WalletConnectionStatus || (WalletConnectionStatus = {}));
-export var ChainInfoID;
+})(WalletConnectionStatus = exports.WalletConnectionStatus || (exports.WalletConnectionStatus = {}));
+var ChainInfoID;
 (function (ChainInfoID) {
     ChainInfoID["Osmosis1"] = "osmosis-1";
     ChainInfoID["OsmosisTestnet"] = "osmo-test-4";
@@ -70,5 +73,5 @@ export var ChainInfoID;
     ChainInfoID["Titan1"] = "titan-1";
     ChainInfoID["Kava_2222_10"] = "kava_2222-10";
     ChainInfoID["Genesis_29_2"] = "genesis_29-2";
-})(ChainInfoID || (ChainInfoID = {}));
+})(ChainInfoID = exports.ChainInfoID || (exports.ChainInfoID = {}));
 //# sourceMappingURL=types.js.map

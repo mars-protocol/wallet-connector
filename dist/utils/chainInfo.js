@@ -1,12 +1,15 @@
+"use strict";
 /*
  * Data taken from @osmosis-labs/osmosis-frontend with minor alterations.
  * https://github.com/osmosis-labs/osmosis-frontend/blob/11bfa1f07f0dda8c8aab1048bd04270a23641783/packages/web/config/chain-infos.ts
  */
-import { __awaiter } from "tslib";
-import { Bech32Address } from "@keplr-wallet/cosmos";
-import { ChainInfoID } from "../types";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getChainInfo = exports.ChainInfoMap = exports.SimpleChainInfoList = exports.createKeplrChainInfo = void 0;
+const tslib_1 = require("tslib");
+const cosmos_1 = require("@keplr-wallet/cosmos");
+const types_1 = require("../types");
 /** Convert a less redundant chain info schema into one that is accepted by Keplr's suggestChain: `ChainInfo`. */
-export function createKeplrChainInfo(chainInfo) {
+function createKeplrChainInfo(chainInfo) {
     const feeCurrencies = [];
     let stakeCurrency;
     for (const currency of chainInfo.currencies) {
@@ -29,16 +32,17 @@ export function createKeplrChainInfo(chainInfo) {
     return Object.assign(Object.assign({}, chainInfo), { stakeCurrency,
         feeCurrencies });
 }
-export const SimpleChainInfoList = {
-    [ChainInfoID.Osmosis1]: {
+exports.createKeplrChainInfo = createKeplrChainInfo;
+exports.SimpleChainInfoList = {
+    [types_1.ChainInfoID.Osmosis1]: {
         rpc: "https://rpc-osmosis.blockapsis.com/",
         rest: "https://lcd-osmosis.blockapsis.com/",
-        chainId: ChainInfoID.Osmosis1,
+        chainId: types_1.ChainInfoID.Osmosis1,
         chainName: "Osmosis",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("osmo"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("osmo"),
         currencies: [
             {
                 coinDenom: "OSMO",
@@ -57,15 +61,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.OsmosisTestnet]: {
+    [types_1.ChainInfoID.OsmosisTestnet]: {
         rpc: "https://rpc-test.osmosis.zone/",
         rest: "https://lcd-test.osmosis.zone/",
-        chainId: ChainInfoID.OsmosisTestnet,
+        chainId: types_1.ChainInfoID.OsmosisTestnet,
         chainName: "Osmosis Testnet",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("osmo"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("osmo"),
         currencies: [
             {
                 coinDenom: "OSMO",
@@ -84,15 +88,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Cosmoshub4]: {
+    [types_1.ChainInfoID.Cosmoshub4]: {
         rpc: "https://rpc-cosmoshub.keplr.app",
         rest: "https://lcd-cosmoshub.keplr.app",
-        chainId: ChainInfoID.Cosmoshub4,
+        chainId: types_1.ChainInfoID.Cosmoshub4,
         chainName: "Cosmos Hub",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("cosmos"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("cosmos"),
         currencies: [
             {
                 coinDenom: "ATOM",
@@ -106,15 +110,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Columbus5]: {
+    [types_1.ChainInfoID.Columbus5]: {
         rpc: "https://rpc-columbus.keplr.app",
         rest: "https://lcd-columbus.keplr.app",
-        chainId: ChainInfoID.Columbus5,
+        chainId: types_1.ChainInfoID.Columbus5,
         chainName: "Terra Classic",
         bip44: {
             coinType: 330,
         },
-        bech32Config: Bech32Address.defaultBech32Config("terra"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("terra"),
         currencies: [
             {
                 coinDenom: "LUNC",
@@ -150,15 +154,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Secret4]: {
+    [types_1.ChainInfoID.Secret4]: {
         rpc: "https://rpc-secret.keplr.app",
         rest: "https://lcd-secret.keplr.app",
-        chainId: ChainInfoID.Secret4,
+        chainId: types_1.ChainInfoID.Secret4,
         chainName: "Secret Network",
         bip44: {
             coinType: 529,
         },
-        bech32Config: Bech32Address.defaultBech32Config("secret"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("secret"),
         currencies: [
             {
                 coinDenom: "SCRT",
@@ -172,15 +176,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Akashnet2]: {
+    [types_1.ChainInfoID.Akashnet2]: {
         rpc: "https://rpc-akash.keplr.app",
         rest: "https://lcd-akash.keplr.app",
-        chainId: ChainInfoID.Akashnet2,
+        chainId: types_1.ChainInfoID.Akashnet2,
         chainName: "Akash",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("akash"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("akash"),
         currencies: [
             {
                 coinDenom: "AKT",
@@ -194,13 +198,13 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Regen1]: {
+    [types_1.ChainInfoID.Regen1]: {
         rpc: "https://rpc-regen.keplr.app",
         rest: "https://lcd-regen.keplr.app",
-        chainId: ChainInfoID.Regen1,
+        chainId: types_1.ChainInfoID.Regen1,
         chainName: "Regen Network",
         bip44: { coinType: 118 },
-        bech32Config: Bech32Address.defaultBech32Config("regen"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("regen"),
         currencies: [
             {
                 coinDenom: "REGEN",
@@ -214,13 +218,13 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Sentinelhub2]: {
+    [types_1.ChainInfoID.Sentinelhub2]: {
         rpc: "https://rpc-sentinel.keplr.app",
         rest: "https://lcd-sentinel.keplr.app",
-        chainId: ChainInfoID.Sentinelhub2,
+        chainId: types_1.ChainInfoID.Sentinelhub2,
         chainName: "Sentinel",
         bip44: { coinType: 118 },
-        bech32Config: Bech32Address.defaultBech32Config("sent"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("sent"),
         currencies: [
             {
                 coinDenom: "DVPN",
@@ -234,15 +238,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Core1]: {
+    [types_1.ChainInfoID.Core1]: {
         rpc: "https://rpc-persistence.keplr.app",
         rest: "https://lcd-persistence.keplr.app",
-        chainId: ChainInfoID.Core1,
+        chainId: types_1.ChainInfoID.Core1,
         chainName: "Persistence",
         bip44: {
             coinType: 750,
         },
-        bech32Config: Bech32Address.defaultBech32Config("persistence"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("persistence"),
         currencies: [
             {
                 coinDenom: "XPRT",
@@ -263,15 +267,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Irishub1]: {
+    [types_1.ChainInfoID.Irishub1]: {
         rpc: "https://rpc-iris.keplr.app",
         rest: "https://lcd-iris.keplr.app",
-        chainId: ChainInfoID.Irishub1,
+        chainId: types_1.ChainInfoID.Irishub1,
         chainName: "IRISnet",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("iaa"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("iaa"),
         currencies: [
             {
                 coinDenom: "IRIS",
@@ -285,15 +289,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.CryptoOrgChainMainnet1]: {
+    [types_1.ChainInfoID.CryptoOrgChainMainnet1]: {
         rpc: "https://rpc-crypto-org.keplr.app/",
         rest: "https://lcd-crypto-org.keplr.app/",
-        chainId: ChainInfoID.CryptoOrgChainMainnet1,
+        chainId: types_1.ChainInfoID.CryptoOrgChainMainnet1,
         chainName: "Crypto.org",
         bip44: {
             coinType: 394,
         },
-        bech32Config: Bech32Address.defaultBech32Config("cro"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("cro"),
         currencies: [
             {
                 coinDenom: "CRO",
@@ -307,15 +311,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.IovMainnetIbc]: {
+    [types_1.ChainInfoID.IovMainnetIbc]: {
         rpc: "https://rpc-iov.keplr.app",
         rest: "https://lcd-iov.keplr.app",
-        chainId: ChainInfoID.IovMainnetIbc,
+        chainId: types_1.ChainInfoID.IovMainnetIbc,
         chainName: "Starname",
         bip44: {
             coinType: 234,
         },
-        bech32Config: Bech32Address.defaultBech32Config("star"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("star"),
         currencies: [
             {
                 coinDenom: "IOV",
@@ -329,15 +333,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Emoney3]: {
+    [types_1.ChainInfoID.Emoney3]: {
         rpc: "https://rpc-emoney.keplr.app",
         rest: "https://lcd-emoney.keplr.app",
-        chainId: ChainInfoID.Emoney3,
+        chainId: types_1.ChainInfoID.Emoney3,
         chainName: "e-Money",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("emoney"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("emoney"),
         currencies: [
             {
                 coinDenom: "NGM",
@@ -363,15 +367,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Juno1]: {
+    [types_1.ChainInfoID.Juno1]: {
         rpc: "https://rpc-juno.itastakers.com",
         rest: "https://lcd-juno.itastakers.com",
-        chainId: ChainInfoID.Juno1,
+        chainId: types_1.ChainInfoID.Juno1,
         chainName: "Juno",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("juno"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("juno"),
         currencies: [
             {
                 coinDenom: "JUNO",
@@ -390,15 +394,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go", "wasmd_0.24+", "cosmwasm"],
     },
-    [ChainInfoID.Uni3]: {
+    [types_1.ChainInfoID.Uni3]: {
         rpc: "https://rpc.uni.juno.deuslabs.fi",
         rest: "https://lcd.uni.juno.deuslabs.fi",
-        chainId: ChainInfoID.Uni3,
+        chainId: types_1.ChainInfoID.Uni3,
         chainName: "Juno Testnet",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("juno"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("juno"),
         currencies: [
             {
                 coinDenom: "junox",
@@ -416,15 +420,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Mars1]: {
+    [types_1.ChainInfoID.Mars1]: {
         rpc: "https://rpc.marsprotocol.io/",
         rest: "https://rest.marsprotocol.io/",
-        chainId: ChainInfoID.Mars1,
+        chainId: types_1.ChainInfoID.Mars1,
         chainName: "Mars Hub",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("mars"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("mars"),
         currencies: [
             {
                 coinDenom: "MARS",
@@ -443,15 +447,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.MarsAres1]: {
+    [types_1.ChainInfoID.MarsAres1]: {
         rpc: "https://testnet-rpc.marsprotocol.io/",
         rest: "https://testnet-rest.marsprotocol.io/",
-        chainId: ChainInfoID.MarsAres1,
+        chainId: types_1.ChainInfoID.MarsAres1,
         chainName: "Mars Hub Testnet",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("mars"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("mars"),
         currencies: [
             {
                 coinDenom: "MARS",
@@ -470,15 +474,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Microtick1]: {
+    [types_1.ChainInfoID.Microtick1]: {
         rpc: "https://rpc-microtick.keplr.app",
         rest: "https://lcd-microtick.keplr.app",
-        chainId: ChainInfoID.Microtick1,
+        chainId: types_1.ChainInfoID.Microtick1,
         chainName: "Microtick",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("micro"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("micro"),
         currencies: [
             {
                 coinDenom: "TICK",
@@ -492,15 +496,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.LikecoinMainnet2]: {
+    [types_1.ChainInfoID.LikecoinMainnet2]: {
         rpc: "https://mainnet-node.like.co/rpc",
         rest: "https://mainnet-node.like.co",
-        chainId: ChainInfoID.LikecoinMainnet2,
+        chainId: types_1.ChainInfoID.LikecoinMainnet2,
         chainName: "LikeCoin",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("like"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("like"),
         currencies: [
             {
                 coinDenom: "LIKE",
@@ -514,15 +518,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Impacthub3]: {
+    [types_1.ChainInfoID.Impacthub3]: {
         rpc: "https://rpc-impacthub.keplr.app",
         rest: "https://lcd-impacthub.keplr.app",
-        chainId: ChainInfoID.Impacthub3,
+        chainId: types_1.ChainInfoID.Impacthub3,
         chainName: "IXO",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("ixo"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("ixo"),
         currencies: [
             {
                 coinDenom: "IXO",
@@ -536,15 +540,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Bitcanna1]: {
+    [types_1.ChainInfoID.Bitcanna1]: {
         rpc: "https://rpc.bitcanna.io",
         rest: "https://lcd.bitcanna.io",
-        chainId: ChainInfoID.Bitcanna1,
+        chainId: types_1.ChainInfoID.Bitcanna1,
         chainName: "BitCanna",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("bcna"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("bcna"),
         currencies: [
             {
                 coinDenom: "BCNA",
@@ -558,15 +562,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Bitsong2b]: {
+    [types_1.ChainInfoID.Bitsong2b]: {
         rpc: "https://rpc.explorebitsong.com",
         rest: "https://lcd.explorebitsong.com",
-        chainId: ChainInfoID.Bitsong2b,
+        chainId: types_1.ChainInfoID.Bitsong2b,
         chainName: "BitSong",
         bip44: {
             coinType: 639,
         },
-        bech32Config: Bech32Address.defaultBech32Config("bitsong"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("bitsong"),
         currencies: [
             {
                 coinDenom: "BTSG",
@@ -580,15 +584,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Kichain2]: {
+    [types_1.ChainInfoID.Kichain2]: {
         rpc: "https://rpc-mainnet.blockchain.ki",
         rest: "https://api-mainnet.blockchain.ki",
-        chainId: ChainInfoID.Kichain2,
+        chainId: types_1.ChainInfoID.Kichain2,
         chainName: "Ki",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("ki"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("ki"),
         currencies: [
             {
                 coinDenom: "XKI",
@@ -602,15 +606,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Panacea3]: {
+    [types_1.ChainInfoID.Panacea3]: {
         rpc: "https://rpc.gopanacea.org",
         rest: "https://api.gopanacea.org",
-        chainId: ChainInfoID.Panacea3,
+        chainId: types_1.ChainInfoID.Panacea3,
         chainName: "MediBloc",
         bip44: {
             coinType: 371,
         },
-        bech32Config: Bech32Address.defaultBech32Config("panacea"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("panacea"),
         currencies: [
             {
                 coinDenom: "MED",
@@ -629,15 +633,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Bostrom]: {
+    [types_1.ChainInfoID.Bostrom]: {
         rpc: "https://rpc.bostrom.cybernode.ai",
         rest: "https://lcd.bostrom.cybernode.ai",
-        chainId: ChainInfoID.Bostrom,
+        chainId: types_1.ChainInfoID.Bostrom,
         chainName: "Bostrom",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("bostrom"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("bostrom"),
         currencies: [
             {
                 coinDenom: "BOOT",
@@ -651,15 +655,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Comdex1]: {
+    [types_1.ChainInfoID.Comdex1]: {
         rpc: "https://rpc.comdex.one",
         rest: "https://rest.comdex.one",
-        chainId: ChainInfoID.Comdex1,
+        chainId: types_1.ChainInfoID.Comdex1,
         chainName: "Comdex",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("comdex"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("comdex"),
         currencies: [
             {
                 coinDenom: "CMDX",
@@ -673,15 +677,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.CheqdMainnet1]: {
+    [types_1.ChainInfoID.CheqdMainnet1]: {
         rpc: "https://rpc.cheqd.net",
         rest: "https://api.cheqd.net",
-        chainId: ChainInfoID.CheqdMainnet1,
+        chainId: types_1.ChainInfoID.CheqdMainnet1,
         chainName: "cheqd",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("cheqd"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("cheqd"),
         currencies: [
             {
                 coinDenom: "CHEQ",
@@ -700,15 +704,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Stargaze1]: {
+    [types_1.ChainInfoID.Stargaze1]: {
         rpc: "https://rpc.stargaze-apis.com",
         rest: "https://rest.stargaze-apis.com",
-        chainId: ChainInfoID.Stargaze1,
+        chainId: types_1.ChainInfoID.Stargaze1,
         chainName: "Stargaze",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("stars"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("stars"),
         currencies: [
             {
                 coinDenom: "STARS",
@@ -722,15 +726,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Chihuahua1]: {
+    [types_1.ChainInfoID.Chihuahua1]: {
         rpc: "https://rpc.chihuahua.wtf",
         rest: "https://api.chihuahua.wtf",
-        chainId: ChainInfoID.Chihuahua1,
+        chainId: types_1.ChainInfoID.Chihuahua1,
         chainName: "Chihuahua",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("chihuahua"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("chihuahua"),
         currencies: [
             {
                 coinDenom: "HUAHUA",
@@ -749,15 +753,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.LumNetwork1]: {
+    [types_1.ChainInfoID.LumNetwork1]: {
         rpc: "https://node0.mainnet.lum.network/rpc",
         rest: "https://node0.mainnet.lum.network/rest",
-        chainId: ChainInfoID.LumNetwork1,
+        chainId: types_1.ChainInfoID.LumNetwork1,
         chainName: "Lum Network",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("lum"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("lum"),
         currencies: [
             {
                 coinDenom: "LUM",
@@ -771,15 +775,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Vidulum1]: {
+    [types_1.ChainInfoID.Vidulum1]: {
         rpc: "https://mainnet-rpc.vidulum.app",
         rest: "https://mainnet-lcd.vidulum.app",
-        chainId: ChainInfoID.Vidulum1,
+        chainId: types_1.ChainInfoID.Vidulum1,
         chainName: "Vidulum",
         bip44: {
             coinType: 370,
         },
-        bech32Config: Bech32Address.defaultBech32Config("vdl"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("vdl"),
         currencies: [
             {
                 coinDenom: "VDL",
@@ -793,15 +797,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.DesmosMainnet]: {
+    [types_1.ChainInfoID.DesmosMainnet]: {
         rpc: "https://rpc.mainnet.desmos.network",
         rest: "https://api.mainnet.desmos.network",
-        chainId: ChainInfoID.DesmosMainnet,
+        chainId: types_1.ChainInfoID.DesmosMainnet,
         chainName: "Desmos",
         bip44: {
             coinType: 852,
         },
-        bech32Config: Bech32Address.defaultBech32Config("desmos"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("desmos"),
         currencies: [
             {
                 coinDenom: "DSM",
@@ -815,15 +819,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Dig1]: {
+    [types_1.ChainInfoID.Dig1]: {
         rpc: "https://rpc-1-dig.notional.ventures",
         rest: "https://api-1-dig.notional.ventures",
-        chainId: ChainInfoID.Dig1,
+        chainId: types_1.ChainInfoID.Dig1,
         chainName: "Dig",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("dig"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("dig"),
         currencies: [
             {
                 coinDenom: "DIG",
@@ -842,15 +846,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Sommelier3]: {
+    [types_1.ChainInfoID.Sommelier3]: {
         rpc: "https://rpc-sommelier.keplr.app",
         rest: "https://lcd-sommelier.keplr.app",
-        chainId: ChainInfoID.Sommelier3,
+        chainId: types_1.ChainInfoID.Sommelier3,
         chainName: "Sommelier",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("somm"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("somm"),
         currencies: [
             {
                 coinDenom: "SOMM",
@@ -864,15 +868,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Sifchain1]: {
+    [types_1.ChainInfoID.Sifchain1]: {
         rpc: "https://rpc.sifchain.finance",
         rest: "https://api-int.sifchain.finance",
-        chainId: ChainInfoID.Sifchain1,
+        chainId: types_1.ChainInfoID.Sifchain1,
         chainName: "Sifchain",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("sif"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("sif"),
         currencies: [
             {
                 coinDenom: "ROWAN",
@@ -886,15 +890,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.LaoziMainnet]: {
+    [types_1.ChainInfoID.LaoziMainnet]: {
         rpc: "https://rpc.laozi3.bandchain.org",
         rest: "https://laozi1.bandchain.org/api",
-        chainId: ChainInfoID.LaoziMainnet,
+        chainId: types_1.ChainInfoID.LaoziMainnet,
         chainName: "BandChain",
         bip44: {
             coinType: 494,
         },
-        bech32Config: Bech32Address.defaultBech32Config("band"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("band"),
         currencies: [
             {
                 coinDenom: "BAND",
@@ -908,15 +912,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Darchub]: {
+    [types_1.ChainInfoID.Darchub]: {
         rpc: "https://node1.konstellation.tech:26657",
         rest: "https://node1.konstellation.tech:1318",
-        chainId: ChainInfoID.Darchub,
+        chainId: types_1.ChainInfoID.Darchub,
         chainName: "Konstellation",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("darc"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("darc"),
         currencies: [
             {
                 coinDenom: "DARC",
@@ -930,15 +934,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Umee1]: {
+    [types_1.ChainInfoID.Umee1]: {
         rpc: "https://rpc.aphrodite.main.network.umee.cc",
         rest: "https://api.aphrodite.main.network.umee.cc",
-        chainId: ChainInfoID.Umee1,
+        chainId: types_1.ChainInfoID.Umee1,
         chainName: "Umee",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("umee"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("umee"),
         currencies: [
             {
                 coinDenom: "UMEE",
@@ -952,15 +956,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.GravityBridge3]: {
+    [types_1.ChainInfoID.GravityBridge3]: {
         rpc: "https://gravitychain.io:26657",
         rest: "https://gravitychain.io:1317",
-        chainId: ChainInfoID.GravityBridge3,
+        chainId: types_1.ChainInfoID.GravityBridge3,
         chainName: "Gravity Bridge",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("gravity"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("gravity"),
         currencies: [
             {
                 coinDenom: "GRAV",
@@ -1024,15 +1028,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Mainnet3]: {
+    [types_1.ChainInfoID.Mainnet3]: {
         rpc: "https://poseidon.mainnet.decentr.xyz",
         rest: "https://rest.mainnet.decentr.xyz",
-        chainId: ChainInfoID.Mainnet3,
+        chainId: types_1.ChainInfoID.Mainnet3,
         chainName: "Decentr",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("decentr"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("decentr"),
         currencies: [
             {
                 coinDenom: "DEC",
@@ -1046,15 +1050,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Shentu22]: {
+    [types_1.ChainInfoID.Shentu22]: {
         rpc: "https://shenturpc.certikpowered.info",
         rest: "https://azuredragon.noopsbycertik.com",
-        chainId: ChainInfoID.Shentu22,
+        chainId: types_1.ChainInfoID.Shentu22,
         chainName: "Certik",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("certik"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("certik"),
         currencies: [
             {
                 coinDenom: "CTK",
@@ -1068,15 +1072,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Carbon1]: {
+    [types_1.ChainInfoID.Carbon1]: {
         rpc: "https://tm-api.carbon.network",
         rest: "https://api.carbon.network",
-        chainId: ChainInfoID.Carbon1,
+        chainId: types_1.ChainInfoID.Carbon1,
         chainName: "Carbon",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("swth"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("swth"),
         currencies: [
             {
                 coinDenom: "SWTH",
@@ -1095,15 +1099,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Injective1]: {
+    [types_1.ChainInfoID.Injective1]: {
         rpc: "https://public.api.injective.network",
         rest: "https://public.lcd.injective.network",
-        chainId: ChainInfoID.Injective1,
+        chainId: types_1.ChainInfoID.Injective1,
         chainName: "Injective",
         bip44: {
             coinType: 60,
         },
-        bech32Config: Bech32Address.defaultBech32Config("inj"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("inj"),
         currencies: [
             {
                 coinDenom: "INJ",
@@ -1122,15 +1126,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.CerberusChain1]: {
+    [types_1.ChainInfoID.CerberusChain1]: {
         rpc: "https://rpc.cerberus.zone:26657",
         rest: "https://api.cerberus.zone:1317",
-        chainId: ChainInfoID.CerberusChain1,
+        chainId: types_1.ChainInfoID.CerberusChain1,
         chainName: "Cerberus",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("cerberus"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("cerberus"),
         currencies: [
             {
                 coinDenom: "CRBRUS",
@@ -1144,15 +1148,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Fetchhub4]: {
+    [types_1.ChainInfoID.Fetchhub4]: {
         rpc: "https://rpc-fetchhub.fetch.ai:443",
         rest: "https://rest-fetchhub.fetch.ai",
-        chainId: ChainInfoID.Fetchhub4,
+        chainId: types_1.ChainInfoID.Fetchhub4,
         chainName: "Fetch.ai",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("fetch"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("fetch"),
         currencies: [
             {
                 coinDenom: "FET",
@@ -1171,15 +1175,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Mantle1]: {
+    [types_1.ChainInfoID.Mantle1]: {
         rpc: "https://rpc.assetmantle.one/",
         rest: "https://rest.assetmantle.one/",
-        chainId: ChainInfoID.Mantle1,
+        chainId: types_1.ChainInfoID.Mantle1,
         chainName: "AssetMantle",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("mantle"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("mantle"),
         currencies: [
             {
                 coinDenom: "MNTL",
@@ -1193,15 +1197,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.PioMainnet1]: {
+    [types_1.ChainInfoID.PioMainnet1]: {
         rpc: "https://rpc.provenance.io/",
         rest: "https://api.provenance.io",
-        chainId: ChainInfoID.PioMainnet1,
+        chainId: types_1.ChainInfoID.PioMainnet1,
         chainName: "Provenance",
         bip44: {
             coinType: 505,
         },
-        bech32Config: Bech32Address.defaultBech32Config("pb"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("pb"),
         currencies: [
             {
                 coinDenom: "HASH",
@@ -1220,15 +1224,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Galaxy1]: {
+    [types_1.ChainInfoID.Galaxy1]: {
         rpc: "https://rpc.galaxychain.zone",
         rest: "https://rest.galaxychain.zone",
-        chainId: ChainInfoID.Galaxy1,
+        chainId: types_1.ChainInfoID.Galaxy1,
         chainName: "Galaxy",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("galaxy"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("galaxy"),
         currencies: [
             {
                 coinDenom: "GLX",
@@ -1247,15 +1251,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Meme1]: {
+    [types_1.ChainInfoID.Meme1]: {
         rpc: "https://rpc-meme-1.meme.sx:443",
         rest: "https://api-meme-1.meme.sx:443",
-        chainId: ChainInfoID.Meme1,
+        chainId: types_1.ChainInfoID.Meme1,
         chainName: "Meme",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("meme"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("meme"),
         currencies: [
             {
                 coinDenom: "MEME",
@@ -1274,15 +1278,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Evmos_9001_2]: {
+    [types_1.ChainInfoID.Evmos_9001_2]: {
         rpc: "https://rpc-evmos.keplr.app/",
         rest: "https://lcd-evmos.keplr.app/",
-        chainId: ChainInfoID.Evmos_9001_2,
+        chainId: types_1.ChainInfoID.Evmos_9001_2,
         chainName: "Evmos",
         bip44: {
             coinType: 60,
         },
-        bech32Config: Bech32Address.defaultBech32Config("evmos"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("evmos"),
         currencies: [
             {
                 coinDenom: "EVMOS",
@@ -1301,15 +1305,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Phoenix1]: {
+    [types_1.ChainInfoID.Phoenix1]: {
         rpc: "https://rpc.terrav2.ccvalidators.com/",
         rest: "https://phoenix-lcd.terra.dev/",
-        chainId: ChainInfoID.Phoenix1,
+        chainId: types_1.ChainInfoID.Phoenix1,
         chainName: "Terra 2.0",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("terra"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("terra"),
         currencies: [
             {
                 coinDenom: "LUNA",
@@ -1328,15 +1332,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer"],
     },
-    [ChainInfoID.Titan1]: {
+    [types_1.ChainInfoID.Titan1]: {
         rpc: "https://rpcapi.rizon.world/",
         rest: "https://restapi.rizon.world/",
-        chainId: ChainInfoID.Titan1,
+        chainId: types_1.ChainInfoID.Titan1,
         chainName: "Rizon",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("rizon"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("rizon"),
         currencies: [
             {
                 coinDenom: "ATOLO",
@@ -1355,15 +1359,15 @@ export const SimpleChainInfoList = {
         },
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Kava_2222_10]: {
+    [types_1.ChainInfoID.Kava_2222_10]: {
         rpc: "https://rpc-kava.keplr.app",
         rest: "https://lcd-kava.keplr.app",
-        chainId: ChainInfoID.Kava_2222_10,
+        chainId: types_1.ChainInfoID.Kava_2222_10,
         chainName: "Kava",
         bip44: {
             coinType: 459,
         },
-        bech32Config: Bech32Address.defaultBech32Config("kava"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("kava"),
         currencies: [
             {
                 coinDenom: "KAVA",
@@ -1391,15 +1395,15 @@ export const SimpleChainInfoList = {
         ],
         features: ["ibc-transfer", "ibc-go"],
     },
-    [ChainInfoID.Genesis_29_2]: {
+    [types_1.ChainInfoID.Genesis_29_2]: {
         rpc: "https://26657.genesisl1.org",
         rest: "https://api.genesisl1.org",
-        chainId: ChainInfoID.Genesis_29_2,
+        chainId: types_1.ChainInfoID.Genesis_29_2,
         chainName: "GenesisL1",
         bip44: {
             coinType: 118,
         },
-        bech32Config: Bech32Address.defaultBech32Config("genesis"),
+        bech32Config: cosmos_1.Bech32Address.defaultBech32Config("genesis"),
         currencies: [
             {
                 coinDenom: "L1",
@@ -1419,9 +1423,9 @@ export const SimpleChainInfoList = {
         features: ["ibc-transfer", "ibc-go"],
     },
 };
-export const ChainInfoMap = Object.entries(SimpleChainInfoList).reduce((curr, [id, simplifiedChainInfo]) => (Object.assign(Object.assign({}, curr), { [id]: createKeplrChainInfo(simplifiedChainInfo) })), {});
-export const getChainInfo = (chainId, chainInfoOverrides) => __awaiter(void 0, void 0, void 0, function* () {
-    const chainInfo = ChainInfoMap[chainId];
+exports.ChainInfoMap = Object.entries(exports.SimpleChainInfoList).reduce((curr, [id, simplifiedChainInfo]) => (Object.assign(Object.assign({}, curr), { [id]: createKeplrChainInfo(simplifiedChainInfo) })), {});
+const getChainInfo = (chainId, chainInfoOverrides) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    const chainInfo = exports.ChainInfoMap[chainId];
     if (typeof chainInfoOverrides !== "undefined" &&
         chainInfoOverrides[chainId] &&
         chainInfo) {
@@ -1430,9 +1434,10 @@ export const getChainInfo = (chainId, chainInfoOverrides) => __awaiter(void 0, v
         });
     }
     if (!chainInfo) {
-        const availableChainIds = [...Object.keys(ChainInfoMap)];
+        const availableChainIds = [...Object.keys(exports.ChainInfoMap)];
         throw new Error(`Chain ID "${chainId}" does not exist among provided ChainInfo objects. Available Chain IDs: ${availableChainIds.join(",")}`);
     }
     return chainInfo;
 });
+exports.getChainInfo = getChainInfo;
 //# sourceMappingURL=chainInfo.js.map

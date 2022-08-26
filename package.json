@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "clean": "rm -rf node_modules dist",
-    "build": "tsc && tsc -m ES6",
+    "build": "tsc",
     "build:webpack": "webpack",
     "build:webpack:stats": "webpack --json > webpack_stats.json",
     "build:webpack:analyze": "webpack-bundle-analyzer webpack_stats.json dist",

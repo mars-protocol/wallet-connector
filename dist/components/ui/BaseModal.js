@@ -1,12 +1,16 @@
-import React, { useEffect, } from "react";
-import ReactModal from "react-modal";
-import { CloseIcon as DefaultCloseIcon } from "./CloseIcon";
-import { baseModalStyles } from "./Styles";
-export const BaseModal = ({ isOpen, onClose, title, maxWidth = "36rem", classNames, closeIcon, children, }) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BaseModal = void 0;
+const tslib_1 = require("tslib");
+const react_1 = tslib_1.__importStar(require("react"));
+const react_modal_1 = tslib_1.__importDefault(require("react-modal"));
+const CloseIcon_1 = require("./CloseIcon");
+const Styles_1 = require("./Styles");
+const BaseModal = ({ isOpen, onClose, title, maxWidth = "36rem", classNames, closeIcon, children, }) => {
     var _a, _b;
     // ReactModal accessibility.
-    useEffect(() => {
-        ReactModal.setAppElement("body");
+    (0, react_1.useEffect)(() => {
+        react_modal_1.default.setAppElement("body");
     }, []);
     const modalContentStyles = {
         position: "absolute",
@@ -22,20 +26,21 @@ export const BaseModal = ({ isOpen, onClose, title, maxWidth = "36rem", classNam
         cursor: "auto",
         maxWidth: "calc(100% - 40px)",
     };
-    return (React.createElement(ReactModal, { ariaHideApp: false, className: (_a = classNames === null || classNames === void 0 ? void 0 : classNames.modalContent) !== null && _a !== void 0 ? _a : "_", contentElement: (props, children) => (React.createElement("div", Object.assign({ style: modalContentStyles }, props), children)), isOpen: isOpen, onRequestClose: (e) => {
+    return (react_1.default.createElement(react_modal_1.default, { ariaHideApp: false, className: (_a = classNames === null || classNames === void 0 ? void 0 : classNames.modalContent) !== null && _a !== void 0 ? _a : "_", contentElement: (props, children) => (react_1.default.createElement("div", Object.assign({ style: modalContentStyles }, props), children)), isOpen: isOpen, onRequestClose: (e) => {
             e.preventDefault();
             onClose === null || onClose === void 0 ? void 0 : onClose();
-        }, overlayClassName: (_b = classNames === null || classNames === void 0 ? void 0 : classNames.modalOverlay) !== null && _b !== void 0 ? _b : "_", overlayElement: (props, children) => (React.createElement("div", Object.assign({ style: baseModalStyles.modalOverlay }, props), children)), style: {
+        }, overlayClassName: (_b = classNames === null || classNames === void 0 ? void 0 : classNames.modalOverlay) !== null && _b !== void 0 ? _b : "_", overlayElement: (props, children) => (react_1.default.createElement("div", Object.assign({ style: Styles_1.baseModalStyles.modalOverlay }, props), children)), style: {
             overlay: (classNames === null || classNames === void 0 ? void 0 : classNames.modalOverlay)
                 ? undefined
-                : baseModalStyles.modalOverlay,
+                : Styles_1.baseModalStyles.modalOverlay,
             content: (classNames === null || classNames === void 0 ? void 0 : classNames.modalContent) ? undefined : modalContentStyles,
         } },
-        React.createElement(React.Fragment, null,
-            React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.modalHeader, style: (classNames === null || classNames === void 0 ? void 0 : classNames.modalHeader) ? undefined : baseModalStyles.modalHeader }, title),
-            onClose && (React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.modalCloseButton, onClick: onClose, style: (classNames === null || classNames === void 0 ? void 0 : classNames.modalCloseButton)
+        react_1.default.createElement(react_1.default.Fragment, null,
+            react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.modalHeader, style: (classNames === null || classNames === void 0 ? void 0 : classNames.modalHeader) ? undefined : Styles_1.baseModalStyles.modalHeader }, title),
+            onClose && (react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.modalCloseButton, onClick: onClose, style: (classNames === null || classNames === void 0 ? void 0 : classNames.modalCloseButton)
                     ? undefined
-                    : baseModalStyles.modalCloseButton }, closeIcon !== null && closeIcon !== void 0 ? closeIcon : React.createElement(DefaultCloseIcon, { height: 26, width: 26 }))),
+                    : Styles_1.baseModalStyles.modalCloseButton }, closeIcon !== null && closeIcon !== void 0 ? closeIcon : react_1.default.createElement(CloseIcon_1.CloseIcon, { height: 26, width: 26 }))),
             children)));
 };
+exports.BaseModal = BaseModal;
 //# sourceMappingURL=BaseModal.js.map

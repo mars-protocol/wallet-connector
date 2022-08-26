@@ -1,11 +1,14 @@
-import { __awaiter } from "tslib";
-import { IndexedDBKVStore } from "@keplr-wallet/common";
-import { CosmJSOfflineSigner, CosmJSOfflineSignerOnlyAmino, } from "@keplr-wallet/provider";
-import { isAndroid, isMobile } from "@walletconnect/browser-utils";
-import { payloadId } from "@walletconnect/utils";
-import Axios from "axios";
-import { Buffer } from "buffer";
-import deepmerge from "deepmerge";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.KeplrWalletConnectV1 = void 0;
+const tslib_1 = require("tslib");
+const common_1 = require("@keplr-wallet/common");
+const provider_1 = require("@keplr-wallet/provider");
+const browser_utils_1 = require("@walletconnect/browser-utils");
+const utils_1 = require("@walletconnect/utils");
+const axios_1 = tslib_1.__importDefault(require("axios"));
+const buffer_1 = require("buffer");
+const deepmerge_1 = tslib_1.__importDefault(require("deepmerge"));
 // VersionFormatRegExp checks if a chainID is in the format required for parsing versions
 // The chainID should be in the form: `{identifier}-{version}`
 const ChainVersionFormatRegExp = /(.+)-([\d]+)/;
@@ -21,7 +24,7 @@ function parseChainId(chainId) {
         return { identifier: split[0], version: parseInt(split[1]) };
     }
 }
-export class KeplrWalletConnectV1 {
+class KeplrWalletConnectV1 {
     constructor(connector, chainInfos, options = {}) {
         var _a;
         this.connector = connector;
@@ -40,7 +43,7 @@ export class KeplrWalletConnectV1 {
         this.version = "0.9.0";
         this.mode = "walletconnect";
         this.defaultOptions = {};
-        this.onCallReqeust = (error, payload) => __awaiter(this, void 0, void 0, function* () {
+        this.onCallReqeust = (error, payload) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             if (error) {
                 console.log(error);
                 return;
@@ -94,7 +97,7 @@ export class KeplrWalletConnectV1 {
             }
         });
         this.kvStore =
-            (_a = options.kvStore) !== null && _a !== void 0 ? _a : new IndexedDBKVStore("keplr_wallet_connect");
+            (_a = options.kvStore) !== null && _a !== void 0 ? _a : new common_1.IndexedDBKVStore("keplr_wallet_connect");
         this.onBeforeSendRequest = options.onBeforeSendRequest;
         this.onAfterSendRequest = options.onAfterSendRequest;
         connector.on("disconnect", () => {
@@ -103,7 +106,7 @@ export class KeplrWalletConnectV1 {
         connector.on("call_request", this.onCallReqeust);
     }
     clearSaved() {
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             yield Promise.all([
                 this.kvStore.set(this.getKeyHasEnabled(), null),
                 this.kvStore.set(this.getKeyLastSeenKey(), null),
@@ -111,9 +114,9 @@ export class KeplrWalletConnectV1 {
         });
     }
     sendCustomRequest(request, options) {
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             // If mobile, attempt to open app to approve request.
-            if (isMobile()) {
+            if ((0, browser_utils_1.isMobile)()) {
                 console.log(request);
                 switch (request.method) {
                     case "keplr_enable_wallet_connect_v1": {
@@ -124,7 +127,7 @@ export class KeplrWalletConnectV1 {
                     // eslint-disable-next-line no-fallthrough
                     case "keplr_sign_amino_wallet_connect_v1":
                         // Prompt to open the app.
-                        window.location.href = isAndroid()
+                        window.location.href = (0, browser_utils_1.isAndroid)()
                             ? "intent://wcV1#Intent;package=com.chainapsis.keplr;scheme=keplrwallet;end;"
                             : "keplrwallet://wcV1";
                 }
@@ -140,7 +143,7 @@ export class KeplrWalletConnectV1 {
         });
     }
     enable(chainIds) {
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             if (typeof chainIds === "string") {
                 chainIds = [chainIds];
             }
@@ -156,7 +159,7 @@ export class KeplrWalletConnectV1 {
                 return;
             }
             yield this.sendCustomRequest({
-                id: payloadId(),
+                id: (0, utils_1.payloadId)(),
                 jsonrpc: "2.0",
                 method: "keplr_enable_wallet_connect_v1",
                 params: chainIds,
@@ -169,12 +172,12 @@ export class KeplrWalletConnectV1 {
     }
     getHasEnabledChainIds() {
         var _a;
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             return (_a = (yield this.kvStore.get(this.getKeyHasEnabled()))) !== null && _a !== void 0 ? _a : [];
         });
     }
     saveHasEnabledChainIds(chainIds) {
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const hasEnabledChainIds = yield this.getHasEnabledChainIds();
             for (const chainId of chainIds) {
                 if (hasEnabledChainIds.indexOf(chainId) < 0) {
@@ -208,32 +211,32 @@ export class KeplrWalletConnectV1 {
         throw new Error("Not yet implemented");
     }
     getKey(chainId) {
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const lastSeenKey = yield this.getLastSeenKey(chainId);
             if (lastSeenKey) {
                 return {
-                    address: Buffer.from(lastSeenKey.address, "hex"),
+                    address: buffer_1.Buffer.from(lastSeenKey.address, "hex"),
                     algo: lastSeenKey.algo,
                     bech32Address: lastSeenKey.bech32Address,
                     isNanoLedger: lastSeenKey.isNanoLedger,
                     name: lastSeenKey.name,
-                    pubKey: Buffer.from(lastSeenKey.pubKey, "hex"),
+                    pubKey: buffer_1.Buffer.from(lastSeenKey.pubKey, "hex"),
                 };
             }
             const response = (yield this.sendCustomRequest({
-                id: payloadId(),
+                id: (0, utils_1.payloadId)(),
                 jsonrpc: "2.0",
                 method: "keplr_get_key_wallet_connect_v1",
                 params: [chainId],
             }))[0];
             yield this.saveLastSeenKey(chainId, response);
             return {
-                address: Buffer.from(response.address, "hex"),
+                address: buffer_1.Buffer.from(response.address, "hex"),
                 algo: response.algo,
                 bech32Address: response.bech32Address,
                 isNanoLedger: response.isNanoLedger,
                 name: response.name,
-                pubKey: Buffer.from(response.pubKey, "hex"),
+                pubKey: buffer_1.Buffer.from(response.pubKey, "hex"),
             };
         });
     }
@@ -241,24 +244,24 @@ export class KeplrWalletConnectV1 {
         return `${this.connector.session.key}-key`;
     }
     getLastSeenKey(chainId) {
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const saved = yield this.getAllLastSeenKey();
             return saved ? saved[chainId] : undefined;
         });
     }
     getAllLastSeenKey() {
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             return yield this.kvStore.get(this.getKeyLastSeenKey());
         });
     }
     saveAllLastSeenKey(data) {
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             yield this.kvStore.set(this.getKeyLastSeenKey(), data);
         });
     }
     saveLastSeenKey(chainId, response) {
         var _a;
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const saved = (_a = (yield this.getAllLastSeenKey())) !== null && _a !== void 0 ? _a : {};
             saved[chainId] = response;
             yield this.saveAllLastSeenKey(saved);
@@ -271,34 +274,34 @@ export class KeplrWalletConnectV1 {
         throw new Error("Not yet implemented");
     }
     getOfflineSigner(chainId) {
-        return new CosmJSOfflineSigner(chainId, this);
+        return new provider_1.CosmJSOfflineSigner(chainId, this);
     }
     getOfflineSignerAuto(chainId) {
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const key = yield this.getKey(chainId);
             return key.isNanoLedger
-                ? new CosmJSOfflineSignerOnlyAmino(chainId, this)
-                : new CosmJSOfflineSigner(chainId, this);
+                ? new provider_1.CosmJSOfflineSignerOnlyAmino(chainId, this)
+                : new provider_1.CosmJSOfflineSigner(chainId, this);
         });
     }
     getOfflineSignerOnlyAmino(chainId) {
-        return new CosmJSOfflineSignerOnlyAmino(chainId, this);
+        return new provider_1.CosmJSOfflineSignerOnlyAmino(chainId, this);
     }
     getSecret20ViewingKey(_chainId, _contractAddress) {
         throw new Error("Not yet implemented");
     }
     sendTx(chainId, tx, mode) {
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const chainInfo = this.chainInfos.find((chainInfo) => chainInfo.chainId === chainId);
             if (!chainInfo)
                 throw new Error("No chain info found.");
-            const restInstance = Axios.create({
+            const restInstance = axios_1.default.create({
                 baseURL: chainInfo.rest,
             });
-            const isProtoTx = Buffer.isBuffer(tx) || tx instanceof Uint8Array;
+            const isProtoTx = buffer_1.Buffer.isBuffer(tx) || tx instanceof Uint8Array;
             const params = isProtoTx
                 ? {
-                    tx_bytes: Buffer.from(tx).toString("base64"),
+                    tx_bytes: buffer_1.Buffer.from(tx).toString("base64"),
                     mode: (() => {
                         switch (mode) {
                             case "async":
@@ -321,21 +324,21 @@ export class KeplrWalletConnectV1 {
             if (txResponse.code != null && txResponse.code !== 0) {
                 throw new Error(txResponse["raw_log"]);
             }
-            return Buffer.from(txResponse.txhash, "hex");
+            return buffer_1.Buffer.from(txResponse.txhash, "hex");
         });
     }
     signAmino(chainId, signer, signDoc, signOptions = {}) {
         var _a;
-        return __awaiter(this, void 0, void 0, function* () {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
             return (yield this.sendCustomRequest({
-                id: payloadId(),
+                id: (0, utils_1.payloadId)(),
                 jsonrpc: "2.0",
                 method: "keplr_sign_amino_wallet_connect_v1",
                 params: [
                     chainId,
                     signer,
                     signDoc,
-                    deepmerge((_a = this.defaultOptions.sign) !== null && _a !== void 0 ? _a : {}, signOptions),
+                    (0, deepmerge_1.default)((_a = this.defaultOptions.sign) !== null && _a !== void 0 ? _a : {}, signOptions),
                 ],
             }))[0];
         });
@@ -347,4 +350,5 @@ export class KeplrWalletConnectV1 {
         throw new Error("Not yet implemented");
     }
 }
+exports.KeplrWalletConnectV1 = KeplrWalletConnectV1;
 //# sourceMappingURL=walletconnect-keplr.js.map

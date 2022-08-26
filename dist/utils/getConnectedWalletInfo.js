@@ -1,7 +1,10 @@
-import { __awaiter } from "tslib";
-import { WalletType } from "../types";
-import { getWalletBalances } from "../utils";
-export const getConnectedWalletInfo = (wallet, client, chainInfo, signingCosmWasmClientOptions, signingStargateClientOptions) => __awaiter(void 0, void 0, void 0, function* () {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getConnectedWalletInfo = void 0;
+const tslib_1 = require("tslib");
+const types_1 = require("../types");
+const utils_1 = require("../utils");
+const getConnectedWalletInfo = (wallet, client, chainInfo, signingCosmWasmClientOptions, signingStargateClientOptions) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
     try {
         yield client.enable(chainInfo.chainId);
     }
@@ -10,7 +13,7 @@ export const getConnectedWalletInfo = (wallet, client, chainInfo, signingCosmWas
         console.warn(e);
         // Only Keplr browser extension supports suggesting chain.
         // Not WalletConnect nor embedded Keplr Mobile web.
-        if (wallet.type === WalletType.Keplr && client.mode !== "mobile-web") {
+        if (wallet.type === types_1.WalletType.Keplr && client.mode !== "mobile-web") {
             const info = Object.assign(Object.assign({}, chainInfo), { stakeCurrency: Object.assign(Object.assign({}, chainInfo.stakeCurrency), { coinImageUrl: chainInfo.stakeCurrency.coinImageUrl
                         ? window.origin + chainInfo.stakeCurrency.coinImageUrl
                         : undefined }), currencies: chainInfo.currencies.map((currency) => (Object.assign(Object.assign({}, currency), { coinImageUrl: currency.coinImageUrl
@@ -40,11 +43,11 @@ export const getConnectedWalletInfo = (wallet, client, chainInfo, signingCosmWas
     }
     const [signingCosmWasmClient, signingStargateClient] = yield Promise.all([
         // Get CosmWasm client.
-        yield (yield import("@cosmjs/cosmwasm-stargate")).SigningCosmWasmClient.connectWithSigner(chainInfo.rpc, offlineSigner, signingCosmWasmClientOptions),
+        yield (yield Promise.resolve().then(() => tslib_1.__importStar(require("@cosmjs/cosmwasm-stargate")))).SigningCosmWasmClient.connectWithSigner(chainInfo.rpc, offlineSigner, signingCosmWasmClientOptions),
         // Get Stargate client.
-        yield (yield import("@cosmjs/stargate")).SigningStargateClient.connectWithSigner(chainInfo.rpc, offlineSigner, signingStargateClientOptions),
+        yield (yield Promise.resolve().then(() => tslib_1.__importStar(require("@cosmjs/stargate")))).SigningStargateClient.connectWithSigner(chainInfo.rpc, offlineSigner, signingStargateClientOptions),
     ]);
-    const walletBalances = yield getWalletBalances(address, chainInfo.chainId);
+    const walletBalances = yield (0, utils_1.getWalletBalances)(address, chainInfo.chainId);
     return {
         wallet,
         walletClient: client,
@@ -57,4 +60,5 @@ export const getConnectedWalletInfo = (wallet, client, chainInfo, signingCosmWas
         signingStargateClient,
     };
 });
+exports.getConnectedWalletInfo = getConnectedWalletInfo;
 //# sourceMappingURL=getConnectedWalletInfo.js.map
