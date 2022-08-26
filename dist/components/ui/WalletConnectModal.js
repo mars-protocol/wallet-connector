@@ -2,7 +2,7 @@ import { __rest } from "tslib";
 import { isAndroid as checkIsAndroid, isMobile as checkIsMobile, } from "@walletconnect/browser-utils";
 import QRCode from "qrcode.react";
 import React, { useEffect, useMemo, useState } from "react";
-import { BaseModal, ModalSubheader } from "./BaseModal";
+import { BaseModal } from "./BaseModal";
 const IOS_KEPLR_MOBILE_URL = "itms-apps://itunes.apple.com/app/1567851089";
 export const WalletConnectModal = (_a) => {
     var { isOpen, uri, classNames, reset } = _a, props = __rest(_a, ["isOpen", "uri", "classNames", "reset"]);
@@ -53,10 +53,16 @@ export const WalletConnectModal = (_a) => {
                 " ",
                 "and try connecting again. Refresh the page if the problem persists.")),
             React.createElement("button", { onClick: () => setQrShowing((s) => !s), style: { textAlign: "left" } },
-                React.createElement(ModalSubheader, { className: classNames === null || classNames === void 0 ? void 0 : classNames.modalSubheader, style: {
-                        marginBottom: qrShowing ? "1rem" : 0,
-                        textDecoration: "underline",
-                    } },
+                React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.modalSubheader, style: (classNames === null || classNames === void 0 ? void 0 : classNames.modalSubheader)
+                        ? {}
+                        : {
+                            marginBottom: qrShowing ? "1rem" : 0,
+                            textDecoration: "underline",
+                            color: "rgb(31, 41, 55)",
+                            fontSize: "1rem",
+                            fontWeight: "bold",
+                            lineHeight: "1.25rem",
+                        } },
                     qrShowing ? "Hide" : "Show",
                     " QR Code")))),
         !!uri && qrShowing && (React.createElement(QRCode, { size: 500, style: { width: "100%", height: "100%" }, value: uri }))));

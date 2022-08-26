@@ -25,6 +25,19 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/i,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.tsx?$/,
         exclude: [/.+\.(test|spec)\.[tj]sx/],
         loader: "ts-loader",
@@ -50,7 +63,7 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".css"],
     alias: {
       react: path.resolve(__dirname, "./node_modules/react"),
       "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),

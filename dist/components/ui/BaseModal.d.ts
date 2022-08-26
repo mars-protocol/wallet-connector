@@ -9,5 +9,4 @@ export declare type BaseModalProps = PropsWithChildren<{
     closeIcon?: ReactNode;
 }>;
 export declare const BaseModal: FunctionComponent<BaseModalProps>;
-export declare const ModalSubheader: import("styled-components").StyledComponent<"div", any, {}, never>;
 //# sourceMappingURL=BaseModal.d.ts.map
