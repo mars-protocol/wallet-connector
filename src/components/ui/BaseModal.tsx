@@ -36,28 +36,27 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
     ReactModal.setAppElement("body")
   }, [])
 
+  const modalContentStyles: React.CSSProperties = {
+    position: "absolute",
+    left: "50%",
+    transform: "translateX(-50%)",
+    padding: "1.25rem",
+    borderRadius: "1rem",
+    display: "flex",
+    flexDirection: "column",
+    background: "white",
+    width: `${maxWidth}px`,
+    outline: "none",
+    cursor: "auto",
+    maxWidth: "calc(100% - 40px)",
+  }
+
   return (
     <ReactModal
       ariaHideApp={false}
       className={classNames?.modalContent ?? "_"}
       contentElement={(props, children) => (
-        <div
-          style={{
-            position: "absolute",
-            left: "50%",
-            transform: "translateX(-50%)",
-            padding: "1.25rem",
-            borderRadius: "1rem",
-            display: "flex",
-            flexDirection: "column",
-            background: "white",
-            width: `${maxWidth}px`,
-            outline: "none",
-            cursor: "auto",
-            maxWidth: "calc(100% - 40px)",
-          }}
-          {...props}
-        >
+        <div style={modalContentStyles} {...props}>
           {children}
         </div>
       )}
@@ -72,11 +71,19 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
           {children}
         </div>
       )}
+      style={{
+        overlay: classNames?.modalOverlay
+          ? undefined
+          : baseModalStyles.modalOverlay,
+        content: classNames?.modalContent ? undefined : modalContentStyles,
+      }}
     >
       <>
         <div
           className={classNames?.modalHeader}
-          style={classNames?.modalHeader ? {} : baseModalStyles.modalHeader}
+          style={
+            classNames?.modalHeader ? undefined : baseModalStyles.modalHeader
+          }
         >
           {title}
         </div>
@@ -87,7 +94,7 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
             onClick={onClose}
             style={
               classNames?.modalCloseButton
-                ? {}
+                ? undefined
                 : baseModalStyles.modalCloseButton
             }
           >

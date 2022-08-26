@@ -54,7 +54,7 @@ export const WalletConnectModal = (_a) => {
                 "and try connecting again. Refresh the page if the problem persists.")),
             React.createElement("button", { onClick: () => setQrShowing((s) => !s), style: { textAlign: "left" } },
                 React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.modalSubheader, style: (classNames === null || classNames === void 0 ? void 0 : classNames.modalSubheader)
-                        ? {}
+                        ? undefined
                         : {
                             marginBottom: qrShowing ? "1rem" : 0,
                             textDecoration: "underline",

@@ -22,7 +22,7 @@ export const SelectWalletModal: FunctionComponent<SelectWalletModalProps> = ({
   <BaseModal classNames={classNames} title="Select a wallet" {...props}>
     <div
       className={classNames?.walletList}
-      style={classNames?.walletList ? {} : selectWalletStyles.walletList}
+      style={classNames?.walletList ? undefined : selectWalletStyles.walletList}
     >
       {wallets.map((wallet, index) => {
         const isKeplrInstall =
@@ -44,7 +44,9 @@ export const SelectWalletModal: FunctionComponent<SelectWalletModalProps> = ({
                   selectWallet(wallet)
                 }
               }}
-              style={classNames?.wallet ? {} : selectWalletStyles.walletRow}
+              style={
+                classNames?.wallet ? undefined : selectWalletStyles.walletRow
+              }
             >
               <img
                 alt={`${wallet.name} logo`}
@@ -52,20 +54,24 @@ export const SelectWalletModal: FunctionComponent<SelectWalletModalProps> = ({
                 src={wallet.imageUrl}
                 style={
                   classNames?.walletImage
-                    ? {}
+                    ? undefined
                     : selectWalletStyles.walletIconImg
                 }
               />
               <div
                 className={classNames?.walletInfo}
                 style={
-                  classNames?.walletInfo ? {} : selectWalletStyles.walletInfo
+                  classNames?.walletInfo
+                    ? undefined
+                    : selectWalletStyles.walletInfo
                 }
               >
                 <div
                   className={classNames?.walletName}
                   style={
-                    classNames?.walletName ? {} : selectWalletStyles.walletName
+                    classNames?.walletName
+                      ? undefined
+                      : selectWalletStyles.walletName
                   }
                 >
                   {isKeplrInstall ? wallet.install : wallet.name}
@@ -74,7 +80,7 @@ export const SelectWalletModal: FunctionComponent<SelectWalletModalProps> = ({
                   className={classNames?.walletDescription}
                   style={
                     classNames?.walletDescription
-                      ? {}
+                      ? undefined
                       : selectWalletStyles.walletDescription
                   }
                 >

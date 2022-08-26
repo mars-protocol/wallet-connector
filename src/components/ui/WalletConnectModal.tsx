@@ -122,7 +122,7 @@ export const WalletConnectModal: FunctionComponent<WalletConnectModalProps> = ({
               className={classNames?.modalSubheader}
               style={
                 classNames?.modalSubheader
-                  ? {}
+                  ? undefined
                   : {
                       marginBottom: qrShowing ? "1rem" : 0,
                       textDecoration: "underline",

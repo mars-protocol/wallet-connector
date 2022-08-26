@@ -1,19 +1,4 @@
 export const baseModalStyles: { [key: string]: React.CSSProperties } = {
-  modalContent: {
-    position: "absolute",
-    left: "50%",
-    transform: "translateX(-50%)",
-    padding: "1.25rem",
-    borderRadius: "1rem",
-    display: "flex",
-    flexDirection: "column",
-    background: "white",
-    width: "100%",
-    outline: "none",
-    cursor: "auto",
-    maxWidth: "calc(100% - 40px)",
-  },
-
   modalOverlay: {
     position: "fixed",
     top: 0,

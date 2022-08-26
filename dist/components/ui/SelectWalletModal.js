@@ -6,7 +6,7 @@ import { selectWalletStyles } from "./Styles";
 export const SelectWalletModal = (_a) => {
     var { wallets, selectWallet, closeModal, classNames, isKeplrExtentionNotInstalled } = _a, props = __rest(_a, ["wallets", "selectWallet", "closeModal", "classNames", "isKeplrExtentionNotInstalled"]);
     return (React.createElement(BaseModal, Object.assign({ classNames: classNames, title: "Select a wallet" }, props),
-        React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletList, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletList) ? {} : selectWalletStyles.walletList }, wallets.map((wallet, index) => {
+        React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletList, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletList) ? undefined : selectWalletStyles.walletList }, wallets.map((wallet, index) => {
             const isKeplrInstall = wallet.type === WalletType.Keplr &&
                 isKeplrExtentionNotInstalled &&
                 wallet.install &&
@@ -21,14 +21,18 @@ export const SelectWalletModal = (_a) => {
                         else {
                             selectWallet(wallet);
                         }
-                    }, style: (classNames === null || classNames === void 0 ? void 0 : classNames.wallet) ? {} : selectWalletStyles.walletRow },
+                    }, style: (classNames === null || classNames === void 0 ? void 0 : classNames.wallet) ? undefined : selectWalletStyles.walletRow },
                     React.createElement("img", { alt: `${wallet.name} logo`, className: classNames === null || classNames === void 0 ? void 0 : classNames.walletImage, src: wallet.imageUrl, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletImage)
-                            ? {}
+                            ? undefined
                             : selectWalletStyles.walletIconImg }),
-                    React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletInfo, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletInfo) ? {} : selectWalletStyles.walletInfo },
-                        React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletName, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletName) ? {} : selectWalletStyles.walletName }, isKeplrInstall ? wallet.install : wallet.name),
+                    React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletInfo, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletInfo)
+                            ? undefined
+                            : selectWalletStyles.walletInfo },
+                        React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletName, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletName)
+                                ? undefined
+                                : selectWalletStyles.walletName }, isKeplrInstall ? wallet.install : wallet.name),
                         React.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletDescription, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletDescription)
-                                ? {}
+                                ? undefined
                                 : selectWalletStyles.walletDescription }, isKeplrInstall ? wallet.installURL : wallet.description)))));
         }))));
 };
