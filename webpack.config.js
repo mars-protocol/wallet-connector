@@ -25,19 +25,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: true,
-            },
-          },
-        ],
-      },
-      {
         test: /\.tsx?$/,
         exclude: [/.+\.(test|spec)\.[tj]sx/],
         loader: "ts-loader",
