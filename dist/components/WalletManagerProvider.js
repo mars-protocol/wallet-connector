@@ -81,8 +81,8 @@ const WalletManagerProvider = ({ children, enabledWalletTypes, defaultChainId, c
     };
     // Obtain WalletConnect if necessary, and connect to the wallet.
     const _connectToWallet = (0, react_1.useCallback)((wallet) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
-        setStatus(types_1.WalletConnectionStatus.Connecting);
         setError(undefined);
+        setStatus(types_1.WalletConnectionStatus.Connecting);
         setConnectingWallet(wallet);
         setPickerModalOpen(false);
         let walletClient;
@@ -90,7 +90,7 @@ const WalletManagerProvider = ({ children, enabledWalletTypes, defaultChainId, c
         // The actual meat of enabling and getting the wallet clients.
         const finalizeWalletConnection = (newWcSession) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
             // Cleared in `cleanupAfterConnection`.
-            setWalletEnableModalOpen(true);
+            setWalletEnableModalOpen(!(localStorageKey && !!localStorage.getItem(localStorageKey)));
             const chainInfo = yield _getDefaultChainInfo();
             walletClient = yield wallet.getClient(chainInfo, _walletConnect);
             if (!walletClient) {

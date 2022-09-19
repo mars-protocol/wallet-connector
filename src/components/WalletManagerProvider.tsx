@@ -201,8 +201,8 @@ export const WalletManagerProvider: FunctionComponent<
   // Obtain WalletConnect if necessary, and connect to the wallet.
   const _connectToWallet = useCallback(
     async (wallet: Wallet) => {
-      setStatus(WalletConnectionStatus.Connecting)
       setError(undefined)
+      setStatus(WalletConnectionStatus.Connecting)
       setConnectingWallet(wallet)
       setPickerModalOpen(false)
 
@@ -212,7 +212,10 @@ export const WalletManagerProvider: FunctionComponent<
       // The actual meat of enabling and getting the wallet clients.
       const finalizeWalletConnection = async (newWcSession?: boolean) => {
         // Cleared in `cleanupAfterConnection`.
-        setWalletEnableModalOpen(true)
+
+        setWalletEnableModalOpen(
+          !(localStorageKey && !!localStorage.getItem(localStorageKey))
+        )
 
         const chainInfo = await _getDefaultChainInfo()
         walletClient = await wallet.getClient(chainInfo, _walletConnect)
