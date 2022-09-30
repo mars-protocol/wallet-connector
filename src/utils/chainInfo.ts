@@ -152,7 +152,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://rpc-columbus.keplr.app",
     rest: "https://lcd-columbus.keplr.app",
     explorer: "https://finder.terra.money/classic/",
-    explorerName: "Terrafinder",
+    explorerName: "TerraFinder",
     chainId: ChainInfoID.Columbus5,
     chainName: "Terra Classic",
     bip44: {
@@ -1420,7 +1420,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://rpc.terrav2.ccvalidators.com/",
     rest: "https://phoenix-lcd.terra.dev/",
     explorer: "https://finder.terra.money/mainnet",
-    explorerName: "Terra Finder",
+    explorerName: "TerraFinder",
     chainId: ChainInfoID.Phoenix1,
     chainName: "Terra 2.0",
     bip44: {
