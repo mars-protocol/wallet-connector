@@ -15,6 +15,8 @@ export type SimplifiedChainInfo = Omit<
   ChainInfo,
   "stakeCurrency" | "feeCurrencies"
 > & {
+  explorer?: string
+  explorerName?: string
   currencies: Array<
     AppCurrency & {
       isStakeCurrency?: boolean
@@ -67,6 +69,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Osmosis1]: {
     rpc: "https://rpc-osmosis.blockapsis.com/",
     rest: "https://lcd-osmosis.blockapsis.com/",
+    explorer: "https://www.mintscan.io/osmosis/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Osmosis1,
     chainName: "Osmosis",
     bip44: {
@@ -94,6 +98,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.OsmosisTestnet]: {
     rpc: "https://rpc-test.osmosis.zone/",
     rest: "https://lcd-test.osmosis.zone/",
+    explorer: "https://testnet.mintscan.io/osmosis-testnet/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.OsmosisTestnet,
     chainName: "Osmosis Testnet",
     bip44: {
@@ -121,6 +127,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Cosmoshub4]: {
     rpc: "https://rpc-cosmoshub.keplr.app",
     rest: "https://lcd-cosmoshub.keplr.app",
+    explorer: "https://www.mintscan.io/cosmos/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Cosmoshub4,
     chainName: "Cosmos Hub",
     bip44: {
@@ -143,6 +151,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Columbus5]: {
     rpc: "https://rpc-columbus.keplr.app",
     rest: "https://lcd-columbus.keplr.app",
+    explorer: "https://finder.terra.money/classic/",
+    explorerName: "Terrafinder",
     chainId: ChainInfoID.Columbus5,
     chainName: "Terra Classic",
     bip44: {
@@ -187,6 +197,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Secret4]: {
     rpc: "https://rpc-secret.keplr.app",
     rest: "https://lcd-secret.keplr.app",
+    explorer: "https://www.mintscan.io/secret/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Secret4,
     chainName: "Secret Network",
     bip44: {
@@ -209,6 +221,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Akashnet2]: {
     rpc: "https://rpc-akash.keplr.app",
     rest: "https://lcd-akash.keplr.app",
+    explorer: "https://www.mintscan.io/akash/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Akashnet2,
     chainName: "Akash",
     bip44: {
@@ -231,6 +245,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Regen1]: {
     rpc: "https://rpc-regen.keplr.app",
     rest: "https://lcd-regen.keplr.app",
+    explorer: "https://www.mintscan.io/regen/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Regen1,
     chainName: "Regen Network",
     bip44: { coinType: 118 },
@@ -251,6 +267,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Sentinelhub2]: {
     rpc: "https://rpc-sentinel.keplr.app",
     rest: "https://lcd-sentinel.keplr.app",
+    explorer: "https://www.mintscan.io/sentinel/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Sentinelhub2,
     chainName: "Sentinel",
     bip44: { coinType: 118 },
@@ -271,6 +289,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Core1]: {
     rpc: "https://rpc-persistence.keplr.app",
     rest: "https://lcd-persistence.keplr.app",
+    explorer: "https://www.mintscan.io/persistence/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Core1,
     chainName: "Persistence",
     bip44: {
@@ -301,6 +321,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Irishub1]: {
     rpc: "https://rpc-iris.keplr.app",
     rest: "https://lcd-iris.keplr.app",
+    explorer: "https://www.mintscan.io/iris/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Irishub1,
     chainName: "IRISnet",
     bip44: {
@@ -323,6 +345,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.CryptoOrgChainMainnet1]: {
     rpc: "https://rpc-crypto-org.keplr.app/",
     rest: "https://lcd-crypto-org.keplr.app/",
+    explorer: "https://www.mintscan.io/crypto-org/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.CryptoOrgChainMainnet1,
     chainName: "Crypto.org",
     bip44: {
@@ -345,6 +369,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.IovMainnetIbc]: {
     rpc: "https://rpc-iov.keplr.app",
     rest: "https://lcd-iov.keplr.app",
+    explorer: "https://www.mintscan.io/starname/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.IovMainnetIbc,
     chainName: "Starname",
     bip44: {
@@ -367,6 +393,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Emoney3]: {
     rpc: "https://rpc-emoney.keplr.app",
     rest: "https://lcd-emoney.keplr.app",
+    explorer: "https://www.mintscan.io/emoney/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Emoney3,
     chainName: "e-Money",
     bip44: {
@@ -401,6 +429,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Juno1]: {
     rpc: "https://rpc-juno.itastakers.com",
     rest: "https://lcd-juno.itastakers.com",
+    explorer: "https://www.mintscan.io/juno/",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Juno1,
     chainName: "Juno",
     bip44: {
@@ -428,6 +458,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Uni3]: {
     rpc: "https://rpc.uni.juno.deuslabs.fi",
     rest: "https://lcd.uni.juno.deuslabs.fi",
+    explorer: "https://testnet.mintscan.io/juno-testnet",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Uni3,
     chainName: "Juno Testnet",
     bip44: {
@@ -454,6 +486,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Mars1]: {
     rpc: "https://rpc.marsprotocol.io/",
     rest: "https://rest.marsprotocol.io/",
+    explorer: "http://explorer.marsprotocol.io/",
+    explorerName: "Mars Explorer",
     chainId: ChainInfoID.Mars1,
     chainName: "Mars Hub",
     bip44: {
@@ -481,6 +515,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.MarsAres1]: {
     rpc: "https://testnet-rpc.marsprotocol.io/",
     rest: "https://testnet-rest.marsprotocol.io/",
+    explorer: "http://testnet-explorer.marsprotocol.io/",
+    explorerName: "Mars Explorer",
     chainId: ChainInfoID.MarsAres1,
     chainName: "Mars Hub Testnet",
     bip44: {
@@ -530,6 +566,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.LikecoinMainnet2]: {
     rpc: "https://mainnet-node.like.co/rpc",
     rest: "https://mainnet-node.like.co",
+    explorer: "https://mintscan.io/likecoin",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.LikecoinMainnet2,
     chainName: "LikeCoin",
     bip44: {
@@ -574,6 +612,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Bitcanna1]: {
     rpc: "https://rpc.bitcanna.io",
     rest: "https://lcd.bitcanna.io",
+    explorer: "https://mintscan.io/bitcanna",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Bitcanna1,
     chainName: "BitCanna",
     bip44: {
@@ -596,6 +636,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Bitsong2b]: {
     rpc: "https://rpc.explorebitsong.com",
     rest: "https://lcd.explorebitsong.com",
+    explorer: "https://mintscan.io/bitsong",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Bitsong2b,
     chainName: "BitSong",
     bip44: {
@@ -618,6 +660,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Kichain2]: {
     rpc: "https://rpc-mainnet.blockchain.ki",
     rest: "https://api-mainnet.blockchain.ki",
+    explorer: "https://mintscan.io/ki-chain",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Kichain2,
     chainName: "Ki",
     bip44: {
@@ -640,6 +684,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Panacea3]: {
     rpc: "https://rpc.gopanacea.org",
     rest: "https://api.gopanacea.org",
+    explorer: "https://mintscan.io/medibloc",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Panacea3,
     chainName: "MediBloc",
     bip44: {
@@ -689,6 +735,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Comdex1]: {
     rpc: "https://rpc.comdex.one",
     rest: "https://rest.comdex.one",
+    explorer: "https://mintscan.io/comdex",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Comdex1,
     chainName: "Comdex",
     bip44: {
@@ -738,6 +786,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Stargaze1]: {
     rpc: "https://rpc.stargaze-apis.com",
     rest: "https://rest.stargaze-apis.com",
+    explorer: "https://mintscan.io/stargaze",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Stargaze1,
     chainName: "Stargaze",
     bip44: {
@@ -760,6 +810,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Chihuahua1]: {
     rpc: "https://rpc.chihuahua.wtf",
     rest: "https://api.chihuahua.wtf",
+    explorer: "https://mintscan.io/chihuahua",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Chihuahua1,
     chainName: "Chihuahua",
     bip44: {
@@ -787,6 +839,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.LumNetwork1]: {
     rpc: "https://node0.mainnet.lum.network/rpc",
     rest: "https://node0.mainnet.lum.network/rest",
+    explorer: "https://mintscan.io/lum",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.LumNetwork1,
     chainName: "Lum Network",
     bip44: {
@@ -831,6 +885,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.DesmosMainnet]: {
     rpc: "https://rpc.mainnet.desmos.network",
     rest: "https://api.mainnet.desmos.network",
+    explorer: "https://mintscan.io/desmos",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.DesmosMainnet,
     chainName: "Desmos",
     bip44: {
@@ -880,6 +936,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Sommelier3]: {
     rpc: "https://rpc-sommelier.keplr.app",
     rest: "https://lcd-sommelier.keplr.app",
+    explorer: "https://mintscan.io/sommelier",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Sommelier3,
     chainName: "Sommelier",
     bip44: {
@@ -902,6 +960,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Sifchain1]: {
     rpc: "https://rpc.sifchain.finance",
     rest: "https://api-int.sifchain.finance",
+    explorer: "https://mintscan.io/sifchain",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Sifchain1,
     chainName: "Sifchain",
     bip44: {
@@ -924,6 +984,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.LaoziMainnet]: {
     rpc: "https://rpc.laozi3.bandchain.org",
     rest: "https://laozi1.bandchain.org/api",
+    explorer: "https://mintscan.io/band",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.LaoziMainnet,
     chainName: "BandChain",
     bip44: {
@@ -946,6 +1008,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Darchub]: {
     rpc: "https://node1.konstellation.tech:26657",
     rest: "https://node1.konstellation.tech:1318",
+    explorer: "https://mintscan.io/konstellation",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Darchub,
     chainName: "Konstellation",
     bip44: {
@@ -968,6 +1032,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Umee1]: {
     rpc: "https://rpc.aphrodite.main.network.umee.cc",
     rest: "https://api.aphrodite.main.network.umee.cc",
+    explorer: "https://mintscan.io/umee",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Umee1,
     chainName: "Umee",
     bip44: {
@@ -990,6 +1056,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.GravityBridge3]: {
     rpc: "https://gravitychain.io:26657",
     rest: "https://gravitychain.io:1317",
+    explorer: "https://mintscan.io/gravity-bridge",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.GravityBridge3,
     chainName: "Gravity Bridge",
     bip44: {
@@ -1133,6 +1201,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Injective1]: {
     rpc: "https://public.api.injective.network",
     rest: "https://public.lcd.injective.network",
+    explorer: "https://mintscan.io/injective",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Injective1,
     chainName: "Injective",
     bip44: {
@@ -1160,6 +1230,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.CerberusChain1]: {
     rpc: "https://rpc.cerberus.zone:26657",
     rest: "https://api.cerberus.zone:1317",
+    explorer: "https://mintscan.io/cerberus",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.CerberusChain1,
     chainName: "Cerberus",
     bip44: {
@@ -1182,6 +1254,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Fetchhub4]: {
     rpc: "https://rpc-fetchhub.fetch.ai:443",
     rest: "https://rest-fetchhub.fetch.ai",
+    explorer: "https://mintscan.io/fetchai",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Fetchhub4,
     chainName: "Fetch.ai",
     bip44: {
@@ -1209,6 +1283,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Mantle1]: {
     rpc: "https://rpc.assetmantle.one/",
     rest: "https://rest.assetmantle.one/",
+    explorer: "https://mintscan.io/asset-mantle",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Mantle1,
     chainName: "AssetMantle",
     bip44: {
@@ -1231,6 +1307,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.PioMainnet1]: {
     rpc: "https://rpc.provenance.io/",
     rest: "https://api.provenance.io",
+    explorer: "https://mintscan.io/provenance",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.PioMainnet1,
     chainName: "Provenance",
     bip44: {
@@ -1312,6 +1390,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Evmos_9001_2]: {
     rpc: "https://rpc-evmos.keplr.app/",
     rest: "https://lcd-evmos.keplr.app/",
+    explorer: "https://mintscan.io/evmos",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Evmos_9001_2,
     chainName: "Evmos",
     bip44: {
@@ -1339,6 +1419,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Phoenix1]: {
     rpc: "https://rpc.terrav2.ccvalidators.com/",
     rest: "https://phoenix-lcd.terra.dev/",
+    explorer: "https://finder.terra.money/mainnet",
+    explorerName: "Terra Finder",
     chainId: ChainInfoID.Phoenix1,
     chainName: "Terra 2.0",
     bip44: {
@@ -1366,6 +1448,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Titan1]: {
     rpc: "https://rpcapi.rizon.world/",
     rest: "https://restapi.rizon.world/",
+    explorer: "https://mintscan.io/rizon",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Titan1,
     chainName: "Rizon",
     bip44: {
@@ -1393,6 +1477,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Kava_2222_10]: {
     rpc: "https://rpc-kava.keplr.app",
     rest: "https://lcd-kava.keplr.app",
+    explorer: "https://mintscan.io/kava",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Kava_2222_10,
     chainName: "Kava",
     bip44: {
