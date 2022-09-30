@@ -4,6 +4,8 @@ import { ChainInfoID, ChainInfoOverrides } from "../types";
  *  Maintains the option to skip this conversion and keep the verbose `ChainInfo` type.
  */
 export declare type SimplifiedChainInfo = Omit<ChainInfo, "stakeCurrency" | "feeCurrencies"> & {
+    explorer?: string;
+    explorerName?: string;
     currencies: Array<AppCurrency & {
         isStakeCurrency?: boolean;
         isFeeCurrency?: boolean;
