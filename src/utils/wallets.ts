@@ -2,6 +2,18 @@ import { Wallet, WalletType } from "../types"
 
 // TODO: Move imageUrl, and maybe name/description, to user configuration somehow, or incorporate in planned configurable UI overhaul.
 
+export const LeapWallet: Wallet = {
+  type: WalletType.Leap,
+  name: "Leap Wallet",
+  install: "Install Leap Wallet",
+  installURL: "https://www.leapwallet.io/",
+  description: "Leap Chrome Extension",
+  imageUrl: "/leap-cosmos-logo.png",
+  getClient: async () => window.getLeapFromWindow(),
+  getOfflineSignerFunction: (client) =>
+    client.getOfflineSignerAuto.bind(client), // // This function expects to be bound to the `client` instance.
+}
+
 export const KeplrWallet: Wallet = {
   type: WalletType.Keplr,
   name: "Keplr Wallet",

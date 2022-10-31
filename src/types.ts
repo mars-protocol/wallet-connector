@@ -27,6 +27,7 @@ export type WalletClient = Keplr | IKeplrWalletConnectV1
 
 export enum WalletType {
   Keplr = "keplr",
+  Leap = "Leap",
   WalletConnectKeplr = "walletconnect_keplr",
 }
 
