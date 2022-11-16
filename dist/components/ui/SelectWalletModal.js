@@ -10,7 +10,7 @@ const SelectWalletModal = (_a) => {
     var { wallets, selectWallet, closeModal, classNames, isKeplrExtentionNotInstalled } = _a, props = tslib_1.__rest(_a, ["wallets", "selectWallet", "closeModal", "classNames", "isKeplrExtentionNotInstalled"]);
     return (react_1.default.createElement(BaseModal_1.BaseModal, Object.assign({ classNames: classNames, title: "Select a wallet" }, props),
         react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletList, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletList) ? undefined : Styles_1.selectWalletStyles.walletList }, wallets.map((wallet, index) => {
-            const isKeplrInstall = wallet.type === types_1.WalletType.Keplr &&
+            const isKeplrInstall = wallet.type === (types_1.WalletType.Leap || types_1.WalletType.Keplr) &&
                 isKeplrExtentionNotInstalled &&
                 wallet.install &&
                 wallet.installURL;

@@ -1,7 +1,5 @@
 import { Wallet, WalletType } from "../types"
 
-// TODO: Move imageUrl, and maybe name/description, to user configuration somehow, or incorporate in planned configurable UI overhaul.
-
 export const LeapWallet: Wallet = {
   type: WalletType.Leap,
   name: "Leap Wallet",
@@ -48,4 +46,8 @@ export const WalletConnectKeplrWallet: Wallet = {
     client.getOfflineSignerOnlyAmino.bind(client),
 }
 
-export const Wallets: Wallet[] = [KeplrWallet, WalletConnectKeplrWallet]
+export const Wallets: Wallet[] = [
+  KeplrWallet,
+  LeapWallet,
+  WalletConnectKeplrWallet,
+]

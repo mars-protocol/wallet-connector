@@ -13,7 +13,8 @@ const getConnectedWalletInfo = (wallet, client, chainInfo, signingCosmWasmClient
         console.warn(e);
         // Only Keplr browser extension supports suggesting chain.
         // Not WalletConnect nor embedded Keplr Mobile web.
-        if (wallet.type === types_1.WalletType.Keplr && client.mode !== "mobile-web") {
+        if (wallet.type === (types_1.WalletType.Keplr || types_1.WalletType.Leap) &&
+            client.mode !== "mobile-web") {
             const info = Object.assign(Object.assign({}, chainInfo), { stakeCurrency: Object.assign(Object.assign({}, chainInfo.stakeCurrency), { coinImageUrl: chainInfo.stakeCurrency.coinImageUrl
                         ? window.origin + chainInfo.stakeCurrency.coinImageUrl
                         : undefined }), currencies: chainInfo.currencies.map((currency) => (Object.assign(Object.assign({}, currency), { coinImageUrl: currency.coinImageUrl

@@ -20,7 +20,10 @@ export const getConnectedWalletInfo = async (
 
     // Only Keplr browser extension supports suggesting chain.
     // Not WalletConnect nor embedded Keplr Mobile web.
-    if (wallet.type === WalletType.Keplr && client.mode !== "mobile-web") {
+    if (
+      wallet.type === (WalletType.Keplr || WalletType.Leap) &&
+      client.mode !== "mobile-web"
+    ) {
       const info = {
         ...chainInfo,
         stakeCurrency: {

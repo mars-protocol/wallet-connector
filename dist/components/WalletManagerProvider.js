@@ -347,6 +347,8 @@ const WalletManagerProvider = ({ children, enabledWalletTypes, defaultChainId, c
         isEmbeddedKeplrMobileWeb,
         status,
     ]);
+    console.log("isKeplrExtentionNotInstalled", isKeplrExtentionNotInstalled);
+    console.log("enabledWallets", enabledWallets);
     return (react_1.default.createElement(WalletManagerContext_1.WalletManagerContext.Provider, { value: value },
         children,
         react_1.default.createElement(ui_1.SelectWalletModal, { classNames: classNames, closeIcon: closeIcon, closeModal: _closePickerModal, isKeplrExtentionNotInstalled: isKeplrExtentionNotInstalled, isOpen: status !== types_1.WalletConnectionStatus.Resetting && pickerModalOpen, onClose: () => setPickerModalOpen(false), selectWallet: _connectToWallet, wallets: enabledWallets }),
