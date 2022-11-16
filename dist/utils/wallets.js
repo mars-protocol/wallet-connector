@@ -10,7 +10,7 @@ exports.LeapWallet = {
     installURL: "https://www.leapwallet.io/",
     description: "Leap Chrome Extension",
     imageUrl: "/leap-cosmos-logo.png",
-    getClient: () => tslib_1.__awaiter(void 0, void 0, void 0, function* () { return window.leap(); }),
+    getClient: () => tslib_1.__awaiter(void 0, void 0, void 0, function* () { return (0, exports.getLeapFromWindow)(); }),
     getOfflineSignerFunction: (client) => client.getOfflineSignerAuto.bind(client), // // This function expects to be bound to the `client` instance.
 };
 exports.KeplrWallet = {
