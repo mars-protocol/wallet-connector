@@ -1,4 +1,9 @@
+import { Keplr } from "@keplr-wallet/types"
+
 import { Wallet, WalletType } from "../types"
+
+// eslint-disable-next-line @typescript-eslint/no-namespace
+export declare const getLeapFromWindow: () => Promise<Keplr | undefined>
 
 export const LeapWallet: Wallet = {
   type: WalletType.Leap,
@@ -7,7 +12,7 @@ export const LeapWallet: Wallet = {
   installURL: "https://www.leapwallet.io/",
   description: "Leap Chrome Extension",
   imageUrl: "/leap-cosmos-logo.png",
-  getClient: async () => window.getLeapFromWindow(),
+  getClient: async () => getLeapFromWindow(),
   getOfflineSignerFunction: (client) =>
     client.getOfflineSignerAuto.bind(client), // // This function expects to be bound to the `client` instance.
 }

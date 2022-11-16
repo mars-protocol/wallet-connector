@@ -1,5 +1,3 @@
-import { Keplr } from "@keplr-wallet/types"
-
 // Fix Safari's nonexistent browser.storage https://github.com/chainapsis/keplr-wallet/blob/4726a96b9663f17b91c5d6b0448bf85ebb4a678a/packages/common/src/kv-store/extension.ts
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -8,13 +6,6 @@ declare namespace browser.storage {
   const local: {
     get: undefined
     set: undefined
-  }
-}
-
-// eslint-disable-next-line @typescript-eslint/no-namespace
-declare global {
-  interface Window {
-    getLeapFromWindow: () => Keplr | undefined
   }
 }
 

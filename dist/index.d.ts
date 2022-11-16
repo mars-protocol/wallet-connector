@@ -1,7 +1,7 @@
 import { Keplr } from "@keplr-wallet/types";
 declare global {
     interface Window {
-        getLeapFromWindow: () => Keplr | undefined;
+        leap: () => Keplr | undefined;
     }
 }
 export * from "./components";
