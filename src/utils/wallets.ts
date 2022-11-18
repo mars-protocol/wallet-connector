@@ -2,8 +2,33 @@ import { Keplr } from "@keplr-wallet/types"
 
 import { Wallet, WalletType } from "../types"
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
-export declare const getLeapFromWindow: () => Promise<Keplr | undefined>
+export const getLeapFromWindow: () => Promise<Keplr | undefined> = async () => {
+  if (typeof window === "undefined") {
+    return undefined
+  }
+
+  if (window.leap) {
+    return window.leap
+  }
+
+  if (document.readyState === "complete") {
+    return window.leap
+  }
+
+  return new Promise((resolve) => {
+    const documentStateChange = (event: Event) => {
+      if (
+        event.target &&
+        (event.target as Document).readyState === "complete"
+      ) {
+        resolve(window.leap)
+        document.removeEventListener("readystatechange", documentStateChange)
+      }
+    }
+
+    document.addEventListener("readystatechange", documentStateChange)
+  })
+}
 
 export const LeapWallet: Wallet = {
   type: WalletType.Leap,
