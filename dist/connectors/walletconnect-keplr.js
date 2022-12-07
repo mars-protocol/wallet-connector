@@ -349,6 +349,9 @@ class KeplrWalletConnectV1 {
     suggestToken(_chainId, _contractAddress, _viewingKey) {
         throw new Error("Not yet implemented");
     }
+    experimentalSignEIP712CosmosTx_v0(chainId, signer, eip712, signDoc, signOptions) {
+        throw new Error("Not yet implemented");
+    }
 }
 exports.KeplrWalletConnectV1 = KeplrWalletConnectV1;
 //# sourceMappingURL=walletconnect-keplr.js.map

@@ -4,7 +4,6 @@ exports.ChainInfoID = exports.WalletConnectionStatus = exports.WalletType = void
 var WalletType;
 (function (WalletType) {
     WalletType["Keplr"] = "keplr";
-    WalletType["Leap"] = "leap";
     WalletType["WalletConnectKeplr"] = "walletconnect_keplr";
 })(WalletType = exports.WalletType || (exports.WalletType = {}));
 var WalletConnectionStatus;

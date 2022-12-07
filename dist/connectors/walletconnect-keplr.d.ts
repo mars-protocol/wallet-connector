@@ -79,5 +79,13 @@ export declare class KeplrWalletConnectV1 implements IKeplrWalletConnectV1 {
         accountNumber?: Long | null;
     }, _signOptions?: KeplrSignOptions): Promise<DirectSignResponse>;
     suggestToken(_chainId: string, _contractAddress: string, _viewingKey?: string): Promise<void>;
+    experimentalSignEIP712CosmosTx_v0(chainId: string, signer: string, eip712: {
+        types: Record<string, {
+            name: string;
+            type: string;
+        }[] | undefined>;
+        domain: Record<string, any>;
+        primaryType: string;
+    }, signDoc: StdSignDoc, signOptions?: KeplrSignOptions): Promise<AminoSignResponse>;
 }
 //# sourceMappingURL=walletconnect-keplr.d.ts.map

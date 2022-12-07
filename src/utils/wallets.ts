@@ -1,46 +1,6 @@
-import { Keplr } from "@keplr-wallet/types"
-
 import { Wallet, WalletType } from "../types"
 
-export const getLeapFromWindow: () => Promise<Keplr | undefined> = async () => {
-  if (typeof window === "undefined") {
-    return undefined
-  }
-
-  if (window.leap) {
-    return window.leap
-  }
-
-  if (document.readyState === "complete") {
-    return window.leap
-  }
-
-  return new Promise((resolve) => {
-    const documentStateChange = (event: Event) => {
-      if (
-        event.target &&
-        (event.target as Document).readyState === "complete"
-      ) {
-        resolve(window.leap)
-        document.removeEventListener("readystatechange", documentStateChange)
-      }
-    }
-
-    document.addEventListener("readystatechange", documentStateChange)
-  })
-}
-
-export const LeapWallet: Wallet = {
-  type: WalletType.Leap,
-  name: "Leap Wallet",
-  install: "Install Leap Wallet",
-  installURL: "https://www.leapwallet.io/",
-  description: "Leap Chrome Extension",
-  imageUrl: "/leap-cosmos-logo.png",
-  getClient: async () => getLeapFromWindow(),
-  getOfflineSignerFunction: (client) =>
-    client.getOfflineSignerAuto.bind(client), // // This function expects to be bound to the `client` instance.
-}
+// TODO: Move imageUrl, and maybe name/description, to user configuration somehow, or incorporate in planned configurable UI overhaul.
 
 export const KeplrWallet: Wallet = {
   type: WalletType.Keplr,
@@ -76,8 +36,4 @@ export const WalletConnectKeplrWallet: Wallet = {
     client.getOfflineSignerOnlyAmino.bind(client),
 }
 
-export const Wallets: Wallet[] = [
-  KeplrWallet,
-  LeapWallet,
-  WalletConnectKeplrWallet,
-]
+export const Wallets: Wallet[] = [KeplrWallet, WalletConnectKeplrWallet]

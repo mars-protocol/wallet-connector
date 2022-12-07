@@ -18,83 +18,79 @@ export const SelectWalletModal: FunctionComponent<SelectWalletModalProps> = ({
   classNames,
   isKeplrExtentionNotInstalled,
   ...props
-}) => {
-  return (
-    <BaseModal classNames={classNames} title="Select a wallet" {...props}>
-      <div
-        className={classNames?.walletList}
-        style={
-          classNames?.walletList ? undefined : selectWalletStyles.walletList
-        }
-      >
-        {wallets.map((wallet, index) => {
-          const isKeplrInstall =
-            wallet.type === (WalletType.Leap || WalletType.Keplr) &&
-            isKeplrExtentionNotInstalled &&
-            wallet.install &&
-            wallet.installURL
-          return (
-            <div key={index}>
-              <div
-                key={wallet.type}
-                className={classNames?.wallet}
-                onClick={(e) => {
-                  e.preventDefault()
-                  if (isKeplrInstall) {
-                    window.open(wallet.installURL, "_blank")
-                    closeModal()
-                  } else {
-                    selectWallet(wallet)
-                  }
-                }}
+}) => (
+  <BaseModal classNames={classNames} title="Select a wallet" {...props}>
+    <div
+      className={classNames?.walletList}
+      style={classNames?.walletList ? undefined : selectWalletStyles.walletList}
+    >
+      {wallets.map((wallet, index) => {
+        const isKeplrInstall =
+          wallet.type === WalletType.Keplr &&
+          isKeplrExtentionNotInstalled &&
+          wallet.install &&
+          wallet.installURL
+        return (
+          <div key={index}>
+            <div
+              key={wallet.type}
+              className={classNames?.wallet}
+              onClick={(e) => {
+                e.preventDefault()
+                if (isKeplrInstall) {
+                  window.open(wallet.installURL, "_blank")
+                  closeModal()
+                } else {
+                  selectWallet(wallet)
+                }
+              }}
+              style={
+                classNames?.wallet ? undefined : selectWalletStyles.walletRow
+              }
+            >
+              <img
+                alt={`${wallet.name} logo`}
+                className={classNames?.walletImage}
+                src={wallet.imageUrl}
                 style={
-                  classNames?.wallet ? undefined : selectWalletStyles.walletRow
+                  classNames?.walletImage
+                    ? undefined
+                    : selectWalletStyles.walletIconImg
+                }
+              />
+              <div
+                className={classNames?.walletInfo}
+                style={
+                  classNames?.walletInfo
+                    ? undefined
+                    : selectWalletStyles.walletInfo
                 }
               >
-                <img
-                  alt={`${wallet.name} logo`}
-                  className={classNames?.walletImage}
-                  src={wallet.imageUrl}
-                  style={
-                    classNames?.walletImage
-                      ? undefined
-                      : selectWalletStyles.walletIconImg
-                  }
-                />
                 <div
-                  className={classNames?.walletInfo}
+                  className={classNames?.walletName}
                   style={
-                    classNames?.walletInfo
+                    classNames?.walletName
                       ? undefined
-                      : selectWalletStyles.walletInfo
+                      : selectWalletStyles.walletName
                   }
                 >
-                  <div
-                    className={classNames?.walletName}
-                    style={
-                      classNames?.walletName
-                        ? undefined
-                        : selectWalletStyles.walletName
-                    }
-                  >
-                    {isKeplrInstall ? wallet.install : wallet.name}
-                  </div>
-                  <div
-                    className={classNames?.walletDescription}
-                    style={
-                      classNames?.walletDescription
-                        ? undefined
-                        : selectWalletStyles.walletDescription
-                    }
-                  >
-                    {isKeplrInstall ? wallet.installURL : wallet.description}
-                  </div>
+                  {isKeplrInstall ? wallet.install : wallet.name}
+                </div>
+                <div
+                  className={classNames?.walletDescription}
+                  style={
+                    classNames?.walletDescription
+                      ? undefined
+                      : selectWalletStyles.walletDescription
+                  }
+                >
+                  {isKeplrInstall ? wallet.installURL : wallet.description}
                 </div>
               </div>
             </div>
-          )
-        })}
-      </div>
-    </BaseModal>
-  )
-}
+          </div>
+        )
+      })}
+    </div>
+  </BaseModal>
+)

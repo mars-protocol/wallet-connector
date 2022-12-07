@@ -13,11 +13,7 @@ const DisplayStatus = () => {
 };
 describe("display status", () => {
     beforeAll(() => (0, test_utils_1.act)(() => {
-        (0, react_1.render)(react_2.default.createElement(components_1.WalletManagerProvider, { defaultChainId: types_1.ChainInfoID.Juno1, enabledWalletTypes: [
-                types_1.WalletType.Keplr,
-                types_1.WalletType.Leap,
-                types_1.WalletType.WalletConnectKeplr,
-            ] },
+        (0, react_1.render)(react_2.default.createElement(components_1.WalletManagerProvider, { defaultChainId: types_1.ChainInfoID.Juno1, enabledWalletTypes: [types_1.WalletType.Keplr, types_1.WalletType.WalletConnectKeplr] },
             react_2.default.createElement(DisplayStatus, null)));
     }));
     it("should display the status in the DOM", () => {

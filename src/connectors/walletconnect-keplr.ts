@@ -530,4 +530,25 @@ export class KeplrWalletConnectV1 implements IKeplrWalletConnectV1 {
   ): Promise<void> {
     throw new Error("Not yet implemented")
   }
+
+  experimentalSignEIP712CosmosTx_v0(
+    chainId: string,
+    signer: string,
+    eip712: {
+      types: Record<
+        string,
+        | {
+            name: string
+            type: string
+          }[]
+        | undefined
+      >
+      domain: Record<string, any>
+      primaryType: string
+    },
+    signDoc: StdSignDoc,
+    signOptions?: KeplrSignOptions
+  ): Promise<AminoSignResponse> {
+    throw new Error("Not yet implemented")
+  }
 }

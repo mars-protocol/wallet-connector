@@ -6,13 +6,13 @@
 import { Bech32Address } from "@keplr-wallet/cosmos"
 import { AppCurrency, ChainInfo } from "@keplr-wallet/types"
 
-import { ChainInfoID, ChainInfoOverrides } from "../types"
+import { ChainInfoID, ChainInfoOptions, ChainInfoOverrides } from "../types"
 
 /** All currency attributes (stake and fee) are defined once in the `currencies` list.
  *  Maintains the option to skip this conversion and keep the verbose `ChainInfo` type.
  */
 export type SimplifiedChainInfo = Omit<
-  ChainInfo,
+  ChainInfoOptions,
   "stakeCurrency" | "feeCurrencies"
 > & {
   explorer?: string
@@ -28,7 +28,7 @@ export type SimplifiedChainInfo = Omit<
 /** Convert a less redundant chain info schema into one that is accepted by Keplr's suggestChain: `ChainInfo`. */
 export function createKeplrChainInfo(
   chainInfo: SimplifiedChainInfo
-): ChainInfo {
+): ChainInfoOptions {
   const feeCurrencies: AppCurrency[] = []
   let stakeCurrency: AppCurrency | undefined
 
