@@ -274,17 +274,21 @@ class KeplrWalletConnectV1 {
         throw new Error("Not yet implemented");
     }
     getOfflineSigner(chainId) {
+        // @ts-ignore
         return new provider_1.CosmJSOfflineSigner(chainId, this);
     }
     getOfflineSignerAuto(chainId) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const key = yield this.getKey(chainId);
             return key.isNanoLedger
-                ? new provider_1.CosmJSOfflineSignerOnlyAmino(chainId, this)
-                : new provider_1.CosmJSOfflineSigner(chainId, this);
+                ? // @ts-ignore
+                    new provider_1.CosmJSOfflineSignerOnlyAmino(chainId, this)
+                : // @ts-ignore
+                    new provider_1.CosmJSOfflineSigner(chainId, this);
         });
     }
     getOfflineSignerOnlyAmino(chainId) {
+        // @ts-ignore
         return new provider_1.CosmJSOfflineSignerOnlyAmino(chainId, this);
     }
     getSecret20ViewingKey(_chainId, _contractAddress) {
