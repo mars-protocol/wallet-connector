@@ -27,6 +27,7 @@
     "prettier/prettier": "error",
     "react/no-children-prop": "off",
     "@typescript-eslint/no-unused-vars": ["off"],
+    "@typescript-eslint/ban-ts-ignore": "off",
     "no-unused-vars": ["off"],
     "react/jsx-sort-props": ["warn", { "reservedFirst": ["key"] }],
     "unused-imports/no-unused-imports": "error",
