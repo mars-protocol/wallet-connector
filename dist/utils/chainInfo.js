@@ -58,7 +58,7 @@ exports.SimpleChainInfoList = {
         ],
         gasPriceStep: {
             low: 0,
-            average: 0,
+            average: 0.0125,
             high: 0.025,
         },
         features: ["ibc-transfer", "ibc-go"],
@@ -87,7 +87,7 @@ exports.SimpleChainInfoList = {
         ],
         gasPriceStep: {
             low: 0,
-            average: 0,
+            average: 0.125,
             high: 0.025,
         },
         features: ["ibc-transfer", "ibc-go"],
@@ -474,7 +474,7 @@ exports.SimpleChainInfoList = {
         ],
         gasPriceStep: {
             low: 0,
-            average: 0,
+            average: 0.125,
             high: 0.025,
         },
         features: ["ibc-transfer", "ibc-go"],
@@ -503,7 +503,7 @@ exports.SimpleChainInfoList = {
         ],
         gasPriceStep: {
             low: 0,
-            average: 0,
+            average: 0.125,
             high: 0.025,
         },
         features: ["ibc-transfer", "ibc-go"],
