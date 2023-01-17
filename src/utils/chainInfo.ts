@@ -88,8 +88,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
         gasPriceStep: {
           low: 0,
-          average: 0.00625,
-          high: 0.01,
+          average: 0.025,
+          high: 0.04,
         },
       },
     ],
@@ -118,8 +118,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
         gasPriceStep: {
           low: 0,
-          average: 0.125,
-          high: 0.025,
+          average: 0.025,
+          high: 0.04,
         },
       },
     ],
@@ -511,7 +511,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
         gasPriceStep: {
           low: 0,
-          average: 0.0625,
+          average: 0.00625,
           high: 0.01,
         },
       },
@@ -541,7 +541,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         isFeeCurrency: true,
         gasPriceStep: {
           low: 0,
-          average: 0.0625,
+          average: 0.00625,
           high: 0.01,
         },
       },

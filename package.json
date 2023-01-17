@@ -1,6 +1,6 @@
 {
   "name": "@marsprotocol/wallet-connector",
-  "version": "0.9.11",
+  "version": "0.9.12",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mars-protocol/wallet-connector.git"
