@@ -413,7 +413,7 @@ export const WalletManagerProvider: FunctionComponent<
             : WalletConnectionStatus.Errored
         )
       )
-  }, [status])
+  }, [status, isKeplrExtentionNotInstalled])
 
   // Auto connect on mount handler, after the above mobile web check.
   useEffect(() => {

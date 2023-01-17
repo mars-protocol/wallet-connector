@@ -26,20 +26,14 @@
     "simple-import-sort/exports": "error",
     "prettier/prettier": "error",
     "react/no-children-prop": "off",
-    "@typescript-eslint/no-unused-vars": ["off"],
+    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
-    "no-unused-vars": ["off"],
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-unused-vars": "off",
     "react/jsx-sort-props": ["warn", { "reservedFirst": ["key"] }],
     "unused-imports/no-unused-imports": "error",
-    "unused-imports/no-unused-vars": [
-      "warn",
-      {
-        "vars": "all",
-        "varsIgnorePattern": "^_",
-        "args": "after-used",
-        "argsIgnorePattern": "^_"
-      }
-    ]
+    "unused-imports/no-unused-vars": "off"
   },
   "overrides": [
     {
