@@ -253,7 +253,7 @@ const WalletManagerProvider = ({ children, enabledWalletTypes, defaultChainId, c
             .finally(() => setStatus(!isKeplrExtentionNotInstalled
             ? types_1.WalletConnectionStatus.AttemptingAutoConnection
             : types_1.WalletConnectionStatus.Errored));
-    }, [status]);
+    }, [status, isKeplrExtentionNotInstalled]);
     // Auto connect on mount handler, after the above mobile web check.
     (0, react_1.useEffect)(() => {
         if (status !== types_1.WalletConnectionStatus.AttemptingAutoConnection ||
