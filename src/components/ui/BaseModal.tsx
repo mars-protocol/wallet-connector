@@ -23,18 +23,13 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
   isOpen,
   onClose,
   title,
-  maxWidth = "540px",
   classNames,
   closeIcon,
   children,
 }) => {
-  // ReactModal accessibility.
   useEffect(() => {
     ReactModal.setAppElement("body")
   }, [])
-
-  const modalContent = baseModalStyles.modalContent
-  modalContent.width = `${maxWidth}px`
 
   return (
     <ReactModal
@@ -60,7 +55,9 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
         overlay: classNames?.modalOverlay
           ? undefined
           : baseModalStyles.modalOverlay,
-        content: classNames?.modalContent ? undefined : modalContent,
+        content: classNames?.modalContent
+          ? undefined
+          : baseModalStyles.modalContent,
       }}
     >
       <>

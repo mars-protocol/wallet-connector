@@ -30,6 +30,7 @@ export const baseModalStyles: { [key: string]: React.CSSProperties } = {
     outline: "none",
     cursor: "auto",
     maxWidth: "calc(100% - 40px)",
+    width: "540px",
   },
 
   modalHeader: {
@@ -40,6 +41,8 @@ export const baseModalStyles: { [key: string]: React.CSSProperties } = {
     letterSpacing: "3px",
     color: "#FFF",
     margin: "0 0 16px",
+    width: "100%",
+    textAlign: "center",
   },
 
   modalCloseButton: {
