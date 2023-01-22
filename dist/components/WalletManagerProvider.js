@@ -28,14 +28,15 @@ const shuttle_1 = require("@delphi-labs/shuttle");
 const react_1 = __importStar(require("react"));
 const utils_1 = require("../utils");
 const ui_1 = require("./ui");
+const WalletManagerContext_1 = require("./WalletManagerContext");
 const WalletManagerProvider = ({ children, chainInfoOverrides, classNames, closeIcon, defaultChainId, enabledWallets, persistent = false, selectWalletOverride, walletMetaOverride, }) => {
     const enabledWalletsFiltered = (0, react_1.useMemo)(() => utils_1.Wallets.filter(({ id }) => enabledWallets.includes(id)), [enabledWallets]);
     if (walletMetaOverride) {
         Object.entries(walletMetaOverride).forEach(([id, override]) => {
             Object.entries(override).forEach(([key, value]) => {
-                enabledWallets.forEach((walletID, index) => {
-                    if (walletID === id) {
-                        enabledWallets[index][key] = value;
+                enabledWalletsFiltered.forEach((wallet, index) => {
+                    if (wallet.id === id) {
+                        enabledWalletsFiltered[index][key] = value;
                     }
                 });
             });
@@ -44,12 +45,22 @@ const WalletManagerProvider = ({ children, chainInfoOverrides, classNames, close
     const _closePickerModal = () => {
         setPickerModalOpen(false);
     };
+    const beginConnection = useCallback(() => {
+        setPickerModalOpen(true);
+    }, []);
     const [pickerModalOpen, setPickerModalOpen] = (0, react_1.useState)(false);
+    const value = (0, react_1.useMemo)(() => ({
+        connect: beginConnection,
+    }), [beginConnection]);
     return (react_1.default.createElement(shuttle_1.ShuttleProvider, { persistent: persistent, providers: [
         // ...
         ] },
-        children,
-        react_1.default.createElement(ui_1.SelectWalletModal, { chainId: defaultChainId, classNames: classNames, closeIcon: closeIcon, closeModal: _closePickerModal, isOpen: pickerModalOpen, onClose: () => setPickerModalOpen(false), selectWalletOverride: selectWalletOverride, wallets: enabledWalletsFiltered })));
+        react_1.default.createElement(WalletManagerContext_1.WalletManagerContext.Provider, { value: value },
+            children,
+            react_1.default.createElement(ui_1.SelectWalletModal, { chainId: defaultChainId, classNames: classNames, closeIcon: closeIcon, closeModal: _closePickerModal, isOpen: pickerModalOpen, onClose: () => setPickerModalOpen(false), selectWalletOverride: selectWalletOverride, wallets: enabledWalletsFiltered }))));
 };
 exports.WalletManagerProvider = WalletManagerProvider;
+function useCallback(arg0, arg1) {
+    throw new Error("Function not implemented.");
+}
 //# sourceMappingURL=WalletManagerProvider.js.map

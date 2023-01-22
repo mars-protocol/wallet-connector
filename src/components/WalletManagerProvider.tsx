@@ -10,6 +10,7 @@ import React, {
 import { WalletID } from "../enums"
 import { Wallets } from "../utils"
 import { SelectWalletModal } from "./ui"
+import { WalletManagerContext } from "./WalletManagerContext"
 
 export type WalletManagerProviderProps = PropsWithChildren<{
   enabledWallets: WalletID[keyof WalletID][]
@@ -41,13 +42,12 @@ export const WalletManagerProvider: FunctionComponent<
     () => Wallets.filter(({ id }) => enabledWallets.includes(id)),
     [enabledWallets]
   )
-
   if (walletMetaOverride) {
     Object.entries(walletMetaOverride).forEach(([id, override]) => {
       Object.entries(override).forEach(([key, value]) => {
-        enabledWallets.forEach((walletID, index) => {
-          if (walletID === id) {
-            enabledWallets[index][key] = value
+        enabledWalletsFiltered.forEach((wallet, index) => {
+          if (wallet.id === id) {
+            enabledWalletsFiltered[index][key] = value
           }
         })
       })
@@ -58,7 +58,18 @@ export const WalletManagerProvider: FunctionComponent<
     setPickerModalOpen(false)
   }
 
+  const beginConnection = useCallback(() => {
+    setPickerModalOpen(true)
+  }, [])
+
   const [pickerModalOpen, setPickerModalOpen] = useState(false)
+
+  const value = useMemo(
+    () => ({
+      connect: beginConnection,
+    }),
+    [beginConnection]
+  )
 
   return (
     <ShuttleProvider
@@ -69,17 +80,22 @@ export const WalletManagerProvider: FunctionComponent<
         ]
       }
     >
-      {children}
-      <SelectWalletModal
-        chainId={defaultChainId}
-        classNames={classNames}
-        closeIcon={closeIcon}
-        closeModal={_closePickerModal}
-        isOpen={pickerModalOpen}
-        onClose={() => setPickerModalOpen(false)}
-        selectWalletOverride={selectWalletOverride}
-        wallets={enabledWalletsFiltered}
-      />
+      <WalletManagerContext.Provider value={value}>
+        {children}
+        <SelectWalletModal
+          chainId={defaultChainId}
+          classNames={classNames}
+          closeIcon={closeIcon}
+          closeModal={_closePickerModal}
+          isOpen={pickerModalOpen}
+          onClose={() => setPickerModalOpen(false)}
+          selectWalletOverride={selectWalletOverride}
+          wallets={enabledWalletsFiltered}
+        />
+      </WalletManagerContext.Provider>
     </ShuttleProvider>
   )
+}
+function useCallback(arg0: () => void, arg1: never[]) {
+  throw new Error("Function not implemented.")
 }

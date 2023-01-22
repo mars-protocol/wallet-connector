@@ -85,3 +85,7 @@ interface ModalClassNames {
   walletDescription?: string
   textContent?: string
 }
+
+interface IWalletManagerContext {
+  connect: void
+}
