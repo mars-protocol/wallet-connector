@@ -27,7 +27,7 @@ exports.baseModalStyles = {
         borderRadius: "16px",
         display: "flex",
         flexDirection: "column",
-        background: "white",
+        background: "linear-gradient(99.79deg, rgba(8, 11, 30, 0.79) 8.17%, rgba(52, 20, 33, 0.9) 94.54%)",
         outline: "none",
         cursor: "auto",
         maxWidth: "calc(100% - 40px)",
@@ -56,7 +56,7 @@ exports.selectWalletStyles = {
         padding: "8px 0",
     },
     wallet: {
-        background: "transparent",
+        background: "rgba(255, 255, 255, 0)",
         padding: "8px",
         boxShadow: "none",
         display: "flex",
@@ -67,6 +67,7 @@ exports.selectWalletStyles = {
         textDecoration: "none",
         borderRadius: "8px",
         cursor: "pointer",
+        transition: "all .5s",
     },
     walletHover: {
         background: "rgba(255, 255, 255, 0.1)",

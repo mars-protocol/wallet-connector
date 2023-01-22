@@ -33,6 +33,9 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
     ReactModal.setAppElement("body")
   }, [])
 
+  const modalContent = baseModalStyles.modalContent
+  modalContent.width = `${maxWidth}px`
+
   return (
     <ReactModal
       ariaHideApp={false}
@@ -57,9 +60,7 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
         overlay: classNames?.modalOverlay
           ? undefined
           : baseModalStyles.modalOverlay,
-        content: classNames?.modalContent
-          ? undefined
-          : { ...baseModalStyles.modalContent, width: `${maxWidth}px` },
+        content: classNames?.modalContent ? undefined : modalContent,
       }}
     >
       <>

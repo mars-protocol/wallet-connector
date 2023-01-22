@@ -21,14 +21,13 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   ...props
 }) => {
   const { connect } = useShuttle()
-  const [isHover, setIsHover] = useState(false)
-
-  const handleMouseEnter = () => {
-    setIsHover(true)
+  const [isHover, setIsHover] = useState("")
+  const handleMouseEnter = (walletID: string) => {
+    setIsHover(walletID)
   }
 
   const handleMouseLeave = () => {
-    setIsHover(false)
+    setIsHover("")
   }
 
   return (
@@ -46,12 +45,9 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         {wallets.map((wallet, index) => {
           const isKeplrInstall =
             wallet.id === WalletID.Keplr && wallet.install && wallet.installURL
+
           return (
-            <div
-              key={index}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
+            <div key={index}>
               <div
                 key={wallet.id}
                 className={classNames?.wallet}
@@ -65,10 +61,14 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                     closeModal()
                   }
                 }}
+                onMouseEnter={() => {
+                  handleMouseEnter(wallet.id)
+                }}
+                onMouseLeave={handleMouseLeave}
                 style={
                   classNames?.wallet
                     ? undefined
-                    : isHover
+                    : isHover === wallet.id
                     ? {
                         ...selectWalletStyles.wallet,
                         ...selectWalletStyles.walletHover,
@@ -82,7 +82,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                   src={
                     wallet.imageUrl
                       ? wallet.imageUrl
-                      : `'./images/${wallet.id}-wallet-extension.png'`
+                      : `'https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/${wallet.id}-wallet-extension.png'`
                   }
                   style={
                     classNames?.walletImage

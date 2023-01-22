@@ -43,17 +43,17 @@ const Styles_1 = require("./Styles");
 const SelectWalletModal = (_a) => {
     var { wallets, chainId, closeModal, classNames, selectWalletOverride } = _a, props = __rest(_a, ["wallets", "chainId", "closeModal", "classNames", "selectWalletOverride"]);
     const { connect } = (0, shuttle_1.useShuttle)();
-    const [isHover, setIsHover] = (0, react_1.useState)(false);
-    const handleMouseEnter = () => {
-        setIsHover(true);
+    const [isHover, setIsHover] = (0, react_1.useState)("");
+    const handleMouseEnter = (walletID) => {
+        setIsHover(walletID);
     };
     const handleMouseLeave = () => {
-        setIsHover(false);
+        setIsHover("");
     };
     return (react_1.default.createElement(BaseModal_1.BaseModal, Object.assign({ classNames: classNames, title: selectWalletOverride ? selectWalletOverride : "Select a wallet" }, props),
         react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletList, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletList) ? undefined : Styles_1.selectWalletStyles.walletList }, wallets.map((wallet, index) => {
             const isKeplrInstall = wallet.id === enums_1.WalletID.Keplr && wallet.install && wallet.installURL;
-            return (react_1.default.createElement("div", { key: index, onMouseEnter: handleMouseEnter, onMouseLeave: handleMouseLeave },
+            return (react_1.default.createElement("div", { key: index },
                 react_1.default.createElement("div", { key: wallet.id, className: classNames === null || classNames === void 0 ? void 0 : classNames.wallet, onClick: (e) => {
                         e.preventDefault();
                         if (isKeplrInstall) {
@@ -64,13 +64,15 @@ const SelectWalletModal = (_a) => {
                             connect(wallet.id, chainId);
                             closeModal();
                         }
-                    }, style: (classNames === null || classNames === void 0 ? void 0 : classNames.wallet)
+                    }, onMouseEnter: () => {
+                        handleMouseEnter(wallet.id);
+                    }, onMouseLeave: handleMouseLeave, style: (classNames === null || classNames === void 0 ? void 0 : classNames.wallet)
                         ? undefined
-                        : isHover
+                        : isHover === wallet.id
                             ? Object.assign(Object.assign({}, Styles_1.selectWalletStyles.wallet), Styles_1.selectWalletStyles.walletHover) : Styles_1.selectWalletStyles.wallet },
                     react_1.default.createElement("img", { alt: `${wallet.name} logo`, className: classNames === null || classNames === void 0 ? void 0 : classNames.walletImage, src: wallet.imageUrl
                             ? wallet.imageUrl
-                            : `'./images/${wallet.id}-wallet-extension.png'`, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletImage)
+                            : `'https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/${wallet.id}-wallet-extension.png'`, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletImage)
                             ? undefined
                             : Styles_1.selectWalletStyles.walletIconImg }),
                     react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletInfo, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletInfo)

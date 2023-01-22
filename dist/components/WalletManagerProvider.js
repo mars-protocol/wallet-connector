@@ -45,7 +45,7 @@ const WalletManagerProvider = ({ children, chainInfoOverrides, classNames, close
     const _closePickerModal = () => {
         setPickerModalOpen(false);
     };
-    const beginConnection = useCallback(() => {
+    const beginConnection = (0, react_1.useCallback)(() => {
         setPickerModalOpen(true);
     }, []);
     const [pickerModalOpen, setPickerModalOpen] = (0, react_1.useState)(false);
@@ -60,7 +60,4 @@ const WalletManagerProvider = ({ children, chainInfoOverrides, classNames, close
             react_1.default.createElement(ui_1.SelectWalletModal, { chainId: defaultChainId, classNames: classNames, closeIcon: closeIcon, closeModal: _closePickerModal, isOpen: pickerModalOpen, onClose: () => setPickerModalOpen(false), selectWalletOverride: selectWalletOverride, wallets: enabledWalletsFiltered }))));
 };
 exports.WalletManagerProvider = WalletManagerProvider;
-function useCallback(arg0, arg1) {
-    throw new Error("Function not implemented.");
-}
 //# sourceMappingURL=WalletManagerProvider.js.map

@@ -25,7 +25,8 @@ export const baseModalStyles: { [key: string]: React.CSSProperties } = {
     borderRadius: "16px",
     display: "flex",
     flexDirection: "column",
-    background: "white",
+    background:
+      "linear-gradient(99.79deg, rgba(8, 11, 30, 0.79) 8.17%, rgba(52, 20, 33, 0.9) 94.54%)",
     outline: "none",
     cursor: "auto",
     maxWidth: "calc(100% - 40px)",
@@ -58,7 +59,7 @@ export const selectWalletStyles: { [key: string]: React.CSSProperties } = {
   },
 
   wallet: {
-    background: "transparent",
+    background: "rgba(255, 255, 255, 0)",
     padding: "8px",
     boxShadow: "none",
     display: "flex",
@@ -69,6 +70,7 @@ export const selectWalletStyles: { [key: string]: React.CSSProperties } = {
     textDecoration: "none",
     borderRadius: "8px",
     cursor: "pointer",
+    transition: "all .5s",
   },
 
   walletHover: {

@@ -37,6 +37,8 @@ const BaseModal = ({ isOpen, onClose, title, maxWidth = "540px", classNames, clo
     (0, react_1.useEffect)(() => {
         react_modal_1.default.setAppElement("body");
     }, []);
+    const modalContent = Styles_1.baseModalStyles.modalContent;
+    modalContent.width = `${maxWidth}px`;
     return (react_1.default.createElement(react_modal_1.default, { ariaHideApp: false, className: (_a = classNames === null || classNames === void 0 ? void 0 : classNames.modalContent) !== null && _a !== void 0 ? _a : "_", contentElement: (props, children) => (react_1.default.createElement("div", Object.assign({ style: Styles_1.baseModalStyles.modalContent }, props), children)), isOpen: isOpen, onRequestClose: (e) => {
             e.preventDefault();
             onClose === null || onClose === void 0 ? void 0 : onClose();
@@ -44,9 +46,7 @@ const BaseModal = ({ isOpen, onClose, title, maxWidth = "540px", classNames, clo
             overlay: (classNames === null || classNames === void 0 ? void 0 : classNames.modalOverlay)
                 ? undefined
                 : Styles_1.baseModalStyles.modalOverlay,
-            content: (classNames === null || classNames === void 0 ? void 0 : classNames.modalContent)
-                ? undefined
-                : Object.assign(Object.assign({}, Styles_1.baseModalStyles.modalContent), { width: `${maxWidth}px` }),
+            content: (classNames === null || classNames === void 0 ? void 0 : classNames.modalContent) ? undefined : modalContent,
         } },
         react_1.default.createElement(react_1.default.Fragment, null,
             react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.modalHeader, style: (classNames === null || classNames === void 0 ? void 0 : classNames.modalHeader) ? undefined : Styles_1.baseModalStyles.modalHeader }, title),

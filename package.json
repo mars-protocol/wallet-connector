@@ -1,6 +1,6 @@
 {
   "name": "@marsprotocol/wallet-connector",
-  "version": "1.0.0-rc5",
+  "version": "1.0.0-rc8",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mars-protocol/wallet-connector.git"
@@ -21,12 +21,11 @@
   ],
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "yarn format && yarn clean && tsc && yarn copy",
+    "build": "yarn format && yarn clean && tsc",
     "build-dist": "tsc",
     "start": "yarn build && cd example && yarn bootstrap",
     "lint": "eslint .",
-    "format": "eslint . --fix",
-    "copy": "cp -R  src/components/ui/images ./dist/components/ui/"
+    "format": "eslint . --fix"
   },
   "dependencies": {
     "@delphi-labs/shuttle": "^1.7.0",
