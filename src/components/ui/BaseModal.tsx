@@ -7,17 +7,14 @@ import React, {
 } from "react"
 import ReactModal from "react-modal"
 
-import { ModalClassNames } from "../../types"
 import { CloseIcon as DefaultCloseIcon } from "./CloseIcon"
 import { baseModalStyles } from "./Styles"
 
 export type BaseModalProps = PropsWithChildren<{
   isOpen: boolean
   onClose?: () => void
-
   title?: ReactElement | string
   maxWidth?: string
-
   classNames?: ModalClassNames
   closeIcon?: ReactNode
 }>
@@ -26,7 +23,7 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
   isOpen,
   onClose,
   title,
-  maxWidth = "36rem",
+  maxWidth = "540px",
   classNames,
   closeIcon,
   children,
@@ -36,27 +33,12 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
     ReactModal.setAppElement("body")
   }, [])
 
-  const modalContentStyles: React.CSSProperties = {
-    position: "absolute",
-    left: "50%",
-    transform: "translateX(-50%)",
-    padding: "1.25rem",
-    borderRadius: "1rem",
-    display: "flex",
-    flexDirection: "column",
-    background: "white",
-    width: `${maxWidth}px`,
-    outline: "none",
-    cursor: "auto",
-    maxWidth: "calc(100% - 40px)",
-  }
-
   return (
     <ReactModal
       ariaHideApp={false}
       className={classNames?.modalContent ?? "_"}
       contentElement={(props, children) => (
-        <div style={modalContentStyles} {...props}>
+        <div style={baseModalStyles.modalContent} {...props}>
           {children}
         </div>
       )}
@@ -75,7 +57,9 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
         overlay: classNames?.modalOverlay
           ? undefined
           : baseModalStyles.modalOverlay,
-        content: classNames?.modalContent ? undefined : modalContentStyles,
+        content: classNames?.modalContent
+          ? undefined
+          : { ...baseModalStyles.modalContent, width: `${maxWidth}px` },
       }}
     >
       <>

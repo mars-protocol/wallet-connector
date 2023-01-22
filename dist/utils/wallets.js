@@ -1,36 +1,69 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Wallets = exports.WalletConnectKeplrWallet = exports.KeplrWallet = void 0;
-const tslib_1 = require("tslib");
-const types_1 = require("../types");
-// TODO: Move imageUrl, and maybe name/description, to user configuration somehow, or incorporate in planned configurable UI overhaul.
+exports.Wallets = exports.XdefiWallet = exports.TerraStationWallet = exports.LeapWallet = exports.KeplrWallet = exports.FalconWallet = exports.CosmostationWallet = void 0;
+const cosmostation_wallet_extension_png_1 = __importDefault(require("src/components/ui/images/cosmostation-wallet-extension.png"));
+const falcon_wallet_extension_png_1 = __importDefault(require("src/components/ui/images/falcon-wallet-extension.png"));
+const keplr_wallet_extension_png_1 = __importDefault(require("src/components/ui/images/keplr-wallet-extension.png"));
+const leap_wallet_extension_png_1 = __importDefault(require("src/components/ui/images/leap-wallet-extension.png"));
+const terra_station_wallet_extension_png_1 = __importDefault(require("src/components/ui/images/terra-station-wallet-extension.png"));
+const xdefi_wallet_extension_png_1 = __importDefault(require("src/components/ui/images/xdefi-wallet-extension.png"));
+const enums_1 = require("src/enums");
+exports.CosmostationWallet = {
+    id: enums_1.WalletID.Cosmostation,
+    name: "Cosmostation Wallet",
+    install: "Install Cosmostation Wallet",
+    installURL: "https://chrome.google.com/webstore/detail/cosmostation-wallet/fpkhgmpbidmiogeglndfbkegfdlnajnf",
+    description: "Cosmostation Extension",
+    imageUrl: cosmostation_wallet_extension_png_1.default,
+};
+exports.FalconWallet = {
+    id: enums_1.WalletID.Falcon,
+    name: "Falcon Wallet",
+    install: "Install Falcon Wallet",
+    installURL: "https://chrome.google.com/webstore/detail/falcon-wallet/gkhnjcpkikkkfhhdhhphcbhmkikoicgn",
+    description: "Falcon Extension",
+    imageUrl: falcon_wallet_extension_png_1.default,
+};
 exports.KeplrWallet = {
-    type: types_1.WalletType.Keplr,
+    id: enums_1.WalletID.Keplr,
     name: "Keplr Wallet",
     install: "Install Keplr Wallet",
-    installURL: "https://keplr.app",
+    installURL: "https://www.keplr.app/download",
     description: "Keplr Chrome Extension",
-    imageUrl: "/keplr-wallet-extension.png",
-    getClient: () => tslib_1.__awaiter(void 0, void 0, void 0, function* () { return (yield Promise.resolve().then(() => tslib_1.__importStar(require("@keplr-wallet/stores")))).getKeplrFromWindow(); }),
-    getOfflineSignerFunction: (client) => 
-    // This function expects to be bound to the `client` instance.
-    client.getOfflineSignerAuto.bind(client),
+    imageUrl: keplr_wallet_extension_png_1.default,
 };
-exports.WalletConnectKeplrWallet = {
-    type: types_1.WalletType.WalletConnectKeplr,
-    name: "WalletConnect",
-    description: "Keplr Mobile",
-    imageUrl: "/walletconnect-keplr.png",
-    getClient: (chainInfo, walletConnect) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
-        if (walletConnect === null || walletConnect === void 0 ? void 0 : walletConnect.connected) {
-            return new (yield Promise.resolve().then(() => tslib_1.__importStar(require("../connectors")))).KeplrWalletConnectV1(walletConnect, [chainInfo]);
-        }
-        throw new Error("Mobile wallet not connected.");
-    }),
-    // WalletConnect only supports Amino signing.
-    getOfflineSignerFunction: (client) => 
-    // This function expects to be bound to the `client` instance.
-    client.getOfflineSignerOnlyAmino.bind(client),
+exports.LeapWallet = {
+    id: enums_1.WalletID.Leap,
+    name: "Leap Wallet",
+    install: "Install Leap Wallet",
+    installURL: "https://chrome.google.com/webstore/detail/leap-cosmos-wallet/fcfcfllfndlomdhbehjjcoimbgofdncg",
+    description: "Leap Extension",
+    imageUrl: leap_wallet_extension_png_1.default,
 };
-exports.Wallets = [exports.KeplrWallet, exports.WalletConnectKeplrWallet];
-//# sourceMappingURL=wallets.js.map
+exports.TerraStationWallet = {
+    id: enums_1.WalletID.TerraStation,
+    name: "Terra Station Wallet",
+    install: "Install Terra Station Wallet",
+    installURL: "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
+    description: "Terra Station Extension",
+    imageUrl: terra_station_wallet_extension_png_1.default,
+};
+exports.XdefiWallet = {
+    id: enums_1.WalletID.Xdefi,
+    name: "XDEFI Wallet",
+    install: "Install XDEFI Wallet",
+    installURL: "https://chrome.google.com/webstore/detail/xdefi-wallet/hmeobnfnfcmdkdcmlblgagmfpfboieaf",
+    description: "XDEFI Extension",
+    imageUrl: xdefi_wallet_extension_png_1.default,
+};
+exports.Wallets = [
+    exports.CosmostationWallet,
+    exports.FalconWallet,
+    exports.KeplrWallet,
+    exports.LeapWallet,
+    exports.TerraStationWallet,
+    exports.XdefiWallet,
+];

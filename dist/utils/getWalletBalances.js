@@ -1,14 +1,17 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getWalletBalances = void 0;
-const tslib_1 = require("tslib");
-const axios_1 = tslib_1.__importDefault(require("axios"));
-const utils_1 = require("../utils");
-const getWalletBalances = (address, chainId) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
-    if (!address || !chainId)
-        return undefined;
-    const URL = `${utils_1.SimpleChainInfoList[chainId].rest}cosmos/bank/v1beta1/balances/${address}`;
-    return yield (0, axios_1.default)({
+const axios_1 = __importDefault(require("axios"));
+const enums_1 = require("src/enums");
+const utils_1 = require("src/utils");
+const getWalletBalances = async (address, chainId) => {
+    const realChainID = enums_1.ChainInfoID[chainId];
+    const chainInfo = utils_1.SimpleChainInfoList[realChainID];
+    const URL = `${chainInfo.rest}cosmos/bank/v1beta1/balances/${address}`;
+    return await (0, axios_1.default)({
         url: URL,
         method: "GET",
         headers: {
@@ -20,6 +23,5 @@ const getWalletBalances = (address, chainId) => tslib_1.__awaiter(void 0, void 0
         return response.data;
     })
         .catch((err) => console.log(err));
-});
+};
 exports.getWalletBalances = getWalletBalances;
-//# sourceMappingURL=getWalletBalances.js.map

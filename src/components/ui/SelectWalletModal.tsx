@@ -1,96 +1,122 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState } from "react"
+import { WalletID } from "src/enums"
 
-import { Wallet, WalletType } from "../../types"
 import { BaseModal, BaseModalProps } from "./BaseModal"
 import { selectWalletStyles } from "./Styles"
 
-export interface SelectWalletModalProps extends BaseModalProps {
+interface Props extends BaseModalProps {
   wallets: Wallet[]
-  selectWallet: (wallet: Wallet) => void
+  selectWallet: (wallet: string) => void
   closeModal: () => void
-  isKeplrExtentionNotInstalled: boolean
+  selectWalletOverride?: string
 }
 
-export const SelectWalletModal: FunctionComponent<SelectWalletModalProps> = ({
+export const SelectWalletModal: FunctionComponent<Props> = ({
   wallets,
   selectWallet,
   closeModal,
   classNames,
-  isKeplrExtentionNotInstalled,
+  selectWalletOverride,
   ...props
-}) => (
-  <BaseModal classNames={classNames} title="Select a wallet" {...props}>
-    <div
-      className={classNames?.walletList}
-      style={classNames?.walletList ? undefined : selectWalletStyles.walletList}
+}) => {
+  const [isHover, setIsHover] = useState(false)
+
+  const handleMouseEnter = () => {
+    setIsHover(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHover(false)
+  }
+
+  return (
+    <BaseModal
+      classNames={classNames}
+      title={selectWalletOverride ? selectWalletOverride : "Select a wallet"}
+      {...props}
     >
-      {wallets.map((wallet, index) => {
-        const isKeplrInstall =
-          wallet.type === WalletType.Keplr &&
-          isKeplrExtentionNotInstalled &&
-          wallet.install &&
-          wallet.installURL
-        return (
-          <div key={index}>
+      <div
+        className={classNames?.walletList}
+        style={
+          classNames?.walletList ? undefined : selectWalletStyles.walletList
+        }
+      >
+        {wallets.map((wallet, index) => {
+          const isKeplrInstall =
+            wallet.id === WalletID.Keplr && wallet.install && wallet.installURL
+          return (
             <div
-              key={wallet.type}
-              className={classNames?.wallet}
-              onClick={(e) => {
-                e.preventDefault()
-                if (isKeplrInstall) {
-                  window.open(wallet.installURL, "_blank")
-                  closeModal()
-                } else {
-                  selectWallet(wallet)
-                }
-              }}
-              style={
-                classNames?.wallet ? undefined : selectWalletStyles.walletRow
-              }
+              key={index}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
-              <img
-                alt={`${wallet.name} logo`}
-                className={classNames?.walletImage}
-                src={wallet.imageUrl}
-                style={
-                  classNames?.walletImage
-                    ? undefined
-                    : selectWalletStyles.walletIconImg
-                }
-              />
               <div
-                className={classNames?.walletInfo}
+                key={wallet.id}
+                className={classNames?.wallet}
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (isKeplrInstall) {
+                    window.open(wallet.installURL, "_blank")
+                    closeModal()
+                  } else {
+                    selectWallet(wallet.id)
+                  }
+                }}
                 style={
-                  classNames?.walletInfo
+                  classNames?.wallet
                     ? undefined
-                    : selectWalletStyles.walletInfo
+                    : isHover
+                    ? {
+                        ...selectWalletStyles.wallet,
+                        ...selectWalletStyles.walletHover,
+                      }
+                    : selectWalletStyles.wallet
                 }
               >
-                <div
-                  className={classNames?.walletName}
+                <img
+                  alt={`${wallet.name} logo`}
+                  className={classNames?.walletImage}
+                  src={wallet.imageUrl}
                   style={
-                    classNames?.walletName
+                    classNames?.walletImage
                       ? undefined
-                      : selectWalletStyles.walletName
+                      : selectWalletStyles.walletIconImg
+                  }
+                />
+                <div
+                  className={classNames?.walletInfo}
+                  style={
+                    classNames?.walletInfo
+                      ? undefined
+                      : selectWalletStyles.walletInfo
                   }
                 >
-                  {isKeplrInstall ? wallet.install : wallet.name}
-                </div>
-                <div
-                  className={classNames?.walletDescription}
-                  style={
-                    classNames?.walletDescription
-                      ? undefined
-                      : selectWalletStyles.walletDescription
-                  }
-                >
-                  {isKeplrInstall ? wallet.installURL : wallet.description}
+                  <div
+                    className={classNames?.walletName}
+                    style={
+                      classNames?.walletName
+                        ? undefined
+                        : selectWalletStyles.walletName
+                    }
+                  >
+                    {isKeplrInstall ? wallet.install : wallet.name}
+                  </div>
+                  <div
+                    className={classNames?.walletDescription}
+                    style={
+                      classNames?.walletDescription
+                        ? undefined
+                        : selectWalletStyles.walletDescription
+                    }
+                  >
+                    {isKeplrInstall ? wallet.installURL : wallet.description}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )
-      })}
-    </div>
-  </BaseModal>
-)
+          )
+        })}
+      </div>
+    </BaseModal>
+  )
+}

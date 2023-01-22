@@ -1,15 +1,15 @@
 import axios from "axios"
-
-import { BalancesResponse } from "../types"
-import { SimpleChainInfoList } from "../utils"
+import { ChainInfoID } from "src/enums"
+import { SimpleChainInfoList, SimplifiedChainInfo } from "src/utils"
 
 export const getWalletBalances = async (
-  address?: string,
-  chainId?: string
+  address: string,
+  chainId: string
 ): Promise<BalancesResponse | undefined> => {
-  if (!address || !chainId) return undefined
-
-  const URL = `${SimpleChainInfoList[chainId].rest}cosmos/bank/v1beta1/balances/${address}`
+  const realChainID: ChainInfoID =
+    ChainInfoID[chainId as keyof typeof ChainInfoID]
+  const chainInfo: SimplifiedChainInfo = SimpleChainInfoList[realChainID]
+  const URL = `${chainInfo.rest}cosmos/bank/v1beta1/balances/${address}`
 
   return await axios({
     url: URL,

@@ -1,39 +1,75 @@
-import { Wallet, WalletType } from "../types"
+import CosmostationIcon from "src/components/ui/images/cosmostation-wallet-extension.png"
+import FalconIcon from "src/components/ui/images/falcon-wallet-extension.png"
+import KeplrIcon from "src/components/ui/images/keplr-wallet-extension.png"
+import LeapIcon from "src/components/ui/images/leap-wallet-extension.png"
+import TerraStationIcon from "src/components/ui/images/terra-station-wallet-extension.png"
+import XdefiIcon from "src/components/ui/images/xdefi-wallet-extension.png"
+import { WalletID } from "src/enums"
 
-// TODO: Move imageUrl, and maybe name/description, to user configuration somehow, or incorporate in planned configurable UI overhaul.
+export const CosmostationWallet: Wallet = {
+  id: WalletID.Cosmostation,
+  name: "Cosmostation Wallet",
+  install: "Install Cosmostation Wallet",
+  installURL:
+    "https://chrome.google.com/webstore/detail/cosmostation-wallet/fpkhgmpbidmiogeglndfbkegfdlnajnf",
+  description: "Cosmostation Extension",
+  imageUrl: CosmostationIcon,
+}
+
+export const FalconWallet: Wallet = {
+  id: WalletID.Falcon,
+  name: "Falcon Wallet",
+  install: "Install Falcon Wallet",
+  installURL:
+    "https://chrome.google.com/webstore/detail/falcon-wallet/gkhnjcpkikkkfhhdhhphcbhmkikoicgn",
+  description: "Falcon Extension",
+  imageUrl: FalconIcon,
+}
 
 export const KeplrWallet: Wallet = {
-  type: WalletType.Keplr,
+  id: WalletID.Keplr,
   name: "Keplr Wallet",
   install: "Install Keplr Wallet",
-  installURL: "https://keplr.app",
+  installURL: "https://www.keplr.app/download",
   description: "Keplr Chrome Extension",
-  imageUrl: "/keplr-wallet-extension.png",
-  getClient: async () =>
-    (await import("@keplr-wallet/stores")).getKeplrFromWindow(),
-  getOfflineSignerFunction: (client) =>
-    // This function expects to be bound to the `client` instance.
-    client.getOfflineSignerAuto.bind(client),
+  imageUrl: KeplrIcon,
 }
 
-export const WalletConnectKeplrWallet: Wallet = {
-  type: WalletType.WalletConnectKeplr,
-  name: "WalletConnect",
-  description: "Keplr Mobile",
-  imageUrl: "/walletconnect-keplr.png",
-  getClient: async (chainInfo, walletConnect) => {
-    if (walletConnect?.connected) {
-      return new (await import("../connectors")).KeplrWalletConnectV1(
-        walletConnect,
-        [chainInfo]
-      )
-    }
-    throw new Error("Mobile wallet not connected.")
-  },
-  // WalletConnect only supports Amino signing.
-  getOfflineSignerFunction: (client) =>
-    // This function expects to be bound to the `client` instance.
-    client.getOfflineSignerOnlyAmino.bind(client),
+export const LeapWallet: Wallet = {
+  id: WalletID.Leap,
+  name: "Leap Wallet",
+  install: "Install Leap Wallet",
+  installURL:
+    "https://chrome.google.com/webstore/detail/leap-cosmos-wallet/fcfcfllfndlomdhbehjjcoimbgofdncg",
+  description: "Leap Extension",
+  imageUrl: LeapIcon,
 }
 
-export const Wallets: Wallet[] = [KeplrWallet, WalletConnectKeplrWallet]
+export const TerraStationWallet: Wallet = {
+  id: WalletID.TerraStation,
+  name: "Terra Station Wallet",
+  install: "Install Terra Station Wallet",
+  installURL:
+    "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
+  description: "Terra Station Extension",
+  imageUrl: TerraStationIcon,
+}
+
+export const XdefiWallet: Wallet = {
+  id: WalletID.Xdefi,
+  name: "XDEFI Wallet",
+  install: "Install XDEFI Wallet",
+  installURL:
+    "https://chrome.google.com/webstore/detail/xdefi-wallet/hmeobnfnfcmdkdcmlblgagmfpfboieaf",
+  description: "XDEFI Extension",
+  imageUrl: XdefiIcon,
+}
+
+export const Wallets: Wallet[] = [
+  CosmostationWallet,
+  FalconWallet,
+  KeplrWallet,
+  LeapWallet,
+  TerraStationWallet,
+  XdefiWallet,
+]

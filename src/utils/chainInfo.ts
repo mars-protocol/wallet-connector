@@ -1,16 +1,7 @@
-/*
- * Data taken from @osmosis-labs/osmosis-frontend with minor alterations.
- * https://github.com/osmosis-labs/osmosis-frontend/blob/11bfa1f07f0dda8c8aab1048bd04270a23641783/packages/web/config/chain-infos.ts
- */
-
 import { Bech32Address } from "@keplr-wallet/cosmos"
-import { AppCurrency, ChainInfo } from "@keplr-wallet/types"
+import { AppCurrency } from "@keplr-wallet/types"
+import { ChainInfoID } from "src/enums"
 
-import { ChainInfoID, ChainInfoOptions, ChainInfoOverrides } from "../types"
-
-/** All currency attributes (stake and fee) are defined once in the `currencies` list.
- *  Maintains the option to skip this conversion and keep the verbose `ChainInfo` type.
- */
 export type SimplifiedChainInfo = Omit<
   ChainInfoOptions,
   "stakeCurrency" | "feeCurrencies"
@@ -23,46 +14,6 @@ export type SimplifiedChainInfo = Omit<
       isFeeCurrency?: boolean
     }
   >
-}
-
-/** Convert a less redundant chain info schema into one that is accepted by Keplr's suggestChain: `ChainInfo`. */
-export function createKeplrChainInfo(
-  chainInfo: SimplifiedChainInfo
-): ChainInfoOptions {
-  const feeCurrencies: AppCurrency[] = []
-  let stakeCurrency: AppCurrency | undefined
-
-  for (const currency of chainInfo.currencies) {
-    if (currency.isFeeCurrency) {
-      feeCurrencies.push(currency)
-    }
-
-    if (currency.isStakeCurrency && stakeCurrency === undefined) {
-      stakeCurrency = currency
-    } else if (currency.isStakeCurrency) {
-      throw new Error(
-        `There cannot be more than one stake currency for ${chainInfo.chainName}`
-      )
-    }
-  }
-
-  if (stakeCurrency === undefined) {
-    throw new Error(
-      `Did not specify a stake currency for ${chainInfo.chainName}`
-    )
-  }
-
-  if (feeCurrencies.length === 0) {
-    throw new Error(
-      `Did not specify any fee currencies for ${chainInfo.chainName}`
-    )
-  }
-
-  return {
-    ...chainInfo,
-    stakeCurrency,
-    feeCurrencies,
-  }
 }
 
 export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
@@ -494,7 +445,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rest: "https://rest.marsprotocol.io/",
     explorer: "http://explorer.marsprotocol.io/",
     explorerName: "Mars Explorer",
-    chainId: ChainInfoID.Mars1,
+    chainId: "mars-1",
     chainName: "Mars Hub",
     bip44: {
       coinType: 118,
@@ -1562,39 +1513,4 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
 
     features: ["ibc-transfer", "ibc-go"],
   },
-}
-export const ChainInfoMap = Object.entries(SimpleChainInfoList).reduce(
-  (curr, [id, simplifiedChainInfo]) => ({
-    ...curr,
-    [id]: createKeplrChainInfo(simplifiedChainInfo),
-  }),
-  {} as Record<`${ChainInfoID}`, ChainInfo>
-)
-
-export const getChainInfo = async (
-  chainId: ChainInfo["chainId"],
-  chainInfoOverrides?: ChainInfoOverrides
-) => {
-  const chainInfo: ChainInfo | undefined = ChainInfoMap[chainId]
-
-  if (
-    typeof chainInfoOverrides !== "undefined" &&
-    chainInfoOverrides[chainId] &&
-    chainInfo
-  ) {
-    Object.keys(chainInfoOverrides[chainId]).map(function (key) {
-      chainInfo[key] = chainInfoOverrides[chainId][key]
-    })
-  }
-
-  if (!chainInfo) {
-    const availableChainIds = [...Object.keys(ChainInfoMap)]
-    throw new Error(
-      `Chain ID "${chainId}" does not exist among provided ChainInfo objects. Available Chain IDs: ${availableChainIds.join(
-        ","
-      )}`
-    )
-  }
-
-  return chainInfo
 }

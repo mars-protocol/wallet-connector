@@ -1,30 +1,70 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectWalletModal = void 0;
-const tslib_1 = require("tslib");
-const react_1 = tslib_1.__importDefault(require("react"));
-const types_1 = require("../../types");
+const react_1 = __importStar(require("react"));
+const enums_1 = require("src/enums");
 const BaseModal_1 = require("./BaseModal");
 const Styles_1 = require("./Styles");
 const SelectWalletModal = (_a) => {
-    var { wallets, selectWallet, closeModal, classNames, isKeplrExtentionNotInstalled } = _a, props = tslib_1.__rest(_a, ["wallets", "selectWallet", "closeModal", "classNames", "isKeplrExtentionNotInstalled"]);
-    return (react_1.default.createElement(BaseModal_1.BaseModal, Object.assign({ classNames: classNames, title: "Select a wallet" }, props),
+    var { wallets, selectWallet, closeModal, classNames, selectWalletOverride } = _a, props = __rest(_a, ["wallets", "selectWallet", "closeModal", "classNames", "selectWalletOverride"]);
+    const [isHover, setIsHover] = (0, react_1.useState)(false);
+    const handleMouseEnter = () => {
+        setIsHover(true);
+    };
+    const handleMouseLeave = () => {
+        setIsHover(false);
+    };
+    return (react_1.default.createElement(BaseModal_1.BaseModal, Object.assign({ classNames: classNames, title: selectWalletOverride ? selectWalletOverride : "Select a wallet" }, props),
         react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletList, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletList) ? undefined : Styles_1.selectWalletStyles.walletList }, wallets.map((wallet, index) => {
-            const isKeplrInstall = wallet.type === types_1.WalletType.Keplr &&
-                isKeplrExtentionNotInstalled &&
-                wallet.install &&
-                wallet.installURL;
-            return (react_1.default.createElement("div", { key: index },
-                react_1.default.createElement("div", { key: wallet.type, className: classNames === null || classNames === void 0 ? void 0 : classNames.wallet, onClick: (e) => {
+            const isKeplrInstall = wallet.id === enums_1.WalletID.Keplr && wallet.install && wallet.installURL;
+            return (react_1.default.createElement("div", { key: index, onMouseEnter: handleMouseEnter, onMouseLeave: handleMouseLeave },
+                react_1.default.createElement("div", { key: wallet.id, className: classNames === null || classNames === void 0 ? void 0 : classNames.wallet, onClick: (e) => {
                         e.preventDefault();
                         if (isKeplrInstall) {
                             window.open(wallet.installURL, "_blank");
                             closeModal();
                         }
                         else {
-                            selectWallet(wallet);
+                            selectWallet(wallet.id);
                         }
-                    }, style: (classNames === null || classNames === void 0 ? void 0 : classNames.wallet) ? undefined : Styles_1.selectWalletStyles.walletRow },
+                    }, style: (classNames === null || classNames === void 0 ? void 0 : classNames.wallet)
+                        ? undefined
+                        : isHover
+                            ? Object.assign(Object.assign({}, Styles_1.selectWalletStyles.wallet), Styles_1.selectWalletStyles.walletHover) : Styles_1.selectWalletStyles.wallet },
                     react_1.default.createElement("img", { alt: `${wallet.name} logo`, className: classNames === null || classNames === void 0 ? void 0 : classNames.walletImage, src: wallet.imageUrl, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletImage)
                             ? undefined
                             : Styles_1.selectWalletStyles.walletIconImg }),
@@ -40,4 +80,3 @@ const SelectWalletModal = (_a) => {
         }))));
 };
 exports.SelectWalletModal = SelectWalletModal;
-//# sourceMappingURL=SelectWalletModal.js.map
