@@ -77,3 +77,4 @@ var ChainInfoID;
     ChainInfoID["Kava_2222_10"] = "kava_2222-10";
     ChainInfoID["Genesis_29_2"] = "genesis_29-2";
 })(ChainInfoID = exports.ChainInfoID || (exports.ChainInfoID = {}));
+//# sourceMappingURL=enums.js.map

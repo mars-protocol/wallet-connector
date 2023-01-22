@@ -1,4 +1,4 @@
-import { ShuttleProvider, useShuttle } from "@delphi-labs/shuttle"
+import { ShuttleProvider } from "@delphi-labs/shuttle"
 import React, {
   FunctionComponent,
   PropsWithChildren,
@@ -10,7 +10,6 @@ import React, {
 import { WalletID } from "../enums"
 import { Wallets } from "../utils"
 import { SelectWalletModal } from "./ui"
-import { WalletManagerContext } from "./WalletManagerContext"
 
 export type WalletManagerProviderProps = PropsWithChildren<{
   enabledWallets: WalletID[keyof WalletID][]
@@ -38,9 +37,6 @@ export const WalletManagerProvider: FunctionComponent<
   selectWalletOverride,
   walletMetaOverride,
 }) => {
-  //! STATE
-  const { connect, disconnect, recentWallet } = useShuttle()
-
   const enabledWalletsFiltered = useMemo(
     () => Wallets.filter(({ id }) => enabledWallets.includes(id)),
     [enabledWallets]
@@ -58,27 +54,11 @@ export const WalletManagerProvider: FunctionComponent<
     })
   }
 
-  const selectWallet = (wallet: string) => {
-    connect(wallet, defaultChainId)
-    setPickerModalOpen(false)
-  }
-
   const _closePickerModal = () => {
     setPickerModalOpen(false)
   }
 
   const [pickerModalOpen, setPickerModalOpen] = useState(false)
-
-  const value = useMemo(
-    () => ({
-      connect: connect,
-      disconnect,
-      recentWallet,
-      connected: !!recentWallet,
-      chainInfoOverrides,
-    }),
-    [connect, disconnect, recentWallet, chainInfoOverrides]
-  )
 
   return (
     <ShuttleProvider
@@ -89,19 +69,17 @@ export const WalletManagerProvider: FunctionComponent<
         ]
       }
     >
-      <WalletManagerContext.Provider value={value}>
-        {children}
-        <SelectWalletModal
-          classNames={classNames}
-          closeIcon={closeIcon}
-          closeModal={_closePickerModal}
-          isOpen={pickerModalOpen}
-          onClose={() => setPickerModalOpen(false)}
-          selectWallet={selectWallet}
-          selectWalletOverride={selectWalletOverride}
-          wallets={enabledWalletsFiltered}
-        />
-      </WalletManagerContext.Provider>
+      {children}
+      <SelectWalletModal
+        chainId={defaultChainId}
+        classNames={classNames}
+        closeIcon={closeIcon}
+        closeModal={_closePickerModal}
+        isOpen={pickerModalOpen}
+        onClose={() => setPickerModalOpen(false)}
+        selectWalletOverride={selectWalletOverride}
+        wallets={enabledWalletsFiltered}
+      />
     </ShuttleProvider>
   )
 }

@@ -1477,3 +1477,4 @@ exports.SimpleChainInfoList = {
         features: ["ibc-transfer", "ibc-go"],
     },
 };
+//# sourceMappingURL=chainInfo.js.map

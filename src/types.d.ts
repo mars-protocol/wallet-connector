@@ -71,16 +71,6 @@ interface IWalletMeta {
   installURL?: string
 }
 
-interface IWalletManagerContext {
-  connect: (
-    wallet: import("./enums").WalletID,
-    chain: import("./enums").ChainInfoID
-  ) => void
-  disconnect: (providerId?: string, chainId?: string) => void
-  connected: boolean
-  chainInfoOverrides?: ChainInfoOverrides
-}
-
 interface ModalClassNames {
   modalContent?: string
   modalOverlay?: string

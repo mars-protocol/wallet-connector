@@ -52,3 +52,4 @@ exports.Wallets = [
     exports.TerraStationWallet,
     exports.XdefiWallet,
 ];
+//# sourceMappingURL=wallets.js.map

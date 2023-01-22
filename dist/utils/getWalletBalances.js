@@ -25,3 +25,4 @@ const getWalletBalances = async (address, chainId) => {
         .catch((err) => console.log(err));
 };
 exports.getWalletBalances = getWalletBalances;
+//# sourceMappingURL=getWalletBalances.js.map

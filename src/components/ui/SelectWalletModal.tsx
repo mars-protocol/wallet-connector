@@ -1,3 +1,4 @@
+import { useShuttle } from "@delphi-labs/shuttle"
 import React, { FunctionComponent, useState } from "react"
 
 import { WalletID } from "../../enums"
@@ -6,19 +7,20 @@ import { selectWalletStyles } from "./Styles"
 
 interface Props extends BaseModalProps {
   wallets: Wallet[]
-  selectWallet: (wallet: string) => void
+  chainId: string
   closeModal: () => void
   selectWalletOverride?: string
 }
 
 export const SelectWalletModal: FunctionComponent<Props> = ({
   wallets,
-  selectWallet,
+  chainId,
   closeModal,
   classNames,
   selectWalletOverride,
   ...props
 }) => {
+  const { connect } = useShuttle()
   const [isHover, setIsHover] = useState(false)
 
   const handleMouseEnter = () => {
@@ -59,7 +61,8 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                     window.open(wallet.installURL, "_blank")
                     closeModal()
                   } else {
-                    selectWallet(wallet.id)
+                    connect(wallet.id, chainId)
+                    closeModal()
                   }
                 }}
                 style={

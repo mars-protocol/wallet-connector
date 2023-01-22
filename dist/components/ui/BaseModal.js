@@ -56,3 +56,4 @@ const BaseModal = ({ isOpen, onClose, title, maxWidth = "540px", classNames, clo
             children)));
 };
 exports.BaseModal = BaseModal;
+//# sourceMappingURL=BaseModal.js.map

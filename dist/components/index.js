@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./ui"), exports);
 __exportStar(require("./WalletManagerContext"), exports);
 __exportStar(require("./WalletManagerProvider"), exports);
+//# sourceMappingURL=index.js.map

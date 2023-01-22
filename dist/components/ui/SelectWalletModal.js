@@ -35,12 +35,14 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectWalletModal = void 0;
+const shuttle_1 = require("@delphi-labs/shuttle");
 const react_1 = __importStar(require("react"));
 const enums_1 = require("../../enums");
 const BaseModal_1 = require("./BaseModal");
 const Styles_1 = require("./Styles");
 const SelectWalletModal = (_a) => {
-    var { wallets, selectWallet, closeModal, classNames, selectWalletOverride } = _a, props = __rest(_a, ["wallets", "selectWallet", "closeModal", "classNames", "selectWalletOverride"]);
+    var { wallets, chainId, closeModal, classNames, selectWalletOverride } = _a, props = __rest(_a, ["wallets", "chainId", "closeModal", "classNames", "selectWalletOverride"]);
+    const { connect } = (0, shuttle_1.useShuttle)();
     const [isHover, setIsHover] = (0, react_1.useState)(false);
     const handleMouseEnter = () => {
         setIsHover(true);
@@ -59,7 +61,8 @@ const SelectWalletModal = (_a) => {
                             closeModal();
                         }
                         else {
-                            selectWallet(wallet.id);
+                            connect(wallet.id, chainId);
+                            closeModal();
                         }
                     }, style: (classNames === null || classNames === void 0 ? void 0 : classNames.wallet)
                         ? undefined
@@ -82,3 +85,4 @@ const SelectWalletModal = (_a) => {
         }))));
 };
 exports.SelectWalletModal = SelectWalletModal;
+//# sourceMappingURL=SelectWalletModal.js.map
