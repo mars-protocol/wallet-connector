@@ -79,11 +79,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                 <img
                   alt={`${wallet.name} logo`}
                   className={classNames?.walletImage}
-                  src={
-                    wallet.imageUrl
-                      ? wallet.imageUrl
-                      : `'https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/${wallet.id}-wallet-extension.png'`
-                  }
+                  src={wallet.imageUrl}
                   style={
                     classNames?.walletImage
                       ? undefined

@@ -70,9 +70,7 @@ const SelectWalletModal = (_a) => {
                         ? undefined
                         : isHover === wallet.id
                             ? Object.assign(Object.assign({}, Styles_1.selectWalletStyles.wallet), Styles_1.selectWalletStyles.walletHover) : Styles_1.selectWalletStyles.wallet },
-                    react_1.default.createElement("img", { alt: `${wallet.name} logo`, className: classNames === null || classNames === void 0 ? void 0 : classNames.walletImage, src: wallet.imageUrl
-                            ? wallet.imageUrl
-                            : `'https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/${wallet.id}-wallet-extension.png'`, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletImage)
+                    react_1.default.createElement("img", { alt: `${wallet.name} logo`, className: classNames === null || classNames === void 0 ? void 0 : classNames.walletImage, src: wallet.imageUrl, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletImage)
                             ? undefined
                             : Styles_1.selectWalletStyles.walletIconImg }),
                     react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletInfo, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletInfo)

@@ -7,6 +7,8 @@ export const CosmostationWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/cosmostation-wallet/fpkhgmpbidmiogeglndfbkegfdlnajnf",
   description: "Cosmostation Extension",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
 }
 
 export const FalconWallet: Wallet = {
@@ -16,6 +18,8 @@ export const FalconWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/falcon-wallet/gkhnjcpkikkkfhhdhhphcbhmkikoicgn",
   description: "Falcon Extension",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/falcon-wallet-extension.png",
 }
 
 export const KeplrWallet: Wallet = {
@@ -24,6 +28,8 @@ export const KeplrWallet: Wallet = {
   install: "Install Keplr Wallet",
   installURL: "https://www.keplr.app/download",
   description: "Keplr Chrome Extension",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
 }
 
 export const LeapWallet: Wallet = {
@@ -33,6 +39,8 @@ export const LeapWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/leap-cosmos-wallet/fcfcfllfndlomdhbehjjcoimbgofdncg",
   description: "Leap Extension",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/leap-wallet-extension.png",
 }
 
 export const TerraStationWallet: Wallet = {
@@ -42,6 +50,8 @@ export const TerraStationWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
   description: "Terra Station Extension",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
 }
 
 export const XdefiWallet: Wallet = {
@@ -51,6 +61,8 @@ export const XdefiWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/xdefi-wallet/hmeobnfnfcmdkdcmlblgagmfpfboieaf",
   description: "XDEFI Extension",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/xdefi-wallet-extension.png",
 }
 
 export const Wallets: Wallet[] = [

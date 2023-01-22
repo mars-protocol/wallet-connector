@@ -8,6 +8,7 @@ exports.CosmostationWallet = {
     install: "Install Cosmostation Wallet",
     installURL: "https://chrome.google.com/webstore/detail/cosmostation-wallet/fpkhgmpbidmiogeglndfbkegfdlnajnf",
     description: "Cosmostation Extension",
+    imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
 };
 exports.FalconWallet = {
     id: enums_1.WalletID.Falcon,
@@ -15,6 +16,7 @@ exports.FalconWallet = {
     install: "Install Falcon Wallet",
     installURL: "https://chrome.google.com/webstore/detail/falcon-wallet/gkhnjcpkikkkfhhdhhphcbhmkikoicgn",
     description: "Falcon Extension",
+    imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/falcon-wallet-extension.png",
 };
 exports.KeplrWallet = {
     id: enums_1.WalletID.Keplr,
@@ -22,6 +24,7 @@ exports.KeplrWallet = {
     install: "Install Keplr Wallet",
     installURL: "https://www.keplr.app/download",
     description: "Keplr Chrome Extension",
+    imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
 };
 exports.LeapWallet = {
     id: enums_1.WalletID.Leap,
@@ -29,6 +32,7 @@ exports.LeapWallet = {
     install: "Install Leap Wallet",
     installURL: "https://chrome.google.com/webstore/detail/leap-cosmos-wallet/fcfcfllfndlomdhbehjjcoimbgofdncg",
     description: "Leap Extension",
+    imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/leap-wallet-extension.png",
 };
 exports.TerraStationWallet = {
     id: enums_1.WalletID.TerraStation,
@@ -36,6 +40,7 @@ exports.TerraStationWallet = {
     install: "Install Terra Station Wallet",
     installURL: "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
     description: "Terra Station Extension",
+    imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
 };
 exports.XdefiWallet = {
     id: enums_1.WalletID.Xdefi,
@@ -43,6 +48,7 @@ exports.XdefiWallet = {
     install: "Install XDEFI Wallet",
     installURL: "https://chrome.google.com/webstore/detail/xdefi-wallet/hmeobnfnfcmdkdcmlblgagmfpfboieaf",
     description: "XDEFI Extension",
+    imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/xdefi-wallet-extension.png",
 };
 exports.Wallets = [
     exports.CosmostationWallet,
