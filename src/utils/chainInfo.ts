@@ -1,6 +1,7 @@
 import { Bech32Address } from "@keplr-wallet/cosmos"
 import { AppCurrency } from "@keplr-wallet/types"
-import { ChainInfoID } from "src/enums"
+
+import { ChainInfoID } from "../enums"
 
 export type SimplifiedChainInfo = Omit<
   ChainInfoOptions,

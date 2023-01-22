@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WalletManagerProvider = void 0;
 const shuttle_1 = require("@delphi-labs/shuttle");
 const react_1 = __importStar(require("react"));
-const utils_1 = require("src/utils");
+const utils_1 = require("../utils");
 const ui_1 = require("./ui");
 const WalletManagerContext_1 = require("./WalletManagerContext");
 const WalletManagerProvider = ({ children, chainInfoOverrides, classNames, closeIcon, defaultChainId, enabledWallets, persistent = false, selectWalletOverride, walletMetaOverride, }) => {

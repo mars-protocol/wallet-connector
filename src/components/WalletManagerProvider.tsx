@@ -6,9 +6,9 @@ import React, {
   useMemo,
   useState,
 } from "react"
-import { WalletID } from "src/enums"
-import { Wallets } from "src/utils"
 
+import { WalletID } from "../enums"
+import { Wallets } from "../utils"
 import { SelectWalletModal } from "./ui"
 import { WalletManagerContext } from "./WalletManagerContext"
 

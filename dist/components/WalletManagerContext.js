@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.useWallet = exports.fetchBalances = exports.useWalletManager = exports.WalletManagerContext = void 0;
 const shuttle_1 = require("@delphi-labs/shuttle");
 const react_1 = require("react");
-const utils_1 = require("src/utils");
+const utils_1 = require("../utils");
 exports.WalletManagerContext = (0, react_1.createContext)(null);
 const useWalletManager = () => {
     const context = (0, react_1.useContext)(exports.WalletManagerContext);

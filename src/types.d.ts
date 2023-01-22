@@ -4,7 +4,7 @@ interface Wallet {
   install?: string | import("react").ReactNode
   installURL?: string
   description: string | import("react").ReactNode
-  imageUrl: string
+  imageUrl?: string
 }
 
 interface AssetResponse {

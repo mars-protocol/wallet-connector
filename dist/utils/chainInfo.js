@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SimpleChainInfoList = void 0;
 const cosmos_1 = require("@keplr-wallet/cosmos");
-const enums_1 = require("src/enums");
+const enums_1 = require("../enums");
 exports.SimpleChainInfoList = {
     [enums_1.ChainInfoID.Osmosis1]: {
         rpc: "https://rpc-osmosis.blockapsis.com/",

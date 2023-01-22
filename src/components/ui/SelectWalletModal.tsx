@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from "react"
-import { WalletID } from "src/enums"
 
+import { WalletID } from "../../enums"
 import { BaseModal, BaseModalProps } from "./BaseModal"
 import { selectWalletStyles } from "./Styles"
 
@@ -76,7 +76,11 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                 <img
                   alt={`${wallet.name} logo`}
                   className={classNames?.walletImage}
-                  src={wallet.imageUrl}
+                  src={
+                    wallet.imageUrl
+                      ? wallet.imageUrl
+                      : `'./images/${wallet.id}-wallet-extension.png'`
+                  }
                   style={
                     classNames?.walletImage
                       ? undefined

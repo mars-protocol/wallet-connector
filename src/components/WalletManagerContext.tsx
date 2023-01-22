@@ -1,6 +1,7 @@
 import { useShuttle } from "@delphi-labs/shuttle"
 import { createContext, useContext } from "react"
-import { getWalletBalances } from "src/utils"
+
+import { getWalletBalances } from "../utils"
 
 export const WalletManagerContext = createContext<IWalletManagerContext | null>(
   null

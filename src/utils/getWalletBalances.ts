@@ -1,6 +1,7 @@
 import axios from "axios"
-import { ChainInfoID } from "src/enums"
-import { SimpleChainInfoList, SimplifiedChainInfo } from "src/utils"
+
+import { ChainInfoID } from "../enums"
+import { SimpleChainInfoList, SimplifiedChainInfo } from "../utils"
 
 export const getWalletBalances = async (
   address: string,

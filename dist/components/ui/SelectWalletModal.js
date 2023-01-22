@@ -36,7 +36,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SelectWalletModal = void 0;
 const react_1 = __importStar(require("react"));
-const enums_1 = require("src/enums");
+const enums_1 = require("../../enums");
 const BaseModal_1 = require("./BaseModal");
 const Styles_1 = require("./Styles");
 const SelectWalletModal = (_a) => {
@@ -65,7 +65,9 @@ const SelectWalletModal = (_a) => {
                         ? undefined
                         : isHover
                             ? Object.assign(Object.assign({}, Styles_1.selectWalletStyles.wallet), Styles_1.selectWalletStyles.walletHover) : Styles_1.selectWalletStyles.wallet },
-                    react_1.default.createElement("img", { alt: `${wallet.name} logo`, className: classNames === null || classNames === void 0 ? void 0 : classNames.walletImage, src: wallet.imageUrl, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletImage)
+                    react_1.default.createElement("img", { alt: `${wallet.name} logo`, className: classNames === null || classNames === void 0 ? void 0 : classNames.walletImage, src: wallet.imageUrl
+                            ? wallet.imageUrl
+                            : `'./images/${wallet.id}-wallet-extension.png'`, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletImage)
                             ? undefined
                             : Styles_1.selectWalletStyles.walletIconImg }),
                     react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletInfo, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletInfo)

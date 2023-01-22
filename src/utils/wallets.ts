@@ -1,10 +1,4 @@
-import CosmostationIcon from "src/components/ui/images/cosmostation-wallet-extension.png"
-import FalconIcon from "src/components/ui/images/falcon-wallet-extension.png"
-import KeplrIcon from "src/components/ui/images/keplr-wallet-extension.png"
-import LeapIcon from "src/components/ui/images/leap-wallet-extension.png"
-import TerraStationIcon from "src/components/ui/images/terra-station-wallet-extension.png"
-import XdefiIcon from "src/components/ui/images/xdefi-wallet-extension.png"
-import { WalletID } from "src/enums"
+import { WalletID } from "../enums"
 
 export const CosmostationWallet: Wallet = {
   id: WalletID.Cosmostation,
@@ -13,7 +7,6 @@ export const CosmostationWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/cosmostation-wallet/fpkhgmpbidmiogeglndfbkegfdlnajnf",
   description: "Cosmostation Extension",
-  imageUrl: CosmostationIcon,
 }
 
 export const FalconWallet: Wallet = {
@@ -23,7 +16,6 @@ export const FalconWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/falcon-wallet/gkhnjcpkikkkfhhdhhphcbhmkikoicgn",
   description: "Falcon Extension",
-  imageUrl: FalconIcon,
 }
 
 export const KeplrWallet: Wallet = {
@@ -32,7 +24,6 @@ export const KeplrWallet: Wallet = {
   install: "Install Keplr Wallet",
   installURL: "https://www.keplr.app/download",
   description: "Keplr Chrome Extension",
-  imageUrl: KeplrIcon,
 }
 
 export const LeapWallet: Wallet = {
@@ -42,7 +33,6 @@ export const LeapWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/leap-cosmos-wallet/fcfcfllfndlomdhbehjjcoimbgofdncg",
   description: "Leap Extension",
-  imageUrl: LeapIcon,
 }
 
 export const TerraStationWallet: Wallet = {
@@ -52,7 +42,6 @@ export const TerraStationWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
   description: "Terra Station Extension",
-  imageUrl: TerraStationIcon,
 }
 
 export const XdefiWallet: Wallet = {
@@ -62,7 +51,6 @@ export const XdefiWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/xdefi-wallet/hmeobnfnfcmdkdcmlblgagmfpfboieaf",
   description: "XDEFI Extension",
-  imageUrl: XdefiIcon,
 }
 
 export const Wallets: Wallet[] = [
