@@ -52,11 +52,11 @@ const SelectWalletModal = (_a) => {
     };
     return (react_1.default.createElement(BaseModal_1.BaseModal, Object.assign({ classNames: classNames, title: selectWalletOverride ? selectWalletOverride : "Select a wallet" }, props),
         react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletList, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletList) ? undefined : Styles_1.selectWalletStyles.walletList }, wallets.map((wallet, index) => {
-            const isKeplrInstall = wallet.id === enums_1.WalletID.Keplr && wallet.install && wallet.installURL;
+            const isInstalled = wallet.id === enums_1.WalletID.Keplr;
             return (react_1.default.createElement("div", { key: index },
                 react_1.default.createElement("div", { key: wallet.id, className: classNames === null || classNames === void 0 ? void 0 : classNames.wallet, onClick: (e) => {
                         e.preventDefault();
-                        if (isKeplrInstall) {
+                        if (!isInstalled) {
                             window.open(wallet.installURL, "_blank");
                             closeModal();
                         }
@@ -78,10 +78,10 @@ const SelectWalletModal = (_a) => {
                             : Styles_1.selectWalletStyles.walletInfo },
                         react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletName, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletName)
                                 ? undefined
-                                : Styles_1.selectWalletStyles.walletName }, isKeplrInstall ? wallet.install : wallet.name),
+                                : Styles_1.selectWalletStyles.walletName }, !isInstalled ? wallet.install : wallet.name),
                         react_1.default.createElement("div", { className: classNames === null || classNames === void 0 ? void 0 : classNames.walletDescription, style: (classNames === null || classNames === void 0 ? void 0 : classNames.walletDescription)
                                 ? undefined
-                                : Styles_1.selectWalletStyles.walletDescription }, isKeplrInstall ? wallet.installURL : wallet.description)))));
+                                : Styles_1.selectWalletStyles.walletDescription }, !isInstalled ? wallet.installURL : wallet.description)))));
         }))));
 };
 exports.SelectWalletModal = SelectWalletModal;

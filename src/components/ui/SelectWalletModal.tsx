@@ -43,8 +43,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         }
       >
         {wallets.map((wallet, index) => {
-          const isKeplrInstall =
-            wallet.id === WalletID.Keplr && wallet.install && wallet.installURL
+          const isInstalled = wallet.id === WalletID.Keplr
 
           return (
             <div key={index}>
@@ -53,7 +52,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                 className={classNames?.wallet}
                 onClick={(e) => {
                   e.preventDefault()
-                  if (isKeplrInstall) {
+                  if (!isInstalled) {
                     window.open(wallet.installURL, "_blank")
                     closeModal()
                   } else {
@@ -102,7 +101,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                         : selectWalletStyles.walletName
                     }
                   >
-                    {isKeplrInstall ? wallet.install : wallet.name}
+                    {!isInstalled ? wallet.install : wallet.name}
                   </div>
                   <div
                     className={classNames?.walletDescription}
@@ -112,7 +111,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                         : selectWalletStyles.walletDescription
                     }
                   >
-                    {isKeplrInstall ? wallet.installURL : wallet.description}
+                    {!isInstalled ? wallet.installURL : wallet.description}
                   </div>
                 </div>
               </div>

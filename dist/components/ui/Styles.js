@@ -31,6 +31,7 @@ exports.baseModalStyles = {
         outline: "none",
         cursor: "auto",
         maxWidth: "calc(100% - 40px)",
+        width: "540px",
     },
     modalHeader: {
         fontSize: "21px",
@@ -40,6 +41,8 @@ exports.baseModalStyles = {
         letterSpacing: "3px",
         color: "#FFF",
         margin: "0 0 16px",
+        width: "100%",
+        textAlign: "center",
     },
     modalCloseButton: {
         position: "absolute",
