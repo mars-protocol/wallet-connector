@@ -3,6 +3,7 @@ import React, {
   FunctionComponent,
   PropsWithChildren,
   ReactNode,
+  useCallback,
   useMemo,
   useState,
 } from "react"
@@ -95,7 +96,4 @@ export const WalletManagerProvider: FunctionComponent<
       </WalletManagerContext.Provider>
     </ShuttleProvider>
   )
-}
-function useCallback(arg0: () => void, arg1: never[]) {
-  throw new Error("Function not implemented.")
 }

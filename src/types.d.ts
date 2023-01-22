@@ -87,5 +87,5 @@ interface ModalClassNames {
 }
 
 interface IWalletManagerContext {
-  connect: void
+  connect: () => void
 }
