@@ -1478,8 +1478,7 @@ exports.SimpleChainInfoList = {
     },
 };
 const getChainInfo = (chainId, chainInfoOverrides) => {
-    const chainInfoID = enums_1.ChainInfoID[chainId];
-    const chainInfo = exports.SimpleChainInfoList[chainInfoID];
+    const chainInfo = exports.SimpleChainInfoList[chainId];
     if (typeof chainInfoOverrides !== "undefined" &&
         chainInfoOverrides[chainId] &&
         chainInfo) {

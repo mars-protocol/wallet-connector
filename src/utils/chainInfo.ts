@@ -1520,8 +1520,7 @@ export const getChainInfo = (
   chainId: string,
   chainInfoOverrides?: ChainInfoOverrides
 ) => {
-  const chainInfoID = ChainInfoID[chainId as keyof typeof ChainInfoID]
-  const chainInfo: SimplifiedChainInfo = SimpleChainInfoList[chainInfoID]
+  const chainInfo: SimplifiedChainInfo = SimpleChainInfoList[chainId]
 
   if (
     typeof chainInfoOverrides !== "undefined" &&
