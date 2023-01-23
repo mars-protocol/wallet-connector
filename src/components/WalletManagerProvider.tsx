@@ -2,7 +2,7 @@ import { Network, ShuttleProvider, WalletProvider } from "@delphi-labs/shuttle"
 import React, { FunctionComponent, useCallback, useMemo, useState } from "react"
 
 import { WalletConnectionStatus } from "../enums"
-import { getChainInfo, Wallets } from "../utils"
+import { getChainInfo, wallets } from "../utils"
 import { SelectWalletModal } from "./ui"
 import { WalletManagerContext } from "./WalletManagerContext"
 
@@ -26,33 +26,42 @@ export const WalletManagerProvider: FunctionComponent<
   const mappedNetwork: any = network
   mappedNetwork.name = mappedNetwork.chainName
   const networks: Network[] = [mappedNetwork]
-  const providers: WalletProvider[] = []
 
-  const enabledWalletsFiltered: Wallet[] = []
-  enabledWallets.forEach((walletID) => {
-    Wallets.map((walletData) => {
-      if (walletData.id === walletID) {
-        enabledWalletsFiltered.push(walletData)
-        return
-      }
-    })
-  })
-
-  if (walletMetaOverride) {
-    Object.entries(walletMetaOverride).forEach(([id, override]) => {
-      Object.entries(override).forEach(([key, value]) => {
-        enabledWalletsFiltered.forEach((wallet, index) => {
-          if (wallet.id === id) {
-            enabledWalletsFiltered[index][key] = value
-          }
-        })
+  const enabledWalletsFiltered: Wallet[] = useMemo(() => {
+    const tempEnabledWalletFiltered: Wallet[] = []
+    enabledWallets.forEach((walletID) => {
+      wallets.map((walletData) => {
+        if (walletData.id === walletID) {
+          tempEnabledWalletFiltered.push(walletData)
+          return
+        }
       })
     })
-  }
 
-  enabledWalletsFiltered.forEach((wallet) => {
-    providers.push(new wallet.provider({ networks }))
-  })
+    if (walletMetaOverride) {
+      Object.entries(walletMetaOverride).forEach(([id, override]) => {
+        Object.entries(override).forEach(([key, value]) => {
+          tempEnabledWalletFiltered.forEach((wallet, index) => {
+            if (wallet.id === id) {
+              tempEnabledWalletFiltered[index][key] = value
+            }
+          })
+        })
+      })
+    }
+
+    return tempEnabledWalletFiltered
+  }, [wallets, enabledWallets])
+
+  const providers: WalletProvider[] = useMemo(() => {
+    const tempProviders: WalletProvider[] = []
+
+    enabledWalletsFiltered.forEach((wallet) => {
+      tempProviders.push(new wallet.provider({ networks }))
+    })
+
+    return tempProviders
+  }, [enabledWalletsFiltered])
 
   const closePickerModal = () => {
     setPickerModalOpen(false)

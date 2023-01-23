@@ -4,5 +4,5 @@ export declare const KeplrWallet: Wallet;
 export declare const LeapWallet: Wallet;
 export declare const TerraStationWallet: Wallet;
 export declare const XdefiWallet: Wallet;
-export declare const Wallets: Wallet[];
+export declare const wallets: Wallet[];
 //# sourceMappingURL=wallets.d.ts.map

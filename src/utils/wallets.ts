@@ -79,7 +79,7 @@ export const XdefiWallet: Wallet = {
   provider: XDefiProvider,
 }
 
-export const Wallets: Wallet[] = [
+export const wallets: Wallet[] = [
   CosmostationWallet,
   FalconWallet,
   KeplrWallet,
