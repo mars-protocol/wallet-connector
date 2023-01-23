@@ -33,21 +33,27 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   }
 
   const handleConnectClick = async (providerId: string, chainId: string) => {
-    setStatus(WalletConnectionStatus.Connecting)
+    closeModal()
+    const slightDelay = setTimeout(
+      () => setStatus(WalletConnectionStatus.Connecting),
+      500
+    )
+
     let connected = true
     try {
       await connect(providerId, chainId)
     } catch (error) {
       if (error) {
+        console.error(error)
         connected = false
       }
     }
+    clearTimeout(slightDelay)
     setStatus(
       connected
         ? WalletConnectionStatus.Connected
         : WalletConnectionStatus.Errored
     )
-    closeModal()
   }
 
   return (
@@ -63,11 +69,11 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         }
       >
         {wallets.map((wallet, index) => {
-          const installWallet = providers.map((provider) => {
-            if (provider.id === wallet.id) {
-              return !provider.initialized && !provider.initializing
-            }
+          const walletProvider = providers.find((provider) => {
+            return provider.id === wallet.id
           })
+          const installWallet =
+            !walletProvider?.initialized && !walletProvider?.initializing
 
           return (
             <div key={index}>

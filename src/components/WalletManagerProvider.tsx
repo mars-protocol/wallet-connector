@@ -1,9 +1,16 @@
 import { Network, ShuttleProvider, WalletProvider } from "@delphi-labs/shuttle"
-import React, { FunctionComponent, useCallback, useMemo, useState } from "react"
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react"
 
 import { WalletConnectionStatus } from "../enums"
 import { getChainInfo, wallets } from "../utils"
 import { SelectWalletModal } from "./ui"
+import { EnablingWalletModal } from "./ui/EnablingWalletModal"
 import { WalletManagerContext } from "./WalletManagerContext"
 
 export const WalletManagerProvider: FunctionComponent<
@@ -15,7 +22,9 @@ export const WalletManagerProvider: FunctionComponent<
   closeIcon,
   defaultChainId,
   enabledWallets,
+  enablingStringOverride,
   persistent = false,
+  renderLoader,
   selectWalletOverride,
   walletMetaOverride,
 }) => {
@@ -60,20 +69,34 @@ export const WalletManagerProvider: FunctionComponent<
     enabledWalletsFiltered.forEach((wallet) => {
       tempProviders.push(new wallet.provider({ networks }))
     })
+
     return tempProviders
   }, [enabledWalletsFiltered, defaultChainId, chainInfoOverrides])
 
-  const closePickerModal = () => {
-    setPickerModalOpen(false)
-  }
+  useEffect(
+    () => {
+      if (status !== WalletConnectionStatus.Unconnected || !persistent) return
 
-  const beginConnection = useCallback(() => {
-    setPickerModalOpen(true)
-  }, [])
+      const shuttleStorage = localStorage.getItem("shuttle")
+      if (shuttleStorage !== null && shuttleStorage !== "[]")
+        setStatus(WalletConnectionStatus.Connected)
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
 
-  const terminateConnection = useCallback(() => {
-    setStatus(WalletConnectionStatus.Unconnected)
-  }, [])
+  const closePickerModal = () => setPickerModalOpen(false)
+
+  const beginConnection = useCallback(() => setPickerModalOpen(true), [])
+
+  const terminateConnection = useCallback(
+    () => setStatus(WalletConnectionStatus.Unconnected),
+    []
+  )
+
+  const statusChange = useCallback(
+    (newStatus: WalletConnectionStatus) => setStatus(newStatus),
+    []
+  )
 
   const value = useMemo(
     () => ({
@@ -96,8 +119,15 @@ export const WalletManagerProvider: FunctionComponent<
           isOpen={pickerModalOpen}
           onClose={() => setPickerModalOpen(false)}
           selectWalletOverride={selectWalletOverride}
-          setStatus={setStatus}
+          setStatus={statusChange}
           wallets={enabledWalletsFiltered}
+        />
+        <EnablingWalletModal
+          classNames={classNames}
+          closeIcon={closeIcon}
+          enablingStringOverride={enablingStringOverride}
+          isOpen={status === WalletConnectionStatus.Connecting}
+          renderLoader={renderLoader}
         />
       </WalletManagerContext.Provider>
     </ShuttleProvider>

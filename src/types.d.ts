@@ -95,7 +95,7 @@ interface WalletManagerProviderProps {
   chainInfoOverrides?: ChainInfoOptions
   classNames?: ModalClassNames
   closeIcon?: ReactNode
-  enablingMeta?: IEnableMeta
+  enablingStringOverride?: string
   selectWalletOverride?: string
   walletMetaOverride?: IWalletMetaOverride
   renderLoader?: () => ReactNode
