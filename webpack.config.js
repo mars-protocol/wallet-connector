@@ -1,29 +1,47 @@
 const path = require("path")
+const webpack = require("webpack")
 const nodeExternals = require("webpack-node-externals")
 
+/** @type {import('webpack').Configuration} */
 module.exports = {
-  mode: "production",
-  entry: "./src/index.ts",
-  devtool: "inline-source-map",
+  mode: "development",
   target: "node",
   externals: [nodeExternals()],
   externalsPresets: {
     node: true,
   },
+  entry: {
+    index: "./src/index.ts",
+  },
+  optimization: {
+    usedExports: true,
+    sideEffects: true,
+  },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].js",
+    chunkFilename: "[name].chunk.js",
+    libraryTarget: "umd",
+    library: "@marsprotocol/wallet-connector",
+    umdNamedDefine: true,
+    globalObject: "this",
+    publicPath: "",
+  },
+  devtool: "source-map",
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
+        exclude: [/.+\.(test|spec)\.[tj]sx/],
+        loader: "ts-loader",
       },
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
-  output: {
-    filename: "index.js",
-    path: path.resolve(__dirname, "dist"),
+    extensions: [".ts", ".tsx", ".js"],
+    alias: {
+      react: path.resolve(__dirname, "./node_modules/react"),
+      "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
+    },
   },
 }
