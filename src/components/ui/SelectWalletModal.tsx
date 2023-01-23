@@ -1,7 +1,7 @@
 import { useShuttle } from "@delphi-labs/shuttle"
 import React, { FunctionComponent, useState } from "react"
 
-import { WalletID } from "../../enums"
+import { WalletConnectionStatus } from "../../enums"
 import { BaseModal, BaseModalProps } from "./BaseModal"
 import { selectWalletStyles } from "./Styles"
 
@@ -9,6 +9,7 @@ interface Props extends BaseModalProps {
   wallets: Wallet[]
   chainId: string
   closeModal: () => void
+  setStatus: (status: WalletConnectionStatus) => void
   selectWalletOverride?: string
 }
 
@@ -18,9 +19,10 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   closeModal,
   classNames,
   selectWalletOverride,
+  setStatus,
   ...props
 }) => {
-  const { connect } = useShuttle()
+  const { connect, providers } = useShuttle()
   const [isHover, setIsHover] = useState("")
   const handleMouseEnter = (walletID: string) => {
     setIsHover(walletID)
@@ -28,6 +30,24 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 
   const handleMouseLeave = () => {
     setIsHover("")
+  }
+
+  const handleConnectClick = async (providerId: string, chainId: string) => {
+    setStatus(WalletConnectionStatus.Connecting)
+    let connected = true
+    try {
+      await connect(providerId, chainId)
+    } catch (error) {
+      if (error) {
+        connected = false
+      }
+    }
+    setStatus(
+      connected
+        ? WalletConnectionStatus.Connected
+        : WalletConnectionStatus.Errored
+    )
+    closeModal()
   }
 
   return (
@@ -43,7 +63,11 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         }
       >
         {wallets.map((wallet, index) => {
-          const isInstalled = wallet.id === WalletID.Keplr
+          const isInstalled = providers.map((provider) => {
+            if (provider.id === wallet.id) {
+              return !(!provider.initialized && !provider.initializing)
+            }
+          })
 
           return (
             <div key={index}>
@@ -56,8 +80,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                     window.open(wallet.installURL, "_blank")
                     closeModal()
                   } else {
-                    connect(wallet.id, chainId)
-                    closeModal()
+                    handleConnectClick(wallet.id, chainId)
                   }
                 }}
                 onMouseEnter={() => {

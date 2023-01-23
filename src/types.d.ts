@@ -89,6 +89,8 @@ interface ModalClassNames {
 
 interface IWalletManagerContext {
   connect: () => void
+  disconnect: () => void
+  status: import("./enums").WalletConnectionStatus
 }
 
 interface WalletManagerProviderProps {

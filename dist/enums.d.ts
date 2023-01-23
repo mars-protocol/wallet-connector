@@ -1,11 +1,8 @@
 export declare enum WalletConnectionStatus {
-    Initializing = 0,
-    AttemptingAutoConnection = 1,
-    ReadyForConnection = 2,
-    Connecting = 3,
-    Connected = 4,
-    Resetting = 5,
-    Errored = 6
+    Unconnected = 0,
+    Connecting = 1,
+    Connected = 2,
+    Errored = 3
 }
 export declare enum WalletID {
     Cosmostation = "cosmostation",
