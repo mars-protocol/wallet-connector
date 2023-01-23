@@ -1,15 +1,12 @@
 import axios from "axios"
 
-import { ChainInfoID } from "../enums"
-import { SimpleChainInfoList, SimplifiedChainInfo } from "../utils"
+import { getChainInfo } from "../utils"
 
 export const getWalletBalances = async (
   address: string,
   chainId: string
 ): Promise<BalancesResponse | undefined> => {
-  const realChainID: ChainInfoID =
-    ChainInfoID[chainId as keyof typeof ChainInfoID]
-  const chainInfo: SimplifiedChainInfo = SimpleChainInfoList[realChainID]
+  const chainInfo = getChainInfo(chainId)
   const URL = `${chainInfo.rest}cosmos/bank/v1beta1/balances/${address}`
 
   return await axios({

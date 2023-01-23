@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SimpleChainInfoList = void 0;
+exports.getChainInfo = exports.SimpleChainInfoList = void 0;
 const cosmos_1 = require("@keplr-wallet/cosmos");
 const enums_1 = require("../enums");
 exports.SimpleChainInfoList = {
@@ -425,7 +425,7 @@ exports.SimpleChainInfoList = {
         rest: "https://rest.marsprotocol.io/",
         explorer: "http://explorer.marsprotocol.io/",
         explorerName: "Mars Explorer",
-        chainId: "mars-1",
+        chainId: enums_1.ChainInfoID.Mars1,
         chainName: "Mars Hub",
         bip44: {
             coinType: 118,
@@ -1477,4 +1477,17 @@ exports.SimpleChainInfoList = {
         features: ["ibc-transfer", "ibc-go"],
     },
 };
+const getChainInfo = (chainId, chainInfoOverrides) => {
+    const chainInfoID = enums_1.ChainInfoID[chainId];
+    const chainInfo = exports.SimpleChainInfoList[chainInfoID];
+    if (typeof chainInfoOverrides !== "undefined" &&
+        chainInfoOverrides[chainId] &&
+        chainInfo) {
+        Object.keys(chainInfoOverrides[chainId]).map(function (key) {
+            chainInfo[key] = chainInfoOverrides[chainId][key];
+        });
+    }
+    return chainInfo;
+};
+exports.getChainInfo = getChainInfo;
 //# sourceMappingURL=chainInfo.js.map

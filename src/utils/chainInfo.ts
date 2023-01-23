@@ -446,7 +446,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rest: "https://rest.marsprotocol.io/",
     explorer: "http://explorer.marsprotocol.io/",
     explorerName: "Mars Explorer",
-    chainId: "mars-1",
+    chainId: ChainInfoID.Mars1,
     chainName: "Mars Hub",
     bip44: {
       coinType: 118,
@@ -1514,4 +1514,24 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
 
     features: ["ibc-transfer", "ibc-go"],
   },
+}
+
+export const getChainInfo = (
+  chainId: string,
+  chainInfoOverrides?: ChainInfoOverrides
+) => {
+  const chainInfoID = ChainInfoID[chainId as keyof typeof ChainInfoID]
+  const chainInfo: SimplifiedChainInfo = SimpleChainInfoList[chainInfoID]
+
+  if (
+    typeof chainInfoOverrides !== "undefined" &&
+    chainInfoOverrides[chainId] &&
+    chainInfo
+  ) {
+    Object.keys(chainInfoOverrides[chainId]).map(function (key) {
+      chainInfo[key] = chainInfoOverrides[chainId][key]
+    })
+  }
+
+  return chainInfo
 }

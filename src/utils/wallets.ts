@@ -1,3 +1,12 @@
+import {
+  CosmostationProvider,
+  FalconProvider,
+  KeplrProvider,
+  LeapCosmosProvider,
+  TerraStationProvider,
+  XDefiProvider,
+} from "@delphi-labs/shuttle"
+
 import { WalletID } from "../enums"
 
 export const CosmostationWallet: Wallet = {
@@ -9,6 +18,7 @@ export const CosmostationWallet: Wallet = {
   description: "Cosmostation Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
+  provider: CosmostationProvider,
 }
 
 export const FalconWallet: Wallet = {
@@ -20,6 +30,7 @@ export const FalconWallet: Wallet = {
   description: "Falcon Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/falcon-wallet-extension.png",
+  provider: FalconProvider,
 }
 
 export const KeplrWallet: Wallet = {
@@ -30,6 +41,7 @@ export const KeplrWallet: Wallet = {
   description: "Keplr Chrome Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
+  provider: KeplrProvider,
 }
 
 export const LeapWallet: Wallet = {
@@ -41,6 +53,7 @@ export const LeapWallet: Wallet = {
   description: "Leap Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/leap-wallet-extension.png",
+  provider: LeapCosmosProvider,
 }
 
 export const TerraStationWallet: Wallet = {
@@ -52,6 +65,7 @@ export const TerraStationWallet: Wallet = {
   description: "Terra Station Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
+  provider: TerraStationProvider,
 }
 
 export const XdefiWallet: Wallet = {
@@ -63,6 +77,7 @@ export const XdefiWallet: Wallet = {
   description: "XDEFI Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/xdefi-wallet-extension.png",
+  provider: XDefiProvider,
 }
 
 export const Wallets: Wallet[] = [

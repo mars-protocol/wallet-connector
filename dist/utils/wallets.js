@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Wallets = exports.XdefiWallet = exports.TerraStationWallet = exports.LeapWallet = exports.KeplrWallet = exports.FalconWallet = exports.CosmostationWallet = void 0;
+const shuttle_1 = require("@delphi-labs/shuttle");
 const enums_1 = require("../enums");
 exports.CosmostationWallet = {
     id: enums_1.WalletID.Cosmostation,
@@ -9,6 +10,7 @@ exports.CosmostationWallet = {
     installURL: "https://chrome.google.com/webstore/detail/cosmostation-wallet/fpkhgmpbidmiogeglndfbkegfdlnajnf",
     description: "Cosmostation Extension",
     imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
+    provider: shuttle_1.CosmostationProvider,
 };
 exports.FalconWallet = {
     id: enums_1.WalletID.Falcon,
@@ -17,6 +19,7 @@ exports.FalconWallet = {
     installURL: "https://chrome.google.com/webstore/detail/falcon-wallet/gkhnjcpkikkkfhhdhhphcbhmkikoicgn",
     description: "Falcon Extension",
     imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/falcon-wallet-extension.png",
+    provider: shuttle_1.FalconProvider,
 };
 exports.KeplrWallet = {
     id: enums_1.WalletID.Keplr,
@@ -25,6 +28,7 @@ exports.KeplrWallet = {
     installURL: "https://www.keplr.app/download",
     description: "Keplr Chrome Extension",
     imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
+    provider: shuttle_1.KeplrProvider,
 };
 exports.LeapWallet = {
     id: enums_1.WalletID.Leap,
@@ -33,6 +37,7 @@ exports.LeapWallet = {
     installURL: "https://chrome.google.com/webstore/detail/leap-cosmos-wallet/fcfcfllfndlomdhbehjjcoimbgofdncg",
     description: "Leap Extension",
     imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/leap-wallet-extension.png",
+    provider: shuttle_1.LeapCosmosProvider,
 };
 exports.TerraStationWallet = {
     id: enums_1.WalletID.TerraStation,
@@ -41,6 +46,7 @@ exports.TerraStationWallet = {
     installURL: "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
     description: "Terra Station Extension",
     imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
+    provider: shuttle_1.TerraStationProvider,
 };
 exports.XdefiWallet = {
     id: enums_1.WalletID.Xdefi,
@@ -49,6 +55,7 @@ exports.XdefiWallet = {
     installURL: "https://chrome.google.com/webstore/detail/xdefi-wallet/hmeobnfnfcmdkdcmlblgagmfpfboieaf",
     description: "XDEFI Extension",
     imageUrl: "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/xdefi-wallet-extension.png",
+    provider: shuttle_1.XDefiProvider,
 };
 exports.Wallets = [
     exports.CosmostationWallet,

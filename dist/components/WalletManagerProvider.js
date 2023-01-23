@@ -42,6 +42,14 @@ const WalletManagerProvider = ({ children, chainInfoOverrides, classNames, close
             });
         });
     }
+    const network = (0, utils_1.getChainInfo)(defaultChainId, chainInfoOverrides);
+    const mappedNetwork = network;
+    mappedNetwork.name = mappedNetwork.chainName;
+    const networks = [mappedNetwork];
+    const providers = [];
+    enabledWalletsFiltered.forEach((wallet) => {
+        providers.push(new wallet.provider({ networks }));
+    });
     const _closePickerModal = () => {
         setPickerModalOpen(false);
     };
@@ -52,9 +60,7 @@ const WalletManagerProvider = ({ children, chainInfoOverrides, classNames, close
     const value = (0, react_1.useMemo)(() => ({
         connect: beginConnection,
     }), [beginConnection]);
-    return (react_1.default.createElement(shuttle_1.ShuttleProvider, { persistent: persistent, providers: [
-        // ...
-        ] },
+    return (react_1.default.createElement(shuttle_1.ShuttleProvider, { persistent: persistent, providers: providers },
         react_1.default.createElement(WalletManagerContext_1.WalletManagerContext.Provider, { value: value },
             children,
             react_1.default.createElement(ui_1.SelectWalletModal, { chainId: defaultChainId, classNames: classNames, closeIcon: closeIcon, closeModal: _closePickerModal, isOpen: pickerModalOpen, onClose: () => setPickerModalOpen(false), selectWalletOverride: selectWalletOverride, wallets: enabledWalletsFiltered }))));

@@ -5,6 +5,7 @@ interface Wallet {
   installURL?: string
   description: string | import("react").ReactNode
   imageUrl?: string
+  provider: import("delphi-labs/shuttle").WalletProvider
 }
 
 interface AssetResponse {
@@ -88,4 +89,18 @@ interface ModalClassNames {
 
 interface IWalletManagerContext {
   connect: () => void
+}
+
+interface WalletManagerProviderProps {
+  enabledWallets: WalletID[keyof WalletID][]
+  defaultChainId: string
+  chainInfoOverrides?: ChainInfoOverrides
+  classNames?: ModalClassNames
+  closeIcon?: ReactNode
+  enablingMeta?: IEnableMeta
+  selectWalletOverride?: string
+  walletMetaOverride?: IWalletMetaOverride
+  renderLoader?: () => ReactNode
+  persistent?: boolean
+  children?: ReactNode | undefined
 }

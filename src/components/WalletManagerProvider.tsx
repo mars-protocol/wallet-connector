@@ -1,30 +1,9 @@
-import { ShuttleProvider } from "@delphi-labs/shuttle"
-import React, {
-  FunctionComponent,
-  PropsWithChildren,
-  ReactNode,
-  useCallback,
-  useMemo,
-  useState,
-} from "react"
+import { Network, ShuttleProvider, WalletProvider } from "@delphi-labs/shuttle"
+import React, { FunctionComponent, useCallback, useMemo, useState } from "react"
 
-import { WalletID } from "../enums"
-import { Wallets } from "../utils"
+import { getChainInfo, Wallets } from "../utils"
 import { SelectWalletModal } from "./ui"
 import { WalletManagerContext } from "./WalletManagerContext"
-
-export type WalletManagerProviderProps = PropsWithChildren<{
-  enabledWallets: WalletID[keyof WalletID][]
-  defaultChainId: string
-  chainInfoOverrides?: ChainInfoOverrides
-  classNames?: ModalClassNames
-  closeIcon?: ReactNode
-  enablingMeta?: IEnableMeta
-  selectWalletOverride?: string
-  walletMetaOverride?: IWalletMetaOverride
-  renderLoader?: () => ReactNode
-  persistent?: boolean
-}>
 
 export const WalletManagerProvider: FunctionComponent<
   WalletManagerProviderProps
@@ -55,6 +34,16 @@ export const WalletManagerProvider: FunctionComponent<
     })
   }
 
+  const network = getChainInfo(defaultChainId, chainInfoOverrides)
+  const mappedNetwork: any = network
+  mappedNetwork.name = mappedNetwork.chainName
+  const networks: Network[] = [mappedNetwork]
+  const providers: WalletProvider[] = []
+
+  enabledWalletsFiltered.forEach((wallet) => {
+    providers.push(new wallet.provider({ networks }))
+  })
+
   const _closePickerModal = () => {
     setPickerModalOpen(false)
   }
@@ -73,14 +62,7 @@ export const WalletManagerProvider: FunctionComponent<
   )
 
   return (
-    <ShuttleProvider
-      persistent={persistent}
-      providers={
-        [
-          // ...
-        ]
-      }
-    >
+    <ShuttleProvider persistent={persistent} providers={providers}>
       <WalletManagerContext.Provider value={value}>
         {children}
         <SelectWalletModal
