@@ -19,20 +19,10 @@ export const WalletManagerProvider: FunctionComponent<
   selectWalletOverride,
   walletMetaOverride,
 }) => {
+  const [pickerModalOpen, setPickerModalOpen] = useState(false)
   const [status, setStatus] = useState<WalletConnectionStatus>(
     WalletConnectionStatus.Unconnected
   )
-
-  const network = useMemo(
-    () => getChainInfo(defaultChainId, chainInfoOverrides),
-    [defaultChainId, chainInfoOverrides]
-  )
-
-  const networks: Network[] = useMemo(() => {
-    const mappedNetwork: any = network
-    mappedNetwork.name = mappedNetwork.chainName
-    return [mappedNetwork]
-  }, [network])
 
   const enabledWalletsFiltered: Wallet[] = useMemo(() => {
     const tempEnabledWalletFiltered: Wallet[] = []
@@ -61,14 +51,17 @@ export const WalletManagerProvider: FunctionComponent<
   }, [enabledWallets, walletMetaOverride])
 
   const providers: WalletProvider[] = useMemo(() => {
+    const network = getChainInfo(defaultChainId, chainInfoOverrides)
+    const mappedNetwork: any = network
+    mappedNetwork.name = mappedNetwork.chainName
+    const networks: Network[] = [mappedNetwork]
     const tempProviders: WalletProvider[] = []
 
     enabledWalletsFiltered.forEach((wallet) => {
       tempProviders.push(new wallet.provider({ networks }))
     })
-
     return tempProviders
-  }, [enabledWalletsFiltered, networks])
+  }, [enabledWalletsFiltered, defaultChainId, chainInfoOverrides])
 
   const closePickerModal = () => {
     setPickerModalOpen(false)
@@ -81,8 +74,6 @@ export const WalletManagerProvider: FunctionComponent<
   const terminateConnection = useCallback(() => {
     setStatus(WalletConnectionStatus.Unconnected)
   }, [])
-
-  const [pickerModalOpen, setPickerModalOpen] = useState(false)
 
   const value = useMemo(
     () => ({
