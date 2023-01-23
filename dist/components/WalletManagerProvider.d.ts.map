@@ -1,1 +1,1 @@
-{"version":3,"file":"WalletManagerProvider.d.ts","sourceRoot":"","sources":["../../src/components/WalletManagerProvider.tsx"],"names":[],"mappings":"AACA,OAAc,EAAE,iBAAiB,EAAkC,MAAM,OAAO,CAAA;AAOhF,eAAO,MAAM,qBAAqB,EAAE,iBAAiB,CACnD,0BAA0B,CAiG3B,CAAA"}
+{"version":3,"file":"WalletManagerProvider.d.ts","sourceRoot":"","sources":["../../src/components/WalletManagerProvider.tsx"],"names":[],"mappings":"AACA,OAAc,EAAE,iBAAiB,EAAkC,MAAM,OAAO,CAAA;AAOhF,eAAO,MAAM,qBAAqB,EAAE,iBAAiB,CACnD,0BAA0B,CAwG3B,CAAA"}

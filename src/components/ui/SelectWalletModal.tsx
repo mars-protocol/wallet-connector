@@ -50,8 +50,6 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     closeModal()
   }
 
-  console.warn("providers", providers)
-
   return (
     <BaseModal
       classNames={classNames}
