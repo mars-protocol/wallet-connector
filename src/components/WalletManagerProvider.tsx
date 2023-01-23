@@ -22,7 +22,7 @@ export const WalletManagerProvider: FunctionComponent<
   enabledWallets.forEach((walletID) => {
     Wallets.map((walletData) => {
       if (walletData.id === walletID) {
-        enabledWallets.push(walletData)
+        enabledWalletsFiltered.push(walletData)
         return
       }
     })

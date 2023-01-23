@@ -34,7 +34,7 @@ const WalletManagerProvider = ({ children, chainInfoOverrides, classNames, close
     enabledWallets.forEach((walletID) => {
         utils_1.Wallets.map((walletData) => {
             if (walletData.id === walletID) {
-                enabledWallets.push(walletData);
+                enabledWalletsFiltered.push(walletData);
                 return;
             }
         });
