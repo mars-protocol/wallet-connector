@@ -17,6 +17,8 @@ export const baseModalStyles: { [key: string]: React.CSSProperties } = {
   },
 
   modalContent: {
+    width: "540px",
+    maxWidth: "calc(100% - 40px)",
     position: "absolute",
     left: "50%",
     transform: "translateX(-50%)",
@@ -29,8 +31,6 @@ export const baseModalStyles: { [key: string]: React.CSSProperties } = {
       "linear-gradient(99.79deg, rgba(8, 11, 30, 0.79) 8.17%, rgba(52, 20, 33, 0.9) 94.54%)",
     outline: "none",
     cursor: "auto",
-    maxWidth: "calc(100% - 40px)",
-    width: "540px",
   },
 
   modalHeader: {

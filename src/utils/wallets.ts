@@ -38,7 +38,7 @@ export const KeplrWallet: Wallet = {
   name: "Keplr Wallet",
   install: "Install Keplr Wallet",
   installURL: "https://www.keplr.app/download",
-  description: "Keplr Chrome Extension",
+  description: "Keplr Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
   provider: KeplrProvider,

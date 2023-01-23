@@ -18,10 +18,16 @@ export const WalletManagerProvider: FunctionComponent<
   selectWalletOverride,
   walletMetaOverride,
 }) => {
-  const enabledWalletsFiltered = useMemo(
-    () => Wallets.filter(({ id }) => enabledWallets.includes(id)),
-    [enabledWallets]
-  )
+  const enabledWalletsFiltered: Wallet[] = []
+  enabledWallets.forEach((walletID) => {
+    Wallets.map((walletData) => {
+      if (walletData.id === walletID) {
+        enabledWallets.push(walletData)
+        return
+      }
+    })
+  })
+
   if (walletMetaOverride) {
     Object.entries(walletMetaOverride).forEach(([id, override]) => {
       Object.entries(override).forEach(([key, value]) => {

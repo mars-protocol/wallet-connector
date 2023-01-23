@@ -30,7 +30,15 @@ const utils_1 = require("../utils");
 const ui_1 = require("./ui");
 const WalletManagerContext_1 = require("./WalletManagerContext");
 const WalletManagerProvider = ({ children, chainInfoOverrides, classNames, closeIcon, defaultChainId, enabledWallets, persistent = false, selectWalletOverride, walletMetaOverride, }) => {
-    const enabledWalletsFiltered = (0, react_1.useMemo)(() => utils_1.Wallets.filter(({ id }) => enabledWallets.includes(id)), [enabledWallets]);
+    const enabledWalletsFiltered = [];
+    enabledWallets.forEach((walletID) => {
+        utils_1.Wallets.map((walletData) => {
+            if (walletData.id === walletID) {
+                enabledWallets.push(walletData);
+                return;
+            }
+        });
+    });
     if (walletMetaOverride) {
         Object.entries(walletMetaOverride).forEach(([id, override]) => {
             Object.entries(override).forEach(([key, value]) => {
