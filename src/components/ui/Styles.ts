@@ -31,6 +31,8 @@ export const baseModalStyles: { [key: string]: React.CSSProperties } = {
       "linear-gradient(99.79deg, rgba(8, 11, 30, 0.79) 8.17%, rgba(52, 20, 33, 0.9) 94.54%)",
     outline: "none",
     cursor: "auto",
+    maxHeight: "100vh",
+    overflowY: "auto",
   },
 
   modalHeader: {

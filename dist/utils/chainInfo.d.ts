@@ -9,5 +9,5 @@ export type SimplifiedChainInfo = Omit<ChainInfoOptions, "stakeCurrency" | "feeC
     }>;
 };
 export declare const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo>;
-export declare const getChainInfo: (chainId: string, chainInfoOverrides?: ChainInfoOverrides) => SimplifiedChainInfo;
+export declare const getChainInfo: (chainId: string, chainInfoOverrides?: ChainInfoOptions) => SimplifiedChainInfo;
 //# sourceMappingURL=chainInfo.d.ts.map

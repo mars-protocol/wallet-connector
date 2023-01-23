@@ -63,9 +63,9 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         }
       >
         {wallets.map((wallet, index) => {
-          const isInstalled = providers.map((provider) => {
+          const installWallet = providers.map((provider) => {
             if (provider.id === wallet.id) {
-              return !(!provider.initialized && !provider.initializing)
+              return !provider.initialized && !provider.initializing
             }
           })
 
@@ -76,7 +76,8 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                 className={classNames?.wallet}
                 onClick={(e) => {
                   e.preventDefault()
-                  if (!isInstalled) {
+                  setIsHover("")
+                  if (installWallet) {
                     window.open(wallet.installURL, "_blank")
                     closeModal()
                   } else {
@@ -124,7 +125,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                         : selectWalletStyles.walletName
                     }
                   >
-                    {!isInstalled ? wallet.install : wallet.name}
+                    {installWallet ? wallet.install : wallet.name}
                   </div>
                   <div
                     className={classNames?.walletDescription}
@@ -134,7 +135,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                         : selectWalletStyles.walletDescription
                     }
                   >
-                    {!isInstalled ? wallet.installURL : wallet.description}
+                    {installWallet ? wallet.installURL : wallet.description}
                   </div>
                 </div>
               </div>

@@ -1,10 +1,9 @@
 const path = require("path")
-const webpack = require("webpack")
 const nodeExternals = require("webpack-node-externals")
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
-  mode: "development",
+  mode: "production",
   target: "node",
   externals: [nodeExternals()],
   externalsPresets: {

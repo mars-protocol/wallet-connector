@@ -51,8 +51,7 @@ export const LeapWallet: Wallet = {
   installURL:
     "https://chrome.google.com/webstore/detail/leap-cosmos-wallet/fcfcfllfndlomdhbehjjcoimbgofdncg",
   description: "Leap Extension",
-  imageUrl:
-    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/leap-wallet-extension.png",
+  imageUrl: "https://assets.leapwallet.io/logos/leap-cosmos-logo.png",
   provider: LeapCosmosProvider,
 }
 

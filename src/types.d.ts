@@ -60,10 +60,6 @@ type IWalletMetaOverride = {
   [key in import("./enums").WalletID]?: IWalletMeta
 }
 
-type ChainInfoOverrides = {
-  [key in import("./enums").ChainInfoID]?: ChainInfoOptions
-}
-
 interface IWalletMeta {
   description?: string | import("react").ReactNode
   imageUrl?: string
@@ -96,7 +92,7 @@ interface IWalletManagerContext {
 interface WalletManagerProviderProps {
   enabledWallets: WalletID[keyof WalletID][]
   defaultChainId: string
-  chainInfoOverrides?: ChainInfoOverrides
+  chainInfoOverrides?: ChainInfoOptions
   classNames?: ModalClassNames
   closeIcon?: ReactNode
   enablingMeta?: IEnableMeta
