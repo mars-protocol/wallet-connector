@@ -6,6 +6,7 @@ interface Wallet {
   description: string | import("react").ReactNode
   imageUrl?: string
   provider: import("delphi-labs/shuttle").WalletProvider
+  installed?: boolen
 }
 
 interface AssetResponse {
