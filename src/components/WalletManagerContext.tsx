@@ -1,3 +1,4 @@
+import { CosmWasmClient } from "@cosmjs/cosmwasm-stargate"
 import { MsgExecuteContract, useShuttle } from "@delphi-labs/shuttle"
 import { createContext, useContext } from "react"
 
@@ -24,8 +25,15 @@ const useWalletManager = () => {
 
 const useWallet = useShuttle
 
+const getClient = async (rpc: string) => {
+  const queryClient = await CosmWasmClient.connect(rpc)
+
+  return queryClient
+}
+
 export {
   fetchBalances,
+  getClient,
   MsgExecuteContract,
   useWallet,
   useWalletManager,

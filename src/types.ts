@@ -1,3 +1,4 @@
+import { CosmWasmClient } from "@cosmjs/cosmwasm-stargate"
 import {
   Bech32Config,
   BIP44,
@@ -127,6 +128,7 @@ export interface WalletClient {
     memo?: string | null | undefined
     wallet?: WalletConnection | null | undefined
   }) => Promise<SigningResult>
+  cosmWasmClient: CosmWasmClient
   recentWallet: WalletConnection
   broadcast: (options: {
     messages: TransactionMsg<any>[]

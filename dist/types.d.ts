@@ -1,3 +1,4 @@
+import { CosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { Bech32Config, BIP44, BroadcastResult, SigningResult, SimulateResult, TransactionMsg, WalletConnection } from "@delphi-labs/shuttle";
 import { AppCurrency, Currency } from "@keplr-wallet/types";
 import { AxiosRequestConfig } from "axios";
@@ -106,6 +107,7 @@ export interface WalletClient {
         memo?: string | null | undefined;
         wallet?: WalletConnection | null | undefined;
     }) => Promise<SigningResult>;
+    cosmWasmClient: CosmWasmClient;
     recentWallet: WalletConnection;
     broadcast: (options: {
         messages: TransactionMsg<any>[];
