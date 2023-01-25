@@ -2,6 +2,7 @@ import { useShuttle } from "@delphi-labs/shuttle"
 import React, { FunctionComponent, useState } from "react"
 
 import { WalletConnectionStatus } from "../../enums"
+import { Wallet } from "../../types"
 import { BaseModal, BaseModalProps } from "./BaseModal"
 import { selectWalletStyles } from "./Styles"
 

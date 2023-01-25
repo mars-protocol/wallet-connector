@@ -1,8 +1,10 @@
 /// <reference types="react" />
-export declare const fetchBalances: (address: string, chainId: string) => Promise<BalancesResponse | undefined>;
-export declare const WalletManagerContext: import("react").Context<IWalletManagerContext | null>;
-export declare const useWalletManager: () => IWalletManagerContext;
-export declare const useWallet: () => {
+import { MsgExecuteContract } from "@delphi-labs/shuttle";
+import { BalancesResponse, IWalletManagerContext } from "../types";
+declare const fetchBalances: (address: string, chainId: string) => Promise<BalancesResponse | undefined>;
+declare const WalletManagerContext: import("react").Context<IWalletManagerContext | null>;
+declare const useWalletManager: () => IWalletManagerContext;
+declare const useWallet: () => {
     providers: import("@delphi-labs/shuttle").WalletProvider[];
     connect: (providerId: string, chainId: string) => Promise<void>;
     wallets: import("@delphi-labs/shuttle").WalletConnection[];
@@ -29,4 +31,5 @@ export declare const useWallet: () => {
         wallet?: import("@delphi-labs/shuttle").WalletConnection | null | undefined;
     }) => Promise<import("@delphi-labs/shuttle").SigningResult>;
 };
+export { fetchBalances, MsgExecuteContract, useWallet, useWalletManager, WalletManagerContext, };
 //# sourceMappingURL=WalletManagerContext.d.ts.map

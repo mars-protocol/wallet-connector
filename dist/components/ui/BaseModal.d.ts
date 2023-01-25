@@ -1,4 +1,5 @@
 import { FunctionComponent, PropsWithChildren, ReactElement, ReactNode } from "react";
+import { ModalClassNames } from "../../types";
 export type BaseModalProps = PropsWithChildren<{
     isOpen: boolean;
     onClose?: () => void;

@@ -1,5 +1,6 @@
 import { AppCurrency } from "@keplr-wallet/types";
 import { ChainInfoID } from "../enums";
+import { ChainInfoOptions } from "../types";
 export type SimplifiedChainInfo = Omit<ChainInfoOptions, "stakeCurrency" | "feeCurrencies"> & {
     explorer?: string;
     explorerName?: string;

@@ -8,6 +8,7 @@ import {
 } from "@delphi-labs/shuttle"
 
 import { WalletID } from "../enums"
+import { Wallet } from "../types"
 
 export const CosmostationWallet: Wallet = {
   id: WalletID.Cosmostation,

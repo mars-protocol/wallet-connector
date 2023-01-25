@@ -1,5 +1,6 @@
 import axios from "axios"
 
+import { BalancesResponse } from "../types"
 import { getChainInfo } from "../utils"
 
 export const getWalletBalances = async (

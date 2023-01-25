@@ -7,6 +7,7 @@ import React, {
 } from "react"
 import ReactModal from "react-modal"
 
+import { ModalClassNames } from "../../types"
 import { CloseIcon as DefaultCloseIcon } from "./CloseIcon"
 import { baseModalStyles } from "./Styles"
 

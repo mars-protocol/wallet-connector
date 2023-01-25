@@ -8,6 +8,7 @@ import React, {
 } from "react"
 
 import { WalletConnectionStatus } from "../enums"
+import { Wallet, WalletManagerProviderProps } from "../types"
 import { getChainInfo, wallets } from "../utils"
 import { SelectWalletModal } from "./ui"
 import { EnablingWalletModal } from "./ui/EnablingWalletModal"
