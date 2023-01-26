@@ -8,6 +8,7 @@ interface Props extends BaseModalProps {
     closeModal: () => void;
     setStatus: (status: WalletConnectionStatus) => void;
     selectWalletOverride?: string;
+    status: WalletConnectionStatus;
 }
 export declare const SelectWalletModal: FunctionComponent<Props>;
 export {};

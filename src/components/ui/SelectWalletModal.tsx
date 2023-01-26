@@ -1,5 +1,5 @@
 import { useShuttle } from "@delphi-labs/shuttle"
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 
 import { WalletConnectionStatus } from "../../enums"
 import { Wallet } from "../../types"
@@ -12,6 +12,7 @@ interface Props extends BaseModalProps {
   closeModal: () => void
   setStatus: (status: WalletConnectionStatus) => void
   selectWalletOverride?: string
+  status: WalletConnectionStatus
 }
 
 export const SelectWalletModal: FunctionComponent<Props> = ({
@@ -21,6 +22,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   classNames,
   selectWalletOverride,
   setStatus,
+  status,
   ...props
 }) => {
   const { connect, providers } = useShuttle()
@@ -56,6 +58,21 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         : WalletConnectionStatus.Errored
     )
   }
+
+  useEffect(
+    () => {
+      if (status !== WalletConnectionStatus.AutoConnect) return
+      const shuttleStorage = localStorage.getItem("shuttle")
+      if (shuttleStorage !== null && shuttleStorage !== "[]") {
+        const recentWallet = JSON.parse(shuttleStorage)[0]
+        handleConnectClick(
+          recentWallet.providerId,
+          recentWallet.network.chainId
+        )
+      }
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [status]
+  )
 
   wallets.forEach((wallet, index) => {
     const walletProvider = providers.find((provider) => {

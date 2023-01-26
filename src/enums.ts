@@ -1,6 +1,7 @@
 export enum WalletConnectionStatus {
   Unconnected,
   Connecting,
+  AutoConnect,
   Connected,
   Errored,
 }

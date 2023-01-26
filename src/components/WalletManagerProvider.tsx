@@ -76,11 +76,16 @@ export const WalletManagerProvider: FunctionComponent<
 
   useEffect(
     () => {
-      if (status !== WalletConnectionStatus.Unconnected || !persistent) return
+      if (
+        (status !== WalletConnectionStatus.Unconnected &&
+          status !== WalletConnectionStatus.AutoConnect) ||
+        !persistent
+      )
+        return
 
       const shuttleStorage = localStorage.getItem("shuttle")
       if (shuttleStorage !== null && shuttleStorage !== "[]")
-        setStatus(WalletConnectionStatus.Connected)
+        setStatus(WalletConnectionStatus.AutoConnect)
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
@@ -121,6 +126,7 @@ export const WalletManagerProvider: FunctionComponent<
           onClose={() => setPickerModalOpen(false)}
           selectWalletOverride={selectWalletOverride}
           setStatus={statusChange}
+          status={status}
           wallets={enabledWalletsFiltered}
         />
         <EnablingWalletModal
