@@ -1,14 +1,10 @@
-import { AppCurrency } from "@keplr-wallet/types";
+import { Network } from "@delphi-labs/shuttle";
 import { ChainInfoID } from "../enums";
 import { ChainInfoOptions } from "../types";
-export type SimplifiedChainInfo = Omit<ChainInfoOptions, "stakeCurrency" | "feeCurrencies"> & {
+export interface SimplifiedChainInfo extends Network {
     explorer?: string;
     explorerName?: string;
-    currencies: Array<AppCurrency & {
-        isStakeCurrency?: boolean;
-        isFeeCurrency?: boolean;
-    }>;
-};
+}
 export declare const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo>;
 export declare const getChainInfo: (chainId: string, chainInfoOverrides?: ChainInfoOptions) => SimplifiedChainInfo;
 //# sourceMappingURL=chainInfo.d.ts.map

@@ -1,21 +1,12 @@
+import { Network } from "@delphi-labs/shuttle"
 import { Bech32Address } from "@keplr-wallet/cosmos"
-import { AppCurrency } from "@keplr-wallet/types"
 
 import { ChainInfoID } from "../enums"
 import { ChainInfoOptions } from "../types"
 
-export type SimplifiedChainInfo = Omit<
-  ChainInfoOptions,
-  "stakeCurrency" | "feeCurrencies"
-> & {
+export interface SimplifiedChainInfo extends Network {
   explorer?: string
   explorerName?: string
-  currencies: Array<
-    AppCurrency & {
-      isStakeCurrency?: boolean
-      isFeeCurrency?: boolean
-    }
-  >
 }
 
 export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
@@ -25,20 +16,18 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/osmosis/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Osmosis1,
-    chainName: "Osmosis",
+    name: "Osmosis",
     bip44: {
       coinType: 118,
     },
+    gasPrice: "0.025uosmo",
     bech32Config: Bech32Address.defaultBech32Config("osmo"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "OSMO",
         coinMinimalDenom: "uosmo",
         coinDecimals: 6,
         coinGeckoId: "osmosis",
-        coinImageUrl: "/tokens/osmo.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0,
           average: 0.025,
@@ -55,20 +44,18 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://testnet.mintscan.io/osmosis-testnet/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.OsmosisTestnet,
-    chainName: "Osmosis Testnet",
+    name: "Osmosis Testnet",
     bip44: {
       coinType: 118,
     },
+    gasPrice: "0.025uosmo",
     bech32Config: Bech32Address.defaultBech32Config("osmo"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "OSMO",
         coinMinimalDenom: "uosmo",
         coinDecimals: 6,
         coinGeckoId: "osmosis",
-        coinImageUrl: "/tokens/osmo.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0,
           average: 0.025,
@@ -85,20 +72,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/cosmos/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Cosmoshub4,
-    chainName: "Cosmos Hub",
+    name: "Cosmos Hub",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("cosmos"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "ATOM",
         coinMinimalDenom: "uatom",
         coinDecimals: 6,
         coinGeckoId: "cosmos",
-        coinImageUrl: "/tokens/atom.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -109,42 +93,24 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://finder.terra.money/classic/",
     explorerName: "TerraFinder",
     chainId: ChainInfoID.Columbus5,
-    chainName: "Terra Classic",
+    name: "Terra Classic",
     bip44: {
       coinType: 330,
     },
     bech32Config: Bech32Address.defaultBech32Config("terra"),
-    currencies: [
+    gasPrice: "0.015uluna",
+    feeCurrencies: [
       {
         coinDenom: "LUNC",
         coinMinimalDenom: "uluna",
         coinDecimals: 6,
         coinGeckoId: "terra-luna",
-        coinImageUrl: "/tokens/lunc.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
       {
         coinDenom: "USTC",
         coinMinimalDenom: "uusd",
         coinDecimals: 6,
         coinGeckoId: "terrausd",
-        coinImageUrl: "/tokens/ustc.png",
-        isFeeCurrency: true,
-        pegMechanism: "algorithmic",
-      },
-      {
-        coinDenom: "KRTC",
-        coinMinimalDenom: "ukrw",
-        coinDecimals: 6,
-        coinGeckoId: "terra-krw",
-        coinImageUrl: "/tokens/krtc.png",
-        pegMechanism: "algorithmic",
-        gasPriceStep: {
-          low: 5.665,
-          average: 5.665,
-          high: 10,
-        },
       },
     ],
 
@@ -156,20 +122,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/secret/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Secret4,
-    chainName: "Secret Network",
+    name: "Secret Network",
     bip44: {
       coinType: 529,
     },
     bech32Config: Bech32Address.defaultBech32Config("secret"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "SCRT",
         coinMinimalDenom: "uscrt",
         coinDecimals: 6,
         coinGeckoId: "secret",
-        coinImageUrl: "/tokens/scrt.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -180,20 +143,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/akash/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Akashnet2,
-    chainName: "Akash",
+    name: "Akash",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("akash"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "AKT",
         coinMinimalDenom: "uakt",
         coinDecimals: 6,
         coinGeckoId: "akash-network",
-        coinImageUrl: "/tokens/akt.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -204,18 +164,15 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/regen/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Regen1,
-    chainName: "Regen Network",
+    name: "Regen Network",
     bip44: { coinType: 118 },
     bech32Config: Bech32Address.defaultBech32Config("regen"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "REGEN",
         coinMinimalDenom: "uregen",
         coinDecimals: 6,
-        coinImageUrl: "/tokens/regen.png",
         coinGeckoId: "regen",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -226,18 +183,15 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/sentinel/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Sentinelhub2,
-    chainName: "Sentinel",
+    name: "Sentinel",
     bip44: { coinType: 118 },
     bech32Config: Bech32Address.defaultBech32Config("sent"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "DVPN",
         coinMinimalDenom: "udvpn",
         coinDecimals: 6,
         coinGeckoId: "sentinel",
-        coinImageUrl: "/tokens/dvpn.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -248,20 +202,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/persistence/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Core1,
-    chainName: "Persistence",
+    name: "Persistence",
     bip44: {
       coinType: 750,
     },
     bech32Config: Bech32Address.defaultBech32Config("persistence"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "XPRT",
         coinMinimalDenom: "uxprt",
         coinDecimals: 6,
         coinGeckoId: "persistence",
-        coinImageUrl: "/tokens/xprt.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
       {
         coinDenom: "PSTAKE",
@@ -269,7 +220,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
           "ibc/A6E3AF63B3C906416A9AF7A556C59EA4BD50E617EFFE6299B99700CCB780E444",
         coinDecimals: 18,
         coinGeckoId: "pstake-finance",
-        coinImageUrl: "/tokens/pstake.png",
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -280,20 +230,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/iris/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Irishub1,
-    chainName: "IRISnet",
+    name: "IRISnet",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("iaa"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "IRIS",
         coinMinimalDenom: "uiris",
         coinDecimals: 6,
         coinGeckoId: "iris-network",
-        coinImageUrl: "/tokens/iris.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -304,20 +251,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/crypto-org/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.CryptoOrgChainMainnet1,
-    chainName: "Crypto.org",
+    name: "Crypto.org",
     bip44: {
       coinType: 394,
     },
     bech32Config: Bech32Address.defaultBech32Config("cro"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "CRO",
         coinMinimalDenom: "basecro",
         coinDecimals: 8,
         coinGeckoId: "crypto-com-chain",
-        coinImageUrl: "/tokens/cro.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -328,20 +272,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/starname/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.IovMainnetIbc,
-    chainName: "Starname",
+    name: "Starname",
     bip44: {
       coinType: 234,
     },
     bech32Config: Bech32Address.defaultBech32Config("star"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "IOV",
         coinMinimalDenom: "uiov",
         coinDecimals: 6,
         coinGeckoId: "starname",
-        coinImageUrl: "/tokens/iov.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -352,27 +293,23 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/emoney/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Emoney3,
-    chainName: "e-Money",
+    name: "e-Money",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("emoney"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "NGM",
         coinMinimalDenom: "ungm",
         coinDecimals: 6,
         coinGeckoId: "e-money",
-        coinImageUrl: "/tokens/ngm.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
       {
         coinDenom: "EEUR",
         coinMinimalDenom: "eeur",
         coinDecimals: 6,
         coinGeckoId: "e-money-eur",
-        coinImageUrl: "/tokens/eeur.png",
         gasPriceStep: {
           low: 1,
           average: 1,
@@ -389,20 +326,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://www.mintscan.io/juno/",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Juno1,
-    chainName: "Juno",
+    name: "Juno",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("juno"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "JUNO",
         coinMinimalDenom: "ujuno",
         coinDecimals: 6,
         coinGeckoId: "juno-network",
-        coinImageUrl: "/tokens/juno.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0.03,
           average: 0.04,
@@ -419,19 +353,16 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://testnet.mintscan.io/juno-testnet",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Uni3,
-    chainName: "Juno Testnet",
+    name: "Juno Testnet",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("juno"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "junox",
         coinMinimalDenom: "ujunox",
         coinDecimals: 6,
-        coinImageUrl: "/tokens/juno.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0.03,
           average: 0.04,
@@ -448,20 +379,18 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "http://explorer.marsprotocol.io/",
     explorerName: "Mars Explorer",
     chainId: ChainInfoID.Mars1,
-    chainName: "Mars Hub",
+    name: "Mars Hub",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("mars"),
-    currencies: [
+    gasPrice: "0umars",
+    feeCurrencies: [
       {
         coinDenom: "MARS",
         coinMinimalDenom: "umars",
         coinDecimals: 6,
         coinGeckoId: "mars",
-        coinImageUrl: "/tokens/mars.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0,
           average: 0.00625,
@@ -478,20 +407,18 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "http://testnet-explorer.marsprotocol.io/",
     explorerName: "Mars Explorer",
     chainId: ChainInfoID.MarsAres1,
-    chainName: "Mars Hub Testnet",
+    name: "Mars Hub Testnet",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("mars"),
-    currencies: [
+    gasPrice: "0umars",
+    feeCurrencies: [
       {
         coinDenom: "MARS",
         coinMinimalDenom: "umars",
         coinDecimals: 6,
         coinGeckoId: "mars",
-        coinImageUrl: "/tokens/mars.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0,
           average: 0.00625,
@@ -506,20 +433,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://rpc-microtick.keplr.app",
     rest: "https://lcd-microtick.keplr.app",
     chainId: ChainInfoID.Microtick1,
-    chainName: "Microtick",
+    name: "Microtick",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("micro"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "TICK",
         coinMinimalDenom: "utick",
         coinDecimals: 6,
         coinGeckoId: "pool:utick",
-        coinImageUrl: "/tokens/tick.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -530,20 +454,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/likecoin",
     explorerName: "Mintscan",
     chainId: ChainInfoID.LikecoinMainnet2,
-    chainName: "LikeCoin",
+    name: "LikeCoin",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("like"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "LIKE",
         coinMinimalDenom: "nanolike",
         coinDecimals: 9,
         coinGeckoId: "likecoin",
-        coinImageUrl: "/tokens/like.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -552,20 +473,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://rpc-impacthub.keplr.app",
     rest: "https://lcd-impacthub.keplr.app",
     chainId: ChainInfoID.Impacthub3,
-    chainName: "IXO",
+    name: "IXO",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("ixo"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "IXO",
         coinMinimalDenom: "uixo",
         coinDecimals: 6,
         coinGeckoId: "pool:uixo",
-        coinImageUrl: "/tokens/ixo.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -576,20 +494,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/bitcanna",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Bitcanna1,
-    chainName: "BitCanna",
+    name: "BitCanna",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("bcna"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "BCNA",
         coinMinimalDenom: "ubcna",
         coinDecimals: 6,
         coinGeckoId: "bitcanna",
-        coinImageUrl: "/tokens/bcna.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -600,20 +515,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/bitsong",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Bitsong2b,
-    chainName: "BitSong",
+    name: "BitSong",
     bip44: {
       coinType: 639,
     },
     bech32Config: Bech32Address.defaultBech32Config("bitsong"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "BTSG",
         coinMinimalDenom: "ubtsg",
         coinDecimals: 6,
         coinGeckoId: "pool:ubtsg",
-        coinImageUrl: "/tokens/btsg.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -624,20 +536,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/ki-chain",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Kichain2,
-    chainName: "Ki",
+    name: "Ki",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("ki"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "XKI",
         coinMinimalDenom: "uxki",
         coinDecimals: 6,
         coinGeckoId: "pool:uxki",
-        coinImageUrl: "/tokens/xki.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -648,20 +557,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/medibloc",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Panacea3,
-    chainName: "MediBloc",
+    name: "MediBloc",
     bip44: {
       coinType: 371,
     },
     bech32Config: Bech32Address.defaultBech32Config("panacea"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "MED",
         coinMinimalDenom: "umed",
         coinDecimals: 6,
         coinGeckoId: "medibloc",
-        coinImageUrl: "/tokens/med.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 5,
           average: 7,
@@ -676,20 +582,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://rpc.bostrom.cybernode.ai",
     rest: "https://lcd.bostrom.cybernode.ai",
     chainId: ChainInfoID.Bostrom,
-    chainName: "Bostrom",
+    name: "Bostrom",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("bostrom"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "BOOT",
         coinMinimalDenom: "boot",
         coinDecimals: 0,
         coinGeckoId: "bostrom",
-        coinImageUrl: "/tokens/boot.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -700,20 +603,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/comdex",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Comdex1,
-    chainName: "Comdex",
+    name: "Comdex",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("comdex"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "CMDX",
         coinMinimalDenom: "ucmdx",
         coinDecimals: 6,
         coinGeckoId: "comdex",
-        coinImageUrl: "/tokens/cmdx.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -722,20 +622,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://rpc.cheqd.net",
     rest: "https://api.cheqd.net",
     chainId: ChainInfoID.CheqdMainnet1,
-    chainName: "cheqd",
+    name: "cheqd",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("cheqd"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "CHEQ",
         coinMinimalDenom: "ncheq",
         coinDecimals: 9,
         coinGeckoId: "cheqd-network",
-        coinImageUrl: "/tokens/cheq.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 25,
           average: 50,
@@ -752,20 +649,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/stargaze",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Stargaze1,
-    chainName: "Stargaze",
+    name: "Stargaze",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("stars"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "STARS",
         coinMinimalDenom: "ustars",
         coinDecimals: 6,
         coinGeckoId: "pool:ustars",
-        coinImageUrl: "/tokens/stars.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -776,20 +670,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/chihuahua",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Chihuahua1,
-    chainName: "Chihuahua",
+    name: "Chihuahua",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("chihuahua"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "HUAHUA",
         coinMinimalDenom: "uhuahua",
         coinDecimals: 6,
         coinGeckoId: "pool:uhuahua",
-        coinImageUrl: "/tokens/huahua.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0.025,
           average: 0.03,
@@ -806,20 +697,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/lum",
     explorerName: "Mintscan",
     chainId: ChainInfoID.LumNetwork1,
-    chainName: "Lum Network",
+    name: "Lum Network",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("lum"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "LUM",
         coinMinimalDenom: "ulum",
         coinDecimals: 6,
         coinGeckoId: "pool:ulum",
-        coinImageUrl: "/tokens/lum.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -828,20 +716,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://mainnet-rpc.vidulum.app",
     rest: "https://mainnet-lcd.vidulum.app",
     chainId: ChainInfoID.Vidulum1,
-    chainName: "Vidulum",
+    name: "Vidulum",
     bip44: {
       coinType: 370,
     },
     bech32Config: Bech32Address.defaultBech32Config("vdl"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "VDL",
         coinMinimalDenom: "uvdl",
         coinDecimals: 6,
         coinGeckoId: "vidulum",
-        coinImageUrl: "/tokens/vdl.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -852,20 +737,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/desmos",
     explorerName: "Mintscan",
     chainId: ChainInfoID.DesmosMainnet,
-    chainName: "Desmos",
+    name: "Desmos",
     bip44: {
       coinType: 852,
     },
     bech32Config: Bech32Address.defaultBech32Config("desmos"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "DSM",
         coinMinimalDenom: "udsm",
         coinDecimals: 6,
         coinGeckoId: "pool:udsm",
-        coinImageUrl: "/tokens/dsm.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -874,20 +756,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://rpc-1-dig.notional.ventures",
     rest: "https://api-1-dig.notional.ventures",
     chainId: ChainInfoID.Dig1,
-    chainName: "Dig",
+    name: "Dig",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("dig"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "DIG",
         coinMinimalDenom: "udig",
         coinDecimals: 6,
         coinGeckoId: "pool:udig",
-        coinImageUrl: "/tokens/dig.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0.025,
           average: 0.03,
@@ -904,20 +783,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/sommelier",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Sommelier3,
-    chainName: "Sommelier",
+    name: "Sommelier",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("somm"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "SOMM",
         coinMinimalDenom: "usomm",
         coinDecimals: 6,
         coinGeckoId: "pool:usomm",
-        coinImageUrl: "/tokens/somm.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -928,20 +804,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/sifchain",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Sifchain1,
-    chainName: "Sifchain",
+    name: "Sifchain",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("sif"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "ROWAN",
         coinMinimalDenom: "rowan",
         coinDecimals: 18,
         coinGeckoId: "sifchain",
-        coinImageUrl: "/tokens/rowan.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -952,20 +825,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/band",
     explorerName: "Mintscan",
     chainId: ChainInfoID.LaoziMainnet,
-    chainName: "BandChain",
+    name: "BandChain",
     bip44: {
       coinType: 494,
     },
     bech32Config: Bech32Address.defaultBech32Config("band"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "BAND",
         coinMinimalDenom: "uband",
         coinDecimals: 6,
         coinGeckoId: "band-protocol",
-        coinImageUrl: "/tokens/band.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -976,20 +846,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/konstellation",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Darchub,
-    chainName: "Konstellation",
+    name: "Konstellation",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("darc"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "DARC",
         coinMinimalDenom: "udarc",
         coinDecimals: 6,
         coinGeckoId: "pool:udarc",
-        coinImageUrl: "/tokens/darc.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -1000,20 +867,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/umee",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Umee1,
-    chainName: "Umee",
+    name: "Umee",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("umee"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "UMEE",
         coinMinimalDenom: "uumee",
         coinDecimals: 6,
         coinGeckoId: "pool:uumee",
-        coinImageUrl: "/tokens/umee.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -1024,65 +888,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/gravity-bridge",
     explorerName: "Mintscan",
     chainId: ChainInfoID.GravityBridge3,
-    chainName: "Gravity Bridge",
+    name: "Gravity Bridge",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("gravity"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "GRAV",
         coinMinimalDenom: "ugraviton",
         coinDecimals: 6,
         coinGeckoId: "pool:ugraviton",
-        coinImageUrl: "/tokens/grav.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
-      },
-      {
-        coinDenom: "PSTAKE",
-        coinMinimalDenom: "gravity0xfB5c6815cA3AC72Ce9F5006869AE67f18bF77006",
-        coinDecimals: 18,
-        coinGeckoId: "pstake-finance",
-        coinImageUrl: "/tokens/pstake.png",
-      },
-      {
-        coinDenom: "WBTC.grv",
-        coinMinimalDenom: "gravity0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
-        coinDecimals: 8,
-        coinGeckoId: "wrapped-bitcoin",
-        coinImageUrl: "/tokens/gwbtc.png",
-      },
-      {
-        coinDenom: "WETH.grv",
-        coinMinimalDenom: "gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-        coinDecimals: 18,
-        coinGeckoId: "ethereum",
-        coinImageUrl: "/tokens/gweth.png",
-      },
-      {
-        coinDenom: "USDC.grv",
-        coinMinimalDenom: "gravity0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-        coinDecimals: 6,
-        coinGeckoId: "usd-coin",
-        coinImageUrl: "/tokens/gusdc.png",
-        pegMechanism: "collateralized",
-      },
-      {
-        coinDenom: "DAI.grv",
-        coinMinimalDenom: "gravity0x6B175474E89094C44Da98b954EedeAC495271d0F",
-        coinDecimals: 18,
-        coinGeckoId: "dai",
-        coinImageUrl: "/tokens/gdai.png",
-        pegMechanism: "collateralized",
-      },
-      {
-        coinDenom: "USDT.grv",
-        coinMinimalDenom: "gravity0xdAC17F958D2ee523a2206206994597C13D831ec7",
-        coinDecimals: 6,
-        coinGeckoId: "tether",
-        coinImageUrl: "/tokens/gusdt.png",
-        pegMechanism: "collateralized",
         gasPriceStep: {
           low: 0,
           average: 0,
@@ -1097,20 +913,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://poseidon.mainnet.decentr.xyz",
     rest: "https://rest.mainnet.decentr.xyz",
     chainId: ChainInfoID.Mainnet3,
-    chainName: "Decentr",
+    name: "Decentr",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("decentr"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "DEC",
         coinMinimalDenom: "udec",
         coinDecimals: 6,
         coinGeckoId: "decentr",
-        coinImageUrl: "/tokens/dec.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer"],
@@ -1119,20 +932,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://shenturpc.certikpowered.info",
     rest: "https://azuredragon.noopsbycertik.com",
     chainId: ChainInfoID.Shentu22,
-    chainName: "Certik",
+    name: "Certik",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("certik"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "CTK",
         coinMinimalDenom: "uctk",
         coinDecimals: 6,
         coinGeckoId: "certik",
-        coinImageUrl: "/tokens/ctk.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -1141,20 +951,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://tm-api.carbon.network",
     rest: "https://api.carbon.network",
     chainId: ChainInfoID.Carbon1,
-    chainName: "Carbon",
+    name: "Carbon",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("swth"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "SWTH",
         coinMinimalDenom: "swth",
         coinDecimals: 8,
         coinGeckoId: "switcheo",
-        coinImageUrl: "/tokens/swth.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 769.23077,
           average: 769.23077,
@@ -1171,20 +978,18 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/injective",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Injective1,
-    chainName: "Injective",
+    name: "Injective",
     bip44: {
       coinType: 60,
     },
     bech32Config: Bech32Address.defaultBech32Config("inj"),
-    currencies: [
+    gasPrice: "0.0005inj",
+    feeCurrencies: [
       {
         coinDenom: "INJ",
         coinMinimalDenom: "inj",
         coinDecimals: 18,
         coinGeckoId: "injective-protocol",
-        coinImageUrl: "/tokens/inj.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0.0005,
           average: 0.0007,
@@ -1201,20 +1006,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/cerberus",
     explorerName: "Mintscan",
     chainId: ChainInfoID.CerberusChain1,
-    chainName: "Cerberus",
+    name: "Cerberus",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("cerberus"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "CRBRUS",
         coinMinimalDenom: "ucrbrus",
         coinDecimals: 6,
         coinGeckoId: "cerberus-2",
-        coinImageUrl: "/tokens/crbrus.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -1225,20 +1027,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/fetchai",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Fetchhub4,
-    chainName: "Fetch.ai",
+    name: "Fetch.ai",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("fetch"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "FET",
         coinMinimalDenom: "afet",
         coinDecimals: 18,
         coinGeckoId: "fetch-ai",
-        coinImageUrl: "/tokens/fet.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0.025,
           average: 0.025,
@@ -1255,20 +1054,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/asset-mantle",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Mantle1,
-    chainName: "AssetMantle",
+    name: "AssetMantle",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("mantle"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "MNTL",
         coinMinimalDenom: "umntl",
         coinDecimals: 6,
         coinGeckoId: "pool:umntl",
-        coinImageUrl: "/tokens/mntl.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -1279,20 +1075,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/provenance",
     explorerName: "Mintscan",
     chainId: ChainInfoID.PioMainnet1,
-    chainName: "Provenance",
+    name: "Provenance",
     bip44: {
       coinType: 505,
     },
     bech32Config: Bech32Address.defaultBech32Config("pb"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "HASH",
         coinMinimalDenom: "nhash",
         coinGeckoId: "provenance-blockchain",
         coinDecimals: 9,
-        coinImageUrl: "/tokens/hash.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 1905,
           average: 2100,
@@ -1307,20 +1100,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://rpc.galaxychain.zone",
     rest: "https://rest.galaxychain.zone",
     chainId: ChainInfoID.Galaxy1,
-    chainName: "Galaxy",
+    name: "Galaxy",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("galaxy"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "GLX",
         coinMinimalDenom: "uglx",
         coinDecimals: 6,
         coinGeckoId: "pool:uglx",
-        coinImageUrl: "/tokens/glx.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0.025,
           average: 0.025,
@@ -1335,20 +1125,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://rpc-meme-1.meme.sx:443",
     rest: "https://api-meme-1.meme.sx:443",
     chainId: ChainInfoID.Meme1,
-    chainName: "Meme",
+    name: "Meme",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("meme"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "MEME",
         coinMinimalDenom: "umeme",
         coinDecimals: 6,
         coinGeckoId: "pool:umeme",
-        coinImageUrl: "/tokens/meme.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0.025,
           average: 0.025,
@@ -1365,20 +1152,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/evmos",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Evmos_9001_2,
-    chainName: "Evmos",
+    name: "Evmos",
     bip44: {
       coinType: 60,
     },
     bech32Config: Bech32Address.defaultBech32Config("evmos"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "EVMOS",
         coinMinimalDenom: "aevmos",
         coinDecimals: 18,
         coinGeckoId: "evmos",
-        coinImageUrl: "/tokens/evmos.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 10000000000,
           average: 25000000000,
@@ -1395,20 +1179,18 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://finder.terra.money/mainnet",
     explorerName: "TerraFinder",
     chainId: ChainInfoID.Phoenix1,
-    chainName: "Terra 2.0",
+    name: "Terra 2.0",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("terra"),
-    currencies: [
+    gasPrice: "0.015uluna",
+    feeCurrencies: [
       {
         coinDenom: "LUNA",
         coinMinimalDenom: "uluna",
         coinDecimals: 6,
         coinGeckoId: "terra-luna-2",
-        coinImageUrl: "/tokens/luna.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0.15,
           average: 0.2,
@@ -1425,20 +1207,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/rizon",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Titan1,
-    chainName: "Rizon",
+    name: "Rizon",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("rizon"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "ATOLO",
         coinMinimalDenom: "uatolo",
         coinDecimals: 6,
         coinGeckoId: "rizon",
-        coinImageUrl: "/tokens/atolo.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 0.025,
           average: 0.025,
@@ -1455,34 +1234,29 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorer: "https://mintscan.io/kava",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Kava_2222_10,
-    chainName: "Kava",
+    name: "Kava",
     bip44: {
       coinType: 459,
     },
     bech32Config: Bech32Address.defaultBech32Config("kava"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "KAVA",
         coinMinimalDenom: "ukava",
         coinDecimals: 6,
         coinGeckoId: "kava",
-        coinImageUrl: "/tokens/kava.png",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
       },
       {
         coinDenom: "HARD",
         coinMinimalDenom: "hard",
         coinDecimals: 6,
         coinGeckoId: "kava-lend",
-        coinImageUrl: "/tokens/hard.svg",
       },
       {
         coinDenom: "SWP",
         coinMinimalDenom: "swp",
         coinDecimals: 6,
         coinGeckoId: "kava-swap",
-        coinImageUrl: "/tokens/swp.svg",
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
@@ -1491,20 +1265,17 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     rpc: "https://26657.genesisl1.org",
     rest: "https://api.genesisl1.org",
     chainId: ChainInfoID.Genesis_29_2,
-    chainName: "GenesisL1",
+    name: "GenesisL1",
     bip44: {
       coinType: 118,
     },
     bech32Config: Bech32Address.defaultBech32Config("genesis"),
-    currencies: [
+    feeCurrencies: [
       {
         coinDenom: "L1",
         coinMinimalDenom: "el1",
         coinDecimals: 18,
         //coinGeckoId: "pool:el1",
-        coinImageUrl: "/tokens/l1.svg",
-        isStakeCurrency: true,
-        isFeeCurrency: true,
         gasPriceStep: {
           low: 999999999,
           average: 1000000000,

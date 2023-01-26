@@ -62,9 +62,7 @@ export const WalletManagerProvider: FunctionComponent<
 
   const providers: WalletProvider[] = useMemo(() => {
     const network = getChainInfo(defaultChainId, chainInfoOverrides)
-    const mappedNetwork: any = network
-    mappedNetwork.name = mappedNetwork.chainName
-    const networks: Network[] = [mappedNetwork]
+    const networks: Network[] = [network]
     const tempProviders: WalletProvider[] = []
 
     enabledWalletsFiltered.forEach((wallet) => {
