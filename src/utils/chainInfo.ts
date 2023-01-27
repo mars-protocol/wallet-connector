@@ -35,20 +35,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         high: 0.04,
       },
     },
-    feeCurrencies: [
-      {
-        coinDenom: "OSMO",
-        coinMinimalDenom: "uosmo",
-        coinDecimals: 6,
-        coinGeckoId: "osmosis",
-        gasPriceStep: {
-          low: 0,
-          average: 0.025,
-          high: 0.04,
-        },
-      },
-    ],
-
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.OsmosisTestnet]: {
@@ -75,20 +61,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         high: 0.04,
       },
     },
-    feeCurrencies: [
-      {
-        coinDenom: "OSMO",
-        coinMinimalDenom: "uosmo",
-        coinDecimals: 6,
-        coinGeckoId: "osmosis",
-        gasPriceStep: {
-          low: 0,
-          average: 0.025,
-          high: 0.04,
-        },
-      },
-    ],
-
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Cosmoshub4]: {
@@ -422,20 +394,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         high: 0.01,
       },
     },
-    feeCurrencies: [
-      {
-        coinDenom: "MARS",
-        coinMinimalDenom: "umars",
-        coinDecimals: 6,
-        coinGeckoId: "mars",
-        gasPriceStep: {
-          low: 0,
-          average: 0.00625,
-          high: 0.01,
-        },
-      },
-    ],
-
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.MarsAres1]: {
@@ -462,20 +420,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
         high: 0.01,
       },
     },
-    feeCurrencies: [
-      {
-        coinDenom: "MARS",
-        coinMinimalDenom: "umars",
-        coinDecimals: 6,
-        coinGeckoId: "mars",
-        gasPriceStep: {
-          low: 0,
-          average: 0.00625,
-          high: 0.01,
-        },
-      },
-    ],
-
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Microtick1]: {
