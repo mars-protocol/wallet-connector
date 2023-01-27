@@ -1,4 +1,4 @@
-import { Network } from "@delphi-labs/shuttle"
+import { BIP44, Network } from "@delphi-labs/shuttle"
 import { Bech32Address } from "@keplr-wallet/cosmos"
 
 import { ChainInfoID } from "../enums"
@@ -7,6 +7,7 @@ import { ChainInfoOptions } from "../types"
 export interface SimplifiedChainInfo extends Network {
   explorer?: string
   explorerName?: string
+  alternativeBIP44s?: BIP44[]
 }
 
 export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
@@ -20,8 +21,20 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     bip44: {
       coinType: 118,
     },
+    alternativeBIP44s: [{ coinType: 330 }],
     gasPrice: "0.025uosmo",
     bech32Config: Bech32Address.defaultBech32Config("osmo"),
+    defaultCurrency: {
+      coinDenom: "OSMO",
+      coinMinimalDenom: "uosmo",
+      coinDecimals: 6,
+      coinGeckoId: "osmosis",
+      gasPriceStep: {
+        low: 0,
+        average: 0.025,
+        high: 0.04,
+      },
+    },
     feeCurrencies: [
       {
         coinDenom: "OSMO",
@@ -48,8 +61,20 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     bip44: {
       coinType: 118,
     },
+    alternativeBIP44s: [{ coinType: 330 }],
     gasPrice: "0.025uosmo",
     bech32Config: Bech32Address.defaultBech32Config("osmo"),
+    defaultCurrency: {
+      coinDenom: "OSMO",
+      coinMinimalDenom: "uosmo",
+      coinDecimals: 6,
+      coinGeckoId: "osmosis",
+      gasPriceStep: {
+        low: 0,
+        average: 0.025,
+        high: 0.04,
+      },
+    },
     feeCurrencies: [
       {
         coinDenom: "OSMO",
@@ -383,8 +408,20 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     bip44: {
       coinType: 118,
     },
+    alternativeBIP44s: [{ coinType: 330 }],
     bech32Config: Bech32Address.defaultBech32Config("mars"),
     gasPrice: "0umars",
+    defaultCurrency: {
+      coinDenom: "MARS",
+      coinMinimalDenom: "umars",
+      coinDecimals: 6,
+      coinGeckoId: "mars",
+      gasPriceStep: {
+        low: 0,
+        average: 0.00625,
+        high: 0.01,
+      },
+    },
     feeCurrencies: [
       {
         coinDenom: "MARS",
@@ -411,8 +448,20 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     bip44: {
       coinType: 118,
     },
+    alternativeBIP44s: [{ coinType: 330 }],
     bech32Config: Bech32Address.defaultBech32Config("mars"),
     gasPrice: "0umars",
+    defaultCurrency: {
+      coinDenom: "MARS",
+      coinMinimalDenom: "umars",
+      coinDecimals: 6,
+      coinGeckoId: "mars",
+      gasPriceStep: {
+        low: 0,
+        average: 0.00625,
+        high: 0.01,
+      },
+    },
     feeCurrencies: [
       {
         coinDenom: "MARS",

@@ -58,11 +58,11 @@ export const LeapWallet: Wallet = {
 
 export const TerraStationWallet: Wallet = {
   id: WalletID.TerraStation,
-  name: "Terra Station Wallet",
-  install: "Install Terra Station Wallet",
+  name: "Station Wallet",
+  install: "Install Station Wallet",
   installURL:
     "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
-  description: "Terra Station Extension",
+  description: "Station Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
   provider: TerraStationProvider,
