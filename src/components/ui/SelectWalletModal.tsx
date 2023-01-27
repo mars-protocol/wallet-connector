@@ -80,10 +80,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         status === WalletConnectionStatus.AutoConnect &&
         recentWallet !== null
       ) {
-        handleConnectClick(
-          recentWallet.providerId as WalletID,
-          recentWallet.network.chainId
-        )
+        handleConnectClick(recentWallet.providerId as WalletID, chainId)
       }
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
     [status, recentWallet]
