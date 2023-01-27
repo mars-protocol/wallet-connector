@@ -1,7 +1,7 @@
 import { useShuttle } from "@delphi-labs/shuttle"
 import React, { FunctionComponent, useEffect, useState } from "react"
 
-import { WalletConnectionStatus } from "../../enums"
+import { WalletConnectionStatus, WalletID } from "../../enums"
 import { Wallet } from "../../types"
 import { BaseModal, BaseModalProps } from "./BaseModal"
 import { selectWalletStyles } from "./Styles"
@@ -25,17 +25,20 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   status,
   ...props
 }) => {
-  const { connect, providers } = useShuttle()
-  const [isHover, setIsHover] = useState("")
-  const handleMouseEnter = (walletID: string) => {
+  const { connect, providers, recentWallet } = useShuttle()
+  const [isHover, setIsHover] = useState<WalletID | undefined>()
+  const [lastClicked, setLastClicked] = useState<WalletID | undefined>()
+
+  const handleMouseEnter = (walletID: WalletID) => {
     setIsHover(walletID)
   }
 
   const handleMouseLeave = () => {
-    setIsHover("")
+    setIsHover(undefined)
   }
 
-  const handleConnectClick = async (providerId: string, chainId: string) => {
+  const handleConnectClick = async (providerId: WalletID, chainId: string) => {
+    setLastClicked(providerId)
     closeModal()
     const slightDelay = setTimeout(
       () => setStatus(WalletConnectionStatus.Connecting),
@@ -47,7 +50,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       await connect(providerId, chainId)
     } catch (error) {
       if (error) {
-        console.error(error)
+        console.error("Wallet Connector: ", error)
         connected = false
       }
     }
@@ -59,21 +62,6 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     )
   }
 
-  useEffect(
-    () => {
-      if (status !== WalletConnectionStatus.AutoConnect) return
-      const shuttleStorage = localStorage.getItem("shuttle")
-      if (shuttleStorage !== null && shuttleStorage !== "[]") {
-        const recentWallet = JSON.parse(shuttleStorage)[0]
-        handleConnectClick(
-          recentWallet.providerId,
-          recentWallet.network.chainId
-        )
-      }
-    }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [status]
-  )
-
   wallets.forEach((wallet, index) => {
     const walletProvider = providers.find((provider) => {
       return provider.id === wallet.id
@@ -83,6 +71,24 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       walletProvider?.initialized || walletProvider?.initializing
   })
 
+  useEffect(
+    () => {
+      if (status === WalletConnectionStatus.Retry && lastClicked) {
+        handleConnectClick(lastClicked, chainId)
+      }
+      if (
+        status === WalletConnectionStatus.AutoConnect &&
+        recentWallet !== null
+      ) {
+        handleConnectClick(
+          recentWallet.providerId as WalletID,
+          recentWallet.network.chainId
+        )
+      }
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [status, recentWallet]
+  )
+
   const walletItem = (wallet: Wallet) => {
     return (
       <div key={wallet.id}>
@@ -91,7 +97,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           className={classNames?.wallet}
           onClick={(e) => {
             e.preventDefault()
-            setIsHover("")
+            setIsHover(undefined)
             if (wallet.installed) {
               handleConnectClick(wallet.id, chainId)
             } else {

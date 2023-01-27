@@ -4,6 +4,7 @@ export enum WalletConnectionStatus {
   AutoConnect,
   Connected,
   Errored,
+  Retry,
 }
 
 export enum WalletID {

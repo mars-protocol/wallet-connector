@@ -387,7 +387,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       coinDenom: "MARS",
       coinMinimalDenom: "umars",
       coinDecimals: 6,
-      coinGeckoId: "mars",
+      coinGeckoId: "marsprotocol",
       gasPriceStep: {
         low: 0,
         average: 0.00625,
@@ -413,7 +413,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
       coinDenom: "MARS",
       coinMinimalDenom: "umars",
       coinDecimals: 6,
-      coinGeckoId: "mars",
+      coinGeckoId: "marsprotocol",
       gasPriceStep: {
         low: 0,
         average: 0.00625,

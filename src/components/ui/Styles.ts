@@ -117,3 +117,32 @@ export const selectWalletStyles: { [key: string]: React.CSSProperties } = {
     lineHeight: "20px",
   },
 }
+
+export const enablingWalletStyles: { [key: string]: React.CSSProperties } = {
+  body: {
+    flex: "0 0 100%",
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+
+  text: {
+    width: "100%",
+    textAlign: "center",
+    margin: "0 0 16px",
+  },
+
+  button: {
+    appearance: "none",
+    height: "32px",
+    lineHeight: "18px",
+    fontSize: "15px",
+    color: "#FFF",
+    padding: "6px 20px",
+    borderRadius: "30px",
+    outline: "none",
+    border: "none",
+    background: "#14a693",
+    cursor: "pointer",
+  },
+}

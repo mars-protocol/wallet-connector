@@ -111,6 +111,10 @@ export const WalletManagerProvider: FunctionComponent<
     [beginConnection, terminateConnection, status]
   )
 
+  const resetConnection = () => {
+    setStatus(WalletConnectionStatus.Retry)
+  }
+
   return (
     <ShuttleProvider persistent={persistent} providers={providers}>
       <WalletManagerContext.Provider value={value}>
@@ -133,6 +137,7 @@ export const WalletManagerProvider: FunctionComponent<
           enablingStringOverride={enablingStringOverride}
           isOpen={status === WalletConnectionStatus.Connecting}
           renderLoader={renderLoader}
+          reset={resetConnection}
         />
       </WalletManagerContext.Provider>
     </ShuttleProvider>
