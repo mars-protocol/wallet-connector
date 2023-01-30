@@ -12,9 +12,9 @@ export interface SimplifiedChainInfo extends Network {
 
 export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Osmosis1]: {
-    rpc: "https://rpc-osmosis.blockapsis.com/",
-    rest: "https://lcd-osmosis.blockapsis.com/",
-    explorer: "https://www.mintscan.io/osmosis/",
+    rpc: "https://rpc-osmosis.blockapsis.com",
+    rest: "https://lcd-osmosis.blockapsis.com",
+    explorer: "https://www.mintscan.io/osmosis",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Osmosis1,
     name: "Osmosis",
@@ -38,9 +38,9 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.OsmosisTestnet]: {
-    rpc: "https://rpc-test.osmosis.zone/",
-    rest: "https://lcd-test.osmosis.zone/",
-    explorer: "https://testnet.mintscan.io/osmosis-testnet/",
+    rpc: "https://rpc-test.osmosis.zone",
+    rest: "https://lcd-test.osmosis.zone",
+    explorer: "https://testnet.mintscan.io/osmosis-testnet",
     explorerName: "Mintscan",
     chainId: ChainInfoID.OsmosisTestnet,
     name: "Osmosis Testnet",
@@ -66,7 +66,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Cosmoshub4]: {
     rpc: "https://rpc-cosmoshub.keplr.app",
     rest: "https://lcd-cosmoshub.keplr.app",
-    explorer: "https://www.mintscan.io/cosmos/",
+    explorer: "https://www.mintscan.io/cosmos",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Cosmoshub4,
     name: "Cosmos Hub",
@@ -87,7 +87,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Columbus5]: {
     rpc: "https://rpc-columbus.keplr.app",
     rest: "https://lcd-columbus.keplr.app",
-    explorer: "https://finder.terra.money/classic/",
+    explorer: "https://finder.terra.money/classic",
     explorerName: "TerraFinder",
     chainId: ChainInfoID.Columbus5,
     name: "Terra Classic",
@@ -116,7 +116,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Secret4]: {
     rpc: "https://rpc-secret.keplr.app",
     rest: "https://lcd-secret.keplr.app",
-    explorer: "https://www.mintscan.io/secret/",
+    explorer: "https://www.mintscan.io/secret",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Secret4,
     name: "Secret Network",
@@ -137,7 +137,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Akashnet2]: {
     rpc: "https://rpc-akash.keplr.app",
     rest: "https://lcd-akash.keplr.app",
-    explorer: "https://www.mintscan.io/akash/",
+    explorer: "https://www.mintscan.io/akash",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Akashnet2,
     name: "Akash",
@@ -158,7 +158,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Regen1]: {
     rpc: "https://rpc-regen.keplr.app",
     rest: "https://lcd-regen.keplr.app",
-    explorer: "https://www.mintscan.io/regen/",
+    explorer: "https://www.mintscan.io/regen",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Regen1,
     name: "Regen Network",
@@ -177,7 +177,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Sentinelhub2]: {
     rpc: "https://rpc-sentinel.keplr.app",
     rest: "https://lcd-sentinel.keplr.app",
-    explorer: "https://www.mintscan.io/sentinel/",
+    explorer: "https://www.mintscan.io/sentinel",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Sentinelhub2,
     name: "Sentinel",
@@ -196,7 +196,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Core1]: {
     rpc: "https://rpc-persistence.keplr.app",
     rest: "https://lcd-persistence.keplr.app",
-    explorer: "https://www.mintscan.io/persistence/",
+    explorer: "https://www.mintscan.io/persistence",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Core1,
     name: "Persistence",
@@ -224,7 +224,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Irishub1]: {
     rpc: "https://rpc-iris.keplr.app",
     rest: "https://lcd-iris.keplr.app",
-    explorer: "https://www.mintscan.io/iris/",
+    explorer: "https://www.mintscan.io/iris",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Irishub1,
     name: "IRISnet",
@@ -243,9 +243,9 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer"],
   },
   [ChainInfoID.CryptoOrgChainMainnet1]: {
-    rpc: "https://rpc-crypto-org.keplr.app/",
-    rest: "https://lcd-crypto-org.keplr.app/",
-    explorer: "https://www.mintscan.io/crypto-org/",
+    rpc: "https://rpc-crypto-org.keplr.app",
+    rest: "https://lcd-crypto-org.keplr.app",
+    explorer: "https://www.mintscan.io/crypto-org",
     explorerName: "Mintscan",
     chainId: ChainInfoID.CryptoOrgChainMainnet1,
     name: "Crypto.org",
@@ -266,7 +266,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.IovMainnetIbc]: {
     rpc: "https://rpc-iov.keplr.app",
     rest: "https://lcd-iov.keplr.app",
-    explorer: "https://www.mintscan.io/starname/",
+    explorer: "https://www.mintscan.io/starname",
     explorerName: "Mintscan",
     chainId: ChainInfoID.IovMainnetIbc,
     name: "Starname",
@@ -287,7 +287,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Emoney3]: {
     rpc: "https://rpc-emoney.keplr.app",
     rest: "https://lcd-emoney.keplr.app",
-    explorer: "https://www.mintscan.io/emoney/",
+    explorer: "https://www.mintscan.io/emoney",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Emoney3,
     name: "e-Money",
@@ -320,7 +320,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Juno1]: {
     rpc: "https://rpc-juno.itastakers.com",
     rest: "https://lcd-juno.itastakers.com",
-    explorer: "https://www.mintscan.io/juno/",
+    explorer: "https://www.mintscan.io/juno",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Juno1,
     name: "Juno",
@@ -371,9 +371,9 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Mars1]: {
-    rpc: "https://rpc.marsprotocol.io/",
-    rest: "https://rest.marsprotocol.io/",
-    explorer: "https://explorer.marsprotocol.io/",
+    rpc: "https://rpc.marsprotocol.io",
+    rest: "https://rest.marsprotocol.io",
+    explorer: "https://explorer.marsprotocol.io",
     explorerName: "Mars Explorer",
     chainId: ChainInfoID.Mars1,
     name: "Mars Hub",
@@ -397,9 +397,9 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.MarsAres1]: {
-    rpc: "https://testnet-rpc.marsprotocol.io/",
-    rest: "https://testnet-rest.marsprotocol.io/",
-    explorer: "https://testnet-explorer.marsprotocol.io/",
+    rpc: "https://testnet-rpc.marsprotocol.io",
+    rest: "https://testnet-rest.marsprotocol.io",
+    explorer: "https://testnet-explorer.marsprotocol.io",
     explorerName: "Mars Explorer",
     chainId: ChainInfoID.MarsAres1,
     name: "Mars Hub Testnet",
@@ -423,9 +423,9 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.MarsAres2]: {
-    rpc: "http://ares2.mywire.org:56657/",
-    rest: "http://ares2.mywire.org:1320/",
-    explorer: "https://testnet-explorer.marsprotocol.io/",
+    rpc: "https://ares2-rpc.larry.coffee",
+    rest: "https://ares2-rest.larry.coffee",
+    explorer: "https://testnet-explorer.marsprotocol.io",
     explorerName: "Mars Explorer",
     chainId: ChainInfoID.MarsAres2,
     name: "Mars Hub Temporary Testnet",
@@ -1068,8 +1068,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Mantle1]: {
-    rpc: "https://rpc.assetmantle.one/",
-    rest: "https://rest.assetmantle.one/",
+    rpc: "https://rpc.assetmantle.one",
+    rest: "https://rest.assetmantle.one",
     explorer: "https://mintscan.io/asset-mantle",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Mantle1,
@@ -1089,7 +1089,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.PioMainnet1]: {
-    rpc: "https://rpc.provenance.io/",
+    rpc: "https://rpc.provenance.io",
     rest: "https://api.provenance.io",
     explorer: "https://mintscan.io/provenance",
     explorerName: "Mintscan",
@@ -1166,8 +1166,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Evmos_9001_2]: {
-    rpc: "https://rpc-evmos.keplr.app/",
-    rest: "https://lcd-evmos.keplr.app/",
+    rpc: "https://rpc-evmos.keplr.app",
+    rest: "https://lcd-evmos.keplr.app",
     explorer: "https://mintscan.io/evmos",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Evmos_9001_2,
@@ -1193,8 +1193,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.Phoenix1]: {
-    rpc: "https://rpc.terrav2.ccvalidators.com/",
-    rest: "https://phoenix-lcd.terra.dev/",
+    rpc: "https://rpc.terrav2.ccvalidators.com",
+    rest: "https://phoenix-lcd.terra.dev",
     explorer: "https://finder.terra.money/mainnet",
     explorerName: "TerraFinder",
     chainId: ChainInfoID.Phoenix1,
@@ -1221,8 +1221,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer"],
   },
   [ChainInfoID.Titan1]: {
-    rpc: "https://rpcapi.rizon.world/",
-    rest: "https://restapi.rizon.world/",
+    rpc: "https://rpcapi.rizon.world",
+    rest: "https://restapi.rizon.world",
     explorer: "https://mintscan.io/rizon",
     explorerName: "Mintscan",
     chainId: ChainInfoID.Titan1,
