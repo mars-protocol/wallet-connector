@@ -423,8 +423,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     features: ["ibc-transfer", "ibc-go"],
   },
   [ChainInfoID.MarsAres2]: {
-    rpc: "https://ares2-rpc.larry.coffee",
-    rest: "https://ares2-rest.larry.coffee",
+    rpc: "https://rpc-temp.marsprotocol.io",
+    rest: " https://rest-temp.marsprotocol.io",
     explorer: "https://testnet-explorer.marsprotocol.io",
     explorerName: "Mars Explorer",
     chainId: ChainInfoID.MarsAres2,
