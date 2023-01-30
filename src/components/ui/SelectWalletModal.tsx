@@ -25,7 +25,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   status,
   ...props
 }) => {
-  const { connect, providers, recentWallet } = useShuttle()
+  const { connect, providers, recentWallet, disconnect } = useShuttle()
   const [isHover, setIsHover] = useState<WalletID | undefined>()
   const [lastClicked, setLastClicked] = useState<WalletID | undefined>()
 
@@ -80,7 +80,12 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         status === WalletConnectionStatus.AutoConnect &&
         recentWallet !== null
       ) {
-        handleConnectClick(recentWallet.providerId as WalletID, chainId)
+        recentWallet.network.chainId === chainId
+          ? handleConnectClick(recentWallet.providerId as WalletID, chainId)
+          : () => {
+              disconnect(recentWallet.providerId, recentWallet.network.chainId)
+              setStatus(WalletConnectionStatus.Unconnected)
+            }
       }
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
     [status, recentWallet]
