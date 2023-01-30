@@ -373,7 +373,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Mars1]: {
     rpc: "https://rpc.marsprotocol.io/",
     rest: "https://rest.marsprotocol.io/",
-    explorer: "http://explorer.marsprotocol.io/",
+    explorer: "https://explorer.marsprotocol.io/",
     explorerName: "Mars Explorer",
     chainId: ChainInfoID.Mars1,
     name: "Mars Hub",
@@ -399,10 +399,36 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.MarsAres1]: {
     rpc: "https://testnet-rpc.marsprotocol.io/",
     rest: "https://testnet-rest.marsprotocol.io/",
-    explorer: "http://testnet-explorer.marsprotocol.io/",
+    explorer: "https://testnet-explorer.marsprotocol.io/",
     explorerName: "Mars Explorer",
     chainId: ChainInfoID.MarsAres1,
     name: "Mars Hub Testnet",
+    bip44: {
+      coinType: 118,
+    },
+    alternativeBIP44s: [{ coinType: 330 }],
+    bech32Config: Bech32Address.defaultBech32Config("mars"),
+    gasPrice: "0umars",
+    defaultCurrency: {
+      coinDenom: "MARS",
+      coinMinimalDenom: "umars",
+      coinDecimals: 6,
+      coinGeckoId: "marsprotocol",
+      gasPriceStep: {
+        low: 0,
+        average: 0.00625,
+        high: 0.01,
+      },
+    },
+    features: ["ibc-transfer", "ibc-go"],
+  },
+  [ChainInfoID.MarsAres2]: {
+    rpc: "http://ares2.mywire.org:56657/",
+    rest: "http://ares2.mywire.org:1320/",
+    explorer: "https://testnet-explorer.marsprotocol.io/",
+    explorerName: "Mars Explorer",
+    chainId: ChainInfoID.MarsAres2,
+    name: "Mars Hub Temporary Testnet",
     bip44: {
       coinType: 118,
     },

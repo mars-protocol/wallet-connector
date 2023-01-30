@@ -34,6 +34,7 @@ export enum ChainInfoID {
   Uni3 = "uni-3",
   Mars1 = "mars-1",
   MarsAres1 = "ares-1",
+  MarsAres2 = "ares-2",
   Microtick1 = "microtick-1",
   LikecoinMainnet2 = "likecoin-mainnet-2",
   Impacthub3 = "impacthub-3",
