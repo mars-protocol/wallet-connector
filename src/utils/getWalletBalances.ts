@@ -8,7 +8,11 @@ export const getWalletBalances = async (
   chainId: string
 ): Promise<BalancesResponse | undefined> => {
   const chainInfo = getChainInfo(chainId)
-  const URL = `${chainInfo.rest}/cosmos/bank/v1beta1/balances/${address}`
+  const URI =
+    chainInfo.rest.slice(-1) === "/"
+      ? "cosmos/bank/v1beta1/balances/"
+      : "/cosmos/bank/v1beta1/balances/"
+  const URL = `${chainInfo.rest}${URI}${address}`
 
   return await axios({
     url: URL,
