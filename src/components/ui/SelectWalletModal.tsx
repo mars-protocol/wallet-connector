@@ -27,7 +27,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 }) => {
   const { connect, providers, recentWallet, disconnect } = useShuttle()
   const [isHover, setIsHover] = useState<WalletID | undefined>()
-  const [lastClicked, setLastClicked] = useState<string | undefined>()
+  const [lastClicked, setLastClicked] = useState<WalletID | undefined>()
 
   const handleMouseEnter = (walletID: WalletID) => {
     setIsHover(walletID)
@@ -37,7 +37,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     setIsHover(undefined)
   }
 
-  const handleConnectClick = async (providerId: string, chainId: string) => {
+  const handleConnectClick = async (providerId: WalletID, chainId: string) => {
     setLastClicked(providerId)
     closeModal()
     const slightDelay = setTimeout(
@@ -105,7 +105,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
             e.preventDefault()
             setIsHover(undefined)
             if (wallet.installed) {
-              handleConnectClick(wallet.provider.id, chainId)
+              handleConnectClick(wallet.id, chainId)
             } else {
               window.open(wallet.installURL, "_blank")
               closeModal()
