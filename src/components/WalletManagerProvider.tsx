@@ -1,4 +1,8 @@
-import { Network, ShuttleProvider, WalletProvider } from "@delphi-labs/shuttle"
+import {
+  MobileWalletProvider,
+  ShuttleProvider,
+  WalletProvider,
+} from "@delphi-labs/shuttle"
 import React, {
   FunctionComponent,
   useCallback,
@@ -34,6 +38,11 @@ export const WalletManagerProvider: FunctionComponent<
     WalletConnectionStatus.Unconnected
   )
 
+  const networks = useMemo(() => {
+    const network = getChainInfo(defaultChainId, chainInfoOverrides)
+    return [network]
+  }, [defaultChainId, chainInfoOverrides])
+
   const enabledWalletsFiltered: Wallet[] = useMemo(() => {
     const tempEnabledWalletFiltered: Wallet[] = []
     enabledWallets.forEach((walletID) => {
@@ -60,17 +69,29 @@ export const WalletManagerProvider: FunctionComponent<
     return tempEnabledWalletFiltered
   }, [enabledWallets, walletMetaOverride])
 
-  const providers: WalletProvider[] = useMemo(() => {
-    const network = getChainInfo(defaultChainId, chainInfoOverrides)
-    const networks: Network[] = [network]
+  const providers: WalletProvider[] | undefined = useMemo(() => {
+    if (!networks) return
     const tempProviders: WalletProvider[] = []
 
     enabledWalletsFiltered.forEach((wallet) => {
-      tempProviders.push(new wallet.provider({ networks }))
+      if (wallet.type === "extension")
+        tempProviders.push(new wallet.provider({ networks }))
     })
 
     return tempProviders
-  }, [enabledWalletsFiltered, defaultChainId, chainInfoOverrides])
+  }, [enabledWalletsFiltered, networks])
+
+  const mobileProviders: MobileWalletProvider[] | undefined = useMemo(() => {
+    if (!networks) return
+    const tempProviders: MobileWalletProvider[] = []
+
+    enabledWalletsFiltered.forEach((wallet) => {
+      if (wallet.type === "app")
+        tempProviders.push(new wallet.provider({ networks }))
+    })
+
+    return tempProviders
+  }, [enabledWalletsFiltered, networks])
 
   useEffect(
     () => {
@@ -115,8 +136,14 @@ export const WalletManagerProvider: FunctionComponent<
     setStatus(WalletConnectionStatus.Retry)
   }
 
+  if (!providers || !mobileProviders) return null
+
   return (
-    <ShuttleProvider persistent={persistent} providers={providers}>
+    <ShuttleProvider
+      mobileProviders={mobileProviders}
+      persistent={persistent}
+      providers={providers}
+    >
       <WalletManagerContext.Provider value={value}>
         {children}
         <SelectWalletModal

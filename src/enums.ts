@@ -12,8 +12,9 @@ export enum WalletID {
   Falcon = "falcon",
   Keplr = "keplr",
   Leap = "leap-cosmos",
-  TerraStation = "terra-station",
+  StationWallet = "terra-station",
   Xdefi = "xdefi",
+  MobileStationWallet = "mobile-terra-station",
 }
 
 export enum ChainInfoID {

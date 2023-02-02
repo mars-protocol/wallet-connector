@@ -27,7 +27,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 }) => {
   const { connect, providers, recentWallet, disconnect } = useShuttle()
   const [isHover, setIsHover] = useState<WalletID | undefined>()
-  const [lastClicked, setLastClicked] = useState<WalletID | undefined>()
+  const [lastClicked, setLastClicked] = useState<string | undefined>()
 
   const handleMouseEnter = (walletID: WalletID) => {
     setIsHover(walletID)
@@ -37,7 +37,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     setIsHover(undefined)
   }
 
-  const handleConnectClick = async (providerId: WalletID, chainId: string) => {
+  const handleConnectClick = async (providerId: string, chainId: string) => {
     setLastClicked(providerId)
     closeModal()
     const slightDelay = setTimeout(
@@ -47,9 +47,10 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 
     let connected = true
     try {
-      await connect(providerId, chainId)
+      await connect({ providerId, chainId })
     } catch (error) {
       if (error) {
+        console.error("Connecting with:", { providerId, chainId })
         console.error("Wallet Connector: ", error)
         connected = false
       }
@@ -83,7 +84,10 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         recentWallet.network.chainId === chainId
           ? handleConnectClick(recentWallet.providerId as WalletID, chainId)
           : () => {
-              disconnect(recentWallet.providerId, recentWallet.network.chainId)
+              disconnect({
+                providerId: recentWallet.providerId,
+                chainId: recentWallet.network.chainId,
+              })
               setStatus(WalletConnectionStatus.Unconnected)
             }
       }
@@ -101,7 +105,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
             e.preventDefault()
             setIsHover(undefined)
             if (wallet.installed) {
-              handleConnectClick(wallet.id, chainId)
+              handleConnectClick(wallet.provider.id, chainId)
             } else {
               window.open(wallet.installURL, "_blank")
               closeModal()

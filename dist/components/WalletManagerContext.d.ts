@@ -7,11 +7,26 @@ declare const WalletManagerContext: import("react").Context<IWalletManagerContex
 declare const useWalletManager: () => IWalletManagerContext;
 declare const useWallet: () => {
     providers: import("@delphi-labs/shuttle").WalletProvider[];
-    connect: (providerId: string, chainId: string) => Promise<void>;
+    mobileProviders: import("@delphi-labs/shuttle").MobileWalletProvider[];
+    mobileConnect: (options: {
+        mobileProviderId: string;
+        chainId: string;
+        callback?: ((walletConnection: import("@delphi-labs/shuttle").WalletConnection) => void) | undefined;
+    }) => Promise<import("@delphi-labs/shuttle").MobileConnectResponse>;
+    connect: (options: {
+        providerId: string;
+        chainId: string;
+    }) => Promise<void>;
     wallets: import("@delphi-labs/shuttle").WalletConnection[];
-    getWallets: (providerId?: string | undefined, chainId?: string | undefined) => import("@delphi-labs/shuttle").WalletConnection[];
+    getWallets: (filters?: {
+        providerId?: string | undefined;
+        chainId?: string | undefined;
+    } | undefined) => import("@delphi-labs/shuttle").WalletConnection[];
     recentWallet: import("@delphi-labs/shuttle").WalletConnection | null;
-    disconnect: (providerId?: string | undefined, chainId?: string | undefined) => void;
+    disconnect: (filters?: {
+        providerId?: string | undefined;
+        chainId?: string | undefined;
+    } | undefined) => void;
     disconnectWallet: (wallet: import("@delphi-labs/shuttle").WalletConnection) => void;
     simulate: (options: {
         messages: import("@delphi-labs/shuttle").TransactionMsg<any>[];
@@ -23,6 +38,7 @@ declare const useWallet: () => {
         gasLimit?: string | null | undefined;
         memo?: string | null | undefined;
         wallet?: import("@delphi-labs/shuttle").WalletConnection | null | undefined;
+        mobile?: boolean | undefined;
     }) => Promise<import("@delphi-labs/shuttle").BroadcastResult>;
     sign: (options: {
         messages: import("@delphi-labs/shuttle").TransactionMsg<any>[];
@@ -30,6 +46,7 @@ declare const useWallet: () => {
         gasLimit?: string | null | undefined;
         memo?: string | null | undefined;
         wallet?: import("@delphi-labs/shuttle").WalletConnection | null | undefined;
+        mobile?: boolean | undefined;
     }) => Promise<import("@delphi-labs/shuttle").SigningResult>;
 };
 declare const getClient: (rpc: string) => Promise<CosmWasmClient>;

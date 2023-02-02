@@ -3,6 +3,7 @@ import {
   FalconProvider,
   KeplrProvider,
   LeapCosmosProvider,
+  MobileTerraStationProvider,
   TerraStationProvider,
   XDefiProvider,
 } from "@delphi-labs/shuttle"
@@ -20,6 +21,7 @@ export const CosmostationWallet: Wallet = {
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
   provider: CosmostationProvider,
+  type: "extension",
 }
 
 export const FalconWallet: Wallet = {
@@ -32,6 +34,7 @@ export const FalconWallet: Wallet = {
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/falcon-wallet-extension.png",
   provider: FalconProvider,
+  type: "extension",
 }
 
 export const KeplrWallet: Wallet = {
@@ -43,6 +46,7 @@ export const KeplrWallet: Wallet = {
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
   provider: KeplrProvider,
+  type: "extension",
 }
 
 export const LeapWallet: Wallet = {
@@ -54,18 +58,33 @@ export const LeapWallet: Wallet = {
   description: "Leap Extension",
   imageUrl: "https://assets.leapwallet.io/logos/leap-cosmos-logo.png",
   provider: LeapCosmosProvider,
+  type: "extension",
 }
 
-export const TerraStationWallet: Wallet = {
-  id: WalletID.TerraStation,
+export const StationWallet: Wallet = {
+  id: WalletID.StationWallet,
   name: "Station Wallet",
   install: "Install Station Wallet",
   installURL:
     "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
-  description: "Station Extension",
+  description: "Station Wallet Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
   provider: TerraStationProvider,
+  type: "extension",
+}
+
+export const MobileStationWallet: Wallet = {
+  id: WalletID.MobileStationWallet,
+  name: "Station Wallet Mobile App",
+  install: "Install Station Wallet Mobile App",
+  installURL:
+    "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
+  description: "Station Mobile App",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
+  provider: MobileTerraStationProvider,
+  type: "app",
 }
 
 export const XdefiWallet: Wallet = {
@@ -78,6 +97,7 @@ export const XdefiWallet: Wallet = {
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/xdefi-wallet-extension.png",
   provider: XDefiProvider,
+  type: "extension",
 }
 
 export const wallets: Wallet[] = [
@@ -85,6 +105,7 @@ export const wallets: Wallet[] = [
   FalconWallet,
   KeplrWallet,
   LeapWallet,
-  TerraStationWallet,
+  MobileStationWallet,
+  StationWallet,
   XdefiWallet,
 ]

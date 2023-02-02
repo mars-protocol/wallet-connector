@@ -13,6 +13,7 @@ export interface Wallet {
     imageUrl?: string;
     provider: any;
     installed?: boolean;
+    type: "app" | "extension";
 }
 export interface AssetResponse {
     denom: string;
