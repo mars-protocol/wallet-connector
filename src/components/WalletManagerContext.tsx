@@ -26,7 +26,7 @@ const useWalletManager = () => {
 const useWallet = useShuttle
 
 const getClient = async (rpc: string) => {
-  const rpcURL = rpc.slice(-1) === "/" ? rpc : `${rpc}/`
+  const rpcURL = new URL("/", rpc).href
   const queryClient = await CosmWasmClient.connect(rpcURL)
 
   return queryClient
