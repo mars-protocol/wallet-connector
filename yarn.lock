@@ -262,10 +262,10 @@
   resolved "https://registry.yarnpkg.com/@cosmjs/utils/-/utils-0.29.5.tgz#3fed1b3528ae8c5f1eb5d29b68755bebfd3294ee"
   integrity sha512-m7h+RXDUxOzEOGt4P+3OVPX7PuakZT3GBmaM/Y2u+abN3xZkziykD/NvedYFvvCCdQo714XcGl33bwifS9FZPQ==
 
-"@delphi-labs/shuttle@^2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@delphi-labs/shuttle/-/shuttle-2.1.2.tgz#1db50e81ccf2f72b00282416b05b2007591b6a58"
-  integrity sha512-V0aMimsraWxqf+RKFkwvCokWCNU0sGbw58hXyo92abBeKvIkN7GkrT2R+pEM37S0/uJ4VyRTT9ly/ky6/435Ug==
+"@delphi-labs/shuttle@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@delphi-labs/shuttle/-/shuttle-2.3.2.tgz#d05890bca91b3b18fc451bde3cb03d83072c1c42"
+  integrity sha512-xgebNiS761IPiqQ5q3no1CBNGD/Q5vznV7ydUqismzR/Vw4GIEAqJv6QFIe7HbjHPXkIPeL/enimEGwAnNB1Ag==
   dependencies:
     "@cosmjs/amino" "^0.29.5"
     "@cosmjs/cosmwasm-stargate" "^0.29.2"
@@ -276,6 +276,8 @@
     "@injectivelabs/sdk-ts" "^1.0.360"
     "@injectivelabs/ts-types" "^1.0.28"
     "@injectivelabs/utils" "^1.0.60"
+    "@keplr-wallet/cosmos" "^0.11.34"
+    "@keplr-wallet/proto-types" "^0.11.38"
     "@metamask/eth-sig-util" "^5.0.2"
     "@walletconnect/client" "^1.8.0"
     "@walletconnect/core" "^1.8.0"
@@ -283,6 +285,7 @@
     "@walletconnect/utils" "^1.8.0"
     cosmjs-types "^0.6.1"
     ethereumjs-util "^7.1.5"
+    long "^5.2.1"
     secp256k1 "^5.0.0"
     tslib "^2.4.0"
     zustand "^4.3.1"
@@ -935,7 +938,7 @@
     buffer "^6.0.3"
     delay "^4.4.0"
 
-"@keplr-wallet/cosmos@^0.11.38":
+"@keplr-wallet/cosmos@^0.11.34", "@keplr-wallet/cosmos@^0.11.38":
   version "0.11.38"
   resolved "https://registry.yarnpkg.com/@keplr-wallet/cosmos/-/cosmos-0.11.38.tgz#5657e3fed10c9a9f75d29f01a137913403196348"
   integrity sha512-0N7pf77cSPp/tNzsCp9dhbmEStXZJv+7KZv3FICRpgSp2w6vKwMPwJ5GIt0T0X4RuiQfgkabnDX77DkBSHo9ng==
@@ -966,7 +969,7 @@
     elliptic "^6.5.3"
     sha.js "^2.4.11"
 
-"@keplr-wallet/proto-types@0.11.38":
+"@keplr-wallet/proto-types@0.11.38", "@keplr-wallet/proto-types@^0.11.38":
   version "0.11.38"
   resolved "https://registry.yarnpkg.com/@keplr-wallet/proto-types/-/proto-types-0.11.38.tgz#b31152b06e1f7a9d7c5768767a22d79dbf4c9161"
   integrity sha512-fMiINr1Y59GfIID1oeCuPkGuBm2WTBjQ/qekDHvwM0aBEB0Ca0J9chhyqwziHvmKAShVmZVyb9P2r/1ZqKV21g==
@@ -1328,7 +1331,7 @@
   resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.2.tgz#b74129719fc8d11c01868010082d483b7545591a"
   integrity sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==
 
-"@types/node@*", "@types/node@>=13.7.0", "@types/node@^18.11.18":
+"@types/node@*", "@types/node@>=13.7.0":
   version "18.11.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.18.tgz#8dfb97f0da23c2293e554c5a50d61ef134d7697f"
   integrity sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==
@@ -1342,6 +1345,11 @@
   version "11.11.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.6.tgz#df929d1bb2eee5afdda598a41930fe50b43eaa6a"
   integrity sha512-Exw4yUWMBXM3X+8oqzJNRqZSwUAaS4+7NdvHqQuFi/d+synz++xmX3QIf+BFqneW8N31R8Ky+sikfZUXq07ggQ==
+
+"@types/node@^18.11.19":
+  version "18.11.19"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.19.tgz#35e26df9ec441ab99d73e99e9aca82935eea216d"
+  integrity sha512-YUgMWAQBWLObABqrvx8qKO1enAvBUdjZOAWQ5grBAkp5LQv45jBvYKZ3oFS9iKRCQyFjqw6iuEa1vmFqtxYLZw==
 
 "@types/pbkdf2@^3.0.0":
   version "3.1.0"
@@ -1985,10 +1993,10 @@ axios@^0.27.2:
     follow-redirects "^1.14.9"
     form-data "^4.0.0"
 
-axios@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.1.tgz#80bf6c8dbb46e6db1fa8fe9ab114c1ca7405c2ee"
-  integrity sha512-78pWJsQTceInlyaeBQeYZ/QgZeWS8hGeKiIJiDKQe3hEyBb7sEMq0K4gjx+Va6WHTYO4zI/RRl8qGRzn0YMadA==
+axios@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.2.tgz#7ac517f0fa3ec46e0e636223fd973713a09c72b3"
+  integrity sha512-1M3O703bYqYuPhbHeya5bnhpYVsDDRyQSabNja04mZtboLNSuZ4YrltestrLXfHgmzua4TpUqRiVKbiQuo2epw==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -3937,7 +3945,7 @@ long@^4.0.0:
   resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
   integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
 
-long@^5.2.0:
+long@^5.2.0, long@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/long/-/long-5.2.1.tgz#e27595d0083d103d2fa2c20c7699f8e0c92b897f"
   integrity sha512-GKSNGeNAtw8IryjjkhZxuKB3JzlcLTwjtiQCHKvqQet81I93kXslhDQruGI/QsddO83mcDToBVy7GqGS/zYf/A==

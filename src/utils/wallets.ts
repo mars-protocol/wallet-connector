@@ -3,6 +3,7 @@ import {
   FalconProvider,
   KeplrProvider,
   LeapCosmosProvider,
+  MobileKeplrProvider,
   MobileTerraStationProvider,
   TerraStationProvider,
   XDefiProvider,
@@ -49,6 +50,18 @@ export const KeplrWallet: Wallet = {
   type: "extension",
 }
 
+export const KeplrMobileWallet: Wallet = {
+  id: WalletID.KeplrMobile,
+  name: "Keplr Wallet",
+  install: "Install Keplr Wallet",
+  installURL: "https://www.keplr.app/download",
+  description: "Keplr Mobile App",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
+  provider: MobileKeplrProvider,
+  type: "app",
+}
+
 export const LeapWallet: Wallet = {
   id: WalletID.Leap,
   name: "Leap Wallet",
@@ -74,13 +87,13 @@ export const StationWallet: Wallet = {
   type: "extension",
 }
 
-export const MobileStationWallet: Wallet = {
-  id: WalletID.MobileStationWallet,
-  name: "Station Wallet Mobile App",
-  install: "Install Station Wallet Mobile App",
+export const StationMobileWallet: Wallet = {
+  id: WalletID.StationMobileWallet,
+  name: "Station Wallet",
+  install: "Install Station Wallet",
   installURL:
     "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
-  description: "Station Mobile App",
+  description: "Station Wallet Mobile App",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
   provider: MobileTerraStationProvider,
@@ -104,8 +117,9 @@ export const wallets: Wallet[] = [
   CosmostationWallet,
   FalconWallet,
   KeplrWallet,
+  KeplrMobileWallet,
   LeapWallet,
-  MobileStationWallet,
   StationWallet,
+  StationMobileWallet,
   XdefiWallet,
 ]

@@ -11,10 +11,11 @@ export enum WalletID {
   Cosmostation = "cosmostation",
   Falcon = "falcon",
   Keplr = "keplr",
+  KeplrMobile = "mobile-keplr",
   Leap = "leap-cosmos",
   StationWallet = "terra-station",
+  StationMobileWallet = "mobile-terra-station",
   Xdefi = "xdefi",
-  MobileStationWallet = "mobile-terra-station",
 }
 
 export enum ChainInfoID {
