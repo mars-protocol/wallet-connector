@@ -56,7 +56,7 @@ export const KeplrMobileWallet: Wallet = {
   walletConnect: "Keplr WalletConnect",
   description: "Keplr Mobile App",
   imageUrl:
-    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-connect-extension.png",
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
   mobileImageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-connect.png",
   provider: MobileKeplrProvider,
@@ -89,7 +89,7 @@ export const StationWallet: Wallet = {
 }
 
 export const StationMobileWallet: Wallet = {
-  id: WalletID.StationMobileWallet,
+  id: WalletID.StationWalletMobile,
   name: "Station Wallet",
   walletConnect: "Station Wallet WalletConnect",
   description: "Station Wallet Mobile App",

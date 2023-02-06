@@ -240,6 +240,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   }
 
   const sortedWallets = wallets
+    .reverse()
     .filter((wallet) => isDesktop || wallet.type === "app")
     .sort((a) => (a.installed ? -1 : 1))
 

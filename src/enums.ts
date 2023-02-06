@@ -15,7 +15,7 @@ export enum WalletID {
   KeplrMobile = "mobile-keplr",
   Leap = "leap-cosmos",
   StationWallet = "terra-station",
-  StationMobileWallet = "mobile-terra-station",
+  StationWalletMobile = "mobile-terra-station",
   Xdefi = "xdefi",
 }
 
