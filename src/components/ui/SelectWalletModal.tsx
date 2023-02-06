@@ -1,5 +1,6 @@
 import { useShuttle } from "@delphi-labs/shuttle"
 import React, { FunctionComponent, useEffect, useState } from "react"
+import { isMobile, isTablet } from "react-device-detect"
 
 import { WalletConnectionStatus, WalletID } from "../../enums"
 import { Wallet } from "../../types"
@@ -168,6 +169,27 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     )
   }
 
+  const walletType = isMobile || isTablet ? "app" : "extension"
+
+  console.table({
+    desktop: wallets
+      .filter((wallet) => wallet.type === "extension")
+      .sort((a) => (a.installed ? -1 : 1))
+      .map((installedWallet) => walletItem(installedWallet)),
+    mobile: wallets
+      .filter((wallet) => wallet.type === "app")
+      .sort((a) => (a.installed ? -1 : 1))
+      .map((installedWallet) => walletItem(installedWallet)),
+  })
+
+  const sortedWallets = wallets
+    .filter((wallet) => wallet.type === walletType)
+    .sort((a) => (a.installed ? -1 : 1))
+
+  if (!sortedWallets.length) {
+    return null
+  }
+
   return (
     <BaseModal
       classNames={classNames}
@@ -181,11 +203,9 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         }
       >
         {wallets
-          .filter((wallet) => wallet.installed === true)
+          .filter((wallet) => wallet.type === walletType)
+          .sort((a) => (a.installed ? -1 : 1))
           .map((installedWallet) => walletItem(installedWallet))}
-        {wallets
-          .filter((wallet) => wallet.installed !== true)
-          .map((installableWallet) => walletItem(installableWallet))}
       </div>
     </BaseModal>
   )

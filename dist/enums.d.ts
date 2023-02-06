@@ -10,10 +10,11 @@ export declare enum WalletID {
     Cosmostation = "cosmostation",
     Falcon = "falcon",
     Keplr = "keplr",
+    KeplrMobile = "mobile-keplr",
     Leap = "leap-cosmos",
     StationWallet = "terra-station",
-    Xdefi = "xdefi",
-    MobileStationWallet = "mobile-terra-station"
+    StationMobileWallet = "mobile-terra-station",
+    Xdefi = "xdefi"
 }
 export declare enum ChainInfoID {
     Osmosis1 = "osmosis-1",
