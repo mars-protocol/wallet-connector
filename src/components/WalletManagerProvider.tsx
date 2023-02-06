@@ -37,6 +37,7 @@ export const WalletManagerProvider: FunctionComponent<
   const [status, setStatus] = useState<WalletConnectionStatus>(
     WalletConnectionStatus.Unconnected
   )
+  const [qrCodeUrl, setQRCodeUrl] = useState<string | undefined>()
 
   const networks = useMemo(() => {
     const network = getChainInfo(defaultChainId, chainInfoOverrides)

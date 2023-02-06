@@ -1,9 +1,10 @@
 import { FunctionComponent, ReactElement, ReactNode } from "react";
 import { BaseModalProps } from "./BaseModal";
-export interface EnablingWalletModalProps extends BaseModalProps {
+interface Props extends BaseModalProps {
     enablingStringOverride?: string | ReactElement;
     reset: () => void;
     renderLoader?: () => ReactNode;
 }
-export declare const EnablingWalletModal: FunctionComponent<EnablingWalletModalProps>;
+export declare const EnablingWalletModal: FunctionComponent<Props>;
+export {};
 //# sourceMappingURL=EnablingWalletModal.d.ts.map

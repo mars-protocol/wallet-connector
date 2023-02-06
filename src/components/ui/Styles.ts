@@ -117,6 +117,11 @@ export const selectWalletStyles: { [key: string]: React.CSSProperties } = {
     lineHeight: "20px",
   },
 
+  walletConnect: {
+    padding: "16px",
+    width: "100%",
+  },
+
   noneAvailableText: {
     textAlign: "center",
   },

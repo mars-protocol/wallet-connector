@@ -9,15 +9,13 @@ import React, {
 import { BaseModal, BaseModalProps } from "./BaseModal"
 import { enablingWalletStyles } from "./Styles"
 
-export interface EnablingWalletModalProps extends BaseModalProps {
+interface Props extends BaseModalProps {
   enablingStringOverride?: string | ReactElement
   reset: () => void
   renderLoader?: () => ReactNode
 }
 
-export const EnablingWalletModal: FunctionComponent<
-  EnablingWalletModalProps
-> = ({
+export const EnablingWalletModal: FunctionComponent<Props> = ({
   isOpen,
   classNames,
   renderLoader,

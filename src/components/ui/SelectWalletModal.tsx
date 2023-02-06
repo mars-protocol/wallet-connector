@@ -1,6 +1,13 @@
-import { useShuttle } from "@delphi-labs/shuttle"
+import { useShuttle, WalletConnection } from "@delphi-labs/shuttle"
 import React, { FunctionComponent, useEffect, useState } from "react"
-import { isMobile, isTablet } from "react-device-detect"
+import {
+  isAndroid,
+  isDesktop,
+  isIOS,
+  isMobile,
+  isTablet,
+} from "react-device-detect"
+import QRCode from "react-qr-code"
 
 import { WalletConnectionStatus, WalletID } from "../../enums"
 import { Wallet } from "../../types"
@@ -26,9 +33,11 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   status,
   ...props
 }) => {
-  const { connect, providers, recentWallet, disconnect } = useShuttle()
+  const { connect, providers, recentWallet, disconnect, mobileConnect } =
+    useShuttle()
   const [isHover, setIsHover] = useState<WalletID | undefined>()
   const [lastClicked, setLastClicked] = useState<WalletID | undefined>()
+  const [qrCodeUrl, setQRCodeUrl] = useState<string | undefined>()
 
   const handleMouseEnter = (walletID: WalletID) => {
     setIsHover(walletID)
@@ -38,17 +47,52 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     setIsHover(undefined)
   }
 
-  const handleConnectClick = async (providerId: WalletID, chainId: string) => {
+  const onMobileConnect = (walletConnection: WalletConnection) => {
+    console.log("Wallet Connection:", walletConnection)
+  }
+
+  const handleConnectClick = async (
+    providerId: WalletID,
+    chainId: string,
+    walletType: string
+  ) => {
     setLastClicked(providerId)
-    closeModal()
+
     const slightDelay = setTimeout(
-      () => setStatus(WalletConnectionStatus.Connecting),
+      () =>
+        setStatus(
+          isDesktop && walletType === "app"
+            ? WalletConnectionStatus.WalletConnect
+            : WalletConnectionStatus.Connecting
+        ),
       500
     )
 
     let connected = true
     try {
-      await connect({ providerId, chainId })
+      if (walletType !== "app") {
+        closeModal()
+        await connect({ providerId, chainId })
+      } else {
+        const urls = await mobileConnect({
+          mobileProviderId: providerId,
+          chainId,
+          callback: () => {
+            closeModal()
+          },
+        })
+        if (!isDesktop) {
+          if (isAndroid) {
+            window.location.href = urls.androidUrl
+          } else if (isIOS) {
+            window.location.href = urls.iosUrl
+          } else {
+            window.location.href = urls.androidUrl
+          }
+        } else {
+          setQRCodeUrl(urls.walletconnectUrl)
+        }
+      }
     } catch (error) {
       if (error) {
         console.error("Connecting with:", { providerId, chainId })
@@ -76,14 +120,18 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   useEffect(
     () => {
       if (status === WalletConnectionStatus.Retry && lastClicked) {
-        handleConnectClick(lastClicked, chainId)
+        handleConnectClick(lastClicked, chainId, "extension")
       }
       if (
         status === WalletConnectionStatus.AutoConnect &&
         recentWallet !== null
       ) {
         recentWallet.network.chainId === chainId
-          ? handleConnectClick(recentWallet.providerId as WalletID, chainId)
+          ? handleConnectClick(
+              recentWallet.providerId as WalletID,
+              chainId,
+              "extension"
+            )
           : () => {
               disconnect({
                 providerId: recentWallet.providerId,
@@ -96,7 +144,11 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     [status, recentWallet]
   )
 
+  const walletType = isMobile || isTablet ? "app" : "extension"
+
   const walletItem = (wallet: Wallet) => {
+    const isApp = wallet.type === "app"
+    const isWalletConnect = isApp && isDesktop
     return (
       <div key={wallet.id}>
         <div
@@ -105,8 +157,8 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           onClick={(e) => {
             e.preventDefault()
             setIsHover(undefined)
-            if (wallet.installed) {
-              handleConnectClick(wallet.id, chainId)
+            if (wallet.installed || wallet.type === "app") {
+              handleConnectClick(wallet.id, chainId, wallet.type)
             } else {
               window.open(wallet.installURL, "_blank")
               closeModal()
@@ -130,7 +182,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           <img
             alt={`${wallet.name} logo`}
             className={classNames?.walletImage}
-            src={wallet.imageUrl}
+            src={isWalletConnect ? wallet.mobileImageUrl : wallet.imageUrl}
             style={
               classNames?.walletImage
                 ? undefined
@@ -151,7 +203,11 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                   : selectWalletStyles.walletName
               }
             >
-              {wallet.installed ? wallet.name : wallet.install}
+              {isWalletConnect
+                ? wallet.walletConnect
+                : isApp || wallet.installed
+                ? wallet.name
+                : wallet.install}
             </div>
             <div
               className={classNames?.walletDescription}
@@ -161,7 +217,9 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                   : selectWalletStyles.walletDescription
               }
             >
-              {wallet.installed ? wallet.description : wallet.installURL}
+              {isApp || wallet.installed
+                ? wallet.description
+                : wallet.installURL}
             </div>
           </div>
         </div>
@@ -169,10 +227,8 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     )
   }
 
-  const walletType = isMobile || isTablet ? "app" : "extension"
-
   const sortedWallets = wallets
-    .filter((wallet) => wallet.type === walletType)
+    .filter((wallet) => isDesktop || wallet.type === "app")
     .sort((a) => (a.installed ? -1 : 1))
 
   if (!sortedWallets.length) {
@@ -198,17 +254,29 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       title={selectWalletOverride ? selectWalletOverride : "Select a wallet"}
       {...props}
     >
-      <div
-        className={classNames?.walletList}
-        style={
-          classNames?.walletList ? undefined : selectWalletStyles.walletList
-        }
-      >
-        {wallets
-          .filter((wallet) => wallet.type === walletType)
-          .sort((a) => (a.installed ? -1 : 1))
-          .map((installedWallet) => walletItem(installedWallet))}
-      </div>
+      {status === WalletConnectionStatus.WalletConnect ? (
+        <div
+          className={classNames?.walletConnect}
+          style={
+            classNames?.walletConnect
+              ? undefined
+              : selectWalletStyles.walletConnect
+          }
+        >
+          {qrCodeUrl && (
+            <QRCode bgColor="transparent" fgColor="##fff" value={qrCodeUrl} />
+          )}
+        </div>
+      ) : (
+        <div
+          className={classNames?.walletList}
+          style={
+            classNames?.walletList ? undefined : selectWalletStyles.walletList
+          }
+        >
+          {sortedWallets.map((installedWallet) => walletItem(installedWallet))}
+        </div>
+      )}
     </BaseModal>
   )
 }

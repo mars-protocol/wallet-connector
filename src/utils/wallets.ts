@@ -53,11 +53,12 @@ export const KeplrWallet: Wallet = {
 export const KeplrMobileWallet: Wallet = {
   id: WalletID.KeplrMobile,
   name: "Keplr Wallet",
-  install: "Install Keplr Wallet",
-  installURL: "https://www.keplr.app/download",
+  walletConnect: "Keplr WalletConnect",
   description: "Keplr Mobile App",
   imageUrl:
-    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-connect-extension.png",
+  mobileImageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-connect.png",
   provider: MobileKeplrProvider,
   type: "app",
 }
@@ -90,12 +91,12 @@ export const StationWallet: Wallet = {
 export const StationMobileWallet: Wallet = {
   id: WalletID.StationMobileWallet,
   name: "Station Wallet",
-  install: "Install Station Wallet",
-  installURL:
-    "https://chrome.google.com/webstore/detail/station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp",
+  walletConnect: "Station Wallet WalletConnect",
   description: "Station Wallet Mobile App",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
+  mobileImageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/wallet-connect.png",
   provider: MobileTerraStationProvider,
   type: "app",
 }

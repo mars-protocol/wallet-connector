@@ -21,6 +21,8 @@ export interface Wallet {
   installURL?: string
   description: string | ReactNode
   imageUrl?: string
+  mobileImageUrl?: string
+  walletConnect?: string
   provider: any
   installed?: boolean
   type: "app" | "extension"
@@ -97,6 +99,7 @@ export interface ModalClassNames {
   walletImage?: string
   walletInfo?: string
   walletName?: string
+  walletConnect?: string
   walletDescription?: string
   textContent?: string
   noneAvailableText?: string
