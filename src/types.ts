@@ -100,6 +100,7 @@ export interface ModalClassNames {
   walletInfo?: string
   walletName?: string
   walletConnect?: string
+  walletConnectQR?: string
   walletDescription?: string
   textContent?: string
   noneAvailableText?: string
@@ -119,6 +120,8 @@ export interface WalletManagerProviderProps {
   closeIcon?: ReactNode
   enablingStringOverride?: string
   selectWalletOverride?: string
+  noWalletsOverride?: string
+  scanQRCodeOverride?: string
   walletMetaOverride?: IWalletMetaOverride
   renderLoader?: () => ReactNode
   persistent?: boolean

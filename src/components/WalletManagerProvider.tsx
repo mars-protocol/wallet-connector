@@ -31,13 +31,14 @@ export const WalletManagerProvider: FunctionComponent<
   persistent = false,
   renderLoader,
   selectWalletOverride,
+  noWalletsOverride,
+  scanQRCodeOverride,
   walletMetaOverride,
 }) => {
   const [pickerModalOpen, setPickerModalOpen] = useState(false)
   const [status, setStatus] = useState<WalletConnectionStatus>(
     WalletConnectionStatus.Unconnected
   )
-  const [qrCodeUrl, setQRCodeUrl] = useState<string | undefined>()
 
   const networks = useMemo(() => {
     const network = getChainInfo(defaultChainId, chainInfoOverrides)
@@ -111,9 +112,18 @@ export const WalletManagerProvider: FunctionComponent<
     []
   )
 
-  const closePickerModal = () => setPickerModalOpen(false)
+  const closePickerModal = () => {
+    if (status === WalletConnectionStatus.WalletConnect) {
+      setStatus(WalletConnectionStatus.Unconnected)
+    }
 
-  const beginConnection = useCallback(() => setPickerModalOpen(true), [])
+    setPickerModalOpen(false)
+  }
+
+  const beginConnection = useCallback(() => {
+    setStatus(WalletConnectionStatus.Unconnected)
+    setPickerModalOpen(true)
+  }, [])
 
   const terminateConnection = useCallback(
     () => setStatus(WalletConnectionStatus.Unconnected),
@@ -154,7 +164,9 @@ export const WalletManagerProvider: FunctionComponent<
           closeIcon={closeIcon}
           closeModal={closePickerModal}
           isOpen={pickerModalOpen}
+          noWalletsOverride={noWalletsOverride}
           onClose={() => setPickerModalOpen(false)}
+          scanQRCodeOverride={scanQRCodeOverride}
           selectWalletOverride={selectWalletOverride}
           setStatus={statusChange}
           status={status}

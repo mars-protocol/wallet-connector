@@ -1,4 +1,4 @@
-import { useShuttle, WalletConnection } from "@delphi-labs/shuttle"
+import { useShuttle } from "@delphi-labs/shuttle"
 import React, { FunctionComponent, useEffect, useState } from "react"
 import {
   isAndroid,
@@ -18,8 +18,10 @@ interface Props extends BaseModalProps {
   wallets: Wallet[]
   chainId: string
   closeModal: () => void
+  noWalletsOverride?: string
   setStatus: (status: WalletConnectionStatus) => void
   selectWalletOverride?: string
+  scanQRCodeOverride?: string
   status: WalletConnectionStatus
 }
 
@@ -28,7 +30,9 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   chainId,
   closeModal,
   classNames,
+  noWalletsOverride,
   selectWalletOverride,
+  scanQRCodeOverride,
   setStatus,
   status,
   ...props
@@ -47,10 +51,6 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     setIsHover(undefined)
   }
 
-  const onMobileConnect = (walletConnection: WalletConnection) => {
-    console.log("Wallet Connection:", walletConnection)
-  }
-
   const handleConnectClick = async (
     providerId: WalletID,
     chainId: string,
@@ -58,22 +58,30 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   ) => {
     setLastClicked(providerId)
 
-    const slightDelay = setTimeout(
-      () =>
-        setStatus(
-          isDesktop && walletType === "app"
-            ? WalletConnectionStatus.WalletConnect
-            : WalletConnectionStatus.Connecting
-        ),
-      500
-    )
-
     let connected = true
-    try {
-      if (walletType !== "app") {
+    if (isDesktop && walletType !== "app") {
+      const slightDelay = setTimeout(
+        () => setStatus(WalletConnectionStatus.Connecting),
+        500
+      )
+      try {
         closeModal()
         await connect({ providerId, chainId })
-      } else {
+      } catch (error) {
+        if (error) {
+          console.error("Connecting with:", { providerId, chainId })
+          console.error("Wallet Connector: ", error)
+          connected = false
+        }
+      }
+      clearTimeout(slightDelay)
+      setStatus(
+        connected
+          ? WalletConnectionStatus.Connected
+          : WalletConnectionStatus.Errored
+      )
+    } else {
+      try {
         const urls = await mobileConnect({
           mobileProviderId: providerId,
           chainId,
@@ -82,6 +90,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           },
         })
         if (!isDesktop) {
+          setStatus(WalletConnectionStatus.Connecting)
           if (isAndroid) {
             window.location.href = urls.androidUrl
           } else if (isIOS) {
@@ -90,22 +99,17 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
             window.location.href = urls.androidUrl
           }
         } else {
+          setStatus(WalletConnectionStatus.WalletConnect)
           setQRCodeUrl(urls.walletconnectUrl)
         }
-      }
-    } catch (error) {
-      if (error) {
-        console.error("Connecting with:", { providerId, chainId })
-        console.error("Wallet Connector: ", error)
-        connected = false
+      } catch (error) {
+        if (error) {
+          console.error("Connecting with:", { providerId, chainId })
+          console.error("Wallet Connector: ", error)
+          connected = false
+        }
       }
     }
-    clearTimeout(slightDelay)
-    setStatus(
-      connected
-        ? WalletConnectionStatus.Connected
-        : WalletConnectionStatus.Errored
-    )
   }
 
   wallets.forEach((wallet, index) => {
@@ -119,6 +123,14 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 
   useEffect(
     () => {
+      if (
+        ((status === WalletConnectionStatus.Connecting && isMobile) ||
+          status === WalletConnectionStatus.WalletConnect) &&
+        recentWallet
+      ) {
+        setStatus(WalletConnectionStatus.Connected)
+      }
+
       if (status === WalletConnectionStatus.Retry && lastClicked) {
         handleConnectClick(lastClicked, chainId, "extension")
       }
@@ -141,7 +153,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
             }
       }
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [status, recentWallet]
+    [status, recentWallet, isMobile]
   )
 
   const walletType = isMobile || isTablet ? "app" : "extension"
@@ -233,7 +245,11 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 
   if (!sortedWallets.length) {
     return (
-      <BaseModal classNames={classNames} title={"Select a wallet"} {...props}>
+      <BaseModal
+        classNames={classNames}
+        title={selectWalletOverride ? selectWalletOverride : "Select a wallet"}
+        {...props}
+      >
         <p
           className={classNames?.noneAvailableText}
           style={
@@ -242,7 +258,9 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
               : selectWalletStyles.noneAvailableText
           }
         >
-          There are currently no wallets supported for your device
+          {noWalletsOverride
+            ? noWalletsOverride
+            : "There are currently no wallets supported for your device"}
         </p>
       </BaseModal>
     )
@@ -251,7 +269,15 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   return (
     <BaseModal
       classNames={classNames}
-      title={selectWalletOverride ? selectWalletOverride : "Select a wallet"}
+      title={
+        status === WalletConnectionStatus.WalletConnect
+          ? scanQRCodeOverride
+            ? scanQRCodeOverride
+            : "Scan QR Code to Connect"
+          : selectWalletOverride
+          ? selectWalletOverride
+          : "Select a wallet"
+      }
       {...props}
     >
       {status === WalletConnectionStatus.WalletConnect ? (
@@ -264,7 +290,17 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           }
         >
           {qrCodeUrl && (
-            <QRCode bgColor="transparent" fgColor="##fff" value={qrCodeUrl} />
+            <QRCode
+              bgColor="transparent"
+              className={classNames?.walletConnectQR}
+              fgColor="##fff"
+              style={
+                classNames?.walletConnectQR
+                  ? undefined
+                  : selectWalletStyles.walletConnectQR
+              }
+              value={qrCodeUrl}
+            />
           )}
         </div>
       ) : (

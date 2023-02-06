@@ -5,9 +5,9 @@ export const CloseIcon: FunctionComponent<SVGProps<SVGSVGElement>> = (
 ) => (
   <svg
     fill="none"
-    height={props.width || 16}
+    height={props.width || 24}
     viewBox="0 0 16 16"
-    width={props.width || 16}
+    width={props.width || 24}
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >

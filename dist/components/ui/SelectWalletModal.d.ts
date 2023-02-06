@@ -6,8 +6,10 @@ interface Props extends BaseModalProps {
     wallets: Wallet[];
     chainId: string;
     closeModal: () => void;
+    noWalletsOverride?: string;
     setStatus: (status: WalletConnectionStatus) => void;
     selectWalletOverride?: string;
+    scanQRCodeOverride?: string;
     status: WalletConnectionStatus;
 }
 export declare const SelectWalletModal: FunctionComponent<Props>;

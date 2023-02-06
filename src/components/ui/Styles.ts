@@ -53,6 +53,8 @@ export const baseModalStyles: { [key: string]: React.CSSProperties } = {
     top: "16px",
     right: "16px",
     cursor: "pointer",
+    height: "24px",
+    width: "24px",
   },
 }
 
@@ -118,8 +120,18 @@ export const selectWalletStyles: { [key: string]: React.CSSProperties } = {
   },
 
   walletConnect: {
+    display: "flex",
+    flex: "0 0 100%",
+    justifyContent: "center",
     padding: "16px",
-    width: "100%",
+  },
+
+  walletConnectQR: {
+    backgroundColor: "#FFF",
+    border: "6px solid #FFF",
+    display: "block",
+    height: "265px",
+    width: "265px",
   },
 
   noneAvailableText: {
