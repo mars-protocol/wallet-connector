@@ -87,7 +87,6 @@ export const WalletManagerProvider: FunctionComponent<
 
     enabledWalletsFiltered.forEach((wallet) => {
       if (wallet.type === "app") {
-        console.log(wallet, wallet.provider)
         tempProviders.push(new wallet.provider({ networks }))
       }
     })

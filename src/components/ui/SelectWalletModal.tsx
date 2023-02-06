@@ -171,23 +171,25 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 
   const walletType = isMobile || isTablet ? "app" : "extension"
 
-  console.table({
-    desktop: wallets
-      .filter((wallet) => wallet.type === "extension")
-      .sort((a) => (a.installed ? -1 : 1))
-      .map((installedWallet) => walletItem(installedWallet)),
-    mobile: wallets
-      .filter((wallet) => wallet.type === "app")
-      .sort((a) => (a.installed ? -1 : 1))
-      .map((installedWallet) => walletItem(installedWallet)),
-  })
-
   const sortedWallets = wallets
     .filter((wallet) => wallet.type === walletType)
     .sort((a) => (a.installed ? -1 : 1))
 
   if (!sortedWallets.length) {
-    return null
+    return (
+      <BaseModal classNames={classNames} title={"Select a wallet"} {...props}>
+        <p
+          className={classNames?.noneAvailableText}
+          style={
+            classNames?.noneAvailableText
+              ? undefined
+              : selectWalletStyles.noneAvailableText
+          }
+        >
+          There are currently no wallets supported for your device
+        </p>
+      </BaseModal>
+    )
   }
 
   return (

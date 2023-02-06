@@ -81,6 +81,7 @@ export interface ModalClassNames {
     walletName?: string;
     walletDescription?: string;
     textContent?: string;
+    noneAvailableText?: string;
 }
 export interface IWalletManagerContext {
     connect: () => void;

@@ -116,6 +116,10 @@ export const selectWalletStyles: { [key: string]: React.CSSProperties } = {
     fontSize: "15px",
     lineHeight: "20px",
   },
+
+  noneAvailableText: {
+    textAlign: "center",
+  },
 }
 
 export const enablingWalletStyles: { [key: string]: React.CSSProperties } = {
