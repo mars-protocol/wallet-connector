@@ -262,10 +262,10 @@
   resolved "https://registry.yarnpkg.com/@cosmjs/utils/-/utils-0.29.5.tgz#3fed1b3528ae8c5f1eb5d29b68755bebfd3294ee"
   integrity sha512-m7h+RXDUxOzEOGt4P+3OVPX7PuakZT3GBmaM/Y2u+abN3xZkziykD/NvedYFvvCCdQo714XcGl33bwifS9FZPQ==
 
-"@delphi-labs/shuttle@^2.3.2":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@delphi-labs/shuttle/-/shuttle-2.3.2.tgz#d05890bca91b3b18fc451bde3cb03d83072c1c42"
-  integrity sha512-xgebNiS761IPiqQ5q3no1CBNGD/Q5vznV7ydUqismzR/Vw4GIEAqJv6QFIe7HbjHPXkIPeL/enimEGwAnNB1Ag==
+"@delphi-labs/shuttle@^2.3.5":
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/@delphi-labs/shuttle/-/shuttle-2.3.5.tgz#efc4d5f05a1449ec189676d229d3baa811fabc9a"
+  integrity sha512-ms1oQDCwocHOGPdU5aKyryvOJJtNLCEFHFtnAH/8Yki+NqQ7aVfjaBiWPtmPDiIWZNCdOOHCE2Lb5XYpKawagw==
   dependencies:
     "@cosmjs/amino" "^0.29.5"
     "@cosmjs/cosmwasm-stargate" "^0.29.2"
@@ -285,9 +285,11 @@
     "@walletconnect/utils" "^1.8.0"
     cosmjs-types "^0.6.1"
     ethereumjs-util "^7.1.5"
+    isomorphic-ws "^5.0.0"
     long "^5.2.1"
     secp256k1 "^5.0.0"
     tslib "^2.4.0"
+    ws "^8.12.0"
     zustand "^4.3.1"
 
 "@discoveryjs/json-ext@^0.5.0":
@@ -3711,6 +3713,11 @@ isomorphic-ws@^4.0.1:
   resolved "https://registry.yarnpkg.com/isomorphic-ws/-/isomorphic-ws-4.0.1.tgz#55fd4cd6c5e6491e76dc125938dd863f5cd4f2dc"
   integrity sha512-BhBvN2MBpWTaSHdWRb/bwdZJ1WaehQ2L1KngkCkfLUGF0mAWAT1sQUQacEmQ0jXkFw/czDXPNQSL5u2/Krsz1w==
 
+isomorphic-ws@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/isomorphic-ws/-/isomorphic-ws-5.0.0.tgz#e5529148912ecb9b451b46ed44d53dae1ce04bbf"
+  integrity sha512-muId7Zzn9ywDsyXgTIafTry2sV3nySZeUDe6YedVd1Hvuuep5AsIlqK+XefWpYTyJG5e503F2xIuT2lcU6rCSw==
+
 jest-diff@^29.3.1:
   version "29.3.1"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-29.3.1.tgz#d8215b72fed8f1e647aed2cae6c752a89e757527"
@@ -5527,6 +5534,11 @@ ws@^7:
   version "7.5.9"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.9.tgz#54fa7db29f4c7cec68b1ddd3a89de099942bb591"
   integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==
+
+ws@^8.12.0:
+  version "8.12.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.12.0.tgz#485074cc392689da78e1828a9ff23585e06cddd8"
+  integrity sha512-kU62emKIdKVeEIOIKVegvqpXMSTAMLJozpHZaJNDYqBjzlSYXQGviYwN1osDLJ9av68qHd4a2oSjd7yD4pacig==
 
 xstream@^11.14.0:
   version "11.14.0"
