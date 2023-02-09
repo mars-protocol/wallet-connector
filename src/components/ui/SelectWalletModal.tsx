@@ -138,6 +138,17 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         status === WalletConnectionStatus.AutoConnect &&
         recentWallet !== null
       ) {
+        if (
+          recentWallet.providerId === "mobile-keplr" ||
+          recentWallet.providerId === "mobile-terra-station"
+        ) {
+          disconnect({
+            providerId: recentWallet.providerId,
+            chainId: recentWallet.network.chainId,
+          })
+          setStatus(WalletConnectionStatus.Unconnected)
+        }
+
         recentWallet.network.chainId === chainId
           ? handleConnectClick(
               recentWallet.providerId as WalletID,
