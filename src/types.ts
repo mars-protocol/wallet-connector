@@ -126,6 +126,16 @@ export interface WalletManagerProviderProps {
   renderLoader?: () => ReactNode
   persistent?: boolean
   children?: ReactNode | undefined
+  stationWalletTutorial?: StationWalletTutorial
+}
+
+export interface StationWalletTutorial {
+  headline: string
+  intro: string
+  reimportWallet: string
+  wrongNetwork: string
+  ready: string
+  retry: string
 }
 
 export interface WalletClient {

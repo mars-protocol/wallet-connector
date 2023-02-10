@@ -5,7 +5,7 @@ export declare const baseModalStyles: {
 export declare const selectWalletStyles: {
     [key: string]: React.CSSProperties;
 };
-export declare const enablingWalletStyles: {
+export declare const modalStyles: {
     [key: string]: React.CSSProperties;
 };
 //# sourceMappingURL=Styles.d.ts.map

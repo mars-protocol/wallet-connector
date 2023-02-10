@@ -6,6 +6,7 @@ export enum WalletConnectionStatus {
   Connected,
   Errored,
   Retry,
+  StationWalletError,
 }
 
 export enum WalletID {

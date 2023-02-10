@@ -78,6 +78,8 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       setStatus(
         connected
           ? WalletConnectionStatus.Connected
+          : providerId === WalletID.StationWallet
+          ? WalletConnectionStatus.StationWalletError
           : WalletConnectionStatus.Errored
       )
     } else {
@@ -138,10 +140,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         status === WalletConnectionStatus.AutoConnect &&
         recentWallet !== null
       ) {
-        if (
-          recentWallet.providerId === "mobile-keplr" ||
-          recentWallet.providerId === "mobile-terra-station"
-        ) {
+        if (recentWallet.providerId.split("-")[0] === "mobile") {
           disconnect({
             providerId: recentWallet.providerId,
             chainId: recentWallet.network.chainId,

@@ -5,7 +5,8 @@ export declare enum WalletConnectionStatus {
     WalletConnect = 3,
     Connected = 4,
     Errored = 5,
-    Retry = 6
+    Retry = 6,
+    StationWalletError = 7
 }
 export declare enum WalletID {
     Cosmostation = "cosmostation",

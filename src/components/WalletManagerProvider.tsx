@@ -16,6 +16,7 @@ import { Wallet, WalletManagerProviderProps } from "../types"
 import { getChainInfo, wallets } from "../utils"
 import { SelectWalletModal } from "./ui"
 import { EnablingWalletModal } from "./ui/EnablingWalletModal"
+import { StationWalletErrorModal } from "./ui/StationWalletErrorModal"
 import { WalletManagerContext } from "./WalletManagerContext"
 
 export const WalletManagerProvider: FunctionComponent<
@@ -33,6 +34,7 @@ export const WalletManagerProvider: FunctionComponent<
   selectWalletOverride,
   noWalletsOverride,
   scanQRCodeOverride,
+  stationWalletTutorial,
   walletMetaOverride,
 }) => {
   const [pickerModalOpen, setPickerModalOpen] = useState(false)
@@ -179,6 +181,14 @@ export const WalletManagerProvider: FunctionComponent<
           isOpen={status === WalletConnectionStatus.Connecting}
           renderLoader={renderLoader}
           reset={resetConnection}
+        />
+        <StationWalletErrorModal
+          classNames={classNames}
+          closeIcon={closeIcon}
+          isOpen={status === WalletConnectionStatus.StationWalletError}
+          renderLoader={renderLoader}
+          reset={resetConnection}
+          stationWalletTutorial={stationWalletTutorial}
         />
       </WalletManagerContext.Provider>
     </ShuttleProvider>

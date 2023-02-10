@@ -139,7 +139,7 @@ export const selectWalletStyles: { [key: string]: React.CSSProperties } = {
   },
 }
 
-export const enablingWalletStyles: { [key: string]: React.CSSProperties } = {
+export const modalStyles: { [key: string]: React.CSSProperties } = {
   body: {
     flex: "0 0 100%",
     display: "flex",
@@ -150,6 +150,21 @@ export const enablingWalletStyles: { [key: string]: React.CSSProperties } = {
   text: {
     width: "100%",
     textAlign: "center",
+    margin: "0 0 16px",
+  },
+
+  textSmall: {
+    width: "100%",
+    textAlign: "left",
+    fontSize: "14px",
+    margin: "0 0 16px",
+  },
+
+  textSubInfo: {
+    width: "100%",
+    textAlign: "center",
+    opacity: ".6",
+    fontSize: "14px",
     margin: "0 0 16px",
   },
 

@@ -7,7 +7,7 @@ import React, {
 } from "react"
 
 import { BaseModal, BaseModalProps } from "./BaseModal"
-import { enablingWalletStyles } from "./Styles"
+import { modalStyles } from "./Styles"
 
 interface Props extends BaseModalProps {
   enablingStringOverride?: string | ReactElement
@@ -43,16 +43,16 @@ export const EnablingWalletModal: FunctionComponent<Props> = ({
       }
       {...props}
     >
-      <div style={enablingWalletStyles.body}>
+      <div style={modalStyles.body}>
         {renderLoader && renderLoader()}
         {showHelp && (
           <>
-            <p style={enablingWalletStyles.text}>
+            <p style={modalStyles.text}>
               If nothing shows up in your wallet try to connect again, by
               clicking on the button below. Refresh the page if the problem
               persists.
             </p>
-            <button onClick={reset} style={enablingWalletStyles.button}>
+            <button onClick={reset} style={modalStyles.button}>
               Reset Connection
             </button>
           </>
