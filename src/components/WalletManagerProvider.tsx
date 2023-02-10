@@ -179,6 +179,10 @@ export const WalletManagerProvider: FunctionComponent<
           closeIcon={closeIcon}
           enablingStringOverride={enablingStringOverride}
           isOpen={status === WalletConnectionStatus.Connecting}
+          onClose={() => {
+            setStatus(WalletConnectionStatus.Unconnected)
+            setPickerModalOpen(true)
+          }}
           renderLoader={renderLoader}
           reset={resetConnection}
         />
@@ -186,6 +190,10 @@ export const WalletManagerProvider: FunctionComponent<
           classNames={classNames}
           closeIcon={closeIcon}
           isOpen={status === WalletConnectionStatus.StationWalletError}
+          onClose={() => {
+            setStatus(WalletConnectionStatus.Unconnected)
+            setPickerModalOpen(true)
+          }}
           renderLoader={renderLoader}
           reset={resetConnection}
           stationWalletTutorial={stationWalletTutorial}

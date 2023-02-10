@@ -46,6 +46,9 @@ export const baseModalStyles: { [key: string]: React.CSSProperties } = {
     margin: "0 0 16px",
     width: "100%",
     textAlign: "center",
+    padding: "0 30px",
+    zIndex: 1,
+    position: "relative",
   },
 
   modalCloseButton: {
@@ -55,6 +58,7 @@ export const baseModalStyles: { [key: string]: React.CSSProperties } = {
     cursor: "pointer",
     height: "24px",
     width: "24px",
+    zIndex: 2,
   },
 }
 

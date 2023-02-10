@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode, useEffect, useState } from "react"
+import React, { FunctionComponent, ReactNode } from "react"
 import { StationWalletTutorial } from "src/types"
 
 import { BaseModal, BaseModalProps } from "./BaseModal"
@@ -13,22 +13,10 @@ interface Props extends BaseModalProps {
 export const StationWalletErrorModal: FunctionComponent<Props> = ({
   isOpen,
   classNames,
-  renderLoader,
   stationWalletTutorial,
   reset,
   ...props
 }) => {
-  const [showHelp, setShowHelp] = useState(false)
-  useEffect(() => {
-    if (!isOpen) {
-      setShowHelp(false)
-      return
-    }
-
-    const timeout = setTimeout(() => setShowHelp(true), 8000)
-    return () => clearTimeout(timeout)
-  }, [isOpen, setShowHelp])
-
   return (
     <BaseModal
       classNames={classNames}
@@ -48,14 +36,14 @@ export const StationWalletErrorModal: FunctionComponent<Props> = ({
             : "Connecting to your Station Wallet failed. Potential reasons include:"}
         </p>
         <p style={modalStyles.textSmall}>
-          {stationWalletTutorial?.reimportWallet
-            ? stationWalletTutorial?.reimportWallet
-            : "1. Your wallet address may use a legacy derivation path. Removing and reimporting it into Station Wallet will add support for BIP44 paths in addition to the 330 cointype without impacting your balances. If you are using a Ledger, remove your Ledger from your Station Wallet and import it again (making sure to click 'yes' on the 'Import Cosmos accounts' page). If you are not using a Ledger, make sure you've backed up your mnemonic phrase. Then, remove your wallet from the extension and re-add it by importing your mnemonic phrase."}
-        </p>
-        <p style={modalStyles.textSmall}>
           {stationWalletTutorial?.wrongNetwork
             ? stationWalletTutorial?.wrongNetwork
-            : "2. You have the wrong network selected. Please make sure to select 'Mainnets' or 'Testnets' by clicking on the gear icon in your Station Wallet interface."}
+            : "1. You have the wrong network selected. Please make sure to select 'Mainnets' or 'Testnets' by clicking on the gear icon in your Station Wallet interface."}
+        </p>
+        <p style={modalStyles.textSmall}>
+          {stationWalletTutorial?.reimportWallet
+            ? stationWalletTutorial?.reimportWallet
+            : "2. Your wallet address may use a legacy derivation path. Removing and reimporting it into Station Wallet will add support for BIP44 paths in addition to the 330 cointype without impacting your balances. If you are using a Ledger, remove your Ledger from your Station Wallet and import it again (making sure to click 'yes' on the 'Import Cosmos accounts' page). If you are not using a Ledger, make sure you've backed up your mnemonic phrase. Then, remove your wallet from the extension and re-add it by importing your mnemonic phrase."}
         </p>
         <p style={modalStyles.textSubInfo}>
           {stationWalletTutorial?.ready

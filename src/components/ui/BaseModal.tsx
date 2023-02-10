@@ -81,7 +81,11 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
                 : baseModalStyles.modalCloseButton
             }
           >
-            {closeIcon ?? <DefaultCloseIcon height={26} width={26} />}
+            {closeIcon ? (
+              closeIcon
+            ) : (
+              <DefaultCloseIcon height={26} width={26} />
+            )}
           </div>
         )}
         {children}
