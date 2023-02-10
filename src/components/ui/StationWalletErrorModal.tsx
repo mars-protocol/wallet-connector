@@ -45,12 +45,12 @@ export const StationWalletErrorModal: FunctionComponent<Props> = ({
         <p style={modalStyles.text}>
           {stationWalletTutorial?.intro
             ? stationWalletTutorial?.intro
-            : "Connecting to your Station Wallet, failed."}
+            : "Connecting to your Station Wallet failed. Potential reasons include:"}
         </p>
         <p style={modalStyles.textSmall}>
           {stationWalletTutorial?.reimportWallet
             ? stationWalletTutorial?.reimportWallet
-            : "1. You have likely just the 330 cointype in your current wallet. If you are using a Ledger can you disconnect it from the extension and then reconnect it again (make sure to click on YES on the 'import cosmos accounts' page) If you are not using a ledger delete you wallet from the extension and import your mnemonic again."}
+            : "1. Your wallet address may use a legacy derivation path. Removing and reimporting it into Station Wallet will add support for BIP44 paths in addition to the 330 cointype without impacting your balances. If you are using a Ledger, remove your Ledger from your Station Wallet and import it again (making sure to click 'yes' on the 'Import Cosmos accounts' page). If you are not using a Ledger, make sure you've backed up your mnemonic phrase. Then, remove your wallet from the extension and re-add it by importing your mnemonic phrase."}
         </p>
         <p style={modalStyles.textSmall}>
           {stationWalletTutorial?.wrongNetwork
@@ -60,7 +60,7 @@ export const StationWalletErrorModal: FunctionComponent<Props> = ({
         <p style={modalStyles.textSubInfo}>
           {stationWalletTutorial?.ready
             ? stationWalletTutorial?.ready
-            : "If you followed the instructions above, you can retry the connection now."}
+            : "After trying the suggestions above, please retry the connection."}
         </p>
         <button onClick={reset} style={modalStyles.button}>
           {stationWalletTutorial?.retry
