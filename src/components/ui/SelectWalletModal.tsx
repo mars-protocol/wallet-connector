@@ -1,12 +1,6 @@
 import { useShuttle } from "@delphi-labs/shuttle"
 import React, { FunctionComponent, useEffect, useState } from "react"
-import {
-  isAndroid,
-  isDesktop,
-  isIOS,
-  isMobile,
-  isTablet,
-} from "react-device-detect"
+import { isAndroid, isDesktop, isIOS, isMobile } from "react-device-detect"
 import QRCode from "react-qr-code"
 
 import { WalletConnectionStatus, WalletID } from "../../enums"
@@ -59,7 +53,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     setLastClicked(providerId)
 
     let connected = true
-    if (isDesktop && walletType !== "app") {
+    if (walletType !== "app") {
       const slightDelay = setTimeout(
         () => setStatus(WalletConnectionStatus.Connecting),
         500
@@ -166,34 +160,41 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     [status, recentWallet, isMobile]
   )
 
-  const walletType = isMobile || isTablet ? "app" : "extension"
-
   const walletItem = (wallet: Wallet) => {
     const isApp = wallet.type === "app"
     const isWalletConnect = isApp && isDesktop
+    let currentWallet = wallet
+
+    if (isMobile && wallet.desktopCounterpart) {
+      const counterpartWallet = wallets.find(
+        (counterpart) => counterpart.id === wallet.desktopCounterpart
+      )
+      currentWallet = counterpartWallet?.installed ? counterpartWallet : wallet
+    }
+
     return (
-      <div key={wallet.id}>
+      <div key={currentWallet.id}>
         <div
-          key={wallet.id}
+          key={currentWallet.id}
           className={classNames?.wallet}
           onClick={(e) => {
             e.preventDefault()
             setIsHover(undefined)
-            if (wallet.installed || wallet.type === "app") {
-              handleConnectClick(wallet.id, chainId, wallet.type)
+            if (currentWallet.installed || currentWallet.type === "app") {
+              handleConnectClick(currentWallet.id, chainId, currentWallet.type)
             } else {
-              window.open(wallet.installURL, "_blank")
+              window.open(currentWallet.installURL, "_blank")
               closeModal()
             }
           }}
           onMouseEnter={() => {
-            handleMouseEnter(wallet.id)
+            handleMouseEnter(currentWallet.id)
           }}
           onMouseLeave={handleMouseLeave}
           style={
             classNames?.wallet
               ? undefined
-              : isHover === wallet.id
+              : isHover === currentWallet.id
               ? {
                   ...selectWalletStyles.wallet,
                   ...selectWalletStyles.walletHover,
@@ -202,9 +203,13 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           }
         >
           <img
-            alt={`${wallet.name} logo`}
+            alt={`${currentWallet.name} logo`}
             className={classNames?.walletImage}
-            src={isWalletConnect ? wallet.mobileImageUrl : wallet.imageUrl}
+            src={
+              isWalletConnect
+                ? currentWallet.mobileImageUrl
+                : currentWallet.imageUrl
+            }
             style={
               classNames?.walletImage
                 ? undefined
@@ -226,10 +231,10 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
               }
             >
               {isWalletConnect
-                ? wallet.walletConnect
-                : isApp || wallet.installed
-                ? wallet.name
-                : wallet.install}
+                ? currentWallet.walletConnect
+                : isApp || currentWallet.installed
+                ? currentWallet.name
+                : currentWallet.install}
             </div>
             <div
               className={classNames?.walletDescription}
@@ -239,9 +244,9 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                   : selectWalletStyles.walletDescription
               }
             >
-              {isApp || wallet.installed
-                ? wallet.description
-                : wallet.installURL}
+              {isApp || currentWallet.installed
+                ? currentWallet.description
+                : currentWallet.installURL}
             </div>
           </div>
         </div>
@@ -323,7 +328,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
             classNames?.walletList ? undefined : selectWalletStyles.walletList
           }
         >
-          {sortedWallets.map((installedWallet) => walletItem(installedWallet))}
+          {sortedWallets.map((wallet) => walletItem(wallet))}
         </div>
       )}
     </BaseModal>

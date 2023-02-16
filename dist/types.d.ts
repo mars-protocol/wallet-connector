@@ -16,6 +16,7 @@ export interface Wallet {
     provider: any;
     installed?: boolean;
     type: "app" | "extension";
+    desktopCounterpart?: WalletID;
 }
 export interface AssetResponse {
     denom: string;
