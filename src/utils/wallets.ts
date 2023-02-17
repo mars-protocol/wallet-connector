@@ -61,7 +61,6 @@ export const KeplrMobileWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-connect.png",
   provider: MobileKeplrProvider,
   type: "app",
-  desktopCounterpart: WalletID.Keplr,
 }
 
 export const LeapWallet: Wallet = {
