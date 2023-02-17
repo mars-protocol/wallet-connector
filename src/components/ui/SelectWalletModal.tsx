@@ -163,38 +163,30 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   const walletItem = (wallet: Wallet) => {
     const isApp = wallet.type === "app"
     const isWalletConnect = isApp && isDesktop
-    let currentWallet = wallet
-
-    if (isMobile && wallet.desktopCounterpart) {
-      const counterpartWallet = wallets.find(
-        (counterpart) => counterpart.id === wallet.desktopCounterpart
-      )
-      currentWallet = counterpartWallet?.installed ? counterpartWallet : wallet
-    }
 
     return (
-      <div key={currentWallet.id}>
+      <div key={wallet.id}>
         <div
-          key={currentWallet.id}
+          key={wallet.id}
           className={classNames?.wallet}
           onClick={(e) => {
             e.preventDefault()
             setIsHover(undefined)
-            if (currentWallet.installed || currentWallet.type === "app") {
-              handleConnectClick(currentWallet.id, chainId, currentWallet.type)
+            if (wallet.installed || wallet.type === "app") {
+              handleConnectClick(wallet.id, chainId, wallet.type)
             } else {
-              window.open(currentWallet.installURL, "_blank")
+              window.open(wallet.installURL, "_blank")
               closeModal()
             }
           }}
           onMouseEnter={() => {
-            handleMouseEnter(currentWallet.id)
+            handleMouseEnter(wallet.id)
           }}
           onMouseLeave={handleMouseLeave}
           style={
             classNames?.wallet
               ? undefined
-              : isHover === currentWallet.id
+              : isHover === wallet.id
               ? {
                   ...selectWalletStyles.wallet,
                   ...selectWalletStyles.walletHover,
@@ -203,13 +195,9 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           }
         >
           <img
-            alt={`${currentWallet.name} logo`}
+            alt={`${wallet.name} logo`}
             className={classNames?.walletImage}
-            src={
-              isWalletConnect
-                ? currentWallet.mobileImageUrl
-                : currentWallet.imageUrl
-            }
+            src={isWalletConnect ? wallet.mobileImageUrl : wallet.imageUrl}
             style={
               classNames?.walletImage
                 ? undefined
@@ -231,10 +219,10 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
               }
             >
               {isWalletConnect
-                ? currentWallet.walletConnect
-                : isApp || currentWallet.installed
-                ? currentWallet.name
-                : currentWallet.install}
+                ? wallet.walletConnect
+                : isApp || wallet.installed
+                ? wallet.name
+                : wallet.install}
             </div>
             <div
               className={classNames?.walletDescription}
@@ -244,9 +232,9 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
                   : selectWalletStyles.walletDescription
               }
             >
-              {isApp || currentWallet.installed
-                ? currentWallet.description
-                : currentWallet.installURL}
+              {isApp || wallet.installed
+                ? wallet.description
+                : wallet.installURL}
             </div>
           </div>
         </div>
@@ -260,6 +248,8 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       if (a.installed === b.installed) return 0
       return a.installed ? -1 : 1
     })
+
+  const installedWallets = wallets.filter((wallet) => wallet.installed)
 
   if (!sortedWallets.length) {
     return (
@@ -328,7 +318,9 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
             classNames?.walletList ? undefined : selectWalletStyles.walletList
           }
         >
-          {sortedWallets.map((wallet) => walletItem(wallet))}
+          {isMobile && installedWallets.length
+            ? installedWallets.map((wallet) => walletItem(wallet))
+            : sortedWallets.map((wallet) => walletItem(wallet))}
         </div>
       )}
     </BaseModal>
