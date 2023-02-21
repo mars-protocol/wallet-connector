@@ -1,5 +1,6 @@
 import { Wallet } from "../types";
 export declare const CosmostationWallet: Wallet;
+export declare const CosmostationMobileWallet: Wallet;
 export declare const FalconWallet: Wallet;
 export declare const KeplrWallet: Wallet;
 export declare const KeplrMobileWallet: Wallet;

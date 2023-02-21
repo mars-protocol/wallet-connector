@@ -10,6 +10,7 @@ export declare enum WalletConnectionStatus {
 }
 export declare enum WalletID {
     Cosmostation = "cosmostation",
+    CosmostationMobile = "mobile-cosmostation",
     Falcon = "falcon",
     Keplr = "keplr",
     KeplrMobile = "mobile-keplr",

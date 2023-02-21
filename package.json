@@ -1,6 +1,6 @@
 {
   "name": "@marsprotocol/wallet-connector",
-  "version": "1.4.5",
+  "version": "1.5.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mars-protocol/wallet-connector.git"
@@ -31,7 +31,7 @@
     "@cosmjs/cosmwasm-stargate": "^0.29.5",
     "@cosmjs/encoding": "^0.29.5",
     "@cosmjs/stargate": "^0.29.5",
-    "@delphi-labs/shuttle": "^2.3.9",
+    "@delphi-labs/shuttle": "^2.6.0",
     "@keplr-wallet/cosmos": "^0.11.38",
     "axios": "^1.3.2",
     "react-device-detect": "^2.2.3",

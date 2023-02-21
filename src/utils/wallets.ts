@@ -3,6 +3,7 @@ import {
   FalconProvider,
   KeplrProvider,
   LeapCosmosProvider,
+  MobileCosmostationProvider,
   MobileKeplrProvider,
   MobileTerraStationProvider,
   TerraStationProvider,
@@ -23,6 +24,19 @@ export const CosmostationWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
   provider: CosmostationProvider,
   type: "extension",
+}
+
+export const CosmostationMobileWallet: Wallet = {
+  id: WalletID.CosmostationMobile,
+  name: "Cosmostation Wallet",
+  walletConnect: "Cosmostation WalletConnect",
+  description: "Cosmostation Mobile App",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
+  mobileImageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
+  provider: MobileCosmostationProvider,
+  type: "app",
 }
 
 export const FalconWallet: Wallet = {
@@ -116,6 +130,7 @@ export const XdefiWallet: Wallet = {
 
 export const wallets: Wallet[] = [
   CosmostationWallet,
+  CosmostationMobileWallet,
   FalconWallet,
   KeplrWallet,
   KeplrMobileWallet,

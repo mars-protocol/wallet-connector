@@ -262,10 +262,10 @@
   resolved "https://registry.yarnpkg.com/@cosmjs/utils/-/utils-0.29.5.tgz#3fed1b3528ae8c5f1eb5d29b68755bebfd3294ee"
   integrity sha512-m7h+RXDUxOzEOGt4P+3OVPX7PuakZT3GBmaM/Y2u+abN3xZkziykD/NvedYFvvCCdQo714XcGl33bwifS9FZPQ==
 
-"@delphi-labs/shuttle@^2.3.8":
-  version "2.3.8"
-  resolved "https://registry.yarnpkg.com/@delphi-labs/shuttle/-/shuttle-2.3.8.tgz#5daec70342c7f22f6e8ac9ab391c41aed70c139e"
-  integrity sha512-QckdIaiWiBP1hOeQQmvNmwHb0zE/mqkShlnD8/q2CP3A0rUDwFlCJIgatoAk0voscThGKK/hQZsJOI9wqOKkKg==
+"@delphi-labs/shuttle@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@delphi-labs/shuttle/-/shuttle-2.6.0.tgz#2eeb58d44f985c95048a541bc20895f3b7d12542"
+  integrity sha512-irXhmw9p/3B6pwnlpuFympFaS2W9muz4jYXGYoGLcxfsfy84GadQfFLzusZyjauu4rD310A+wTSU3DSUAF7uxA==
   dependencies:
     "@cosmjs/amino" "^0.29.5"
     "@cosmjs/cosmwasm-stargate" "^0.29.5"
@@ -286,7 +286,6 @@
     cosmjs-types "^0.6.1"
     ethereumjs-util "^7.1.5"
     isomorphic-ws "^5.0.0"
-    long "^5.2.1"
     secp256k1 "^5.0.0"
     tslib "^2.4.0"
     use-local-storage-state "^18.1.2"
@@ -3943,7 +3942,7 @@ long@^4.0.0:
   resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
   integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
 
-long@^5.2.0, long@^5.2.1:
+long@^5.2.0:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/long/-/long-5.2.1.tgz#e27595d0083d103d2fa2c20c7699f8e0c92b897f"
   integrity sha512-GKSNGeNAtw8IryjjkhZxuKB3JzlcLTwjtiQCHKvqQet81I93kXslhDQruGI/QsddO83mcDToBVy7GqGS/zYf/A==
