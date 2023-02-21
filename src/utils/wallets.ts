@@ -34,7 +34,7 @@ export const CosmostationMobileWallet: Wallet = {
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
   mobileImageUrl:
-    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-connect.png",
   provider: MobileCosmostationProvider,
   type: "app",
 }
