@@ -1308,14 +1308,16 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
 }
 
 export const getChainInfo = (
-  chainId: string,
+  chainId: ChainInfoID,
   chainInfoOverrides?: ChainInfoOptions
 ) => {
   const chainInfo: SimplifiedChainInfo = SimpleChainInfoList[chainId]
 
-  if (typeof chainInfoOverrides !== "undefined" && chainInfo) {
+  if (chainInfoOverrides && chainInfo) {
     Object.keys(chainInfoOverrides).map(function (key) {
-      chainInfo[key] = chainInfoOverrides[key]
+      //@ts-ignore
+      chainInfo[key as keyof SimplifiedChainInfo] =
+        chainInfoOverrides[key as keyof SimplifiedChainInfo]
     })
   }
 

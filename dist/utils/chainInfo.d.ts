@@ -7,5 +7,5 @@ export interface SimplifiedChainInfo extends Network {
     alternativeBIP44s?: BIP44[];
 }
 export declare const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo>;
-export declare const getChainInfo: (chainId: string, chainInfoOverrides?: ChainInfoOptions) => SimplifiedChainInfo;
+export declare const getChainInfo: (chainId: ChainInfoID, chainInfoOverrides?: ChainInfoOptions) => SimplifiedChainInfo;
 //# sourceMappingURL=chainInfo.d.ts.map

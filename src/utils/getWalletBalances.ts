@@ -1,11 +1,12 @@
 import axios from "axios"
+import { ChainInfoID } from "src/enums"
 
 import { BalancesResponse } from "../types"
 import { getChainInfo } from "../utils"
 
 export const getWalletBalances = async (
   address: string,
-  chainId: string
+  chainId: ChainInfoID
 ): Promise<BalancesResponse | undefined> => {
   const chainInfo = getChainInfo(chainId)
   const uri =

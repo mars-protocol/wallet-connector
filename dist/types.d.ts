@@ -3,7 +3,7 @@ import { Bech32Config, BIP44, BroadcastResult, SigningResult, SimulateResult, Tr
 import { AppCurrency, Currency } from "@keplr-wallet/types";
 import { AxiosRequestConfig } from "axios";
 import { ReactNode } from "react";
-import { WalletConnectionStatus, WalletID } from "./enums";
+import { ChainInfoID, WalletConnectionStatus, WalletID } from "./enums";
 export interface Wallet {
     id: WalletID;
     name: string | ReactNode;
@@ -42,14 +42,17 @@ export interface ChainInfoOptions {
     rest: string;
     restConfig?: AxiosRequestConfig;
     chainId?: string;
-    chainName?: string;
+    chainPrefix?: string;
+    name?: string;
     stakeCurrency?: Currency;
     walletUrl?: string;
     walletUrlForStaking?: string;
+    gasPrice?: string;
     bip44?: BIP44;
     alternativeBIP44s?: BIP44[];
     bech32Config?: Bech32Config;
     currencies?: AppCurrency[];
+    defaultCurrency?: AppCurrency;
     feeCurrencies?: Currency[];
     coinType?: number;
     gasPriceStep?: {
@@ -59,6 +62,9 @@ export interface ChainInfoOptions {
     };
     features?: string[];
     beta?: boolean;
+    explorer?: string;
+    explorerName?: string;
+    evm?: string;
 }
 type IWalletMetaOverride = {
     [key in WalletID]?: IWalletMeta;
@@ -94,7 +100,7 @@ export interface IWalletManagerContext {
 }
 export interface WalletManagerProviderProps {
     enabledWallets: WalletID[keyof WalletID][];
-    defaultChainId: string;
+    defaultChainId: ChainInfoID;
     chainInfoOverrides?: ChainInfoOptions;
     classNames?: ModalClassNames;
     closeIcon?: ReactNode;

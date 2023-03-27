@@ -1,13 +1,14 @@
 import { CosmWasmClient } from "@cosmjs/cosmwasm-stargate"
 import { MsgExecuteContract, useShuttle } from "@delphi-labs/shuttle"
 import { createContext, useContext } from "react"
+import { ChainInfoID } from "src/enums"
 
 import { BalancesResponse, IWalletManagerContext } from "../types"
 import { getWalletBalances } from "../utils"
 
 const fetchBalances = async (
   address: string,
-  chainId: string
+  chainId: ChainInfoID
 ): Promise<BalancesResponse | undefined> => {
   return await getWalletBalances(address, chainId)
 }

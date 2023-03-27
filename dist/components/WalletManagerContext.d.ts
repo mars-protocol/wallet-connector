@@ -1,8 +1,9 @@
 /// <reference types="react" />
 import { CosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { MsgExecuteContract } from "@delphi-labs/shuttle";
+import { ChainInfoID } from "src/enums";
 import { BalancesResponse, IWalletManagerContext } from "../types";
-declare const fetchBalances: (address: string, chainId: string) => Promise<BalancesResponse | undefined>;
+declare const fetchBalances: (address: string, chainId: ChainInfoID) => Promise<BalancesResponse | undefined>;
 declare const WalletManagerContext: import("react").Context<IWalletManagerContext | null>;
 declare const useWalletManager: () => IWalletManagerContext;
 declare const useWallet: () => {
@@ -16,7 +17,7 @@ declare const useWallet: () => {
     connect: (options: {
         providerId: string;
         chainId: string;
-    }) => Promise<void>;
+    }) => Promise<import("@delphi-labs/shuttle").WalletConnection>;
     wallets: import("@delphi-labs/shuttle").WalletConnection[];
     getWallets: (filters?: {
         providerId?: string | undefined;

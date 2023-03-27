@@ -63,6 +63,7 @@ export const WalletManagerProvider: FunctionComponent<
         Object.entries(override).forEach(([key, value]) => {
           tempEnabledWalletFiltered.forEach((wallet, index) => {
             if (wallet.id === id) {
+              //@ts-ignore
               tempEnabledWalletFiltered[index][key] = value
             }
           })
