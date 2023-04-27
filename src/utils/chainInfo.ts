@@ -63,6 +63,32 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     },
     features: ["ibc-transfer", "ibc-go"],
   },
+  [ChainInfoID.OsmosisTestnet5]: {
+    rpc: "https://rpc.osmotest5.osmosis.zone",
+    rest: "https://lcd.osmotest5.osmosis.zone",
+    explorer: "https://testnet.mintscan.io/osmosis-testnet",
+    explorerName: "Mintscan",
+    chainId: ChainInfoID.OsmosisTestnet5,
+    name: "Osmosis Testnet",
+    bip44: {
+      coinType: 118,
+    },
+    alternativeBIP44s: [{ coinType: 330 }],
+    gasPrice: "0.025uosmo",
+    bech32Config: Bech32Address.defaultBech32Config("osmo"),
+    defaultCurrency: {
+      coinDenom: "OSMO",
+      coinMinimalDenom: "uosmo",
+      coinDecimals: 6,
+      coinGeckoId: "osmosis",
+      gasPriceStep: {
+        low: 0,
+        average: 0.025,
+        high: 0.04,
+      },
+    },
+    features: ["ibc-transfer", "ibc-go"],
+  },
   [ChainInfoID.Cosmoshub4]: {
     rpc: "https://rpc-cosmoshub.keplr.app",
     rest: "https://lcd-cosmoshub.keplr.app",

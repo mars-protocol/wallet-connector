@@ -24,6 +24,7 @@ export enum WalletID {
 export enum ChainInfoID {
   Osmosis1 = "osmosis-1",
   OsmosisTestnet = "osmo-test-4",
+  OsmosisTestnet5 = "osmo-test-5",
   Cosmoshub4 = "cosmoshub-4",
   Columbus5 = "columbus-5",
   Secret4 = "secret-4",
