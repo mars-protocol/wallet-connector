@@ -7,7 +7,7 @@ import {
   MobileKeplrProvider,
   MobileTerraStationProvider,
   TerraStationProvider,
-  XDefiProvider,
+  XDEFICosmosProvider,
 } from "@delphi-labs/shuttle"
 
 import { WalletID } from "../enums"
@@ -122,7 +122,7 @@ export const XdefiWallet: Wallet = {
   installURL: "https://go.xdefi.io/mars",
   description: "XDEFI Extension",
   imageUrl: "https://xdefi-static.s3.eu-west-1.amazonaws.com/xdefi.png",
-  provider: XDefiProvider,
+  provider: XDEFICosmosProvider,
   type: "extension",
 }
 
