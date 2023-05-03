@@ -119,11 +119,9 @@ export const XdefiWallet: Wallet = {
   id: WalletID.Xdefi,
   name: "XDEFI Wallet",
   install: "Install XDEFI Wallet",
-  installURL:
-    "https://chrome.google.com/webstore/detail/xdefi-wallet/hmeobnfnfcmdkdcmlblgagmfpfboieaf",
+  installURL: "https://go.xdefi.io/mars",
   description: "XDEFI Extension",
-  imageUrl:
-    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/xdefi-wallet-extension.png",
+  imageUrl: "https://xdefi-static.s3.eu-west-1.amazonaws.com/xdefi.png",
   provider: XDefiProvider,
   type: "extension",
 }
