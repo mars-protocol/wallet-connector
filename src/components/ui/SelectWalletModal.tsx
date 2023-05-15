@@ -108,14 +108,16 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     }
   }
 
-  wallets.forEach((wallet, index) => {
-    const walletProvider = providers.find((provider) => {
-      return provider.id === wallet.id
-    })
+  useEffect(() => {
+    wallets.forEach((wallet, index) => {
+      const walletProvider = providers.find((provider) => {
+        return provider.id === wallet.id
+      })
 
-    wallets[index].installed =
-      walletProvider?.initialized || walletProvider?.initializing
-  })
+      wallets[index].installed =
+        walletProvider?.initialized || walletProvider?.initializing
+    })
+  }, [wallets])
 
   useEffect(
     () => {
