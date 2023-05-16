@@ -78,4 +78,6 @@ export enum ChainInfoID {
   Titan1 = "titan-1",
   Kava_2222_10 = "kava_2222-10",
   Genesis_29_2 = "genesis_29-2",
+  Neutron = "neutron-1",
+  NeutronTestnet = "pion-1",
 }

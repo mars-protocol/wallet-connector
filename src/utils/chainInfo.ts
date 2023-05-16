@@ -1331,6 +1331,58 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
 
     features: ["ibc-transfer", "ibc-go"],
   },
+  [ChainInfoID.NeutronTestnet]: {
+    rpc: "https://rpc-palvus.pion-1.ntrn.tech/",
+    rest: "https://rest-palvus.pion-1.ntrn.tech/",
+    explorer: "https://explorer.rs-testnet.polypore.xyz/pion-1",
+    explorerName: "PING.PUB",
+    chainId: ChainInfoID.NeutronTestnet,
+    name: "Neutron Testnet",
+    bip44: {
+      coinType: 118,
+    },
+    alternativeBIP44s: [{ coinType: 330 }],
+    gasPrice: "0.025untrn",
+    bech32Config: Bech32Address.defaultBech32Config("ntrn"),
+    defaultCurrency: {
+      coinDenom: "NTRN",
+      coinMinimalDenom: "untrn",
+      coinDecimals: 6,
+      coinGeckoId: "neutron",
+      gasPriceStep: {
+        low: 0,
+        average: 0.025,
+        high: 0.04,
+      },
+    },
+    features: ["ibc-transfer", "ibc-go"],
+  },
+  [ChainInfoID.Neutron]: {
+    rpc: "https://rpc-neutron.keplr.app/",
+    rest: "https://lcd-neutron.keplr.app/",
+    explorer: "https://neutron.explorers.guru",
+    explorerName: "Explorer",
+    chainId: ChainInfoID.Neutron,
+    name: "Neutron",
+    bip44: {
+      coinType: 118,
+    },
+    alternativeBIP44s: [{ coinType: 330 }],
+    gasPrice: "0.025untrn",
+    bech32Config: Bech32Address.defaultBech32Config("ntrn"),
+    defaultCurrency: {
+      coinDenom: "NTRN",
+      coinMinimalDenom: "untrn",
+      coinDecimals: 6,
+      coinGeckoId: "neutron",
+      gasPriceStep: {
+        low: 0,
+        average: 0.025,
+        high: 0.04,
+      },
+    },
+    features: ["ibc-transfer", "ibc-go"],
+  },
 }
 
 export const getChainInfo = (

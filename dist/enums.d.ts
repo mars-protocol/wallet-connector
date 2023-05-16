@@ -75,6 +75,8 @@ export declare enum ChainInfoID {
     Phoenix1 = "phoenix-1",
     Titan1 = "titan-1",
     Kava_2222_10 = "kava_2222-10",
-    Genesis_29_2 = "genesis_29-2"
+    Genesis_29_2 = "genesis_29-2",
+    Neutron = "neutron-1",
+    NeutronTestnet = "pion-1"
 }
 //# sourceMappingURL=enums.d.ts.map
