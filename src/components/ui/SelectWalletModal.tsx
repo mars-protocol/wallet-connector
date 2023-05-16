@@ -31,8 +31,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   status,
   ...props
 }) => {
-  const { connect, providers, recentWallet, disconnect, mobileConnect } =
-    useShuttle()
+  const { connect, recentWallet, disconnect, mobileConnect } = useShuttle()
   const [isHover, setIsHover] = useState<WalletID | undefined>()
   const [lastClicked, setLastClicked] = useState<WalletID | undefined>()
   const [qrCodeUrl, setQRCodeUrl] = useState<string | undefined>()
@@ -107,17 +106,6 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       }
     }
   }
-
-  useEffect(() => {
-    wallets.forEach((wallet, index) => {
-      const walletProvider = providers.find((provider) => {
-        return provider.id === wallet.id
-      })
-
-      wallets[index].installed =
-        walletProvider?.initialized || walletProvider?.initializing
-    })
-  }, [wallets])
 
   useEffect(
     () => {

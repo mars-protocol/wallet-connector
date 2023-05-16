@@ -125,8 +125,16 @@ export const WalletManagerProvider: FunctionComponent<
 
   const beginConnection = useCallback(() => {
     setStatus(WalletConnectionStatus.Unconnected)
+    wallets.forEach((wallet, index) => {
+      const walletProvider = providers?.find((provider) => {
+        return provider.id === wallet.id
+      })
+
+      wallets[index].installed =
+        walletProvider?.initialized || walletProvider?.initializing
+    })
     setPickerModalOpen(true)
-  }, [])
+  }, [providers])
 
   const terminateConnection = useCallback(
     () => setStatus(WalletConnectionStatus.Unconnected),
