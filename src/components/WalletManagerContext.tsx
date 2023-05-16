@@ -1,8 +1,8 @@
 import { CosmWasmClient } from "@cosmjs/cosmwasm-stargate"
 import { MsgExecuteContract, useShuttle } from "@delphi-labs/shuttle"
 import { createContext, useContext } from "react"
-import { ChainInfoID } from "src/enums"
 
+import { ChainInfoID } from "../enums"
 import { BalancesResponse, IWalletManagerContext } from "../types"
 import { getWalletBalances } from "../utils"
 

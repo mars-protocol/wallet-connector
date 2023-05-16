@@ -3,4 +3,4 @@ babel-polyfill.js
 jest.config.js
 coverage/
 dist/
-sandbox/
+example/

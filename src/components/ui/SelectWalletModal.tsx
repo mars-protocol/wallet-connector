@@ -1,5 +1,5 @@
 import { useShuttle } from "@delphi-labs/shuttle"
-import React, { FunctionComponent, useEffect, useState } from "react"
+import { FunctionComponent, useEffect, useState } from "react"
 import { isAndroid, isDesktop, isIOS, isMobile } from "react-device-detect"
 import QRCode from "react-qr-code"
 

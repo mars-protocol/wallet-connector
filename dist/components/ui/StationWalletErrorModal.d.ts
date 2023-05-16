@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from "react";
-import { StationWalletTutorial } from "src/types";
+import { StationWalletTutorial } from "../../types";
 import { BaseModalProps } from "./BaseModal";
 interface Props extends BaseModalProps {
     stationWalletTutorial?: StationWalletTutorial;

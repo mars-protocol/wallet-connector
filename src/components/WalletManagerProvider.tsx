@@ -3,7 +3,7 @@ import {
   ShuttleProvider,
   WalletProvider,
 } from "@delphi-labs/shuttle"
-import React, {
+import {
   FunctionComponent,
   useCallback,
   useEffect,
@@ -38,6 +38,7 @@ export const WalletManagerProvider: FunctionComponent<
   walletMetaOverride,
 }) => {
   const [pickerModalOpen, setPickerModalOpen] = useState(false)
+  const [selectableWallets, setSelectableWallets] = useState<Wallet[]>([])
   const [status, setStatus] = useState<WalletConnectionStatus>(
     WalletConnectionStatus.Unconnected
   )
@@ -125,16 +126,20 @@ export const WalletManagerProvider: FunctionComponent<
 
   const beginConnection = useCallback(() => {
     setStatus(WalletConnectionStatus.Unconnected)
-    wallets.forEach((wallet, index) => {
+    const walletState: Wallet[] = []
+    enabledWalletsFiltered.forEach((wallet) => {
       const walletProvider = providers?.find((provider) => {
         return provider.id === wallet.id
       })
 
-      wallets[index].installed =
-        walletProvider?.initialized || walletProvider?.initializing
+      walletState.push({
+        ...wallet,
+        installed: walletProvider?.initialized || walletProvider?.initializing,
+      })
     })
+    setSelectableWallets(walletState)
     setPickerModalOpen(true)
-  }, [providers])
+  }, [providers, enabledWalletsFiltered])
 
   const terminateConnection = useCallback(
     () => setStatus(WalletConnectionStatus.Unconnected),
@@ -181,7 +186,7 @@ export const WalletManagerProvider: FunctionComponent<
           selectWalletOverride={selectWalletOverride}
           setStatus={statusChange}
           status={status}
-          wallets={enabledWalletsFiltered}
+          wallets={selectableWallets}
         />
         <EnablingWalletModal
           classNames={classNames}

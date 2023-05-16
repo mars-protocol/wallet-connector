@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from "react"
-import { StationWalletTutorial } from "src/types"
 
+import { StationWalletTutorial } from "../../types"
 import { BaseModal, BaseModalProps } from "./BaseModal"
 import { modalStyles } from "./Styles"
 
