@@ -44,6 +44,7 @@ export const WalletManagerProvider: FunctionComponent<
   )
 
   const networks = useMemo(() => {
+    console.log("current chain", defaultChainId)
     const network = getChainInfo(defaultChainId, chainInfoOverrides)
     return [network]
   }, [defaultChainId, chainInfoOverrides])
@@ -80,8 +81,15 @@ export const WalletManagerProvider: FunctionComponent<
     const tempProviders: WalletProvider[] = []
 
     enabledWalletsFiltered.forEach((wallet) => {
-      if (wallet.type === "extension")
-        tempProviders.push(new wallet.provider({ networks }))
+      if (wallet.type === "extension") {
+        const newProvider = new wallet.provider({ networks })
+        try {
+          newProvider.init()
+        } catch (e) {
+          console.log(e)
+        }
+        tempProviders.push(newProvider)
+      }
     })
 
     return tempProviders
@@ -125,6 +133,7 @@ export const WalletManagerProvider: FunctionComponent<
   }
 
   const beginConnection = useCallback(() => {
+    console.table(providers)
     setStatus(WalletConnectionStatus.Unconnected)
     const walletState: Wallet[] = []
     enabledWalletsFiltered.forEach((wallet) => {
