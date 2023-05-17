@@ -1,5 +1,5 @@
 import { useShuttle } from "@delphi-labs/shuttle"
-import { FunctionComponent, useEffect, useState } from "react"
+import { FunctionComponent, useEffect, useMemo, useState } from "react"
 import { isAndroid, isDesktop, isIOS, isMobile } from "react-device-detect"
 import QRCode from "react-qr-code"
 
@@ -19,6 +19,8 @@ interface Props extends BaseModalProps {
   status: WalletConnectionStatus
 }
 
+let retryCount = 10
+
 export const SelectWalletModal: FunctionComponent<Props> = ({
   wallets,
   chainId,
@@ -31,10 +33,18 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   status,
   ...props
 }) => {
-  const { connect, recentWallet, disconnect, mobileConnect } = useShuttle()
+  const { connect, recentWallet, disconnect, mobileConnect, providers } =
+    useShuttle()
   const [isHover, setIsHover] = useState<WalletID | undefined>()
   const [lastClicked, setLastClicked] = useState<WalletID | undefined>()
   const [qrCodeUrl, setQRCodeUrl] = useState<string | undefined>()
+
+  /* STATUS */
+  const isConnecting = status === WalletConnectionStatus.Connecting
+  const isConnected = status === WalletConnectionStatus.Connected
+  const isAutoConnecting = status === WalletConnectionStatus.AutoConnect
+  const isWalletConnect = status === WalletConnectionStatus.WalletConnect
+  const isRetry = status === WalletConnectionStatus.Retry
 
   const handleMouseEnter = (walletID: WalletID) => {
     setIsHover(walletID)
@@ -44,15 +54,12 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     setIsHover(undefined)
   }
 
-  const handleConnectClick = async (
+  const handleConnect = async (
     providerId: WalletID,
     chainId: ChainInfoID,
     walletType: string
   ) => {
     setLastClicked(providerId)
-
-    console.log(providerId, chainId, walletType)
-
     let connected = true
     if (walletType !== "app") {
       const slightDelay = setTimeout(
@@ -111,21 +118,14 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 
   useEffect(
     () => {
-      if (
-        ((status === WalletConnectionStatus.Connecting && isMobile) ||
-          status === WalletConnectionStatus.WalletConnect) &&
-        recentWallet
-      ) {
+      if (isConnected) return
+      if (((isConnecting && isMobile) || isWalletConnect) && recentWallet)
         setStatus(WalletConnectionStatus.Connected)
-      }
 
-      if (status === WalletConnectionStatus.Retry && lastClicked) {
-        handleConnectClick(lastClicked, chainId, "extension")
-      }
-      if (
-        status === WalletConnectionStatus.AutoConnect &&
-        recentWallet !== null
-      ) {
+      if (isRetry && lastClicked)
+        handleConnect(lastClicked, chainId, "extension")
+
+      if (isAutoConnecting && recentWallet !== null) {
         if (recentWallet.providerId.split("-")[0] === "mobile") {
           disconnect({
             providerId: recentWallet.providerId,
@@ -134,23 +134,40 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           setStatus(WalletConnectionStatus.Unconnected)
         }
 
-        recentWallet.network.chainId === chainId
-          ? handleConnectClick(
-              recentWallet.providerId as WalletID,
-              chainId,
-              "extension"
-            )
-          : () => {
-              disconnect({
-                providerId: recentWallet.providerId,
-                chainId: recentWallet.network.chainId,
-              })
-              setStatus(WalletConnectionStatus.Unconnected)
-            }
+        if (recentWallet.network.chainId === chainId && retryCount > 0) {
+          tryConnect(recentWallet.providerId as WalletID, chainId)
+        } else {
+          disconnect({
+            providerId: recentWallet.providerId,
+            chainId: recentWallet.network.chainId,
+          })
+          setStatus(WalletConnectionStatus.Unconnected)
+        }
       }
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [status, recentWallet, isMobile]
+    [
+      chainId,
+      isConnected,
+      isConnecting,
+      isAutoConnecting,
+      isRetry,
+      isWalletConnect,
+      recentWallet,
+    ]
   )
+
+  const tryConnect = async (providerId: WalletID, chainId: ChainInfoID) => {
+    try {
+      await connect({ providerId, chainId })
+    } catch (e) {
+      setTimeout(() => {
+        if (retryCount > 0) {
+          retryCount--
+          tryConnect(providerId, chainId)
+        }
+      }, 200)
+    }
+  }
 
   const walletItem = (wallet: Wallet) => {
     const isApp = wallet.type === "app"
@@ -165,7 +182,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
             e.preventDefault()
             setIsHover(undefined)
             if (wallet.installed || wallet.type === "app") {
-              handleConnectClick(wallet.id, chainId, wallet.type)
+              handleConnect(wallet.id, chainId, wallet.type)
             } else {
               window.open(wallet.installURL, "_blank")
               closeModal()
@@ -234,14 +251,18 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     )
   }
 
-  const sortedWallets = wallets
-    .filter((wallet) => isDesktop || wallet.type === "app")
-    .sort((a, b) => {
-      if (a.installed === b.installed) return 0
-      return a.installed ? -1 : 1
-    })
+  const sortedWallets = useMemo(() => {
+    return wallets
+      .filter((wallet) => isDesktop || wallet.type === "app")
+      .sort((a, b) => {
+        if (a.installed === b.installed) return 0
+        return a.installed ? -1 : 1
+      })
+  }, [wallets])
 
-  const installedWallets = wallets.filter((wallet) => wallet.installed)
+  const installedWallets = useMemo(() => {
+    return wallets.filter((wallet) => wallet.installed)
+  }, [wallets])
 
   if (!sortedWallets.length) {
     return (
@@ -270,7 +291,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     <BaseModal
       classNames={classNames}
       title={
-        status === WalletConnectionStatus.WalletConnect
+        isWalletConnect
           ? scanQRCodeOverride
             ? scanQRCodeOverride
             : "Scan QR Code to Connect"
@@ -280,7 +301,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       }
       {...props}
     >
-      {status === WalletConnectionStatus.WalletConnect ? (
+      {isWalletConnect ? (
         <div
           className={classNames?.walletConnect}
           style={
