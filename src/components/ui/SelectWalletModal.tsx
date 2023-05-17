@@ -19,8 +19,6 @@ interface Props extends BaseModalProps {
   status: WalletConnectionStatus
 }
 
-let retryCount = 10
-
 export const SelectWalletModal: FunctionComponent<Props> = ({
   wallets,
   chainId,
@@ -134,9 +132,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           setStatus(WalletConnectionStatus.Unconnected)
         }
 
-        if (recentWallet.network.chainId === chainId && retryCount > 0) {
-          tryConnect(recentWallet.providerId as WalletID, chainId)
-        } else {
+        if (recentWallet.network.chainId !== chainId) {
           disconnect({
             providerId: recentWallet.providerId,
             chainId: recentWallet.network.chainId,
@@ -155,19 +151,6 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       recentWallet,
     ]
   )
-
-  const tryConnect = async (providerId: WalletID, chainId: ChainInfoID) => {
-    try {
-      await connect({ providerId, chainId })
-    } catch (e) {
-      setTimeout(() => {
-        if (retryCount > 0) {
-          retryCount--
-          tryConnect(providerId, chainId)
-        }
-      }, 200)
-    }
-  }
 
   const walletItem = (wallet: Wallet) => {
     const isApp = wallet.type === "app"

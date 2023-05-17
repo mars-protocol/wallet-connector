@@ -20,6 +20,7 @@ import {
   getWalletProviders,
   wallets,
 } from "../utils"
+import AutoConnectHandler from "./AutoConnectHandler"
 import { SelectWalletModal } from "./ui"
 import { EnablingWalletModal } from "./ui/EnablingWalletModal"
 import { StationWalletErrorModal } from "./ui/StationWalletErrorModal"
@@ -161,6 +162,11 @@ export const WalletManagerProvider: FunctionComponent<
       providers={providers}
     >
       <WalletManagerContext.Provider value={value}>
+        {status === WalletConnectionStatus.AutoConnect && (
+          <AutoConnectHandler
+            setConnected={() => setStatus(WalletConnectionStatus.Connected)}
+          />
+        )}
         {children}
         <SelectWalletModal
           chainId={defaultChainId}
