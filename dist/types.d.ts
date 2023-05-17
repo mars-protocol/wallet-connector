@@ -66,7 +66,7 @@ export interface ChainInfoOptions {
     explorerName?: string;
     evm?: string;
 }
-type IWalletMetaOverride = {
+export type IWalletMetaOverride = {
     [key in WalletID]?: IWalletMeta;
 };
 export interface IWalletMeta {
@@ -100,10 +100,11 @@ export interface IWalletManagerContext {
 }
 export interface WalletManagerProviderProps {
     enabledWallets: WalletID[keyof WalletID][];
-    defaultChainId: ChainInfoID;
+    chainIds: ChainInfoID[];
     chainInfoOverrides?: ChainInfoOptions;
     classNames?: ModalClassNames;
     closeIcon?: ReactNode;
+    defaultChainId: ChainInfoID;
     enablingStringOverride?: string;
     selectWalletOverride?: string;
     noWalletsOverride?: string;
@@ -145,5 +146,4 @@ export interface WalletClient {
     }) => Promise<SimulateResult>;
 }
 export type TxBroadcastResult = BroadcastResult;
-export {};
 //# sourceMappingURL=types.d.ts.map

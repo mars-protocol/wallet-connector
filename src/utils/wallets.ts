@@ -6,12 +6,16 @@ import {
   MobileCosmostationProvider,
   MobileKeplrProvider,
   MobileTerraStationProvider,
+  MobileWalletProvider,
   TerraStationProvider,
+  WalletProvider,
   XDEFICosmosProvider,
 } from "@delphi-labs/shuttle"
 
 import { WalletID } from "../enums"
-import { Wallet } from "../types"
+import { IWalletMetaOverride, Wallet } from "../types"
+import { SimplifiedChainInfo } from "./chainInfo"
+import { ensure } from "./helpers"
 
 export const CosmostationWallet: Wallet = {
   id: WalletID.Cosmostation,
@@ -137,3 +141,62 @@ export const wallets: Wallet[] = [
   StationMobileWallet,
   XdefiWallet,
 ]
+
+export const getEnabledWallets = (
+  wallets: Wallet[],
+  enabledWallets: WalletID[keyof WalletID][],
+  walletMetaOverride?: IWalletMetaOverride
+): Wallet[] => {
+  const updatedWallets = enabledWallets.map((walletID) => {
+    return ensure(wallets.find((wallet) => wallet.id === walletID))
+  })
+
+  if (walletMetaOverride) {
+    Object.entries(walletMetaOverride).forEach(([id, override]) => {
+      Object.entries(override).forEach(([key, value]) => {
+        updatedWallets.forEach((wallet, index) => {
+          if (wallet?.id === id) {
+            //@ts-ignore
+            enabledWalletsFiltered[index][key] = value
+          }
+        })
+      })
+    })
+  }
+
+  return updatedWallets
+}
+
+export const getWalletProviders = (
+  wallets: Wallet[],
+  networks?: SimplifiedChainInfo[]
+) => {
+  if (!networks) return
+
+  const providers: WalletProvider[] = []
+
+  wallets.forEach((wallet) => {
+    if (wallet.type === "extension") {
+      const newProvider = new wallet.provider({ networks })
+      providers.push(newProvider)
+    }
+  })
+  return providers
+}
+
+export const getMobileProviders = (
+  wallets: Wallet[],
+  networks?: SimplifiedChainInfo[]
+) => {
+  if (!networks) return
+
+  const providers: MobileWalletProvider[] = []
+
+  wallets.forEach((wallet) => {
+    if (wallet.type === "app") {
+      const newProvider = new wallet.provider({ networks })
+      providers.push(newProvider)
+    }
+  })
+  return providers
+}

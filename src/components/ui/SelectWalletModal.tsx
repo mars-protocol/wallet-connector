@@ -3,14 +3,14 @@ import { FunctionComponent, useEffect, useState } from "react"
 import { isAndroid, isDesktop, isIOS, isMobile } from "react-device-detect"
 import QRCode from "react-qr-code"
 
-import { WalletConnectionStatus, WalletID } from "../../enums"
+import { ChainInfoID, WalletConnectionStatus, WalletID } from "../../enums"
 import { Wallet } from "../../types"
 import { BaseModal, BaseModalProps } from "./BaseModal"
 import { selectWalletStyles } from "./Styles"
 
 interface Props extends BaseModalProps {
   wallets: Wallet[]
-  chainId: string
+  chainId: ChainInfoID
   closeModal: () => void
   noWalletsOverride?: string
   setStatus: (status: WalletConnectionStatus) => void
@@ -46,10 +46,12 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 
   const handleConnectClick = async (
     providerId: WalletID,
-    chainId: string,
+    chainId: ChainInfoID,
     walletType: string
   ) => {
     setLastClicked(providerId)
+
+    console.log(providerId, chainId, walletType)
 
     let connected = true
     if (walletType !== "app") {

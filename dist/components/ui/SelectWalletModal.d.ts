@@ -1,10 +1,10 @@
 import { FunctionComponent } from "react";
-import { WalletConnectionStatus } from "../../enums";
+import { ChainInfoID, WalletConnectionStatus } from "../../enums";
 import { Wallet } from "../../types";
 import { BaseModalProps } from "./BaseModal";
 interface Props extends BaseModalProps {
     wallets: Wallet[];
-    chainId: string;
+    chainId: ChainInfoID;
     closeModal: () => void;
     noWalletsOverride?: string;
     setStatus: (status: WalletConnectionStatus) => void;

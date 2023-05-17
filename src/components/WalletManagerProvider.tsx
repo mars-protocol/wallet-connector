@@ -5,6 +5,7 @@ import {
 } from "@delphi-labs/shuttle"
 import {
   FunctionComponent,
+  Suspense,
   useCallback,
   useEffect,
   useMemo,
@@ -13,7 +14,13 @@ import {
 
 import { WalletConnectionStatus } from "../enums"
 import { Wallet, WalletManagerProviderProps } from "../types"
-import { getChainInfo, wallets } from "../utils"
+import {
+  getChainInfo,
+  getEnabledWallets,
+  getMobileProviders,
+  getWalletProviders,
+  wallets,
+} from "../utils"
 import { SelectWalletModal } from "./ui"
 import { EnablingWalletModal } from "./ui/EnablingWalletModal"
 import { StationWalletErrorModal } from "./ui/StationWalletErrorModal"
@@ -26,6 +33,7 @@ export const WalletManagerProvider: FunctionComponent<
   chainInfoOverrides,
   classNames,
   closeIcon,
+  chainIds,
   defaultChainId,
   enabledWallets,
   enablingStringOverride,
@@ -42,71 +50,50 @@ export const WalletManagerProvider: FunctionComponent<
   const [status, setStatus] = useState<WalletConnectionStatus>(
     WalletConnectionStatus.Unconnected
   )
+  const [providers, setProviders] = useState<WalletProvider[]>()
+  const [mobileProviders, setMobileProviders] =
+    useState<MobileWalletProvider[]>()
 
-  const networks = useMemo(() => {
-    console.log("current chain", defaultChainId)
-    const network = getChainInfo(defaultChainId, chainInfoOverrides)
-    return [network]
-  }, [defaultChainId, chainInfoOverrides])
+  const networks = chainIds.map((chainId) => {
+    return getChainInfo(chainId, chainInfoOverrides)
+  })
 
-  const enabledWalletsFiltered: Wallet[] = useMemo(() => {
-    const tempEnabledWalletFiltered: Wallet[] = []
-    enabledWallets.forEach((walletID) => {
-      wallets.map((walletData) => {
-        if (walletData.id === walletID) {
-          tempEnabledWalletFiltered.push(walletData)
-          return
-        }
-      })
-    })
+  const filteredWallets = getEnabledWallets(
+    wallets,
+    enabledWallets,
+    walletMetaOverride
+  )
 
-    if (walletMetaOverride) {
-      Object.entries(walletMetaOverride).forEach(([id, override]) => {
-        Object.entries(override).forEach(([key, value]) => {
-          tempEnabledWalletFiltered.forEach((wallet, index) => {
-            if (wallet.id === id) {
-              //@ts-ignore
-              tempEnabledWalletFiltered[index][key] = value
-            }
-          })
-        })
-      })
-    }
+  useEffect(() => {
+    if (
+      typeof window === "undefined" ||
+      providers ||
+      !filteredWallets ||
+      !networks
+    )
+      return
+    //@ts-ignore
+    setProviders(getWalletProviders(filteredWallets, networks))
+  }, [filteredWallets, networks, providers])
 
-    return tempEnabledWalletFiltered
-  }, [enabledWallets, walletMetaOverride])
+  useEffect(() => {
+    if (
+      typeof window === "undefined" ||
+      mobileProviders ||
+      !filteredWallets ||
+      !networks
+    )
+      return
+    setMobileProviders(getMobileProviders(filteredWallets, networks))
+  }, [filteredWallets, networks, mobileProviders])
 
-  const providers: WalletProvider[] | undefined = useMemo(() => {
-    if (!networks) return
-    const tempProviders: WalletProvider[] = []
-
-    enabledWalletsFiltered.forEach((wallet) => {
-      if (wallet.type === "extension") {
-        const newProvider = new wallet.provider({ networks })
-        try {
-          newProvider.init()
-        } catch (e) {
-          console.log(e)
-        }
-        tempProviders.push(newProvider)
-      }
-    })
-
-    return tempProviders
-  }, [enabledWalletsFiltered, networks])
-
-  const mobileProviders: MobileWalletProvider[] | undefined = useMemo(() => {
-    if (!networks) return
-    const tempProviders: MobileWalletProvider[] = []
-
-    enabledWalletsFiltered.forEach((wallet) => {
-      if (wallet.type === "app") {
-        tempProviders.push(new wallet.provider({ networks }))
-      }
-    })
-
-    return tempProviders
-  }, [enabledWalletsFiltered, networks])
+  useEffect(() => {
+    setStatus(
+      persistent
+        ? WalletConnectionStatus.AutoConnect
+        : WalletConnectionStatus.Unconnected
+    )
+  }, [defaultChainId, persistent])
 
   useEffect(
     () => {
@@ -133,11 +120,12 @@ export const WalletManagerProvider: FunctionComponent<
   }
 
   const beginConnection = useCallback(() => {
-    console.table(providers)
+    if (!providers) return
     setStatus(WalletConnectionStatus.Unconnected)
     const walletState: Wallet[] = []
-    enabledWalletsFiltered.forEach((wallet) => {
-      const walletProvider = providers?.find((provider) => {
+    filteredWallets.forEach((wallet) => {
+      //@ts-ignore
+      const walletProvider = providers.find((provider) => {
         return provider.id === wallet.id
       })
 
@@ -148,7 +136,7 @@ export const WalletManagerProvider: FunctionComponent<
     })
     setSelectableWallets(walletState)
     setPickerModalOpen(true)
-  }, [providers, enabledWalletsFiltered])
+  }, [providers, filteredWallets])
 
   const terminateConnection = useCallback(
     () => setStatus(WalletConnectionStatus.Unconnected),
@@ -173,55 +161,57 @@ export const WalletManagerProvider: FunctionComponent<
     setStatus(WalletConnectionStatus.Retry)
   }
 
-  if (!providers || !mobileProviders) return null
+  if (!providers) return null
 
   return (
-    <ShuttleProvider
-      mobileProviders={mobileProviders}
-      persistent={persistent}
-      providers={providers}
-    >
-      <WalletManagerContext.Provider value={value}>
-        {children}
-        <SelectWalletModal
-          chainId={defaultChainId}
-          classNames={classNames}
-          closeIcon={closeIcon}
-          closeModal={closePickerModal}
-          isOpen={pickerModalOpen}
-          noWalletsOverride={noWalletsOverride}
-          onClose={() => setPickerModalOpen(false)}
-          scanQRCodeOverride={scanQRCodeOverride}
-          selectWalletOverride={selectWalletOverride}
-          setStatus={statusChange}
-          status={status}
-          wallets={selectableWallets}
-        />
-        <EnablingWalletModal
-          classNames={classNames}
-          closeIcon={closeIcon}
-          enablingStringOverride={enablingStringOverride}
-          isOpen={status === WalletConnectionStatus.Connecting}
-          onClose={() => {
-            setStatus(WalletConnectionStatus.Unconnected)
-            setPickerModalOpen(true)
-          }}
-          renderLoader={renderLoader}
-          reset={resetConnection}
-        />
-        <StationWalletErrorModal
-          classNames={classNames}
-          closeIcon={closeIcon}
-          isOpen={status === WalletConnectionStatus.StationWalletError}
-          onClose={() => {
-            setStatus(WalletConnectionStatus.Unconnected)
-            setPickerModalOpen(true)
-          }}
-          renderLoader={renderLoader}
-          reset={resetConnection}
-          stationWalletTutorial={stationWalletTutorial}
-        />
-      </WalletManagerContext.Provider>
-    </ShuttleProvider>
+    <Suspense fallback={null}>
+      <ShuttleProvider
+        mobileProviders={mobileProviders ?? []}
+        persistent={persistent}
+        providers={providers}
+      >
+        <WalletManagerContext.Provider value={value}>
+          {children}
+          <SelectWalletModal
+            chainId={defaultChainId}
+            classNames={classNames}
+            closeIcon={closeIcon}
+            closeModal={closePickerModal}
+            isOpen={pickerModalOpen}
+            noWalletsOverride={noWalletsOverride}
+            onClose={() => setPickerModalOpen(false)}
+            scanQRCodeOverride={scanQRCodeOverride}
+            selectWalletOverride={selectWalletOverride}
+            setStatus={statusChange}
+            status={status}
+            wallets={selectableWallets}
+          />
+          <EnablingWalletModal
+            classNames={classNames}
+            closeIcon={closeIcon}
+            enablingStringOverride={enablingStringOverride}
+            isOpen={status === WalletConnectionStatus.Connecting}
+            onClose={() => {
+              setStatus(WalletConnectionStatus.Unconnected)
+              setPickerModalOpen(true)
+            }}
+            renderLoader={renderLoader}
+            reset={resetConnection}
+          />
+          <StationWalletErrorModal
+            classNames={classNames}
+            closeIcon={closeIcon}
+            isOpen={status === WalletConnectionStatus.StationWalletError}
+            onClose={() => {
+              setStatus(WalletConnectionStatus.Unconnected)
+              setPickerModalOpen(true)
+            }}
+            renderLoader={renderLoader}
+            reset={resetConnection}
+            stationWalletTutorial={stationWalletTutorial}
+          />
+        </WalletManagerContext.Provider>
+      </ShuttleProvider>
+    </Suspense>
   )
 }

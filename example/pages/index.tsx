@@ -13,6 +13,7 @@ const Home: NextPage = () => {
   return (
     <WalletManagerProvider
       defaultChainId={chainId}
+      chainIds={[ChainInfoID.Osmosis1, ChainInfoID.Neutron]}
       enabledWallets={[
         WalletID.Keplr,
         WalletID.Xdefi,
@@ -30,7 +31,7 @@ const Home: NextPage = () => {
           <ConnectButton />
         </div>
 
-        <div className="flex flex-row items-center justify-center w-full gap-2">
+        <div className="flex flex-wrap items-center justify-center w-full gap-2">
           <button
             onClick={() => {
               if (chainId === ChainInfoID.Osmosis1) {
@@ -39,10 +40,11 @@ const Home: NextPage = () => {
                 setChainId(ChainInfoID.Osmosis1)
               }
             }}
-            className="px-3 py-2 bg-blue-600 border-none rounded-md border-gray hover:opacity-70 focus-within:outline-none w-[200px]"
+            className="px-3 py-2 bg-blue-400 border-none rounded-md border-gray hover:opacity-70 focus-within:outline-none w-[200px]"
           >
             Change ChainID
           </button>
+          <p className="w-full mt-4 text-center">Current chain: {chainId}</p>
         </div>
       </div>
     </WalletManagerProvider>
