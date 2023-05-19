@@ -156,7 +156,7 @@ export interface WalletClient {
     wallet?: WalletConnection | null | undefined
   }) => Promise<SigningResult>
   cosmWasmClient: CosmWasmClient
-  recentWallet: WalletConnection
+  connectedWallet: WalletConnection
   broadcast: (options: {
     messages: TransactionMsg<any>[]
     feeAmount?: string | null | undefined
