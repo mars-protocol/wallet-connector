@@ -1,4 +1,4 @@
-import { useShuttle } from "@delphi-labs/shuttle"
+import { useShuttle, WalletConnection } from "@delphi-labs/shuttle"
 import { FunctionComponent, useEffect, useMemo, useState } from "react"
 import { isAndroid, isDesktop, isIOS, isMobile } from "react-device-detect"
 import QRCode from "react-qr-code"
@@ -17,6 +17,7 @@ interface Props extends BaseModalProps {
   selectWalletOverride?: string
   scanQRCodeOverride?: string
   status: WalletConnectionStatus
+  setConnectedWallet: (recentWallet: WalletConnection | undefined) => void
 }
 
 export const SelectWalletModal: FunctionComponent<Props> = ({
@@ -29,9 +30,10 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   scanQRCodeOverride,
   setStatus,
   status,
+  setConnectedWallet,
   ...props
 }) => {
-  const { connect, mobileConnect } = useShuttle()
+  const { connect, mobileConnect, wallets: connectedWallet } = useShuttle()
   const [isHover, setIsHover] = useState<WalletID | undefined>()
   const [lastClicked, setLastClicked] = useState<WalletID | undefined>()
   const [qrCodeUrl, setQRCodeUrl] = useState<string | undefined>()
@@ -74,6 +76,12 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
         }
       }
       clearTimeout(slightDelay)
+      if (connected) {
+        const recentWallet = connectedWallet?.find(
+          (wallet) => wallet.network.chainId === chainId
+        )
+        setConnectedWallet(recentWallet)
+      }
       setStatus(
         connected
           ? WalletConnectionStatus.Connected

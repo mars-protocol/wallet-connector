@@ -1,6 +1,7 @@
 import {
   MobileWalletProvider,
   ShuttleProvider,
+  WalletConnection,
   WalletProvider,
 } from "@delphi-labs/shuttle"
 import {
@@ -52,6 +53,9 @@ export const WalletManagerProvider: FunctionComponent<
   const [status, setStatus] = useState<WalletConnectionStatus>(
     WalletConnectionStatus.Unconnected
   )
+  const [connectedWallet, setConnectedWallet] = useState<
+    WalletConnection | undefined
+  >()
   const [providers, setProviders] = useState<WalletProvider[]>()
   const [mobileProviders, setMobileProviders] =
     useState<MobileWalletProvider[]>()
@@ -88,12 +92,13 @@ export const WalletManagerProvider: FunctionComponent<
   }, [filteredWallets, networks, mobileProviders])
 
   useEffect(() => {
+    if (prevDefaultChainId === defaultChainId) return
     setStatus(
       persistent
         ? WalletConnectionStatus.AutoConnect
         : WalletConnectionStatus.Unconnected
     )
-  }, [defaultChainId, persistent])
+  }, [defaultChainId, prevDefaultChainId, persistent])
 
   useEffect(
     () => {
@@ -164,9 +169,10 @@ export const WalletManagerProvider: FunctionComponent<
     () => ({
       connect: beginConnection,
       disconnect: terminateConnection,
+      connectedWallet,
       status,
     }),
-    [beginConnection, terminateConnection, status]
+    [beginConnection, terminateConnection, connectedWallet, status]
   )
 
   const resetConnection = () => {
@@ -186,11 +192,13 @@ export const WalletManagerProvider: FunctionComponent<
           <AutoConnectHandler
             chainId={defaultChainId}
             setConnected={() => setStatus(WalletConnectionStatus.Connected)}
+            setConnectedWallet={setConnectedWallet}
           />
         )}
         {status === WalletConnectionStatus.Disconnecting && (
           <DisconnectHandler
             chainId={defaultChainId}
+            setConnectedWallet={() => setConnectedWallet(undefined)}
             setDisconnected={() =>
               setStatus(WalletConnectionStatus.Unconnected)
             }
@@ -207,6 +215,7 @@ export const WalletManagerProvider: FunctionComponent<
           onClose={() => setPickerModalOpen(false)}
           scanQRCodeOverride={scanQRCodeOverride}
           selectWalletOverride={selectWalletOverride}
+          setConnectedWallet={setConnectedWallet}
           setStatus={statusChange}
           status={status}
           wallets={selectableWallets}

@@ -3,10 +3,15 @@ import { ChainInfoID } from "src/enums"
 
 interface Props {
   setDisconnected: () => void
+  setConnectedWallet: () => void
   chainId: ChainInfoID
 }
 
-const DisconnectHandler = ({ setDisconnected, chainId }: Props) => {
+const DisconnectHandler = ({
+  setDisconnected,
+  setConnectedWallet,
+  chainId,
+}: Props) => {
   const { disconnectWallet, disconnect, wallets } = useShuttle()
 
   const recentWallet = wallets?.find((w) => w.network.chainId === chainId)
@@ -16,6 +21,7 @@ const DisconnectHandler = ({ setDisconnected, chainId }: Props) => {
     disconnect()
   }
 
+  setConnectedWallet()
   setDisconnected()
 
   return null

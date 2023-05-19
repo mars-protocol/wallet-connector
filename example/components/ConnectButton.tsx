@@ -1,4 +1,3 @@
-import { WalletConnection } from "@delphi-labs/shuttle"
 import {
   ChainInfoID,
   WalletConnectionStatus,
@@ -12,18 +11,17 @@ interface Props {
 }
 
 export default function ConnectButton(props: Props) {
-  const { connect, status: walletStatus, disconnect } = useWalletManager()
-  const { wallets } = useWallet()
-  const [recentWallet, setRecentWallet] = useState<WalletConnection>()
+  const {
+    connect,
+    status: walletStatus,
+    connectedWallet,
+    disconnect,
+  } = useWalletManager()
   const [isConnected, setIsConnected] = useState(false)
 
   const handleDisconnect = () => {
     disconnect()
   }
-
-  useEffect(() => {
-    setRecentWallet(wallets?.find((w) => w.network.chainId === props.chainId))
-  }, [wallets, props.chainId])
 
   useEffect(() => {
     setIsConnected(walletStatus === WalletConnectionStatus.Connected)
@@ -33,8 +31,8 @@ export default function ConnectButton(props: Props) {
     <div className="flex flex-wrap justify-center w-full">
       <p className="w-full mb-2 text-center">
         <b>
-          {isConnected && recentWallet
-            ? recentWallet?.account.address ?? ""
+          {isConnected
+            ? connectedWallet?.account.address ?? ""
             : "Not connected"}
         </b>
       </p>

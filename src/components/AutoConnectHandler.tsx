@@ -1,13 +1,18 @@
-import { useShuttle } from "@delphi-labs/shuttle"
+import { useShuttle, WalletConnection } from "@delphi-labs/shuttle"
 import { useEffect } from "react"
 import { ChainInfoID } from "src/enums"
 
 interface Props {
   setConnected: () => void
+  setConnectedWallet: (recentWallet: WalletConnection) => void
   chainId: ChainInfoID
 }
 
-const AutoConnectHandler = ({ setConnected, chainId }: Props) => {
+const AutoConnectHandler = ({
+  setConnected,
+  setConnectedWallet,
+  chainId,
+}: Props) => {
   const { connect, providers, wallets } = useShuttle()
 
   useEffect(() => {
@@ -22,9 +27,12 @@ const AutoConnectHandler = ({ setConnected, chainId }: Props) => {
     if (recentProvider?.initialized) {
       recentProvider
         .connect({ chainId: recentWallet.network.chainId })
-        .then(setConnected)
+        .then(() => {
+          setConnected()
+          setConnectedWallet(recentWallet)
+        })
     }
-  }, [connect, wallets, providers, setConnected, chainId])
+  }, [connect, wallets, providers, setConnected, setConnectedWallet, chainId])
 
   return null
 }

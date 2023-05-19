@@ -116,6 +116,7 @@ export interface ModalClassNames {
 export interface IWalletManagerContext {
   connect: () => void
   disconnect: () => void
+  connectedWallet: WalletConnection | undefined
   status: WalletConnectionStatus
 }
 
