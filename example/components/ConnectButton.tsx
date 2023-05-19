@@ -1,7 +1,6 @@
 import {
   ChainInfoID,
   WalletConnectionStatus,
-  useWallet,
   useWalletManager,
 } from "@marsprotocol/wallet-connector"
 import { useEffect, useState } from "react"
@@ -11,12 +10,7 @@ interface Props {
 }
 
 export default function ConnectButton(props: Props) {
-  const {
-    connect,
-    status: walletStatus,
-    connectedWallet,
-    disconnect,
-  } = useWalletManager()
+  const { connect, status, connectedWallet, disconnect } = useWalletManager()
   const [isConnected, setIsConnected] = useState(false)
 
   const handleDisconnect = () => {
@@ -24,8 +18,8 @@ export default function ConnectButton(props: Props) {
   }
 
   useEffect(() => {
-    setIsConnected(walletStatus === WalletConnectionStatus.Connected)
-  }, [walletStatus])
+    setIsConnected(status === WalletConnectionStatus.Connected)
+  }, [status])
 
   return (
     <div className="flex flex-wrap justify-center w-full">
@@ -43,7 +37,7 @@ export default function ConnectButton(props: Props) {
         }`}
       >
         {!isConnected
-          ? walletStatus === WalletConnectionStatus.Connecting
+          ? status === WalletConnectionStatus.Connecting
             ? "Connecting"
             : "Connect"
           : "Disconnect"}

@@ -23,6 +23,7 @@ import {
   wallets,
 } from "../utils"
 import AutoConnectHandler from "./AutoConnectHandler"
+import ConnectedHandler from "./ConnectedHandler"
 import DisconnectHandler from "./DisconnectHandler"
 import { SelectWalletModal } from "./ui"
 import { EnablingWalletModal } from "./ui/EnablingWalletModal"
@@ -92,13 +93,17 @@ export const WalletManagerProvider: FunctionComponent<
   }, [filteredWallets, networks, mobileProviders])
 
   useEffect(() => {
-    if (prevDefaultChainId === defaultChainId) return
+    if (connectedWallet) {
+      setStatus(WalletConnectionStatus.Connected)
+      return
+    }
+
     setStatus(
       persistent
         ? WalletConnectionStatus.AutoConnect
         : WalletConnectionStatus.Unconnected
     )
-  }, [defaultChainId, prevDefaultChainId, persistent])
+  }, [defaultChainId, persistent, connectedWallet])
 
   useEffect(
     () => {
@@ -125,7 +130,11 @@ export const WalletManagerProvider: FunctionComponent<
   }
 
   useEffect(() => {
-    if (!providers || prevDefaultChainId === defaultChainId) return
+    if (
+      !providers ||
+      (prevDefaultChainId === defaultChainId && selectableWallets.length > 0)
+    )
+      return
     const walletState: Wallet[] = []
     filteredWallets.forEach((wallet) => {
       //@ts-ignore
@@ -204,6 +213,12 @@ export const WalletManagerProvider: FunctionComponent<
             }
           />
         )}
+        {status === WalletConnectionStatus.Connected && !connectedWallet && (
+          <ConnectedHandler
+            chainId={defaultChainId}
+            setConnectedWallet={setConnectedWallet}
+          />
+        )}
         {children}
         <SelectWalletModal
           chainId={defaultChainId}
@@ -215,7 +230,6 @@ export const WalletManagerProvider: FunctionComponent<
           onClose={() => setPickerModalOpen(false)}
           scanQRCodeOverride={scanQRCodeOverride}
           selectWalletOverride={selectWalletOverride}
-          setConnectedWallet={setConnectedWallet}
           setStatus={statusChange}
           status={status}
           wallets={selectableWallets}

@@ -1,4 +1,3 @@
-import { WalletConnection } from "@delphi-labs/shuttle";
 import { FunctionComponent } from "react";
 import { ChainInfoID, WalletConnectionStatus } from "../../enums";
 import { Wallet } from "../../types";
@@ -12,7 +11,6 @@ interface Props extends BaseModalProps {
     selectWalletOverride?: string;
     scanQRCodeOverride?: string;
     status: WalletConnectionStatus;
-    setConnectedWallet: (recentWallet: WalletConnection | undefined) => void;
 }
 export declare const SelectWalletModal: FunctionComponent<Props>;
 export {};
