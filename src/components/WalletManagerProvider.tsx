@@ -8,6 +8,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react"
 
@@ -21,6 +22,7 @@ import {
   wallets,
 } from "../utils"
 import AutoConnectHandler from "./AutoConnectHandler"
+import DisconnectHandler from "./DisconnectHandler"
 import { SelectWalletModal } from "./ui"
 import { EnablingWalletModal } from "./ui/EnablingWalletModal"
 import { StationWalletErrorModal } from "./ui/StationWalletErrorModal"
@@ -64,6 +66,16 @@ export const WalletManagerProvider: FunctionComponent<
     walletMetaOverride
   )
 
+  const usePrevious = (value: any) => {
+    const ref = useRef()
+    useEffect(() => {
+      ref.current = value
+    })
+    return ref.current
+  }
+
+  const prevDefaultChainId = usePrevious(defaultChainId)
+
   useEffect(() => {
     if (providers || !filteredWallets || !networks) return
     //@ts-ignore
@@ -78,7 +90,7 @@ export const WalletManagerProvider: FunctionComponent<
   useEffect(() => {
     setStatus(
       persistent
-        ? WalletConnectionStatus.Retry
+        ? WalletConnectionStatus.AutoConnect
         : WalletConnectionStatus.Unconnected
     )
   }, [defaultChainId, persistent])
@@ -108,30 +120,38 @@ export const WalletManagerProvider: FunctionComponent<
   }
 
   useEffect(() => {
-    if (!providers || selectableWallets.length > 0) return
-    setStatus(WalletConnectionStatus.Unconnected)
+    if (!providers || prevDefaultChainId === defaultChainId) return
     const walletState: Wallet[] = []
     filteredWallets.forEach((wallet) => {
       //@ts-ignore
       const walletProvider = providers.find((provider) => {
         return provider.id === wallet.id
       })
-
-      walletState.push({
-        ...wallet,
-        installed: walletProvider?.initialized || walletProvider?.initializing,
-      })
+      if (wallet.supportedChains.includes(defaultChainId)) {
+        walletState.push({
+          ...wallet,
+          installed:
+            walletProvider?.initialized || walletProvider?.initializing,
+        })
+      }
     })
     setSelectableWallets(walletState)
     if (persistent) setStatus(WalletConnectionStatus.AutoConnect)
-  }, [providers, filteredWallets, persistent, selectableWallets.length])
+  }, [
+    providers,
+    filteredWallets,
+    persistent,
+    selectableWallets.length,
+    defaultChainId,
+    prevDefaultChainId,
+  ])
 
   const beginConnection = useCallback(() => {
     setPickerModalOpen(true)
   }, [])
 
   const terminateConnection = useCallback(
-    () => setStatus(WalletConnectionStatus.Unconnected),
+    () => setStatus(WalletConnectionStatus.Disconnecting),
     []
   )
 
@@ -164,7 +184,16 @@ export const WalletManagerProvider: FunctionComponent<
       <WalletManagerContext.Provider value={value}>
         {status === WalletConnectionStatus.AutoConnect && (
           <AutoConnectHandler
+            chainId={defaultChainId}
             setConnected={() => setStatus(WalletConnectionStatus.Connected)}
+          />
+        )}
+        {status === WalletConnectionStatus.Disconnecting && (
+          <DisconnectHandler
+            chainId={defaultChainId}
+            setDisconnected={() =>
+              setStatus(WalletConnectionStatus.Unconnected)
+            }
           />
         )}
         {children}

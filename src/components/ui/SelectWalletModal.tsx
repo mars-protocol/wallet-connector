@@ -31,8 +31,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   status,
   ...props
 }) => {
-  const { connect, recentWallet, disconnect, mobileConnect, providers } =
-    useShuttle()
+  const { connect, mobileConnect } = useShuttle()
   const [isHover, setIsHover] = useState<WalletID | undefined>()
   const [lastClicked, setLastClicked] = useState<WalletID | undefined>()
   const [qrCodeUrl, setQRCodeUrl] = useState<string | undefined>()
@@ -116,40 +115,12 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 
   useEffect(
     () => {
-      if (isConnected) return
-      if (((isConnecting && isMobile) || isWalletConnect) && recentWallet)
-        setStatus(WalletConnectionStatus.Connected)
+      if (isConnected || isAutoConnecting || isConnecting) return
 
       if (isRetry && lastClicked)
         handleConnect(lastClicked, chainId, "extension")
-
-      if (isAutoConnecting && recentWallet !== null) {
-        if (recentWallet.providerId.split("-")[0] === "mobile") {
-          disconnect({
-            providerId: recentWallet.providerId,
-            chainId: recentWallet.network.chainId,
-          })
-          setStatus(WalletConnectionStatus.Unconnected)
-        }
-
-        if (recentWallet.network.chainId !== chainId) {
-          disconnect({
-            providerId: recentWallet.providerId,
-            chainId: recentWallet.network.chainId,
-          })
-          setStatus(WalletConnectionStatus.Unconnected)
-        }
-      }
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      chainId,
-      isConnected,
-      isConnecting,
-      isAutoConnecting,
-      isRetry,
-      isWalletConnect,
-      recentWallet,
-    ]
+    [chainId, isConnected, isConnecting, isAutoConnecting, isRetry, lastClicked]
   )
 
   const walletItem = (wallet: Wallet) => {
