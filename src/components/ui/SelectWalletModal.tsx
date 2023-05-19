@@ -19,8 +19,6 @@ interface Props extends BaseModalProps {
   status: WalletConnectionStatus
 }
 
-let retryCount = 10
-
 export const SelectWalletModal: FunctionComponent<Props> = ({
   wallets,
   chainId,
@@ -33,8 +31,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   status,
   ...props
 }) => {
-  const { connect, recentWallet, disconnect, mobileConnect, providers } =
-    useShuttle()
+  const { connect, mobileConnect } = useShuttle()
   const [isHover, setIsHover] = useState<WalletID | undefined>()
   const [lastClicked, setLastClicked] = useState<WalletID | undefined>()
   const [qrCodeUrl, setQRCodeUrl] = useState<string | undefined>()
@@ -118,56 +115,13 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
 
   useEffect(
     () => {
-      if (isConnected) return
-      if (((isConnecting && isMobile) || isWalletConnect) && recentWallet)
-        setStatus(WalletConnectionStatus.Connected)
+      if (isConnected || isAutoConnecting || isConnecting) return
 
       if (isRetry && lastClicked)
         handleConnect(lastClicked, chainId, "extension")
-
-      if (isAutoConnecting && recentWallet !== null) {
-        if (recentWallet.providerId.split("-")[0] === "mobile") {
-          disconnect({
-            providerId: recentWallet.providerId,
-            chainId: recentWallet.network.chainId,
-          })
-          setStatus(WalletConnectionStatus.Unconnected)
-        }
-
-        if (recentWallet.network.chainId === chainId && retryCount > 0) {
-          tryConnect(recentWallet.providerId as WalletID, chainId)
-        } else {
-          disconnect({
-            providerId: recentWallet.providerId,
-            chainId: recentWallet.network.chainId,
-          })
-          setStatus(WalletConnectionStatus.Unconnected)
-        }
-      }
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      chainId,
-      isConnected,
-      isConnecting,
-      isAutoConnecting,
-      isRetry,
-      isWalletConnect,
-      recentWallet,
-    ]
+    [chainId, isConnected, isConnecting, isAutoConnecting, isRetry, lastClicked]
   )
-
-  const tryConnect = async (providerId: WalletID, chainId: ChainInfoID) => {
-    try {
-      await connect({ providerId, chainId })
-    } catch (e) {
-      setTimeout(() => {
-        if (retryCount > 0) {
-          retryCount--
-          tryConnect(providerId, chainId)
-        }
-      }, 200)
-    }
-  }
 
   const walletItem = (wallet: Wallet) => {
     const isApp = wallet.type === "app"

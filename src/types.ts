@@ -26,6 +26,7 @@ export interface Wallet {
   provider: any
   installed?: boolean
   type: "app" | "extension"
+  supportedChains: ChainInfoID[]
 }
 
 export interface AssetResponse {

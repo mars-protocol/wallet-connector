@@ -12,7 +12,7 @@ import {
   XDEFICosmosProvider,
 } from "@delphi-labs/shuttle"
 
-import { WalletID } from "../enums"
+import { ChainInfoID, WalletID } from "../enums"
 import { IWalletMetaOverride, Wallet } from "../types"
 import { SimplifiedChainInfo } from "./chainInfo"
 import { ensure } from "./helpers"
@@ -28,6 +28,18 @@ export const CosmostationWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
   provider: CosmostationProvider,
   type: "extension",
+  supportedChains: [
+    ChainInfoID.Cosmoshub4,
+    ChainInfoID.Injective1,
+    ChainInfoID.Juno1,
+    ChainInfoID.Mars1,
+    ChainInfoID.MarsAres1,
+    ChainInfoID.NeutronTestnet,
+    ChainInfoID.Neutron,
+    ChainInfoID.Osmosis1,
+    ChainInfoID.OsmosisTestnet,
+    ChainInfoID.Stargaze1,
+  ],
 }
 
 export const CosmostationMobileWallet: Wallet = {
@@ -41,6 +53,18 @@ export const CosmostationMobileWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-connect.png",
   provider: MobileCosmostationProvider,
   type: "app",
+  supportedChains: [
+    ChainInfoID.Cosmoshub4,
+    ChainInfoID.Injective1,
+    ChainInfoID.Juno1,
+    ChainInfoID.Mars1,
+    ChainInfoID.MarsAres1,
+    ChainInfoID.NeutronTestnet,
+    ChainInfoID.Neutron,
+    ChainInfoID.Osmosis1,
+    ChainInfoID.OsmosisTestnet,
+    ChainInfoID.Stargaze1,
+  ],
 }
 
 export const FalconWallet: Wallet = {
@@ -54,6 +78,7 @@ export const FalconWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/falcon-wallet-extension.png",
   provider: FalconProvider,
   type: "extension",
+  supportedChains: [ChainInfoID.Cosmoshub4, ChainInfoID.Osmosis1],
 }
 
 export const KeplrWallet: Wallet = {
@@ -66,6 +91,18 @@ export const KeplrWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
   provider: KeplrProvider,
   type: "extension",
+  supportedChains: [
+    ChainInfoID.Cosmoshub4,
+    ChainInfoID.Injective1,
+    ChainInfoID.Juno1,
+    ChainInfoID.Mars1,
+    ChainInfoID.MarsAres1,
+    ChainInfoID.NeutronTestnet,
+    ChainInfoID.Neutron,
+    ChainInfoID.Osmosis1,
+    ChainInfoID.OsmosisTestnet,
+    ChainInfoID.Stargaze1,
+  ],
 }
 
 export const KeplrMobileWallet: Wallet = {
@@ -79,6 +116,14 @@ export const KeplrMobileWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-connect.png",
   provider: MobileKeplrProvider,
   type: "app",
+  supportedChains: [
+    ChainInfoID.Cosmoshub4,
+    ChainInfoID.Injective1,
+    ChainInfoID.Juno1,
+    ChainInfoID.Neutron,
+    ChainInfoID.Osmosis1,
+    ChainInfoID.Stargaze1,
+  ],
 }
 
 export const LeapWallet: Wallet = {
@@ -91,6 +136,18 @@ export const LeapWallet: Wallet = {
   imageUrl: "https://assets.leapwallet.io/logos/leap-cosmos-logo.png",
   provider: LeapCosmosProvider,
   type: "extension",
+  supportedChains: [
+    ChainInfoID.Cosmoshub4,
+    ChainInfoID.Injective1,
+    ChainInfoID.Juno1,
+    ChainInfoID.Mars1,
+    ChainInfoID.MarsAres1,
+    ChainInfoID.NeutronTestnet,
+    ChainInfoID.Neutron,
+    ChainInfoID.Osmosis1,
+    ChainInfoID.OsmosisTestnet,
+    ChainInfoID.Stargaze1,
+  ],
 }
 
 export const StationWallet: Wallet = {
@@ -104,6 +161,7 @@ export const StationWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
   provider: TerraStationProvider,
   type: "extension",
+  supportedChains: [ChainInfoID.Mars1, ChainInfoID.Osmosis1],
 }
 
 export const StationMobileWallet: Wallet = {
@@ -117,6 +175,7 @@ export const StationMobileWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/wallet-connect.png",
   provider: MobileTerraStationProvider,
   type: "app",
+  supportedChains: [],
 }
 
 export const XdefiWallet: Wallet = {
@@ -128,6 +187,7 @@ export const XdefiWallet: Wallet = {
   imageUrl: "https://xdefi-static.s3.eu-west-1.amazonaws.com/xdefi.png",
   provider: XDEFICosmosProvider,
   type: "extension",
+  supportedChains: [ChainInfoID.Mars1, ChainInfoID.Osmosis1],
 }
 
 export const wallets: Wallet[] = [
