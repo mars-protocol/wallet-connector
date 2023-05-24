@@ -151,7 +151,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     },
     alternativeBIP44s: [{ coinType: 330 }],
     gasPrice: "0.025untrn",
-    bech32Config: Bech32Address.defaultBech32Config("ntrn"),
+    bech32Config: Bech32Address.defaultBech32Config("neutron"),
     defaultCurrency: {
       coinDenom: "NTRN",
       coinMinimalDenom: "untrn",
@@ -177,7 +177,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     },
     alternativeBIP44s: [{ coinType: 330 }],
     gasPrice: "0.025untrn",
-    bech32Config: Bech32Address.defaultBech32Config("ntrn"),
+    bech32Config: Bech32Address.defaultBech32Config("neutron"),
     defaultCurrency: {
       coinDenom: "NTRN",
       coinMinimalDenom: "untrn",
