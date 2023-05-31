@@ -213,9 +213,10 @@ export const WalletManagerProvider: FunctionComponent<
             }
           />
         )}
-        {status === WalletConnectionStatus.Connected && !connectedWallet && (
+        {status === WalletConnectionStatus.Connected && (
           <ConnectedHandler
             chainId={defaultChainId}
+            connectedWallet={connectedWallet}
             setConnectedWallet={setConnectedWallet}
           />
         )}

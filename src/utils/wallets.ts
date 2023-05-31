@@ -59,7 +59,6 @@ export const CosmostationMobileWallet: Wallet = {
     ChainInfoID.Juno1,
     ChainInfoID.Mars1,
     ChainInfoID.MarsAres1,
-    ChainInfoID.NeutronTestnet,
     ChainInfoID.Neutron,
     ChainInfoID.Osmosis1,
     ChainInfoID.OsmosisTestnet,
