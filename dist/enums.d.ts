@@ -22,7 +22,6 @@ export declare enum WalletID {
 }
 export declare enum ChainInfoID {
     Cosmoshub4 = "cosmoshub-4",
-    FakeOsmosis1 = "fosmosis-1",
     Injective1 = "injective-1",
     Juno1 = "juno-1",
     Mars1 = "mars-1",
@@ -30,6 +29,7 @@ export declare enum ChainInfoID {
     Neutron = "neutron-1",
     NeutronTestnet = "pion-1",
     Osmosis1 = "osmosis-1",
+    OsmosisDevnet = "devnet",
     OsmosisTestnet = "osmo-test-5",
     Stargaze1 = "stargaze-1"
 }

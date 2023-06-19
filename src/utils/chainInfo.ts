@@ -217,13 +217,13 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     },
     features: ["ibc-transfer", "ibc-go"],
   },
-  [ChainInfoID.FakeOsmosis1]: {
-    rpc: "https://rpc-osmosis.blockapsis.com",
-    rest: "https://lcd-osmosis.blockapsis.com",
+  [ChainInfoID.OsmosisDevnet]: {
+    rpc: "https://rpc.devnet.osmosis.zone",
+    rest: "	https://lcd.devnet.osmosis.zone",
     explorer: "https://www.mintscan.io/osmosis",
     explorerName: "Mintscan",
-    chainId: ChainInfoID.FakeOsmosis1,
-    name: "Fake Osmosis",
+    chainId: ChainInfoID.OsmosisDevnet,
+    name: "Osmosis Devnet",
     bip44: {
       coinType: 118,
     },

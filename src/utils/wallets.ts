@@ -30,7 +30,6 @@ export const CosmostationWallet: Wallet = {
   type: "extension",
   supportedChains: [
     ChainInfoID.Cosmoshub4,
-    ChainInfoID.FakeOsmosis1,
     ChainInfoID.Injective1,
     ChainInfoID.Juno1,
     ChainInfoID.Mars1,
@@ -38,6 +37,7 @@ export const CosmostationWallet: Wallet = {
     ChainInfoID.NeutronTestnet,
     ChainInfoID.Neutron,
     ChainInfoID.Osmosis1,
+    ChainInfoID.OsmosisDevnet,
     ChainInfoID.OsmosisTestnet,
     ChainInfoID.Stargaze1,
   ],
@@ -93,7 +93,6 @@ export const KeplrWallet: Wallet = {
   type: "extension",
   supportedChains: [
     ChainInfoID.Cosmoshub4,
-    ChainInfoID.FakeOsmosis1,
     ChainInfoID.Injective1,
     ChainInfoID.Juno1,
     ChainInfoID.Mars1,
@@ -101,6 +100,7 @@ export const KeplrWallet: Wallet = {
     ChainInfoID.NeutronTestnet,
     ChainInfoID.Neutron,
     ChainInfoID.Osmosis1,
+    ChainInfoID.OsmosisDevnet,
     ChainInfoID.OsmosisTestnet,
     ChainInfoID.Stargaze1,
   ],
