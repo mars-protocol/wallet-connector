@@ -24,6 +24,7 @@ export enum WalletID {
 
 export enum ChainInfoID {
   Cosmoshub4 = "cosmoshub-4",
+  FakeOsmosis1 = "fosmosis-1",
   Injective1 = "injective-1",
   Juno1 = "juno-1",
   Mars1 = "mars-1",

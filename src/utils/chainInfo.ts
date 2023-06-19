@@ -217,6 +217,32 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     },
     features: ["ibc-transfer", "ibc-go"],
   },
+  [ChainInfoID.FakeOsmosis1]: {
+    rpc: "https://rpc-osmosis.blockapsis.com",
+    rest: "https://lcd-osmosis.blockapsis.com",
+    explorer: "https://www.mintscan.io/osmosis",
+    explorerName: "Mintscan",
+    chainId: ChainInfoID.FakeOsmosis1,
+    name: "Fake Osmosis",
+    bip44: {
+      coinType: 118,
+    },
+    alternativeBIP44s: [{ coinType: 330 }],
+    gasPrice: "0.025uosmo",
+    bech32Config: Bech32Address.defaultBech32Config("osmo"),
+    defaultCurrency: {
+      coinDenom: "OSMO",
+      coinMinimalDenom: "uosmo",
+      coinDecimals: 6,
+      coinGeckoId: "osmosis",
+      gasPriceStep: {
+        low: 0,
+        average: 0.025,
+        high: 0.04,
+      },
+    },
+    features: ["ibc-transfer", "ibc-go"],
+  },
   [ChainInfoID.OsmosisTestnet]: {
     rpc: "https://rpc.osmotest5.osmosis.zone",
     rest: "https://lcd.osmotest5.osmosis.zone",
