@@ -123,6 +123,7 @@ export interface IWalletManagerContext {
 export interface WalletManagerProviderProps {
   enabledWallets: WalletID[keyof WalletID][]
   chainIds: ChainInfoID[]
+  walletConnectProjectId?: string
   chainInfoOverrides?: ChainInfoOptions
   classNames?: ModalClassNames
   closeIcon?: ReactNode

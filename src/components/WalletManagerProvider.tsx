@@ -48,6 +48,7 @@ export const WalletManagerProvider: FunctionComponent<
   scanQRCodeOverride,
   stationWalletTutorial,
   walletMetaOverride,
+  walletConnectProjectId,
 }) => {
   const [pickerModalOpen, setPickerModalOpen] = useState(false)
   const [selectableWallets, setSelectableWallets] = useState<Wallet[]>([])
@@ -195,6 +196,7 @@ export const WalletManagerProvider: FunctionComponent<
       extensionProviders={providers}
       mobileProviders={mobileProviders ?? []}
       persistent={persistent}
+      walletConnectProjectId={walletConnectProjectId}
     >
       <WalletManagerContext.Provider value={value}>
         {status === WalletConnectionStatus.AutoConnect && (
