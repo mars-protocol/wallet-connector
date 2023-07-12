@@ -1,9 +1,9 @@
 import {
-  MobileWalletProvider,
   ShuttleProvider,
   WalletConnection,
-  WalletProvider,
-} from "@delphi-labs/shuttle"
+  WalletExtensionProvider,
+  WalletMobileProvider,
+} from "@delphi-labs/shuttle-react"
 import {
   FunctionComponent,
   useCallback,
@@ -52,14 +52,14 @@ export const WalletManagerProvider: FunctionComponent<
   const [pickerModalOpen, setPickerModalOpen] = useState(false)
   const [selectableWallets, setSelectableWallets] = useState<Wallet[]>([])
   const [status, setStatus] = useState<WalletConnectionStatus>(
-    WalletConnectionStatus.Unconnected
+    WalletConnectionStatus.Unconnected,
   )
   const [connectedWallet, setConnectedWallet] = useState<
     WalletConnection | undefined
   >()
-  const [providers, setProviders] = useState<WalletProvider[]>()
+  const [providers, setProviders] = useState<WalletExtensionProvider[]>()
   const [mobileProviders, setMobileProviders] =
-    useState<MobileWalletProvider[]>()
+    useState<WalletMobileProvider[]>()
 
   const networks = chainIds.map((chainId) => {
     return getChainInfo(chainId, chainInfoOverrides)
@@ -68,7 +68,7 @@ export const WalletManagerProvider: FunctionComponent<
   const filteredWallets = getEnabledWallets(
     wallets,
     enabledWallets,
-    walletMetaOverride
+    walletMetaOverride,
   )
 
   const usePrevious = (value: any) => {
@@ -101,7 +101,7 @@ export const WalletManagerProvider: FunctionComponent<
     setStatus(
       persistent
         ? WalletConnectionStatus.AutoConnect
-        : WalletConnectionStatus.Unconnected
+        : WalletConnectionStatus.Unconnected,
     )
   }, [defaultChainId, persistent, connectedWallet])
 
@@ -114,11 +114,11 @@ export const WalletManagerProvider: FunctionComponent<
       )
         return
 
-      const shuttleStorage = localStorage.getItem("shuttle")
+      const shuttleStorage = localStorage.getItem("shuttle-react")
       if (shuttleStorage !== null && shuttleStorage !== "[]")
         setStatus(WalletConnectionStatus.AutoConnect)
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [],
   )
 
   const closePickerModal = () => {
@@ -166,12 +166,12 @@ export const WalletManagerProvider: FunctionComponent<
 
   const terminateConnection = useCallback(
     () => setStatus(WalletConnectionStatus.Disconnecting),
-    []
+    [],
   )
 
   const statusChange = useCallback(
     (newStatus: WalletConnectionStatus) => setStatus(newStatus),
-    []
+    [],
   )
 
   const value = useMemo(
@@ -181,7 +181,7 @@ export const WalletManagerProvider: FunctionComponent<
       connectedWallet,
       status,
     }),
-    [beginConnection, terminateConnection, connectedWallet, status]
+    [beginConnection, terminateConnection, connectedWallet, status],
   )
 
   const resetConnection = () => {
@@ -192,9 +192,9 @@ export const WalletManagerProvider: FunctionComponent<
 
   return (
     <ShuttleProvider
+      extensionProviders={providers}
       mobileProviders={mobileProviders ?? []}
       persistent={persistent}
-      providers={providers}
     >
       <WalletManagerContext.Provider value={value}>
         {status === WalletConnectionStatus.AutoConnect && (

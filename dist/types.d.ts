@@ -1,5 +1,5 @@
 import { CosmWasmClient } from "@cosmjs/cosmwasm-stargate";
-import { Bech32Config, BIP44, BroadcastResult, SigningResult, SimulateResult, TransactionMsg, WalletConnection } from "@delphi-labs/shuttle";
+import { Bech32Config, BIP44, BroadcastResult, SigningResult, SimulateResult, TransactionMsg, WalletConnection } from "@delphi-labs/shuttle-react";
 import { AppCurrency, Currency } from "@keplr-wallet/types";
 import { AxiosRequestConfig } from "axios";
 import { ReactNode } from "react";

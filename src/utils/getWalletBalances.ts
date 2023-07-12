@@ -6,7 +6,7 @@ import { getChainInfo } from "../utils"
 
 export const getWalletBalances = async (
   address: string,
-  chainId: ChainInfoID
+  chainId: ChainInfoID,
 ): Promise<BalancesResponse | undefined> => {
   const chainInfo = getChainInfo(chainId)
   const uri =

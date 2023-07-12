@@ -1,4 +1,4 @@
-import { useShuttle, WalletConnection } from "@delphi-labs/shuttle"
+import { useShuttle, WalletConnection } from "@delphi-labs/shuttle-react"
 import { useEffect } from "react"
 import { ChainInfoID } from "src/enums"
 

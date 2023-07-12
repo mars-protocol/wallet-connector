@@ -1,7 +1,7 @@
 import React, { FunctionComponent, SVGProps } from "react"
 
 export const CloseIcon: FunctionComponent<SVGProps<SVGSVGElement>> = (
-  props
+  props,
 ) => (
   <svg
     fill="none"

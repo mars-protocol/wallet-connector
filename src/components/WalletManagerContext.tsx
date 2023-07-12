@@ -1,5 +1,5 @@
 import { CosmWasmClient } from "@cosmjs/cosmwasm-stargate"
-import { MsgExecuteContract, useShuttle } from "@delphi-labs/shuttle"
+import { MsgExecuteContract, useShuttle } from "@delphi-labs/shuttle-react"
 import { createContext, useContext } from "react"
 
 import { ChainInfoID } from "../enums"
@@ -8,7 +8,7 @@ import { getWalletBalances } from "../utils"
 
 const fetchBalances = async (
   address: string,
-  chainId: ChainInfoID
+  chainId: ChainInfoID,
 ): Promise<BalancesResponse | undefined> => {
   return await getWalletBalances(address, chainId)
 }

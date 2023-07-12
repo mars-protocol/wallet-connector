@@ -1,4 +1,4 @@
-import { BIP44, Network } from "@delphi-labs/shuttle"
+import { BIP44, Network } from "@delphi-labs/shuttle-react"
 import { Bech32Address } from "@keplr-wallet/cosmos"
 
 import { ChainInfoID } from "../enums"
@@ -294,7 +294,7 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
 
 export const getChainInfo = (
   chainId: ChainInfoID,
-  chainInfoOverrides?: ChainInfoOptions
+  chainInfoOverrides?: ChainInfoOptions,
 ) => {
   const chainInfo: SimplifiedChainInfo = SimpleChainInfoList[chainId]
 

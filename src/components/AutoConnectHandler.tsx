@@ -1,4 +1,4 @@
-import { useShuttle, WalletConnection } from "@delphi-labs/shuttle"
+import { useShuttle, WalletConnection } from "@delphi-labs/shuttle-react"
 import { useEffect } from "react"
 import { ChainInfoID } from "src/enums"
 
@@ -13,15 +13,15 @@ const AutoConnectHandler = ({
   setConnectedWallet,
   chainId,
 }: Props) => {
-  const { connect, providers, wallets } = useShuttle()
+  const { connect, extensionProviders, wallets } = useShuttle()
 
   useEffect(() => {
     if (wallets === null) return
     const recentWallet = wallets.find((w) => w.network.chainId === chainId)
 
     if (!recentWallet) return
-    const recentProvider = providers.find(
-      (p) => p.id === recentWallet.providerId
+    const recentProvider = extensionProviders.find(
+      (p) => p.id === recentWallet.providerId,
     )
 
     if (recentProvider?.initialized) {
@@ -32,7 +32,14 @@ const AutoConnectHandler = ({
           setConnectedWallet(recentWallet)
         })
     }
-  }, [connect, wallets, providers, setConnected, setConnectedWallet, chainId])
+  }, [
+    connect,
+    wallets,
+    extensionProviders,
+    setConnected,
+    setConnectedWallet,
+    chainId,
+  ])
 
   return null
 }

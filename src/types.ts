@@ -7,7 +7,7 @@ import {
   SimulateResult,
   TransactionMsg,
   WalletConnection,
-} from "@delphi-labs/shuttle"
+} from "@delphi-labs/shuttle-react"
 import { AppCurrency, Currency } from "@keplr-wallet/types"
 import { AxiosRequestConfig } from "axios"
 import { ReactNode } from "react"

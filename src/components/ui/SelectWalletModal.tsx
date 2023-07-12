@@ -1,4 +1,4 @@
-import { useShuttle } from "@delphi-labs/shuttle"
+import { MobileConnectResponse, useShuttle } from "@delphi-labs/shuttle-react"
 import { FunctionComponent, useEffect, useMemo, useState } from "react"
 import { isAndroid, isDesktop, isIOS, isMobile } from "react-device-detect"
 import QRCode from "react-qr-code"
@@ -54,18 +54,18 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   const handleConnect = async (
     providerId: WalletID,
     chainId: ChainInfoID,
-    walletType: string
+    walletType: string,
   ) => {
     setLastClicked(providerId)
     let connected = true
     if (walletType !== "app") {
       const slightDelay = setTimeout(
         () => setStatus(WalletConnectionStatus.Connecting),
-        500
+        500,
       )
       try {
         closeModal()
-        await connect({ providerId, chainId })
+        await connect({ extensionProviderId: providerId, chainId })
       } catch (error) {
         if (error) {
           console.error("Connecting with:", { providerId, chainId })
@@ -79,11 +79,11 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           ? WalletConnectionStatus.Connected
           : providerId === WalletID.StationWallet
           ? WalletConnectionStatus.StationWalletError
-          : WalletConnectionStatus.Errored
+          : WalletConnectionStatus.Errored,
       )
     } else {
       try {
-        const urls = await mobileConnect({
+        const urls: MobileConnectResponse = await mobileConnect({
           mobileProviderId: providerId,
           chainId,
           callback: () => {
@@ -101,7 +101,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
           }
         } else {
           setStatus(WalletConnectionStatus.WalletConnect)
-          setQRCodeUrl(urls.walletconnectUrl)
+          setQRCodeUrl(urls.qrCodeUrl)
         }
       } catch (error) {
         if (error) {
@@ -120,7 +120,14 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       if (isRetry && lastClicked)
         handleConnect(lastClicked, chainId, "extension")
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [chainId, isConnected, isConnecting, isAutoConnecting, isRetry, lastClicked]
+    [
+      chainId,
+      isConnected,
+      isConnecting,
+      isAutoConnecting,
+      isRetry,
+      lastClicked,
+    ],
   )
 
   const walletItem = (wallet: Wallet) => {

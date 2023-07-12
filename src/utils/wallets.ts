@@ -1,16 +1,14 @@
 import {
-  CosmostationProvider,
-  FalconProvider,
-  KeplrProvider,
-  LeapCosmosProvider,
-  MobileCosmostationProvider,
-  MobileKeplrProvider,
-  MobileTerraStationProvider,
-  MobileWalletProvider,
-  TerraStationProvider,
-  WalletProvider,
-  XDEFICosmosProvider,
-} from "@delphi-labs/shuttle"
+  CosmostationExtensionProvider,
+  CosmostationMobileProvider,
+  KeplrExtensionProvider,
+  KeplrMobileProvider,
+  LeapCosmosExtensionProvider,
+  StationExtensionProvider,
+  WalletExtensionProvider,
+  WalletMobileProvider,
+  XDEFICosmosExtensionProvider,
+} from "@delphi-labs/shuttle-react"
 
 import { ChainInfoID, WalletID } from "../enums"
 import { IWalletMetaOverride, Wallet } from "../types"
@@ -26,7 +24,7 @@ export const CosmostationWallet: Wallet = {
   description: "Cosmostation Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
-  provider: CosmostationProvider,
+  provider: CosmostationExtensionProvider,
   type: "extension",
   supportedChains: [
     ChainInfoID.Cosmoshub4,
@@ -52,7 +50,7 @@ export const CosmostationMobileWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-extension.png",
   mobileImageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/cosmostation-wallet-connect.png",
-  provider: MobileCosmostationProvider,
+  provider: CosmostationMobileProvider,
   type: "app",
   supportedChains: [
     ChainInfoID.Cosmoshub4,
@@ -67,20 +65,6 @@ export const CosmostationMobileWallet: Wallet = {
   ],
 }
 
-export const FalconWallet: Wallet = {
-  id: WalletID.Falcon,
-  name: "Falcon Wallet",
-  install: "Install Falcon Wallet",
-  installURL:
-    "https://chrome.google.com/webstore/detail/falcon-wallet/gkhnjcpkikkkfhhdhhphcbhmkikoicgn",
-  description: "Falcon Extension",
-  imageUrl:
-    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/falcon-wallet-extension.png",
-  provider: FalconProvider,
-  type: "extension",
-  supportedChains: [ChainInfoID.Cosmoshub4, ChainInfoID.Osmosis1],
-}
-
 export const KeplrWallet: Wallet = {
   id: WalletID.Keplr,
   name: "Keplr Wallet",
@@ -89,7 +73,7 @@ export const KeplrWallet: Wallet = {
   description: "Keplr Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
-  provider: KeplrProvider,
+  provider: KeplrExtensionProvider,
   type: "extension",
   supportedChains: [
     ChainInfoID.Cosmoshub4,
@@ -115,7 +99,7 @@ export const KeplrMobileWallet: Wallet = {
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-extension.png",
   mobileImageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/keplr-wallet-connect.png",
-  provider: MobileKeplrProvider,
+  provider: KeplrMobileProvider,
   type: "app",
   supportedChains: [
     ChainInfoID.Cosmoshub4,
@@ -135,7 +119,7 @@ export const LeapWallet: Wallet = {
     "https://chrome.google.com/webstore/detail/leap-cosmos-wallet/fcfcfllfndlomdhbehjjcoimbgofdncg",
   description: "Leap Extension",
   imageUrl: "https://assets.leapwallet.io/logos/leap-cosmos-logo.png",
-  provider: LeapCosmosProvider,
+  provider: LeapCosmosExtensionProvider,
   type: "extension",
   supportedChains: [
     ChainInfoID.Cosmoshub4,
@@ -160,23 +144,9 @@ export const StationWallet: Wallet = {
   description: "Station Wallet Extension",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
-  provider: TerraStationProvider,
+  provider: StationExtensionProvider,
   type: "extension",
   supportedChains: [ChainInfoID.Mars1, ChainInfoID.Osmosis1],
-}
-
-export const StationMobileWallet: Wallet = {
-  id: WalletID.StationWalletMobile,
-  name: "Station Wallet",
-  walletConnect: "Station Wallet WalletConnect",
-  description: "Station Wallet Mobile App",
-  imageUrl:
-    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/terra-station-wallet-extension.png",
-  mobileImageUrl:
-    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/wallet-connect.png",
-  provider: MobileTerraStationProvider,
-  type: "app",
-  supportedChains: [],
 }
 
 export const XdefiWallet: Wallet = {
@@ -186,7 +156,7 @@ export const XdefiWallet: Wallet = {
   installURL: "https://go.xdefi.io/mars",
   description: "XDEFI Extension",
   imageUrl: "https://xdefi-static.s3.eu-west-1.amazonaws.com/xdefi.png",
-  provider: XDEFICosmosProvider,
+  provider: XDEFICosmosExtensionProvider,
   type: "extension",
   supportedChains: [ChainInfoID.Mars1, ChainInfoID.Osmosis1],
 }
@@ -194,19 +164,17 @@ export const XdefiWallet: Wallet = {
 export const wallets: Wallet[] = [
   CosmostationWallet,
   CosmostationMobileWallet,
-  FalconWallet,
   KeplrWallet,
   KeplrMobileWallet,
   LeapWallet,
   StationWallet,
-  StationMobileWallet,
   XdefiWallet,
 ]
 
 export const getEnabledWallets = (
   wallets: Wallet[],
   enabledWallets: WalletID[keyof WalletID][],
-  walletMetaOverride?: IWalletMetaOverride
+  walletMetaOverride?: IWalletMetaOverride,
 ): Wallet[] => {
   const updatedWallets = enabledWallets.map((walletID) => {
     return ensure(wallets.find((wallet) => wallet.id === walletID))
@@ -230,11 +198,11 @@ export const getEnabledWallets = (
 
 export const getWalletProviders = (
   wallets: Wallet[],
-  networks?: SimplifiedChainInfo[]
+  networks?: SimplifiedChainInfo[],
 ) => {
   if (!networks) return
 
-  const providers: WalletProvider[] = []
+  const providers: WalletExtensionProvider[] = []
 
   wallets.forEach((wallet) => {
     if (wallet.type === "extension") {
@@ -247,11 +215,11 @@ export const getWalletProviders = (
 
 export const getMobileProviders = (
   wallets: Wallet[],
-  networks?: SimplifiedChainInfo[]
+  networks?: SimplifiedChainInfo[],
 ) => {
   if (!networks) return
 
-  const providers: MobileWalletProvider[] = []
+  const providers: WalletMobileProvider[] = []
 
   wallets.forEach((wallet) => {
     if (wallet.type === "app") {

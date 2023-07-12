@@ -1,4 +1,4 @@
-import { useShuttle } from "@delphi-labs/shuttle"
+import { useShuttle } from "@delphi-labs/shuttle-react"
 import { ChainInfoID } from "src/enums"
 
 interface Props {

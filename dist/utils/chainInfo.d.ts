@@ -1,4 +1,4 @@
-import { BIP44, Network } from "@delphi-labs/shuttle";
+import { BIP44, Network } from "@delphi-labs/shuttle-react";
 import { ChainInfoID } from "../enums";
 import { ChainInfoOptions } from "../types";
 export interface SimplifiedChainInfo extends Network {
