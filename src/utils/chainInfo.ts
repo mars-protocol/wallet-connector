@@ -168,8 +168,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.NeutronTestnet]: {
     rpc: "https://rpc-palvus.pion-1.ntrn.tech/",
     rest: "https://rest-palvus.pion-1.ntrn.tech/",
-    explorer: "https://explorer.rs-testnet.polypore.xyz/pion-1",
-    explorerName: "PING.PUB",
+    explorer: "https://testnet.mintscan.io/neutron-testnet",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.NeutronTestnet,
     name: "Neutron Testnet",
     bip44: {
