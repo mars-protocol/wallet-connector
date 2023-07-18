@@ -28,6 +28,7 @@ import DisconnectHandler from "./DisconnectHandler"
 import { SelectWalletModal } from "./ui"
 import { EnablingWalletModal } from "./ui/EnablingWalletModal"
 import { StationWalletErrorModal } from "./ui/StationWalletErrorModal"
+import WalletConnectHandler from "./WalletConnectHandler"
 import { WalletManagerContext } from "./WalletManagerContext"
 
 export const WalletManagerProvider: FunctionComponent<
@@ -123,10 +124,6 @@ export const WalletManagerProvider: FunctionComponent<
   )
 
   const closePickerModal = () => {
-    if (status === WalletConnectionStatus.WalletConnect) {
-      setStatus(WalletConnectionStatus.Unconnected)
-    }
-
     setPickerModalOpen(false)
   }
 
@@ -201,6 +198,13 @@ export const WalletManagerProvider: FunctionComponent<
       <WalletManagerContext.Provider value={value}>
         {status === WalletConnectionStatus.AutoConnect && (
           <AutoConnectHandler
+            chainId={defaultChainId}
+            setConnected={() => setStatus(WalletConnectionStatus.Connected)}
+            setConnectedWallet={setConnectedWallet}
+          />
+        )}
+        {status === WalletConnectionStatus.WalletConnect && (
+          <WalletConnectHandler
             chainId={defaultChainId}
             setConnected={() => setStatus(WalletConnectionStatus.Connected)}
             setConnectedWallet={setConnectedWallet}

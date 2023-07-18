@@ -1,15 +1,10 @@
 import {
-  ChainInfoID,
   WalletConnectionStatus,
   useWalletManager,
 } from "@marsprotocol/wallet-connector"
 import { useEffect, useState } from "react"
 
-interface Props {
-  chainId: ChainInfoID
-}
-
-export default function ConnectButton(props: Props) {
+export default function ConnectButton() {
   const { connect, status, connectedWallet, disconnect } = useWalletManager()
   const [isConnected, setIsConnected] = useState(false)
 
