@@ -13,7 +13,7 @@ const WalletConnectHandler = ({
   setConnectedWallet,
   chainId,
 }: Props) => {
-  const { connect, extensionProviders, wallets } = useShuttle()
+  const { connect, mobileProviders, wallets } = useShuttle()
 
   useEffect(() => {
     if (wallets === null) return
@@ -21,7 +21,7 @@ const WalletConnectHandler = ({
 
     if (!recentWallet) return
     if (!recentWallet.providerId.includes("mobile")) return
-    const recentProvider = extensionProviders.find(
+    const recentProvider = mobileProviders.find(
       (p) => p.id === recentWallet.providerId,
     )
 
@@ -35,7 +35,7 @@ const WalletConnectHandler = ({
   }, [
     connect,
     wallets,
-    extensionProviders,
+    mobileProviders,
     setConnected,
     setConnectedWallet,
     chainId,
