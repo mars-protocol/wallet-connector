@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       enabledWallets={[
         WalletID.Keplr,
         WalletID.Xdefi,
-        WalletID.StationWallet,
+        WalletID.Station,
         WalletID.Leap,
         WalletID.Cosmostation,
         WalletID.KeplrMobile,
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
     >
       <div className="absolute inset-0 flex flex-wrap content-center justify-center">
         <div className="flex flex-row items-center justify-center w-full gap-2 mb-4">
-          <ConnectButton chainId={chainId} />
+          <ConnectButton />
         </div>
 
         <div className="flex flex-wrap items-center justify-center w-full gap-2">

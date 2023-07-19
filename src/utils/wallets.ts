@@ -137,7 +137,7 @@ export const LeapWallet: Wallet = {
 }
 
 export const StationWallet: Wallet = {
-  id: WalletID.StationWallet,
+  id: WalletID.Station,
   name: "Station Wallet",
   install: "Install Station Wallet",
   installURL:
@@ -151,7 +151,7 @@ export const StationWallet: Wallet = {
 }
 
 export const VectisWallet: Wallet = {
-  id: WalletID.VectisWallet,
+  id: WalletID.Vectis,
   name: "Vectis Wallet",
   install: "Install Vectis Wallet",
   installURL:
@@ -183,6 +183,7 @@ export const wallets: Wallet[] = [
   KeplrMobileWallet,
   LeapWallet,
   StationWallet,
+  VectisWallet,
   XdefiWallet,
 ]
 

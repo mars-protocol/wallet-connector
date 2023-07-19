@@ -77,7 +77,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       setStatus(
         connected
           ? WalletConnectionStatus.Connected
-          : providerId === WalletID.StationWallet
+          : providerId === WalletID.Station
           ? WalletConnectionStatus.StationWalletError
           : WalletConnectionStatus.Errored,
       )
