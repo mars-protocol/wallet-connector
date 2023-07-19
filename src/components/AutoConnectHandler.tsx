@@ -15,10 +15,9 @@ const AutoConnectHandler = ({
 }: Props) => {
   const { connect, extensionProviders, mobileProviders, wallets } = useShuttle()
 
-  const providers = [...extensionProviders, ...mobileProviders]
-
   useEffect(() => {
     if (wallets === null) return
+    const providers = [...extensionProviders, ...mobileProviders]
     const recentWallet = wallets.find((w) => w.network.chainId === chainId)
 
     if (!recentWallet) return
@@ -34,7 +33,15 @@ const AutoConnectHandler = ({
           setConnectedWallet(recentWallet)
         })
     }
-  }, [connect, wallets, providers, setConnected, setConnectedWallet, chainId])
+  }, [
+    connect,
+    wallets,
+    extensionProviders,
+    mobileProviders,
+    setConnected,
+    setConnectedWallet,
+    chainId,
+  ])
 
   return null
 }

@@ -18,6 +18,7 @@ export declare enum WalletID {
     Leap = "leap-cosmos",
     StationWallet = "terra-station",
     StationWalletMobile = "mobile-terra-station",
+    VectisWallet = "vectis-cosmos",
     Xdefi = "xfi-cosmos"
 }
 export declare enum ChainInfoID {

@@ -8,6 +8,7 @@ export declare const KeplrWallet: Wallet;
 export declare const KeplrMobileWallet: Wallet;
 export declare const LeapWallet: Wallet;
 export declare const StationWallet: Wallet;
+export declare const VectisWallet: Wallet;
 export declare const XdefiWallet: Wallet;
 export declare const wallets: Wallet[];
 export declare const getEnabledWallets: (wallets: Wallet[], enabledWallets: WalletID[keyof WalletID][], walletMetaOverride?: IWalletMetaOverride) => Wallet[];

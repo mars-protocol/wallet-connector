@@ -5,6 +5,7 @@ import {
   KeplrMobileProvider,
   LeapCosmosExtensionProvider,
   StationExtensionProvider,
+  VectisCosmosExtensionProvider,
   WalletExtensionProvider,
   WalletMobileProvider,
   XDEFICosmosExtensionProvider,
@@ -147,6 +148,20 @@ export const StationWallet: Wallet = {
   provider: StationExtensionProvider,
   type: "extension",
   supportedChains: [ChainInfoID.Mars1, ChainInfoID.Osmosis1],
+}
+
+export const VectisWallet: Wallet = {
+  id: WalletID.VectisWallet,
+  name: "Vectis Wallet",
+  install: "Install Vectis Wallet",
+  installURL:
+    "https://chrome.google.com/webstore/detail/vectis/cgkaddoglojnmfiblgmlinfaijcdpfjm",
+  description: "Vectis Smart Contract Wallet",
+  imageUrl:
+    "https://cloudflare-ipfs.com/ipfs/QmU7BdRsm936vQvawJNzxfHEuChEf8GEKUhp4ADHjV6tnp",
+  provider: VectisCosmosExtensionProvider,
+  type: "extension",
+  supportedChains: [ChainInfoID.NeutronTestnet, ChainInfoID.Neutron],
 }
 
 export const XdefiWallet: Wallet = {
