@@ -137,6 +137,7 @@ export interface WalletManagerProviderProps {
   persistent?: boolean
   children?: ReactNode | undefined
   stationWalletTutorial?: StationWalletTutorial
+  noModal?: boolean
 }
 
 export interface StationWalletTutorial {

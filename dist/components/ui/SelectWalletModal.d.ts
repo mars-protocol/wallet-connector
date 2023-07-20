@@ -11,6 +11,7 @@ interface Props extends BaseModalProps {
     selectWalletOverride?: string;
     scanQRCodeOverride?: string;
     status: WalletConnectionStatus;
+    noModal?: boolean;
 }
 export declare const SelectWalletModal: FunctionComponent<Props>;
 export {};

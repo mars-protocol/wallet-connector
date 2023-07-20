@@ -17,6 +17,7 @@ interface Props extends BaseModalProps {
   selectWalletOverride?: string
   scanQRCodeOverride?: string
   status: WalletConnectionStatus
+  noModal?: boolean
 }
 
 export const SelectWalletModal: FunctionComponent<Props> = ({
@@ -29,6 +30,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   scanQRCodeOverride,
   setStatus,
   status,
+  noModal,
   ...props
 }) => {
   const { connect, mobileConnect } = useShuttle()
@@ -225,10 +227,45 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
     return wallets.filter((wallet) => wallet.installed)
   }, [wallets])
 
+  const walletConnectContent = () => (
+    <div
+      className={classNames?.walletConnect}
+      style={
+        classNames?.walletConnect ? undefined : selectWalletStyles.walletConnect
+      }
+    >
+      {qrCodeUrl && (
+        <QRCode
+          bgColor="transparent"
+          className={classNames?.walletConnectQR}
+          fgColor="##fff"
+          style={
+            classNames?.walletConnectQR
+              ? undefined
+              : selectWalletStyles.walletConnectQR
+          }
+          value={qrCodeUrl}
+        />
+      )}
+    </div>
+  )
+
+  const walletList = () => (
+    <div
+      className={classNames?.walletList}
+      style={classNames?.walletList ? undefined : selectWalletStyles.walletList}
+    >
+      {isMobile && installedWallets.length
+        ? installedWallets.map((wallet) => walletItem(wallet))
+        : sortedWallets.map((wallet) => walletItem(wallet))}
+    </div>
+  )
+
   if (!sortedWallets.length) {
     return (
       <BaseModal
         classNames={classNames}
+        noModal={noModal}
         title={selectWalletOverride ? selectWalletOverride : "Select a wallet"}
         {...props}
       >
@@ -251,6 +288,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
   return (
     <BaseModal
       classNames={classNames}
+      noModal={noModal}
       title={
         isWalletConnect
           ? scanQRCodeOverride
@@ -262,41 +300,7 @@ export const SelectWalletModal: FunctionComponent<Props> = ({
       }
       {...props}
     >
-      {isWalletConnect ? (
-        <div
-          className={classNames?.walletConnect}
-          style={
-            classNames?.walletConnect
-              ? undefined
-              : selectWalletStyles.walletConnect
-          }
-        >
-          {qrCodeUrl && (
-            <QRCode
-              bgColor="transparent"
-              className={classNames?.walletConnectQR}
-              fgColor="##fff"
-              style={
-                classNames?.walletConnectQR
-                  ? undefined
-                  : selectWalletStyles.walletConnectQR
-              }
-              value={qrCodeUrl}
-            />
-          )}
-        </div>
-      ) : (
-        <div
-          className={classNames?.walletList}
-          style={
-            classNames?.walletList ? undefined : selectWalletStyles.walletList
-          }
-        >
-          {isMobile && installedWallets.length
-            ? installedWallets.map((wallet) => walletItem(wallet))
-            : sortedWallets.map((wallet) => walletItem(wallet))}
-        </div>
-      )}
+      {isWalletConnect ? walletConnectContent() : walletList()}
     </BaseModal>
   )
 }

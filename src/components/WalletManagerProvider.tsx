@@ -50,6 +50,7 @@ export const WalletManagerProvider: FunctionComponent<
   stationWalletTutorial,
   walletMetaOverride,
   walletConnectProjectId,
+  noModal,
 }) => {
   const [pickerModalOpen, setPickerModalOpen] = useState(false)
   const [selectableWallets, setSelectableWallets] = useState<Wallet[]>([])
@@ -233,6 +234,7 @@ export const WalletManagerProvider: FunctionComponent<
           closeIcon={closeIcon}
           closeModal={closePickerModal}
           isOpen={pickerModalOpen}
+          noModal={noModal}
           noWalletsOverride={noWalletsOverride}
           onClose={() => setPickerModalOpen(false)}
           scanQRCodeOverride={scanQRCodeOverride}

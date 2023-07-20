@@ -1,9 +1,10 @@
-import React, {
+import {
   FunctionComponent,
   PropsWithChildren,
   ReactElement,
   ReactNode,
   useEffect,
+  useMemo,
 } from "react"
 import ReactModal from "react-modal"
 
@@ -18,6 +19,7 @@ export type BaseModalProps = PropsWithChildren<{
   maxWidth?: string
   classNames?: ModalClassNames
   closeIcon?: ReactNode
+  noModal?: boolean
 }>
 
 export const BaseModal: FunctionComponent<BaseModalProps> = ({
@@ -27,10 +29,65 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
   classNames,
   closeIcon,
   children,
+  noModal,
 }) => {
   useEffect(() => {
     ReactModal.setAppElement("body")
   }, [])
+
+  const modalContent = useMemo(
+    () => (
+      <>
+        <div
+          className={classNames?.modalHeader}
+          style={
+            classNames?.modalHeader ? undefined : baseModalStyles.modalHeader
+          }
+        >
+          {title}
+        </div>
+
+        {onClose && (
+          <div
+            className={classNames?.modalCloseButton}
+            onClick={onClose}
+            style={
+              classNames?.modalCloseButton
+                ? undefined
+                : baseModalStyles.modalCloseButton
+            }
+          >
+            {closeIcon ? (
+              closeIcon
+            ) : (
+              <DefaultCloseIcon height={26} width={26} />
+            )}
+          </div>
+        )}
+        {children}
+      </>
+    ),
+    [
+      children,
+      classNames?.modalCloseButton,
+      classNames?.modalHeader,
+      closeIcon,
+      onClose,
+      title,
+    ],
+  )
+
+  if (noModal)
+    return (
+      <div
+        className={classNames?.modalContent ?? "_"}
+        style={
+          classNames?.modalContent ? undefined : baseModalStyles.modalContent
+        }
+      >
+        {modalContent}
+      </div>
+    )
 
   return (
     <ReactModal
@@ -61,35 +118,7 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
           : baseModalStyles.modalContent,
       }}
     >
-      <>
-        <div
-          className={classNames?.modalHeader}
-          style={
-            classNames?.modalHeader ? undefined : baseModalStyles.modalHeader
-          }
-        >
-          {title}
-        </div>
-
-        {onClose && (
-          <div
-            className={classNames?.modalCloseButton}
-            onClick={onClose}
-            style={
-              classNames?.modalCloseButton
-                ? undefined
-                : baseModalStyles.modalCloseButton
-            }
-          >
-            {closeIcon ? (
-              closeIcon
-            ) : (
-              <DefaultCloseIcon height={26} width={26} />
-            )}
-          </div>
-        )}
-        {children}
-      </>
+      {modalContent}
     </ReactModal>
   )
 }
