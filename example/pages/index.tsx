@@ -17,12 +17,12 @@ const Home: NextPage = () => {
       enabledWallets={[
         WalletID.Keplr,
         WalletID.Xdefi,
-        WalletID.Station,
         WalletID.Leap,
         WalletID.Cosmostation,
         WalletID.KeplrMobile,
         WalletID.CosmostationMobile,
       ]}
+      noModal={true}
       renderLoader={() => <div>Loading...</div>}
       persistent
     >
@@ -30,7 +30,7 @@ const Home: NextPage = () => {
         <div className="flex flex-row items-center justify-center w-full gap-2 mb-4">
           <ConnectButton />
         </div>
-
+        <div id="wallet-connector" />
         <div className="flex flex-wrap items-center justify-center w-full gap-2">
           <button
             onClick={() => {

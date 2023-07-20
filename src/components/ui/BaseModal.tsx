@@ -6,6 +6,7 @@ import {
   useEffect,
   useMemo,
 } from "react"
+import { createRoot } from "react-dom/client"
 import ReactModal from "react-modal"
 
 import { ModalClassNames } from "../../types"
@@ -47,7 +48,7 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
           {title}
         </div>
 
-        {onClose && (
+        {onClose && !noModal && (
           <div
             className={classNames?.modalCloseButton}
             onClick={onClose}
@@ -72,22 +73,24 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
       classNames?.modalCloseButton,
       classNames?.modalHeader,
       closeIcon,
+      noModal,
       onClose,
       title,
     ],
   )
 
-  if (noModal)
-    return (
-      <div
-        className={classNames?.modalContent ?? "_"}
-        style={
-          classNames?.modalContent ? undefined : baseModalStyles.modalContent
-        }
-      >
-        {modalContent}
-      </div>
-    )
+  if (noModal) {
+    const walletNode = document.getElementById("wallet-connector")
+    if (walletNode) {
+      const content = createRoot(walletNode!)
+      content.render(
+        <div className={classNames?.modalContent ?? "_"}>
+          {isOpen ? modalContent : null}
+        </div>,
+      )
+    }
+    return null
+  }
 
   return (
     <ReactModal
