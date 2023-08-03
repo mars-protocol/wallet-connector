@@ -7,7 +7,6 @@ export type BaseModalProps = PropsWithChildren<{
     maxWidth?: string;
     classNames?: ModalClassNames;
     closeIcon?: ReactNode;
-    noModal?: boolean;
 }>;
 export declare const BaseModal: FunctionComponent<BaseModalProps>;
 //# sourceMappingURL=BaseModal.d.ts.map

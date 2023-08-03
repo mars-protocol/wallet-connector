@@ -1,12 +1,10 @@
-import {
+import React, {
   FunctionComponent,
   PropsWithChildren,
   ReactElement,
   ReactNode,
   useEffect,
-  useMemo,
 } from "react"
-import { createRoot } from "react-dom/client"
 import ReactModal from "react-modal"
 
 import { ModalClassNames } from "../../types"
@@ -20,7 +18,6 @@ export type BaseModalProps = PropsWithChildren<{
   maxWidth?: string
   classNames?: ModalClassNames
   closeIcon?: ReactNode
-  noModal?: boolean
 }>
 
 export const BaseModal: FunctionComponent<BaseModalProps> = ({
@@ -30,67 +27,10 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
   classNames,
   closeIcon,
   children,
-  noModal,
 }) => {
   useEffect(() => {
     ReactModal.setAppElement("body")
   }, [])
-
-  const modalContent = useMemo(
-    () => (
-      <>
-        <div
-          className={classNames?.modalHeader}
-          style={
-            classNames?.modalHeader ? undefined : baseModalStyles.modalHeader
-          }
-        >
-          {title}
-        </div>
-
-        {onClose && !noModal && (
-          <div
-            className={classNames?.modalCloseButton}
-            onClick={onClose}
-            style={
-              classNames?.modalCloseButton
-                ? undefined
-                : baseModalStyles.modalCloseButton
-            }
-          >
-            {closeIcon ? (
-              closeIcon
-            ) : (
-              <DefaultCloseIcon height={26} width={26} />
-            )}
-          </div>
-        )}
-        {children}
-      </>
-    ),
-    [
-      children,
-      classNames?.modalCloseButton,
-      classNames?.modalHeader,
-      closeIcon,
-      noModal,
-      onClose,
-      title,
-    ],
-  )
-
-  if (noModal) {
-    const walletNode = document.getElementById("wallet-connector")
-    if (walletNode) {
-      const content = createRoot(walletNode!)
-      content.render(
-        <div className={classNames?.modalContent ?? "_"}>
-          {isOpen ? modalContent : null}
-        </div>,
-      )
-    }
-    return null
-  }
 
   return (
     <ReactModal
@@ -121,7 +61,35 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
           : baseModalStyles.modalContent,
       }}
     >
-      {modalContent}
+      <>
+        <div
+          className={classNames?.modalHeader}
+          style={
+            classNames?.modalHeader ? undefined : baseModalStyles.modalHeader
+          }
+        >
+          {title}
+        </div>
+
+        {onClose && (
+          <div
+            className={classNames?.modalCloseButton}
+            onClick={onClose}
+            style={
+              classNames?.modalCloseButton
+                ? undefined
+                : baseModalStyles.modalCloseButton
+            }
+          >
+            {closeIcon ? (
+              closeIcon
+            ) : (
+              <DefaultCloseIcon height={26} width={26} />
+            )}
+          </div>
+        )}
+        {children}
+      </>
     </ReactModal>
   )
 }

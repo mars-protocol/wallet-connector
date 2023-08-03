@@ -142,8 +142,8 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
   [ChainInfoID.Neutron]: {
     rpc: "https://rpc-neutron.keplr.app/",
     rest: "https://lcd-neutron.keplr.app/",
-    explorer: "https://neutron.explorers.guru",
-    explorerName: "Explorer",
+    explorer: "https://www.mintscan.io/neutron",
+    explorerName: "Mintscan",
     chainId: ChainInfoID.Neutron,
     name: "Neutron",
     bip44: {
