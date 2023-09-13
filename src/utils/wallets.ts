@@ -5,6 +5,7 @@ import {
   KeplrMobileProvider,
   LeapCosmosExtensionProvider,
   LeapCosmosMobileProvider,
+  LeapMetamaskCosmosSnapExtensionProvider,
   StationExtensionProvider,
   VectisCosmosExtensionProvider,
   WalletExtensionProvider,
@@ -168,7 +169,7 @@ export const MetaMaskLeap: Wallet = {
   description: "MetaMask Snap provided by Leap",
   imageUrl:
     "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/leap-metamask-snap.png",
-  provider: LeapCosmosExtensionProvider,
+  provider: LeapMetamaskCosmosSnapExtensionProvider,
   type: "extension",
   supportedChains: [
     ChainInfoID.Neutron,
