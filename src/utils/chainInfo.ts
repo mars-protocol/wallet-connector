@@ -1,4 +1,4 @@
-import { BIP44, Network } from "@delphi-labs/shuttle-react"
+import { Network } from "@delphi-labs/shuttle-react"
 import { Bech32Address } from "@keplr-wallet/cosmos"
 
 import { ChainInfoID } from "../enums"
@@ -7,7 +7,6 @@ import { ChainInfoOptions } from "../types"
 export interface SimplifiedChainInfo extends Network {
   explorer?: string
   explorerName?: string
-  alternativeBIP44s?: BIP44[]
 }
 
 export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
@@ -18,9 +17,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorerName: "Mintscan",
     chainId: ChainInfoID.Cosmoshub4,
     name: "Cosmos Hub",
-    bip44: {
-      coinType: 118,
-    },
     bech32Config: Bech32Address.defaultBech32Config("cosmos"),
     feeCurrencies: [
       {
@@ -67,9 +63,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorerName: "Mintscan",
     chainId: ChainInfoID.Juno1,
     name: "Juno",
-    bip44: {
-      coinType: 118,
-    },
     bech32Config: Bech32Address.defaultBech32Config("juno"),
     feeCurrencies: [
       {
@@ -94,10 +87,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorerName: "Mars Explorer",
     chainId: ChainInfoID.Mars1,
     name: "Mars Hub",
-    bip44: {
-      coinType: 118,
-    },
-    alternativeBIP44s: [{ coinType: 330 }],
     bech32Config: Bech32Address.defaultBech32Config("mars"),
     gasPrice: "0umars",
     defaultCurrency: {
@@ -120,10 +109,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorerName: "Mars Explorer",
     chainId: ChainInfoID.MarsAres1,
     name: "Mars Hub Testnet",
-    bip44: {
-      coinType: 118,
-    },
-    alternativeBIP44s: [{ coinType: 330 }],
     bech32Config: Bech32Address.defaultBech32Config("mars"),
     gasPrice: "0umars",
     defaultCurrency: {
@@ -146,10 +131,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorerName: "Mintscan",
     chainId: ChainInfoID.Neutron,
     name: "Neutron",
-    bip44: {
-      coinType: 118,
-    },
-    alternativeBIP44s: [{ coinType: 330 }],
     gasPrice: "0.025untrn",
     bech32Config: Bech32Address.defaultBech32Config("neutron"),
     defaultCurrency: {
@@ -172,10 +153,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorerName: "Mintscan",
     chainId: ChainInfoID.NeutronTestnet,
     name: "Neutron Testnet",
-    bip44: {
-      coinType: 118,
-    },
-    alternativeBIP44s: [{ coinType: 330 }],
     gasPrice: "0.025untrn",
     bech32Config: Bech32Address.defaultBech32Config("neutron"),
     defaultCurrency: {
@@ -198,10 +175,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorerName: "Mintscan",
     chainId: ChainInfoID.Osmosis1,
     name: "Osmosis",
-    bip44: {
-      coinType: 118,
-    },
-    alternativeBIP44s: [{ coinType: 330 }],
     gasPrice: "0.025uosmo",
     bech32Config: Bech32Address.defaultBech32Config("osmo"),
     defaultCurrency: {
@@ -224,10 +197,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorerName: "Mintscan",
     chainId: ChainInfoID.OsmosisDevnet,
     name: "Osmosis Devnet",
-    bip44: {
-      coinType: 118,
-    },
-    alternativeBIP44s: [{ coinType: 330 }],
     gasPrice: "0.025uosmo",
     bech32Config: Bech32Address.defaultBech32Config("osmo"),
     defaultCurrency: {
@@ -250,10 +219,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorerName: "Mintscan",
     chainId: ChainInfoID.OsmosisTestnet,
     name: "Osmosis Testnet",
-    bip44: {
-      coinType: 118,
-    },
-    alternativeBIP44s: [{ coinType: 330 }],
     gasPrice: "0.025uosmo",
     bech32Config: Bech32Address.defaultBech32Config("osmo"),
     defaultCurrency: {
@@ -276,9 +241,6 @@ export const SimpleChainInfoList: Record<ChainInfoID, SimplifiedChainInfo> = {
     explorerName: "Mintscan",
     chainId: ChainInfoID.Stargaze1,
     name: "Stargaze",
-    bip44: {
-      coinType: 118,
-    },
     bech32Config: Bech32Address.defaultBech32Config("stars"),
     feeCurrencies: [
       {
