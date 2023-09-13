@@ -7,6 +7,8 @@ export declare const CosmostationMobileWallet: Wallet;
 export declare const KeplrWallet: Wallet;
 export declare const KeplrMobileWallet: Wallet;
 export declare const LeapWallet: Wallet;
+export declare const LeapMobileWallet: Wallet;
+export declare const MetaMaskLeap: Wallet;
 export declare const StationWallet: Wallet;
 export declare const VectisWallet: Wallet;
 export declare const XdefiWallet: Wallet;

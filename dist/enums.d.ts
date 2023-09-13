@@ -16,6 +16,8 @@ export declare enum WalletID {
     Keplr = "keplr",
     KeplrMobile = "mobile-keplr",
     Leap = "leap-cosmos",
+    LeapMobile = "mobile-leap-cosmos",
+    LeapMetaMaskSnap = "leap-metamask-cosmos-snap",
     Station = "station",
     Vectis = "vectis-cosmos",
     Xdefi = "xfi-cosmos"

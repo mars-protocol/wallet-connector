@@ -4,6 +4,7 @@ import {
   KeplrExtensionProvider,
   KeplrMobileProvider,
   LeapCosmosExtensionProvider,
+  LeapCosmosMobileProvider,
   StationExtensionProvider,
   VectisCosmosExtensionProvider,
   WalletExtensionProvider,
@@ -136,6 +137,46 @@ export const LeapWallet: Wallet = {
   ],
 }
 
+export const LeapMobileWallet: Wallet = {
+  id: WalletID.LeapMobile,
+  name: "Leap Wallet",
+  walletConnect: "Leap WalletConnect",
+  description: "Leap Mobile App",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/leap-wallet-extension.png",
+  mobileImageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/leap-wallet-connect.png",
+  provider: LeapCosmosMobileProvider,
+  type: "app",
+  supportedChains: [
+    ChainInfoID.Cosmoshub4,
+    ChainInfoID.Injective1,
+    ChainInfoID.Juno1,
+    ChainInfoID.Mars1,
+    ChainInfoID.MarsAres1,
+    ChainInfoID.Neutron,
+    ChainInfoID.Osmosis1,
+    ChainInfoID.OsmosisTestnet,
+    ChainInfoID.Stargaze1,
+  ],
+}
+export const MetaMaskLeap: Wallet = {
+  id: WalletID.LeapMetaMaskSnap,
+  name: "MetaMask (via Leap Snap)",
+  install: "Install MetaMask",
+  installURL: "https://metamask.io/download/",
+  description: "MetaMask Snap provided by Leap",
+  imageUrl:
+    "https://raw.githubusercontent.com/mars-protocol/wallet-connector/main/src/components/ui/images/leap-metamask-snap.png",
+  provider: LeapCosmosExtensionProvider,
+  type: "extension",
+  supportedChains: [
+    ChainInfoID.Neutron,
+    ChainInfoID.Osmosis1,
+    ChainInfoID.Stargaze1,
+  ],
+}
+
 export const StationWallet: Wallet = {
   id: WalletID.Station,
   name: "Station Wallet",
@@ -182,6 +223,8 @@ export const wallets: Wallet[] = [
   KeplrWallet,
   KeplrMobileWallet,
   LeapWallet,
+  LeapMobileWallet,
+  MetaMaskLeap,
   StationWallet,
   VectisWallet,
   XdefiWallet,
