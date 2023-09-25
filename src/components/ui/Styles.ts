@@ -33,7 +33,7 @@ export const baseModalStyles: { [key: string]: React.CSSProperties } = {
     cursor: "auto",
     maxHeight: "100vh",
     overflowY: "auto",
-    justifyContent: "center",
+    justifyContent: "start",
   },
 
   modalHeader: {
