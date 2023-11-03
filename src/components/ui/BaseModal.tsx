@@ -1,4 +1,5 @@
-import React, {
+import {
+  ComponentType,
   FunctionComponent,
   PropsWithChildren,
   ReactElement,
@@ -32,11 +33,13 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
     ReactModal.setAppElement("body")
   }, [])
 
+  const ModalSafeForReact18 = ReactModal as ComponentType<ReactModal["props"]>
+
   return (
-    <ReactModal
+    <ModalSafeForReact18
       ariaHideApp={false}
       className={classNames?.modalContent ?? "_"}
-      contentElement={(props, children) => (
+      contentElement={(props) => (
         <div style={baseModalStyles.modalContent} {...props}>
           {children}
         </div>
@@ -47,7 +50,7 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
         onClose?.()
       }}
       overlayClassName={classNames?.modalOverlay ?? "_"}
-      overlayElement={(props, children) => (
+      overlayElement={(props) => (
         <div style={baseModalStyles.modalOverlay} {...props}>
           {children}
         </div>
@@ -90,6 +93,6 @@ export const BaseModal: FunctionComponent<BaseModalProps> = ({
         )}
         {children}
       </>
-    </ReactModal>
+    </ModalSafeForReact18>
   )
 }
